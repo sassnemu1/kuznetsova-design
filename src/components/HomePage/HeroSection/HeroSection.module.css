@@ -1,0 +1,489 @@
+/* ─── BASE ────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 680px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: var(--bg);
+}
+
+/* ─── ATMOSPHERE ──────────────────────────────────────── */
+.radial {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse 80% 70% at 50% 55%,
+      #ffffff 0%,
+      #f7f7f4 45%,
+      #ecece8 100%
+    );
+
+  z-index: 0;
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+
+  opacity: .3;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+
+  background-size: 180px 180px;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── BG GHOST TEXT ───────────────────────────────────── */
+.bgText {
+  position: absolute;
+
+  top: 72%;
+  left: 16%;
+
+  transform: translate(-50%, -50%);
+
+  font-family: var(--font-bold);
+  font-size: clamp(180px, 35vw, 420px);
+  font-weight: 900;
+
+  color: #ecece877;
+
+  opacity: .03;
+
+  white-space: nowrap;
+  letter-spacing: -.06em;
+  line-height: 1;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 1;
+}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+.nav {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 26px 52px;
+
+  z-index: 20;
+
+  opacity: 0;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoMark {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--accent);
+
+  flex-shrink: 0;
+}
+.logoMark img {
+  width: 60px;
+  height: 60px;
+}
+
+.logoText {
+  font-family: var(--font-body);
+  font-size: 13px;
+
+  color: var(--text-secondary);
+
+  letter-spacing: .04em;
+}
+
+.navLinks {
+  display: flex;
+  gap: 44px;
+
+  list-style: none;
+}
+
+.navLinks a {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  transition: .3s;
+}
+.navLinks a:hover {
+  color: var(--text);
+}
+
+.contactBtn {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(29,78,216,.15);
+
+  color: var(--accent);
+
+  transition: .3s ease;
+}
+.contactBtn:hover {
+  background: var(--accent);
+
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 30px rgba(29,78,216,.18);
+}
+
+/* ─── TITLE ───────────────────────────────────────────── */
+.titleWrap {
+  position: relative;
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  will-change: transform;
+}
+
+/* perspective container for letter rotation */
+.titlePerspective {
+  perspective: 900px;
+  perspective-origin: center bottom;
+}
+
+.titleTop {
+  display: flex;
+
+  line-height: .9;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(72px, 8vw, 150px);
+
+  color: var(--text);
+
+  letter-spacing: -.03em;
+}
+
+.letter {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform-origin: center bottom;
+}
+
+/* ─── DESIGN LINE ─────────────────────────────────────── */
+.titleBottom {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  line-height: 0.88;
+  opacity: 0;    /* GSAP start */
+  will-change: transform, opacity;
+}
+
+.designText {
+  font-family: var(--font-bold);
+
+  font-size: clamp(100px, 12vw, 220px);
+
+  font-weight: 900;
+
+  color: var(--accent);
+
+  letter-spacing: -.03em;
+}
+
+.tagline {
+  margin-top: 24px;
+
+  font-family: var(--font-body);
+
+  font-size: 13px;
+
+  color: var(--text-light);
+
+  text-transform: uppercase;
+
+  letter-spacing: .24em;
+}
+
+/* ─── BOTTOM ROW ──────────────────────────────────────── */
+.bottomRow {
+  position: absolute;
+  bottom: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+  opacity: 0;
+}
+
+.iconBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.45);
+  transition: border-color 0.22s, color 0.22s, transform 0.22s, background 0.22s;
+}
+.iconBtn svg { width: 17px; height: 17px; }
+.iconBtn:hover {
+  border-color: #c8f060;
+  color: #c8f060;
+  transform: scale(1.1);
+  background: rgba(200,240,96,0.07);
+}
+
+/* ─── SCROLL INDICATOR ───────────────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 42px;
+  right: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  z-index: 20;
+}
+
+.scrollLine {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.scrollLine::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: #c8f060;
+  animation: scrollPulse 2s ease-in-out infinite 2s;
+}
+@keyframes scrollPulse {
+  0%   { left: -100%; }
+  50%  { left: 0%; }
+  100% { left: 100%; }
+}
+
+.scrollLabel {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav { padding: 28px 28px; }
+  .navLinks { display: none; }
+  .navContact { display: none; }
+  .sideStatLeft { left: 28px; }
+  .sideStatRight { right: 28px; }
+  .scrollIndicator { display: none; }
+}
+
+@media (max-width: 600px) {
+  .sideStatLeft,
+  .sideStatRight { display: none; }
+  .tagline { display: none; }
+}
+
+/* ───────────────────────── */
+/* SOCIALS */
+/* ───────────────────────── */
+
+.socialLeft,
+.socialRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  z-index: 20;
+}
+
+.socialLeft {
+  left: 52px;
+}
+
+.socialRight {
+  right: 52px;
+}
+
+.socialLeft a,
+.socialRight a {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 25%;
+
+  background: rgba(255,255,255,.45);
+  backdrop-filter: blur(12px);
+
+  /* border: 1px solid rgba(18,18,18,.08); */
+  border: 1px solid rgba(29,78,216,.15);
+
+  color: var(--accent);
+
+  font-size: 22px;
+
+  transition:
+    transform .35s cubic-bezier(.22,1,.36,1),
+    background .35s,
+    color .35s,
+    box-shadow .35s;
+}
+
+.socialLeft a:hover,
+.socialRight a:hover {
+  transform: translateY(-4px) scale(1.08);
+
+  background: var(--accent);
+  color: white;
+
+  box-shadow:
+    0 10px 30px rgba(29,78,216,.18);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 18px 20px;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .navContact {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .titleTop {
+    font-size: clamp(42px, 12vw, 64px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .designText {
+    font-size: clamp(64px, 18vw, 110px);
+  }
+
+  .tagline {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    margin-top: 14px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bgText {
+    font-size: 140px;
+    left: 50%;
+    top: 65%;
+    opacity: 0.02;
+  }
+}
+
+@media (max-width: 768px) {
+  .socialLeft,
+  .socialRight {
+    top: auto;
+    bottom: 20px;
+    transform: none;
+
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .socialLeft {
+    left: 16px;
+  }
+
+  .socialRight {
+    right: 16px;
+  }
+
+  .socialLeft a,
+  .socialRight a {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .noise {
+    opacity: 0.15;
+  }
+}
