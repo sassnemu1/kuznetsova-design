@@ -1,0 +1,177 @@
+.footer {
+  background: var(--bg);
+  color: #111;
+  padding: 140px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+
+/* ─── ЦЕНТРАЛЬНЫЙ ТАЙТЛ ───────────────────────────────────── */
+.titleSection {
+  display: flex;
+  gap: 22px;
+  text-align: center;
+  margin-bottom: 110px;
+}
+
+.titlePerspective {
+  perspective: 1000px;
+  perspective-origin: center bottom;
+}
+
+.titleTop {
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(68px, 7vw, 138px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.letter {
+  display: inline-block;
+  transform-origin: bottom center;
+}
+
+.titleBottom {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.designText {
+  font-family: var(--font-bold);
+  font-size: clamp(92px, 11vw, 178px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  line-height: 0.85;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #555;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+/* ─── КОНТЕНТ ─────────────────────────────────────────────── */
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.footerLinks h4 {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  color: #888;
+  font-weight: 500;
+}
+
+.footerLinks a {
+  display: block;
+  color: #222;
+  font-size: 15px;
+  line-height: 2.1;
+  transition: color 0.3s;
+}
+
+.footerLinks a:hover {
+  color: var(--accent);
+}
+
+/* Социальные сети */
+.socialWrapper {
+  text-align: right;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.socialLinks a {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.socialLinks a:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+/* Copyright */
+.copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
+  color: #777;
+}
+
+.legal {
+  color: #aaa;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer {
+    padding: 100px 0 50px;
+  }
+  .footerContent {
+    flex-direction: column;
+    gap: 50px;
+    text-align: center;
+  }
+  .socialWrapper {
+    text-align: center;
+  }
+  .socialLinks {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerLinks {
+    gap: 50px;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,808 @@
+/* ─── SECTION ────────────────────────────────────────────────── */
+.services {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background: #080808;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.services__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 52px 5vw 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.services__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.services__label {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #3864db;
+  opacity: 0.5;
+  font-family: var(--font-body);
+}
+
+.services__title h2 {
+  font-family: var(--font-bold);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: #fff;
+  /* GSAP animates from opacity:0 y:44 */
+  opacity: 0;
+  transform: translateY(44px);
+}
+
+/* ─── COUNTER ────────────────────────────────────────────────── */
+.services__counter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+  /* GSAP reveals */
+  opacity: 0;
+}
+
+.services__current {
+  font-family: var(--font-bold);
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.services__total {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(56, 100, 219, 0.35);
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+/* ─── PROGRESS BAR ───────────────────────────────────────────── */
+.services__progress-wrap {
+  position: absolute;
+  bottom: 52px;
+  left: 5vw;
+  right: 5vw;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.services__progress-track {
+  flex: 1;
+  height: 1px;
+  background: rgba(56, 100, 219, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.services__progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3864db, #6b9eff);
+  will-change: width;
+}
+
+.services__scroll-hint {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(56, 100, 219, 0.35);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+/* ─── TRACK ──────────────────────────────────────────────────── */
+.services__track-outer {
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+}
+
+.services__track {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 5vw;
+  will-change: transform;
+}
+
+/* ─── CARD ───────────────────────────────────────────────────── */
+.serviceCard {
+  flex-shrink: 0;
+  width: 400px;
+  height: 480px;
+  margin-right: 32px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(56, 100, 219, 0.1);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+
+  /* Parallax driven by CSS var (GSAP animates --card-parallax, hover adds on top) */
+  --card-parallax: 0px;
+  transform: translateY(var(--card-parallax));
+
+  transition:
+    border-color 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    background   0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+.serviceCard:hover {
+  border-color: rgba(107, 158, 255, 0.22);
+  background: rgba(56, 100, 219, 0.05);
+  transform: translateY(calc(var(--card-parallax) - 8px));
+}
+
+.serviceCard--active {
+  border-color: color-mix(in srgb, var(--card-color, #3864db) 35%, transparent);
+  background:   color-mix(in srgb, var(--card-color, #3864db) 5%, transparent);
+}
+
+/* Gradient glow at bottom */
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 25% 85%,
+    color-mix(in srgb, var(--card-color, #3864db) 18%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.serviceCard:hover::before,
+.serviceCard--active::before { opacity: 1; }
+
+/* Top-edge shimmer */
+.serviceCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--card-color, #3864db) 55%, transparent),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.serviceCard--active::after { opacity: 1; }
+
+/* ─── CARD IMAGE ─────────────────────────────────────────────── */
+.serviceCard__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+  z-index: 0;
+}
+
+.serviceCard__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.serviceCard:hover .serviceCard__image img {
+  transform: scale(1.06);
+}
+
+/* Fade image into card background */
+.serviceCard__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(8, 8, 8, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* ─── PLACEHOLDER IMAGE ──────────────────────────────────────── */
+.placeholderImg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.placeholderImg__pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.placeholderImg__label {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+/* ─── CARD PARTS ─────────────────────────────────────────────── */
+.serviceCard__top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 32px 0;
+}
+
+.serviceCard__id {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--card-color, #3864db);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.serviceCard__tag {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  border: 1px solid rgba(56, 100, 219, 0.15);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.serviceCard__content {
+  position: absolute;
+  bottom: 68px;
+  left: 32px;
+  right: 32px;
+  z-index: 3;
+}
+
+.serviceCard__title {
+  font-family: var(--font-bold);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.serviceCard__desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.33);
+  font-family: var(--font-body);
+}
+
+.serviceCard__bg-num {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  font-family: var(--font-bold);
+  font-size: 9rem;
+  line-height: 1;
+  color: rgba(56, 100, 219, 0.04);
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.5s ease;
+  z-index: 1;
+}
+
+.serviceCard--active .serviceCard__bg-num {
+  color: color-mix(in srgb, var(--card-color, #3864db) 12%, transparent);
+}
+
+.serviceCard__line {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 110px;
+  height: 1px;
+  background: rgba(56, 100, 219, 0.15);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 3;
+}
+
+.serviceCard--active .serviceCard__line,
+.serviceCard:hover .serviceCard__line { transform: scaleX(1); }
+
+.serviceCard__cta {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--card-color, #3864db);
+  font-family: var(--font-body);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.serviceCard:hover .serviceCard__cta { opacity: 1; transform: translateY(0); }
+
+/* ─── DETAIL OVERLAY ─────────────────────────────────────────── */
+.services__detail {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  background: rgba(4, 4, 12, 0.97);
+  backdrop-filter: blur(28px);
+}
+
+/* ─── PORTFOLIO PANEL (left) ─────────────────────────────────── */
+.detail__portfolio {
+  width: 50%;
+  height: 100%;
+  padding: 52px 5vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid rgba(56, 100, 219, 0.1);
+}
+
+.detail__portfolio-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.detail__close {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(56, 100, 219, 0.08);
+  border: 1px solid rgba(56, 100, 219, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(107, 158, 255, 0.7);
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.35s;
+  align-self: flex-start;
+}
+
+.detail__close:hover {
+  background: rgba(56, 100, 219, 0.18);
+  border-color: rgba(107, 158, 255, 0.4);
+  color: #fff;
+  transform: scale(1.08) rotate(90deg);
+}
+
+.detail__portfolio-tag {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(56, 100, 219, 0.5);
+  font-family: var(--font-body);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.detail__portfolio-title {
+  font-family: var(--font-bold);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.detail__portfolio-sub {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-body);
+  max-width: 380px;
+}
+
+/* ─── WORK LIST ──────────────────────────────────────────────── */
+.detail__work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.detail__work-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 8px;
+  border-bottom: 1px solid rgba(56, 100, 219, 0.07);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.25s ease;
+}
+
+.detail__work-item:hover { background: rgba(56, 100, 219, 0.06); }
+.detail__work-item:hover .detail__work-arrow { opacity: 1; transform: translateX(4px); }
+
+.detail__work-thumb {
+  width: 56px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 100, 219, 0.14);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.detail__work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail__work-thumb-inner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 158, 255, 0.15) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.detail__work-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.detail__work-title {
+  font-size: 0.97rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.detail__work-sub {
+  font-size: 11px;
+  color: rgba(56, 100, 219, 0.45);
+  font-family: var(--font-body);
+  letter-spacing: 0.06em;
+}
+
+.detail__work-year {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.18);
+  font-family: var(--font-body);
+  letter-spacing: 0.1em;
+}
+
+.detail__work-arrow {
+  color: rgba(107, 158, 255, 0.5);
+  opacity: 0;
+  transform: translateX(0);
+  flex-shrink: 0;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ─── CTA ROW ────────────────────────────────────────────────── */
+.detail__cta-row {
+  padding-top: 28px;
+  border-top: 1px solid rgba(56, 100, 219, 0.08);
+  margin-top: 8px;
+}
+
+.detail__all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(107, 158, 255, 0.6);
+  font-family: var(--font-body);
+  background: rgba(56, 100, 219, 0.06);
+  border: 1px solid rgba(56, 100, 219, 0.18);
+  padding: 12px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+
+.detail__all-btn:hover {
+  color: #fff;
+  border-color: rgba(107, 158, 255, 0.4);
+  background: rgba(56, 100, 219, 0.14);
+}
+
+/* ─── DETAIL CARD (right half, GSAP-positioned) ──────────────── */
+.detail__card {
+  position: absolute;
+  background: color-mix(in srgb, var(--card-color, #3864db) 7%, #090914);
+  border: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
+  overflow: hidden;
+}
+
+.detail__card-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.detail__card-image img,
+.detail__card-image .placeholderImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detail__card-image--placeholder {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* gradient fade so text stays readable */
+.detail__card-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 20, 0.2) 0%,
+    rgba(9, 9, 20, 0.75) 55%,
+    rgba(9, 9, 20, 0.97) 100%
+  );
+  pointer-events: none;
+}
+
+.detail__card-body {
+  position: absolute;
+  inset: 0;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail__card-content {
+  position: absolute;
+  bottom: 56px;
+  left: 36px;
+  right: 36px;
+}
+
+.detail__card .serviceCard__id { color: var(--card-color, #3864db); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .serviceCard { width: 340px; height: 460px; }
+  .serviceCard__image { height: 170px; }
+  .detail__portfolio { padding: 40px 32px; }
+}
+
+@media (max-width: 768px) {
+  .services__header { flex-direction: column; gap: 12px; padding: 36px 5vw 0; }
+  .services__counter { align-items: flex-start; }
+
+  .serviceCard { width: 300px; height: 420px; margin-right: 20px; }
+  .serviceCard__image { height: 150px; }
+  .serviceCard__top { padding: 22px 24px 0; }
+  .serviceCard__content { left: 24px; right: 24px; bottom: 56px; }
+  .serviceCard__line    { left: 24px; right: 24px; bottom: 96px; }
+  .serviceCard__cta     { left: 24px; bottom: 28px; }
+  .services__progress-wrap { bottom: 32px; }
+
+  .services__detail { flex-direction: column; }
+  .detail__portfolio {
+    width: 100%;
+    height: 55%;
+    padding: 28px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(56, 100, 219, 0.1);
+  }
+  .detail__card {
+    position: absolute !important;
+    top: 55% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 45% !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* ─── BACKGROUND IMAGES ─────────────────────────────────────── */
+.serviceCard__bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.serviceCard:hover .serviceCard__bg-img {
+  transform: scale(1.06);
+}
+
+/* Более тёмный оверлей — теперь текст отлично читается */
+.serviceCard__bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, 0.35) 30%,
+    rgba(8, 8, 8, 0.85) 65%,
+    rgba(8, 8, 8, 0.95) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Detail card background */
+.detail__card-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.detail__card-bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 20, 0.25) 20%,
+    rgba(9, 9, 20, 0.8) 55%,
+    rgba(9, 9, 20, 0.97) 100%
+  );
+  pointer-events: none;
+}
+
+/* Убеждаемся, что весь текст поверх изображений */
+.serviceCard__top,
+.serviceCard__content,
+.serviceCard__line,
+.serviceCard__cta,
+.serviceCard__bg-num {
+  position: relative;
+  z-index: 3;
+}
+
+/* ─── DETAIL OVERLAY ─────────────────────────────────────────── */
+.services__detail {
+  position: fixed;           /* Изменено с absolute на fixed */
+  inset: 0;
+  z-index: 100;              /* Увеличил, чтобы был выше футера */
+  display: none;             /* Будет управляться через JS */
+  background: rgba(4, 4, 12, 0.97);
+  backdrop-filter: blur(28px);
+  overflow: hidden;          /* Важно! */
+}
+
+/* Левая панель — теперь с внутренним скроллом */
+.detail__portfolio {
+  width: 50%;
+  height: 100%;
+  padding: 52px 5vw;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;          /* ← Главное изменение */
+  overflow-x: hidden;
+  border-right: 1px solid rgba(56, 100, 219, 0.1);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 100, 219, 0.3) transparent;
+}
+
+.detail__portfolio::-webkit-scrollbar {
+  width: 6px;
+}
+
+.detail__portfolio::-webkit-scrollbar-thumb {
+  background: rgba(56, 100, 219, 0.3);
+  border-radius: 10px;
+}
+
+.detail__portfolio::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 158, 255, 0.4);
+}
+
+/* Правая панель */
+.detail__card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: color-mix(in srgb, var(--card-color, #3864db) 7%, #090914);
+  border: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
+  overflow: hidden;
+}
+
+/* Убираем конфликт с медиа-запросом */
+@media (max-width: 768px) {
+  .services__detail {
+    flex-direction: column;
+  }
+  .detail__portfolio {
+    width: 100%;
+    height: 55%;
+    border-right: none;
+    border-bottom: 1px solid rgba(56, 100, 219, 0.1);
+  }
+  .detail__card {
+    position: absolute !important;
+    top: 55% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 45% !important;
+  }
+}
+

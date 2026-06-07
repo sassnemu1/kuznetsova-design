@@ -10,233 +10,169 @@ import {
   FaTelegramPlane,
   FaVk,
 } from "react-icons/fa";
-
 import { MdOutlineMail } from "react-icons/md";
+import useGSAP from "@/hooks/useGSAP.js";
 
 export default function HeroSection() {
   const heroRef = useRef(null);
   const bgTextRef = useRef(null);
-  const titleWrapRef = useRef(null);
   const navRef = useRef(null);
   const socialLeftRef = useRef(null);
   const socialRightRef = useRef(null);
   const lettersRef = useRef([]);
   const designRef = useRef(null);
-  const scrollIndicatorRef = useRef(null);
+  const taglineRef = useRef(null);
 
+  const { gsap, ScrollTrigger } = useGSAP();
+
+  // useEffect (not useLayoutEffect) — GSAP arrives async from the hook,
+  // so the DOM is always ready by the time gsap/ScrollTrigger are non-null.
   useEffect(() => {
-    let gsap, ScrollTrigger, Lenis, ctx;
+    if (!gsap || !ScrollTrigger) return;
 
-    const init = async () => {
-      const gsapModule = await import("gsap");
-      gsap = gsapModule.gsap;
-      const scrollTriggerModule = await import("gsap/ScrollTrigger");
-      ScrollTrigger = scrollTriggerModule.ScrollTrigger;
-      const lenisModule = await import("lenis");
-      Lenis = lenisModule.default;
+    const ctx = gsap.context(() => {
+      const hero = heroRef.current;
+      if (!hero) return;
 
-      gsap.registerPlugin(ScrollTrigger);
+      // ── Entry animation ──────────────────────────────────────────
+      const enterTL = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // ── Lenis smooth scroll ──
-      const lenis = new Lenis({ lerp: 0.08, smooth: true });
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-
-      ctx = gsap.context(() => {
-        // ── MASTER TIMELINE ──
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        // 0.0s — Logo drops in from top
-        tl.fromTo(
+      enterTL
+        .fromTo(
           navRef.current,
-          { y: -60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1 }
-        );
-
-        // 0.4s — "Kuznetsova" letters stagger in
-        tl.fromTo(
+          { y: -48, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9 }
+        )
+        .fromTo(
           lettersRef.current,
-          { y: 120, opacity: 0, rotateX: -60 },
+          { y: 110, opacity: 0, rotateX: -55, filter: "blur(6px)" },
           {
             y: 0,
             opacity: 1,
             rotateX: 0,
-            stagger: 0.04,
-            duration: 0.9,
+            filter: "blur(0px)",
+            stagger: 0.042,
+            duration: 0.85,
             ease: "power4.out",
           },
-          "-=0.4"
-        );
-
-        // 0.9s — "DESIGN" slams up from below with scale
-        tl.fromTo(
+          "-=0.45"
+        )
+        .fromTo(
           designRef.current,
-          { y: 220, scale: 1.25, opacity: 0 },
-          { y: 0, scale: 1, opacity: 1, duration: 1.1, ease: "expo.out" },
-          "-=0.5"
-        );
-
-        tl.fromTo(
-          [socialLeftRef.current, socialRightRef.current],
+          { y: 200, scale: 1.22, opacity: 0, filter: "blur(10px)" },
           {
-            opacity: 0,
-            x: (i) => (i === 0 ? -40 : 40),
-          },
-          {
+            y: 0,
+            scale: 1,
             opacity: 1,
-            x: 0,
-            duration: 1,
-            stagger: 0.1,
+            filter: "blur(0px)",
+            duration: 1.05,
+            ease: "expo.out",
           },
-          "-=0.8"
-        );
-
-        // bg text subtle fade
-        tl.fromTo(
+          "-=0.45"
+        )
+        .fromTo(
+          [socialLeftRef.current, socialRightRef.current],
+          { opacity: 0, x: (i) => (i === 0 ? -36 : 36) },
+          { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 },
+          "-=0.65"
+        )
+        .fromTo(
           bgTextRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: 2 },
-          "-=1.5"
+          { opacity: 1, duration: 2.5 },
+          "-=1.8"
+        )
+        .fromTo(
+          taglineRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+          "-=1.2"
         );
-        
 
-        // ── MOUSE PARALLAX ──
-        const hero = heroRef.current;
-        const handleMouse = (e) => {
-          const rect = hero.getBoundingClientRect();
-          const cx = rect.width / 2;
-          const cy = rect.height / 2;
-          const mx = e.clientX - rect.left - cx;
-          const my = e.clientY - rect.top - cy;
+      // ── Scroll-out animation ─────────────────────────────────────
+      const scrollTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.3,
+          invalidateOnRefresh: true,
+        },
+      });
 
-          gsap.to(titleWrapRef.current, {
-            x: mx * 0.025,
-            y: my * 0.02,
-            duration: 1.2,
-            ease: "power2.out",
-          });
-          gsap.to(bgTextRef.current, {
-            x: mx * -0.012,
-            y: my * -0.01,
-            duration: 1.8,
-            ease: "power2.out",
-          });
-        };
+      scrollTL
+        .to(navRef.current,          { y: -80, opacity: 0, ease: "none" }, 0)
+        .to(socialLeftRef.current,   { x: -70, opacity: 0, ease: "none" }, 0)
+        .to(socialRightRef.current,  { x: 70,  opacity: 0, ease: "none" }, 0)
+        .to(lettersRef.current,      { y: -130, opacity: 0, stagger: 0.02, ease: "none" }, 0)
+        .to(designRef.current,       { y: 110, scale: 0.9, opacity: 0, ease: "none" }, 0)
+        .to(taglineRef.current,      { opacity: 0, ease: "none" }, 0);
+    }, heroRef);
 
-        hero.addEventListener("mousemove", handleMouse);
-
-        // cleanup stored
-        hero._cleanMouse = () => hero.removeEventListener("mousemove", handleMouse);
-
-        // ── SCROLL: bg text slow parallax ──
-        gsap.to(bgTextRef.current, {
-          y: -120,
-          ease: "none",
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-
-        // ── SCROLL: title fade out faster ──
-        gsap.to(titleWrapRef.current, {
-          y: -60,
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "10% top",
-            end: "50% top",
-            scrub: true,
-          },
-        });
-        
-      }, heroRef);
-    };
-    
-    init();
+    const t = setTimeout(() => ScrollTrigger.refresh(), 150);
 
     return () => {
-      ctx?.revert();
-      heroRef.current?._cleanMouse?.();
+      clearTimeout(t);
+      ctx.revert();
     };
-  }, []);
+  }, [gsap, ScrollTrigger]);
 
   const kuznetsova = "Kuznetsova".split("");
 
   return (
-    <section className={styles.hero} ref={heroRef}>
-      {/* NOISE + GRADIENT OVERLAY */}
-      <div className={styles.noise} />
-      <div className={styles.radial} />
-
-      {/* BACKGROUND GHOST TEXT */}
+    <section ref={heroRef} className={styles.hero}>
       <div className={styles.bgText} ref={bgTextRef}>
         MOSCOW
       </div>
 
-      {/* NAV */}
+      {/* ── NAV ─────────────────────────────────────────────── */}
       <nav className={styles.nav} ref={navRef}>
         <div className={styles.navLogo}>
-          {/* <span className={styles.logoMark}>K</span> */}
           <div className={styles.logoMark}>
-            <img src="logo-w.svg" alt="logo" />
+            <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
           </div>
           <span className={styles.logoText}>Kuznetsova Design</span>
         </div>
+
         <ul className={styles.navLinks}>
-          <li><a href="#">Work</a></li>
-          <li><a href="#">Studio</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#studio">Studio</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
+
         <div className={styles.navContact}>
-          <a href="#" className={styles.contactBtn}>Get in touch ↗</a>
+          <a href="#contact" className={styles.contactBtn}>
+            Get in touch ↗
+          </a>
         </div>
       </nav>
 
-      {/* LEFT SOCIALS */}
+      {/* ── SOCIAL LEFT ─────────────────────────────────────── */}
       <div className={styles.socialLeft} ref={socialLeftRef}>
-        <a href="#" aria-label="Instagram">
-          <FaInstagram />
-        </a>
-
-        <a href="#" aria-label="Behance">
-          <FaBehance />
-        </a>
-
-        <a href="#" aria-label="Dribbble">
-          <FaDribbble />
-        </a>
+        <a href="#" aria-label="Instagram"><FaInstagram /></a>
+        <a href="#" aria-label="Behance"><FaBehance /></a>
+        <a href="#" aria-label="Dribbble"><FaDribbble /></a>
       </div>
 
-      {/* RIGHT CONTACTS */}
+      {/* ── SOCIAL RIGHT ────────────────────────────────────── */}
       <div className={styles.socialRight} ref={socialRightRef}>
-        <a href="#" aria-label="Telegram">
-          <FaTelegramPlane />
-        </a>
-
-        <a href="#" aria-label="VK">
-          <FaVk />
-        </a>
-
+        <a href="#" aria-label="Telegram"><FaTelegramPlane /></a>
+        <a href="#" aria-label="VK"><FaVk /></a>
         <a href="mailto:hello@kuznetsova.design" aria-label="Email">
           <MdOutlineMail />
         </a>
       </div>
 
-      {/* CENTER TITLE */}
-      <div className={styles.titleWrap} ref={titleWrapRef}>
+      {/* ── TITLE ───────────────────────────────────────────── */}
+      <div className={styles.titleWrap}>
         <div className={styles.titlePerspective}>
           <div className={styles.titleTop}>
             {kuznetsova.map((char, i) => (
               <span
                 key={i}
                 className={styles.letter}
-                ref={(el) => (lettersRef.current[i] = el)}
+                ref={(el) => { lettersRef.current[i] = el; }}
               >
                 {char}
               </span>
@@ -248,11 +184,10 @@ export default function HeroSection() {
           <span className={styles.designText}>DESIGN.</span>
         </div>
 
-        <p className={styles.tagline}>
+        <p className={styles.tagline} ref={taglineRef}>
           Visual systems · Brand identity · Digital experiences
         </p>
       </div>
-
     </section>
   );
 }
