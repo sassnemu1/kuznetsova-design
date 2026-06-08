@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  
 }
 
 /* ─── HEADER ─────────────────────────────────────────────────── */
@@ -392,50 +393,82 @@
 
 /* ─── DETAIL OVERLAY ─────────────────────────────────────────── */
 .services__detail {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 50;
-  display: flex;
+  z-index: 100;
+  display: none;
   background: rgba(4, 4, 12, 0.97);
   backdrop-filter: blur(28px);
-}
-
-/* ─── PORTFOLIO PANEL (left) ─────────────────────────────────── */
-.detail__portfolio {
-  width: 50%;
-  height: 100%;
-  padding: 52px 5vw;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  border-right: 1px solid rgba(56, 100, 219, 0.1);
 }
 
-.detail__portfolio-header {
+/* ─── PORTFOLIO PANEL (left, 60%) ────────────────────────────── */
+.detail__portfolio {
+  width: 100%;
+  height: 100%;
+  padding: 44px 4vw 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  pointer-events: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 100, 219, 0.25) transparent;
+  /* Reserve 40% right for the card */
+  padding-right: calc(40% + 3vw);
+}
+
+.detail__portfolio::-webkit-scrollbar { width: 4px; }
+.detail__portfolio::-webkit-scrollbar-thumb {
+  background: rgba(56, 100, 219, 0.25);
+  border-radius: 10px;
+}
+
+/* Divider line */
+.detail__portfolio::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 60%;
+  width: 1px;
+  height: 100%;
+  background: rgba(56, 100, 219, 0.08);
+  pointer-events: none;
+}
+
+/* ─── PORTFOLIO HEADER ───────────────────────────────────────── */
+.detail__portfolio-header {
+  flex-shrink: 0;
+  margin-bottom: 32px;
+}
+
+.detail__header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .detail__close {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(56, 100, 219, 0.08);
-  border: 1px solid rgba(56, 100, 219, 0.2);
+  background: rgba(56, 100, 219, 0.07);
+  border: 1px solid rgba(56, 100, 219, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(107, 158, 255, 0.7);
+  color: rgba(107, 158, 255, 0.6);
+  flex-shrink: 0;
   transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.35s;
-  align-self: flex-start;
 }
 
 .detail__close:hover {
-  background: rgba(56, 100, 219, 0.18);
-  border-color: rgba(107, 158, 255, 0.4);
+  background: rgba(56, 100, 219, 0.16);
+  border-color: rgba(107, 158, 255, 0.35);
   color: #fff;
   transform: scale(1.08) rotate(90deg);
 }
@@ -446,135 +479,192 @@
   text-transform: uppercase;
   color: rgba(56, 100, 219, 0.5);
   font-family: var(--font-body);
-  display: block;
-  margin-bottom: 8px;
+  border: 1px solid rgba(56, 100, 219, 0.18);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.detail__portfolio-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .detail__portfolio-title {
   font-family: var(--font-bold);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   line-height: 0.92;
   letter-spacing: -0.02em;
   color: #fff;
-  margin-bottom: 14px;
+  margin: 0;
 }
 
 .detail__portfolio-sub {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.28);
   font-family: var(--font-body);
-  max-width: 380px;
+  max-width: 440px;
 }
 
-/* ─── WORK LIST ──────────────────────────────────────────────── */
-.detail__work-list {
-  flex: 1 1 auto;             /* занимает всё оставшееся пространство */
-  overflow-y: auto;           /* ← главный скролл */
-  overflow-x: hidden;
-  padding-right: 8px;         /* место под скроллбар */
-  margin-right: -8px;         /* компенсируем */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 100, 219, 0.3) transparent;
-}
-
-.detail__work-item {
+/* Stats row */
+.detail__portfolio-stats {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 8px;
-  border-bottom: 1px solid rgba(56, 100, 219, 0.07);
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background 0.25s ease;
+  gap: 20px;
+  padding-top: 4px;
 }
 
-.detail__work-item:hover { background: rgba(56, 100, 219, 0.06); }
-.detail__work-item:hover .detail__work-arrow { opacity: 1; transform: translateX(4px); }
+.detail__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
-.detail__work-thumb {
-  width: 56px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid rgba(56, 100, 219, 0.14);
+.detail__stat-num {
+  font-family: var(--font-bold);
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.detail__stat-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(56, 100, 219, 0.45);
+  font-family: var(--font-body);
+}
+
+.detail__stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(56, 100, 219, 0.15);
+}
+
+/* ─── 2-COLUMN WORK GRID ─────────────────────────────────────── */
+.detail__work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1 1 auto;
+  padding-bottom: 16px;
+}
+
+.detail__work-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 100, 219, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.detail__work-card:hover {
+  border-color: rgba(107, 158, 255, 0.22);
+  background: rgba(56, 100, 219, 0.05);
+  transform: translateY(-3px);
+}
+
+.detail__work-card:hover .detail__work-card-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.detail__work-card-thumb {
+  position: relative;
+  height: 88px;
   flex-shrink: 0;
   overflow: hidden;
-  position: relative;
 }
 
-.detail__work-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.detail__work-thumb-inner {
+.detail__work-card-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(107, 158, 255, 0.15) 0%,
-    transparent 60%
+    to bottom,
+    transparent 30%,
+    rgba(4, 4, 12, 0.7) 100%
   );
   pointer-events: none;
 }
 
-.detail__work-info {
-  flex: 1;
+.detail__work-card-year {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-body);
+}
+
+.detail__work-card-body {
+  padding: 10px 12px 12px;
   display: flex;
   flex-direction: column;
   gap: 3px;
+  flex: 1;
 }
 
-.detail__work-title {
-  font-size: 0.97rem;
+.detail__work-card-title {
+  font-size: 0.88rem;
   color: #fff;
   font-family: var(--font-body);
   font-weight: 400;
   letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
-.detail__work-sub {
-  font-size: 11px;
+.detail__work-card-sub {
+  font-size: 10px;
   color: rgba(56, 100, 219, 0.45);
   font-family: var(--font-body);
   letter-spacing: 0.06em;
 }
 
-.detail__work-year {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.18);
-  font-family: var(--font-body);
-  letter-spacing: 0.1em;
-}
-
-.detail__work-arrow {
-  color: rgba(107, 158, 255, 0.5);
+.detail__work-card-arrow {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(56, 100, 219, 0.12);
+  border: 1px solid rgba(56, 100, 219, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(107, 158, 255, 0.7);
   opacity: 0;
-  transform: translateX(0);
-  flex-shrink: 0;
+  transform: translate(0, 0);
   transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ─── CTA ROW ────────────────────────────────────────────────── */
 .detail__cta-row {
-  padding-top: 28px;
-  border-top: 1px solid rgba(56, 100, 219, 0.08);
-  margin-top: 8px;
+  padding: 24px 0 40px;
+  border-top: 1px solid rgba(56, 100, 219, 0.07);
+  margin-top: 4px;
+  flex-shrink: 0;
 }
 
 .detail__all-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(107, 158, 255, 0.6);
+  color: rgba(107, 158, 255, 0.55);
   font-family: var(--font-body);
-  background: rgba(56, 100, 219, 0.06);
-  border: 1px solid rgba(56, 100, 219, 0.18);
-  padding: 12px 24px;
+  background: rgba(56, 100, 219, 0.05);
+  border: 1px solid rgba(56, 100, 219, 0.16);
+  padding: 11px 22px;
   border-radius: 999px;
   cursor: pointer;
   transition: color 0.3s, border-color 0.3s, background 0.3s;
@@ -582,8 +672,8 @@
 
 .detail__all-btn:hover {
   color: #fff;
-  border-color: rgba(107, 158, 255, 0.4);
-  background: rgba(56, 100, 219, 0.14);
+  border-color: rgba(107, 158, 255, 0.35);
+  background: rgba(56, 100, 219, 0.12);
 }
 
 /* ─── DETAIL CARD (right half, GSAP-positioned) ──────────────── */
@@ -930,4 +1020,55 @@
   .detail__card {
     display: none !important;
   }
+}
+
+/* ─── DETAIL OVERLAY — 50/50 ─────────────────────────────────── */
+.services__detail {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  background: rgba(4, 4, 12, 0.98);
+  backdrop-filter: blur(28px);
+}
+
+.detail__portfolio {
+  width: 50%;
+  height: 100%;
+  padding: 52px 5vw;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid rgba(56, 100, 219, 0.1);
+}
+
+.detail__portfolio-header {
+  flex-shrink: 0;
+  margin-bottom: 32px;
+}
+
+.detail__work-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-right: 12px;
+  margin-right: -12px;
+}
+
+.detail__cta-row {
+  flex-shrink: 0;
+  padding-top: 28px;
+  border-top: 1px solid rgba(56, 100, 219, 0.08);
+}
+
+/* Правая карточка */
+.detail__card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: color-mix(in srgb, var(--card-color, #3864db) 7%, #090914);
+  border-left: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
+  overflow: hidden;
 }

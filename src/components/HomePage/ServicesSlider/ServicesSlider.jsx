@@ -8,64 +8,85 @@ import { SERVICES_DATA } from "@/data/ServicesData";
 import "./ServicesSlider.css";
 
 export default function ServicesSlider() {
-  const sectionRef    = useRef(null);
-  const trackRef      = useRef(null);
-  const progressRef   = useRef(null);
-  const currentRef    = useRef(null);
-  const hintRef       = useRef(null);
-  const titleRef      = useRef(null);
-  const counterRef    = useRef(null);
-  const cardRefs      = useRef([]);
-  const detailRef     = useRef(null);
-  const portfolioRef  = useRef(null);
-  const detailCardRef = useRef(null);
-  const closeBtnRef   = useRef(null);
-  const workItemRefs  = useRef([]);
+    const sectionRef    = useRef(null);
+    const trackRef      = useRef(null);
+    const progressRef   = useRef(null);
+    const currentRef    = useRef(null);
+    const hintRef       = useRef(null);
+    const titleRef      = useRef(null);
+    const counterRef    = useRef(null);
+    const cardRefs      = useRef([]);
+    const detailRef     = useRef(null);
+    const portfolioRef  = useRef(null);
+    const detailCardRef = useRef(null);
+    const closeBtnRef   = useRef(null);
+    const workItemRefs  = useRef([]);
 
-  const scrollTriggerRef = useRef(null);
-  const isAnimatingRef   = useRef(false);
-  const originRectRef    = useRef(null);
-  const openRafRef       = useRef(null);
-  const isMobileRef      = useRef(false);
-  const savedScrollYRef  = useRef(0);
+    const scrollTriggerRef    = useRef(null);
+    const isAnimatingRef      = useRef(false);
+    const originRectRef       = useRef(null);
+    const openRafRef          = useRef(null);
+    const isMobileRef         = useRef(false);
+    const savedScrollYRef     = useRef(0);
+    const savedSTProgressRef  = useRef(0); // сохраняем прогресс ScrollTrigger
 
-  const [activeIndex,     setActiveIndex]     = useState(0);
-  const [selectedService, setSelectedService] = useState(null);
-  const [detailVisible,   setDetailVisible]   = useState(false);
+    const [activeIndex,     setActiveIndex]     = useState(0);
+    const [selectedService, setSelectedService] = useState(null);
+    const [detailVisible,   setDetailVisible]   = useState(false);
 
-  const { gsap, ScrollTrigger } = useGSAP();
+    const { gsap, ScrollTrigger } = useGSAP();
 
-  const services = SERVICES_DATA;
+    const services = SERVICES_DATA;
 
-  // ── Scroll lock helpers ────────────────────────────────────────────────
-  // Сохраняем scrollY и фиксируем body — страница не скроллится под оверлеем,
-  // и при закрытии пользователь остаётся ровно там, где был.
-  const lockBodyScroll = () => {
-    savedScrollYRef.current = window.scrollY;
-    document.body.style.position = "fixed";
-    document.body.style.top      = `-${savedScrollYRef.current}px`;
-    document.body.style.left     = "0";
-    document.body.style.right    = "0";
-    document.body.style.overflow = "hidden";
-  };
+    // ── Scroll lock helpers ────────────────────────────────────────────────
+    // Сохраняем scrollY и фиксируем body — страница не скроллится под оверлеем,
+    // и при закрытии пользователь остаётся ровно там, где был.
+    const lockBodyScroll = () => {
+        savedScrollYRef.current = window.scrollY;
+    
+        // Скрываем всё кроме нашей секции — никакого белого фона
+        const section = sectionRef.current;
+            if (section) {
+                Array.from(document.body.children).forEach(el => {
+                    if (!el.contains(section) && el !== section) {
+                        el.dataset.hiddenByServices = el.style.visibility || "";
+                        el.style.visibility = "hidden";
+                }
+            });
+        }
 
-  const unlockBodyScroll = () => {
-    document.body.style.position = "";
-    document.body.style.top      = "";
-    document.body.style.left     = "";
-    document.body.style.right    = "";
-    document.body.style.overflow = "";
-    window.scrollTo({ top: savedScrollYRef.current, behavior: "instant" });
-  };
+        document.body.style.position = "fixed";
+        document.body.style.top      = `-${savedScrollYRef.current}px`;
+        document.body.style.left     = "0";
+        document.body.style.right    = "0";
+        document.body.style.overflow = "hidden";
+    };
 
-  // ── Detect mobile once on mount ────────────────────────────────────────
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    isMobileRef.current = mq.matches;
-    const onChange = (e) => { isMobileRef.current = e.matches; };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+    const unlockBodyScroll = () => {
+        // Восстанавливаем видимость
+        Array.from(document.body.children).forEach(el => {
+            if ("hiddenByServices" in el.dataset) {
+            el.style.visibility = el.dataset.hiddenByServices;
+            delete el.dataset.hiddenByServices;
+            }
+        });
+
+        document.body.style.position = "";
+        document.body.style.top      = "";
+        document.body.style.left     = "";
+        document.body.style.right    = "";
+        document.body.style.overflow = "";
+        window.scrollTo({ top: savedScrollYRef.current, behavior: "instant" });
+    };
+
+    // ── Detect mobile once on mount ────────────────────────────────────────
+    useEffect(() => {
+        const mq = window.matchMedia("(max-width: 768px)");
+        isMobileRef.current = mq.matches;
+        const onChange = (e) => { isMobileRef.current = e.matches; };
+        mq.addEventListener("change", onChange);
+        return () => mq.removeEventListener("change", onChange);
+    }, []);
 
   // ── Main horizontal scroll (desktop only) ──────────────────────────────
   useEffect(() => {
@@ -192,7 +213,10 @@ export default function ServicesSlider() {
     }
 
     // ── Desktop: FLIP-анимация ─────────────────────────────────────────
-    if (scrollTriggerRef.current) scrollTriggerRef.current.disable();
+    if (scrollTriggerRef.current) {
+      savedSTProgressRef.current = scrollTriggerRef.current.progress;
+      scrollTriggerRef.current.disable();
+    }
     lockBodyScroll();
 
     const rect        = cardEl.getBoundingClientRect();
@@ -287,7 +311,17 @@ export default function ServicesSlider() {
         isAnimatingRef.current = false;
         originRectRef.current  = null;
         unlockBodyScroll();
-        if (scrollTriggerRef.current) scrollTriggerRef.current.enable();
+        if (scrollTriggerRef.current) {
+          scrollTriggerRef.current.enable();
+          // Восстанавливаем позицию горизонтального скролла
+          requestAnimationFrame(() => {
+            if (scrollTriggerRef.current) {
+              const st = scrollTriggerRef.current;
+              const target = st.start + savedSTProgressRef.current * (st.end - st.start);
+              window.scrollTo({ top: target, behavior: "instant" });
+            }
+          });
+        }
       },
     })
       .to(validWorkItems, { opacity: 0, x: -28, stagger: 0.03, duration: 0.28, ease: "power2.in" }, 0)
@@ -298,14 +332,17 @@ export default function ServicesSlider() {
       .to(allCards,       { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.55, ease: "power3.out" }, 0.45);
   }, [gsap, detailVisible]);
 
-  useEffect(() => () => cancelAnimationFrame(openRafRef.current), []);
+    useEffect(() => () => cancelAnimationFrame(openRafRef.current), []);
 
-  // Снимаем лок при анмаунте — на случай ухода со страницы с открытым оверлеем
-  useEffect(() => {
-    return () => {
-      if (document.body.style.position === "fixed") unlockBodyScroll();
-    };
-  }, []);
+    // Снимаем лок при анмаунте — на случай ухода со страницы с открытым оверлеем
+    useEffect(() => {
+        return () => {
+            if (document.body.style.position === "fixed") {
+            document.documentElement.classList.remove("services-open"); // ← добавить
+            unlockBodyScroll();
+            }
+        };
+    }, []);
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
@@ -378,57 +415,77 @@ export default function ServicesSlider() {
       {/* DETAIL OVERLAY */}
       <div className="services__detail" ref={detailRef} style={{ display: "none" }}>
 
-        {/* Left panel: portfolio list */}
+        {/* Left panel: portfolio */}
         <div className="detail__portfolio" ref={portfolioRef}>
-          <div className="detail__portfolio-header">
-            <button className="detail__close" ref={closeBtnRef} onClick={closeDetail} aria-label="Close">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M13.5 4.5l-9 9M4.5 4.5l9 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </button>
 
+          {/* Sticky header */}
+          <div className="detail__portfolio-header">
+            <div className="detail__header-top">
+              <button className="detail__close" ref={closeBtnRef} onClick={closeDetail} aria-label="Close">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </button>
+              {selectedService && (
+                <span className="detail__portfolio-tag">{selectedService.tag}</span>
+              )}
+            </div>
             {selectedService && (
               <div className="detail__portfolio-meta">
-                <span className="detail__portfolio-tag">{selectedService.tag}</span>
                 <h3 className="detail__portfolio-title">{selectedService.title.replace("\n", " ")}</h3>
                 <p className="detail__portfolio-sub">{selectedService.desc}</p>
+                <div className="detail__portfolio-stats">
+                  <span className="detail__stat">
+                    <span className="detail__stat-num">{selectedService.works?.length ?? 0}</span>
+                    <span className="detail__stat-label">Projects</span>
+                  </span>
+                  <span className="detail__stat-divider" />
+                  <span className="detail__stat">
+                    <span className="detail__stat-num">2023–24</span>
+                    <span className="detail__stat-label">Period</span>
+                  </span>
+                </div>
               </div>
             )}
           </div>
 
-          <div className="detail__work-list">
+          {/* 2-column work grid */}
+          <div className="detail__work-grid">
             {(selectedService?.works ?? []).map((work, i) => (
               <div
-                className="detail__work-item"
+                className="detail__work-card"
                 key={`${selectedService?.id}-${i}`}
                 ref={el => { workItemRefs.current[i] = el; }}
               >
-                <div className="detail__work-thumb" style={{ background: work.thumbBg }}>
-                  <div className="detail__work-thumb-inner" />
+                <div className="detail__work-card-thumb" style={{ background: work.thumbBg }}>
+                  <div className="detail__work-card-overlay" />
+                  <span className="detail__work-card-year">{work.year}</span>
                 </div>
-                <div className="detail__work-info">
-                  <span className="detail__work-title">{work.title}</span>
-                  <span className="detail__work-sub">{work.sub}</span>
+                <div className="detail__work-card-body">
+                  <span className="detail__work-card-title">{work.title}</span>
+                  <span className="detail__work-card-sub">{work.sub}</span>
                 </div>
-                <span className="detail__work-year">{work.year}</span>
-                <svg className="detail__work-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <div className="detail__work-card-arrow">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
               </div>
             ))}
           </div>
 
+          {/* CTA */}
           <div className="detail__cta-row">
             <button className="detail__all-btn">
               See all work
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                 <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Right panel: expanded card (desktop only, hidden on mobile via CSS) */}
+        {/* Right panel: expanded card (desktop only) */}
         <div
           className="detail__card"
           ref={detailCardRef}

@@ -24,6 +24,8 @@ export default function HeroSection() {
   const taglineRef = useRef(null);
 
   const { gsap, ScrollTrigger } = useGSAP();
+  const scrollTriggerRef = useRef(null);
+  const introPlayedRef = useRef(false);
 
   useEffect(() => {
     if (!gsap || !ScrollTrigger) return;
@@ -40,51 +42,58 @@ export default function HeroSection() {
       gsap.set(bgTextRef.current, { opacity: 0 });
       gsap.set(taglineRef.current, { opacity: 0, y: 12 });
 
-      // ── Check if we should play intro animation ───────────────
       const scrollY = window.scrollY;
-      const shouldPlayIntro = scrollY < 80; // небольшая погрешность
+      const shouldPlayIntro = scrollY < 100;
 
-      if (shouldPlayIntro) {
-        // Entry animation
-        const intro = gsap.timeline({
+      // ── Create Scroll Out Animation (but don't start yet) ───────
+      const createScrollTL = () => {
+        if (scrollTriggerRef.current) return;
+
+        const scrollTL = gsap.timeline({
           scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top 70%",
-            toggleActions: "play none none reverse",
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.3,
+            invalidateOnRefresh: true,
           },
         });
 
-        intro
-          .fromTo(
-            navRef.current,
-            { y: -48, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.9 }
-          )
+        scrollTL
+          .to(navRef.current, { y: -80, opacity: 0, ease: "none" }, 0)
+          .to(socialLeftRef.current, { x: -70, opacity: 0, ease: "none" }, 0)
+          .to(socialRightRef.current, { x: 70, opacity: 0, ease: "none" }, 0)
+          .to(lettersRef.current, { y: -130, opacity: 0, stagger: 0.02, ease: "none" }, 0)
+          .to(designRef.current, { y: 110, scale: 0.9, opacity: 0, ease: "none" }, 0)
+          .to(taglineRef.current, { opacity: 0, ease: "none" }, 0);
+
+        scrollTriggerRef.current = scrollTL.scrollTrigger;
+      };
+
+      // ── Intro Animation ─────────────────────────────────────────
+      if (shouldPlayIntro && !introPlayedRef.current) {
+        introPlayedRef.current = true;
+
+        const enterTL = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          onComplete: () => {
+            // Запускаем scrub-анимацию только после завершения intro
+            createScrollTL();
+          },
+        });
+
+        enterTL
+          .fromTo(navRef.current, { y: -48, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 })
           .fromTo(
             lettersRef.current,
             { y: 110, opacity: 0, rotateX: -55, filter: "blur(6px)" },
-            {
-              y: 0,
-              opacity: 1,
-              rotateX: 0,
-              filter: "blur(0px)",
-              stagger: 0.042,
-              duration: 0.85,
-              ease: "power4.out",
-            },
+            { y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)", stagger: 0.042, duration: 0.85, ease: "power4.out" },
             "-=0.45"
           )
           .fromTo(
             designRef.current,
             { y: 200, scale: 1.22, opacity: 0, filter: "blur(10px)" },
-            {
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              filter: "blur(0px)",
-              duration: 1.05,
-              ease: "expo.out",
-            },
+            { y: 0, scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.05, ease: "expo.out" },
             "-=0.45"
           )
           .fromTo(
@@ -93,64 +102,33 @@ export default function HeroSection() {
             { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 },
             "-=0.65"
           )
-          .fromTo(
-            bgTextRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 2.5 },
-            "-=1.8"
-          )
-          .fromTo(
-            taglineRef.current,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-            "-=1.2"
-          );
+          .fromTo(bgTextRef.current, { opacity: 0 }, { opacity: 1, duration: 2.5 }, "-=1.8")
+          .fromTo(taglineRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=1.2");
       } else {
-        // Already scrolled — set final state immediately
+        // Уже проскроллено — сразу конечное состояние
         gsap.set(navRef.current, { y: 0, opacity: 1 });
         gsap.set(lettersRef.current, { y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" });
         gsap.set(designRef.current, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)" });
         gsap.set([socialLeftRef.current, socialRightRef.current], { opacity: 1, x: 0 });
         gsap.set(bgTextRef.current, { opacity: 1 });
         gsap.set(taglineRef.current, { opacity: 1, y: 0 });
+
+        createScrollTL();
       }
-
-      // ── Scroll-out animation (always active) ───────────────────
-      const scrollTL = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.3,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      scrollTL
-        .to(navRef.current, { y: -80, opacity: 0, ease: "none" }, 0)
-        .to(socialLeftRef.current, { x: -70, opacity: 0, ease: "none" }, 0)
-        .to(socialRightRef.current, { x: 70, opacity: 0, ease: "none" }, 0)
-        .to(lettersRef.current, { y: -130, opacity: 0, stagger: 0.02, ease: "none" }, 0)
-        .to(designRef.current, { y: 110, scale: 0.9, opacity: 0, ease: "none" }, 0)
-        .to(taglineRef.current, { opacity: 0, ease: "none" }, 0);
     }, heroRef);
 
-    // Лучшая стратегия refresh для Next.js + GSAP
     const refresh = () => {
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          ScrollTrigger.refresh();
-        });
+        requestAnimationFrame(() => ScrollTrigger.refresh());
       });
     };
 
     refresh();
-
-    // Дополнительно на load
     window.addEventListener("load", refresh);
 
     return () => {
       window.removeEventListener("load", refresh);
+      if (scrollTriggerRef.current) scrollTriggerRef.current.kill();
       ctx.revert();
     };
   }, [gsap, ScrollTrigger]);
