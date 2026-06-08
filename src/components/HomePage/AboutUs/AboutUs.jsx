@@ -10,18 +10,21 @@ const services = [
     desc: "Логотипы, брендбуки, упаковка, мерч и полная айдентика, которую запоминают.",
     tags: ["Figma", "Illustrator", "After Effects", "Branding"],
     bgColor: "#f8f5f0",
+    image: "/design-solutions.webp",
   },
   {
     title: "ВЕБ И DIGITAL",
     desc: "Современные сайты и цифровые продукты на чистом коде. Без шаблонов и компромиссов.",
     tags: ["React", "Next.js", "TypeScript", "Framer Motion"],
     bgColor: "#f0f4ff",
+    image: "/web-dev.webp",
   },
   {
     title: "3D-ДИЗАЙН",
     desc: "Визуализация, 3D-моделинг, моушн и AR/VR решения. Объём, который продаёт.",
     tags: ["Blender", "Cinema 4D", "Spline", "Three.js"],
     bgColor: "#f5f0f8",
+    image: "/mob-dev.webp",
   },
 ];
 
@@ -38,7 +41,6 @@ export default function AboutSection() {
 
   const heroEyebrowRef = useRef(null);
   const heroLine1Ref = useRef(null);
-  const heroLine2Ref = useRef(null);
   const heroSubRef = useRef(null);
   const heroBtnRef = useRef(null);
   const heroRulerRef = useRef(null);
@@ -54,61 +56,124 @@ export default function AboutSection() {
     if (!gsap || !ScrollTrigger) return;
 
     const ctx = gsap.context(() => {
+
+      // ─── Hover: параллакс фона карточки ──────────────────────────────
+      servCardsRef.current.forEach((card) => {
+        if (!card) return;
+        const bg = card.querySelector(`.${styles.servCardBg}`);
+        if (!bg) return;
+
+        const onEnter = () => gsap.to(bg, { scale: 1.08, y: -12, duration: 0.9, ease: "power2.out" });
+        const onLeave = () => gsap.to(bg, { scale: 1, y: 0, duration: 0.85, ease: "power2.out" });
+
+        card.addEventListener("mouseenter", onEnter);
+        card.addEventListener("mouseleave", onLeave);
+        card._hoverHandlers = { onEnter, onLeave };
+      });
+
+      // ─── Hero enter-анимации ──────────────────────────────────────────
       const heroTL = gsap.timeline({
-        scrollTrigger: { trigger: heroRef.current, start: "top 78%", toggleActions: "play none none reverse" },
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top 78%",
+          toggleActions: "play none none reverse",
+        },
         defaults: { ease: "power4.out" },
       });
 
       heroTL
         .fromTo(heroEyebrowRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 })
         .fromTo(heroLine1Ref.current, { y: "110%", opacity: 0 }, { y: "0%", opacity: 1, duration: 1.15 }, "-=0.5")
-        .fromTo(heroLine2Ref.current, { y: "110%", opacity: 0 }, { y: "0%", opacity: 1, duration: 1.15 }, "-=0.85")
         .fromTo(heroSubRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.95 }, "-=0.65")
         .fromTo(heroBtnRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.85 }, "-=0.55")
         .fromTo(heroRulerRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.8, ease: "expo.out" }, "-=1.1")
         .fromTo(heroIndexRef.current, { opacity: 0 }, { opacity: 1, duration: 2 }, "-=1.3");
 
+      // Stats
       statsRefs.current.forEach((el, i) => {
         if (!el) return;
         gsap.fromTo(el, { opacity: 0, y: 40 }, {
           opacity: 1, y: 0, duration: 0.9, delay: i * 0.08,
-          scrollTrigger: { trigger: heroRef.current, start: "top 65%", toggleActions: "play none none reverse" }
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
         });
       });
 
+      // Intro правой колонки
       gsap.fromTo(servIntroRef.current, { opacity: 0, y: 35 }, {
         opacity: 1, y: 0, duration: 1.1,
-        scrollTrigger: { trigger: heroRef.current, start: "top 60%" }
+        scrollTrigger: {
+          trigger: servIntroRef.current,
+          start: "top 82%",
+        },
       });
 
-      servCardsRef.current.forEach((el, i) => {
-        if (!el) return;
-        gsap.fromTo(el, { opacity: 0, y: 60 }, {
-          opacity: 1, y: 0, duration: 1.05, delay: i * 0.1,
-          scrollTrigger: { trigger: heroRef.current, start: "top 58%" }
+      // ─── Карточки: появляются одна за одной при скролле ──────────────
+      // CSS sticky держит левую колонку.
+      // gap: 28vh между карточками = естественная пауза.
+      // Каждая карточка анимируется от своего собственного trigger-а.
+      servCardsRef.current.forEach((card, i) => {
+        if (!card) return;
+
+        gsap.set(card, { opacity: 0, y: 70 });
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 80%",
+          end: "bottom 10%",
+          onEnter: () => {
+            gsap.to(card, {
+              opacity: 1,
+              y: 0,
+              duration: 1.0,
+              ease: "power3.out",
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, {
+              opacity: 0,
+              y: 70,
+              duration: 0.5,
+              ease: "power2.in",
+            });
+          },
         });
       });
+
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      servCardsRef.current.forEach((card) => {
+        if (card?._hoverHandlers) {
+          const { onEnter, onLeave } = card._hoverHandlers;
+          card.removeEventListener("mouseenter", onEnter);
+          card.removeEventListener("mouseleave", onLeave);
+          delete card._hoverHandlers;
+        }
+      });
+      ctx.revert();
+    };
   }, [gsap, ScrollTrigger]);
 
   return (
     <section ref={sectionRef} className={styles.about} id="studio">
       <div ref={heroRef} className={styles.hero}>
-
         <div className={styles.heroLayout}>
-          {/* Левая колонка */}
+
+          {/* ── Левая колонка — sticky через CSS ── */}
           <div className={styles.heroLeft}>
             <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— О нас</span>
 
-            <div className={styles.heroPerspective}>
-              <h1 className={styles.heroTitle}>
-                <div className={styles.heroClip}>
-                  <span ref={heroLine1Ref} className={styles.heroTitleLine}>Мы стремимся к инновациям.</span>
-                </div>
-              </h1>
-            </div>
+            <h1 className={styles.heroTitle}>
+              <div className={styles.heroClip}>
+                <span ref={heroLine1Ref} className={styles.heroTitleLine}>
+                  Мы стремимся к инновациям.
+                </span>
+              </div>
+            </h1>
 
             <p ref={heroSubRef} className={styles.heroSub}>
               Создаём визуальные системы, которые работают во всех измерениях —<br />
@@ -118,13 +183,23 @@ export default function AboutSection() {
             <a ref={heroBtnRef} href="#contact" className={styles.heroBtn}>
               Начать проект
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path
+                  d="M2.5 7h9M7.5 3l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </a>
 
             <div className={styles.statsGrid}>
               {stats.map((stat, i) => (
-                <div key={i} ref={el => statsRefs.current[i] = el} className={styles.statCard}>
+                <div
+                  key={i}
+                  ref={(el) => { statsRefs.current[i] = el; }}
+                  className={styles.statCard}
+                >
                   <div className={styles.statNum}>{stat.num}</div>
                   <div className={styles.statLabel}>{stat.label}</div>
                 </div>
@@ -132,7 +207,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Правая колонка — услуги */}
+          {/* ── Правая колонка — карточки скроллятся ── */}
           <div className={styles.heroRight}>
             <div className={styles.servicesBlock}>
               <div className={styles.servTop}>
@@ -142,31 +217,39 @@ export default function AboutSection() {
                 </p>
               </div>
 
-              {/* <div className={styles.servGrid}>
+              <div className={styles.servGrid}>
                 {services.map((service, i) => (
                   <div
                     key={i}
-                    ref={el => { servCardsRef.current[i] = el; }}
+                    ref={(el) => { servCardsRef.current[i] = el; }}
                     className={styles.servCard}
                     style={{ backgroundColor: service.bgColor }}
                   >
-                    <h3 className={styles.servCardTitle}>{service.title}</h3>
-                    <p className={styles.servCardDesc}>{service.desc}</p>
-
-                    <div className={styles.servCardDivider} />
-
-                    <div className={styles.servCardTags}>
-                      {service.tags.map((tag, idx) => (
-                        <span key={idx} className={styles.servTag}>{tag}</span>
-                      ))}
+                    <div
+                      className={styles.servCardBg}
+                      style={{ backgroundImage: `url(${service.image})` }}
+                    />
+                    <div className={styles.servCardContent}>
+                      <h3 className={styles.servCardTitle}>{service.title}</h3>
+                      <p className={styles.servCardDesc}>{service.desc}</p>
+                      <div className={styles.servCardDivider} />
+                      <div className={styles.servCardTags}>
+                        {service.tags.map((tag, idx) => (
+                          <span key={idx} className={styles.servTag}>{tag}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
-              </div> */}
+              </div>
             </div>
           </div>
+
         </div>
 
+        {/* Декоративные элементы */}
+        {/* <div ref={heroIndexRef} className={styles.heroBgIndex} aria-hidden>II</div> */}
+        {/* <div ref={heroRulerRef} className={styles.heroRuler} /> */}
       </div>
     </section>
   );

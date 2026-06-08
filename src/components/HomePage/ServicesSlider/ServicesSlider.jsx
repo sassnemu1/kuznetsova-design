@@ -327,8 +327,8 @@ export default function ServicesSlider() {
       .to(validWorkItems, { opacity: 0, x: -28, stagger: 0.03, duration: 0.28, ease: "power2.in" }, 0)
       .to(closeBtn,       { opacity: 0, y: -14,                duration: 0.22, ease: "power2.in" }, 0)
       .to(portfolio,      { opacity: 0, x: -48,                duration: 0.35, ease: "power2.in" }, 0.04)
-      .to(detailCard,     { top: flipTop, left: flipLeft, width: flipW, height: flipH, borderRadius: 24, duration: 0.72, clearProps: "xPercent,yPercent" }, 0.08)
-      .to(detail,         { opacity: 0,                         duration: 0.3,  ease: "power2.in" }, 0.5)
+      .to(detailCard,     { top: flipTop, left: flipLeft, width: flipW, height: flipH, borderRadius: 24, duration: 1.72, clearProps: "xPercent,yPercent" }, 0.08)
+      .to(detail,         { opacity: 0,                         duration: 1.3,  ease: "power2.in" }, 0.5)
       .to(allCards,       { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.55, ease: "power3.out" }, 0.45);
   }, [gsap, detailVisible]);
 
@@ -346,7 +346,7 @@ export default function ServicesSlider() {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <section className="services" ref={sectionRef}>
+    <section className="services" ref={sectionRef} id="services">
 
       {/* HEADER */}
       <div className="services__header">
