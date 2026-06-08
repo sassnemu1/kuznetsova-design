@@ -100,7 +100,7 @@ export default function AboutSection() {
         <div className={styles.heroLayout}>
           {/* Левая колонка */}
           <div className={styles.heroLeft}>
-            <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— About Us</span>
+            <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— О нас</span>
 
             <div className={styles.heroPerspective}>
               <h1 className={styles.heroTitle}>

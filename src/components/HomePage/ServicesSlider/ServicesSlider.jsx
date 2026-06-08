@@ -2,126 +2,102 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import useGSAP from "@/hooks/useGSAP";
+
+import { SERVICES_DATA } from "@/data/ServicesData";
+
 import "./ServicesSlider.css";
 
-const services = [
-  {
-    id: "01",
-    tag: "Strategy",
-    title: "Brand\nIdentity",
-    desc: "Логотипы, визуальные системы, типографика, бренд-стратегия и рыночное позиционирование.",
-    color: "#3864db",
-    image: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80&auto=format&fit=crop",
-    works: [
-      { title: "Noir Coffee", sub: "Brand identity & packaging", year: "2024", thumbBg: "linear-gradient(135deg,#0d1a3d,#3864db)" },
-      { title: "Solara Energy", sub: "Visual system & motion", year: "2024", thumbBg: "linear-gradient(135deg,#1a3a8f,#6b9eff)" },
-      { title: "Arca Studio", sub: "Full brand redesign", year: "2023", thumbBg: "linear-gradient(135deg,#0a1628,#2248a8)" },
-      { title: "Vend Capital", sub: "Corporate identity", year: "2023", thumbBg: "linear-gradient(135deg,#06101f,#1a3a8f)" },
-    ],
-  },
-  {
-    id: "02",
-    tag: "Digital",
-    title: "UI / UX\nDesign",
-    desc: "Пользовательские интерфейсы, сценарии взаимодействия, прототипы и продуманные цифровые опыты.",
-    color: "#6b9eff",
-    image: "https://images.unsplash.com/photo-1545235617-7a424c1a60cc?w=800&q=80&auto=format&fit=crop",
-    works: [
-      { title: "Pulse Health", sub: "Mobile app design", year: "2024", thumbBg: "linear-gradient(135deg,#0d1a3d,#6b9eff)" },
-      { title: "Trove Platform", sub: "SaaS dashboard", year: "2024", thumbBg: "linear-gradient(135deg,#1a3a8f,#9db4f5)" },
-      { title: "Flow Finance", sub: "Banking UI", year: "2023", thumbBg: "linear-gradient(135deg,#06101f,#3864db)" },
-      { title: "Kite Tools", sub: "Design system", year: "2023", thumbBg: "linear-gradient(135deg,#0a1628,#2248a8)" },
-    ],
-  },
-  {
-    id: "03",
-    tag: "Development",
-    title: "Web\nDesign",
-    desc: "Премиальные сайты с авторской анимацией, сложными взаимодействиями и высокой производительностью.",
-    color: "#2248a8",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop",
-    works: [
-      { title: "Studio Kuma", sub: "Portfolio & CMS", year: "2024", thumbBg: "linear-gradient(135deg,#060d1f,#2248a8)" },
-      { title: "Maison Blanc", sub: "E-commerce", year: "2024", thumbBg: "linear-gradient(135deg,#0a1628,#3864db)" },
-      { title: "Terrain Agency", sub: "Agency website", year: "2023", thumbBg: "linear-gradient(135deg,#06101f,#1a3a8f)" },
-      { title: "Forrest Labs", sub: "Landing page", year: "2023", thumbBg: "linear-gradient(135deg,#040810,#2248a8)" },
-    ],
-  },
-  {
-    id: "04",
-    tag: "Animation",
-    title: "Motion\nDesign",
-    desc: "3D-графика, сложные анимации, переходы и продвинутое 3D-моделирование.",
-    color: "#9db4f5",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80&auto=format&fit=crop",
-    works: [
-      { title: "Apex Reel", sub: "Motion showreel", year: "2024", thumbBg: "linear-gradient(135deg,#0d1a3d,#9db4f5)" },
-      { title: "Luma Intro", sub: "Brand animation", year: "2024", thumbBg: "linear-gradient(135deg,#1a3a8f,#6b9eff)" },
-      { title: "Waves Audio", sub: "Scroll experience", year: "2023", thumbBg: "linear-gradient(135deg,#0a1628,#3864db)" },
-      { title: "Yonder Film", sub: "Title sequence", year: "2023", thumbBg: "linear-gradient(135deg,#06101f,#9db4f5)" },
-    ],
-  },
-  {
-    id: "05",
-    tag: "Creative",
-    title: "Art\nDirection",
-    desc: "Креативное руководство, визуальный язык и концептуальная разработка проектов.",
-    color: "#1a3a8f",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
-    works: [
-      { title: "Grand Hotel", sub: "Editorial campaign", year: "2024", thumbBg: "linear-gradient(135deg,#040810,#1a3a8f)" },
-      { title: "Celeste Label", sub: "Album art direction", year: "2024", thumbBg: "linear-gradient(135deg,#060d1f,#2248a8)" },
-      { title: "Odessa Mag", sub: "Print & digital", year: "2023", thumbBg: "linear-gradient(135deg,#0a1628,#3864db)" },
-      { title: "Nox Studio", sub: "Visual identity", year: "2023", thumbBg: "linear-gradient(135deg,#040810,#1a3a8f)" },
-    ],
-  },
-];
-
 export default function ServicesSlider() {
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-  const progressRef = useRef(null);
-  const currentRef = useRef(null);
-  const hintRef = useRef(null);
-  const titleRef = useRef(null);
-  const counterRef = useRef(null);
-  const cardRefs = useRef([]);
-  const detailRef = useRef(null);
-  const portfolioRef = useRef(null);
+  const sectionRef    = useRef(null);
+  const trackRef      = useRef(null);
+  const progressRef   = useRef(null);
+  const currentRef    = useRef(null);
+  const hintRef       = useRef(null);
+  const titleRef      = useRef(null);
+  const counterRef    = useRef(null);
+  const cardRefs      = useRef([]);
+  const detailRef     = useRef(null);
+  const portfolioRef  = useRef(null);
   const detailCardRef = useRef(null);
-  const closeBtnRef = useRef(null);
-  const workItemRefs = useRef([]);
-  const scrollTriggerRef = useRef(null);
-  const isAnimatingRef = useRef(false);
-  const originRectRef = useRef(null);
-  const openRafRef = useRef(null);
+  const closeBtnRef   = useRef(null);
+  const workItemRefs  = useRef([]);
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollTriggerRef = useRef(null);
+  const isAnimatingRef   = useRef(false);
+  const originRectRef    = useRef(null);
+  const openRafRef       = useRef(null);
+  const isMobileRef      = useRef(false);
+  const savedScrollYRef  = useRef(0);
+
+  const [activeIndex,     setActiveIndex]     = useState(0);
   const [selectedService, setSelectedService] = useState(null);
-  const [detailVisible, setDetailVisible] = useState(false);
+  const [detailVisible,   setDetailVisible]   = useState(false);
 
   const { gsap, ScrollTrigger } = useGSAP();
 
-  // ── Main horizontal scroll ─────────────────────────────────────────────
+  const services = SERVICES_DATA;
+
+  // ── Scroll lock helpers ────────────────────────────────────────────────
+  // Сохраняем scrollY и фиксируем body — страница не скроллится под оверлеем,
+  // и при закрытии пользователь остаётся ровно там, где был.
+  const lockBodyScroll = () => {
+    savedScrollYRef.current = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top      = `-${savedScrollYRef.current}px`;
+    document.body.style.left     = "0";
+    document.body.style.right    = "0";
+    document.body.style.overflow = "hidden";
+  };
+
+  const unlockBodyScroll = () => {
+    document.body.style.position = "";
+    document.body.style.top      = "";
+    document.body.style.left     = "";
+    document.body.style.right    = "";
+    document.body.style.overflow = "";
+    window.scrollTo({ top: savedScrollYRef.current, behavior: "instant" });
+  };
+
+  // ── Detect mobile once on mount ────────────────────────────────────────
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    isMobileRef.current = mq.matches;
+    const onChange = (e) => { isMobileRef.current = e.matches; };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // ── Main horizontal scroll (desktop only) ──────────────────────────────
   useEffect(() => {
     if (!gsap || !ScrollTrigger) return;
 
     const ctx = gsap.context(() => {
-      const section = sectionRef.current;
-      const track = trackRef.current;
+      const section  = sectionRef.current;
+      const track    = trackRef.current;
       const progress = progressRef.current;
       if (!section || !track) return;
+
+      // On mobile — only entrance animation, no pinning
+      if (isMobileRef.current) {
+        gsap.fromTo(
+          cardRefs.current.filter(Boolean),
+          { opacity: 0, y: 48 },
+          { opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: section, start: "top 85%" } }
+        );
+        return;
+      }
 
       const getScrollAmount = () => {
         const overflowWidth = track.scrollWidth - window.innerWidth;
         return -(overflowWidth + window.innerWidth * 0.05);
       };
 
-      // Entrance animation
+      // Entrance
       gsap.timeline({ delay: 0.15 })
-        .fromTo(titleRef.current, { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out" })
+        .fromTo(titleRef.current,   { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1,   ease: "power3.out" })
         .fromTo(counterRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.65")
-        .fromTo(hintRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.5");
+        .fromTo(hintRef.current,    { opacity: 0 },         { opacity: 1,        duration: 0.8, ease: "power2.out" }, "-=0.5");
 
       gsap.fromTo(
         cardRefs.current.filter(Boolean),
@@ -157,7 +133,12 @@ export default function ServicesSlider() {
         gsap.fromTo(card, { "--card-parallax": "0px" }, {
           "--card-parallax": `${dir}px`,
           ease: "none",
-          scrollTrigger: { trigger: section, start: "top top", end: () => `+=${Math.abs(getScrollAmount())}`, scrub: 2.5 }
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${Math.abs(getScrollAmount())}`,
+            scrub: 2.5,
+          },
         });
       });
     }, sectionRef);
@@ -177,31 +158,63 @@ export default function ServicesSlider() {
     if (!gsap || isAnimatingRef.current || detailVisible) return;
     isAnimatingRef.current = true;
 
-    if (scrollTriggerRef.current) scrollTriggerRef.current.disable();
+    const detail    = detailRef.current;
+    const portfolio = portfolioRef.current;
+    const closeBtn  = closeBtnRef.current;
 
-    const rect = cardEl.getBoundingClientRect();
+    // ── Mobile: простой fade без FLIP ──────────────────────────────────
+    if (isMobileRef.current) {
+      gsap.set(detail,    { display: "flex", opacity: 0 });
+      gsap.set(portfolio, { opacity: 0, y: 24 });
+      gsap.set(closeBtn,  { opacity: 0 });
+
+      setSelectedService(service);
+      setDetailVisible(true);
+      lockBodyScroll();
+
+      cancelAnimationFrame(openRafRef.current);
+      openRafRef.current = requestAnimationFrame(() => {
+        openRafRef.current = requestAnimationFrame(() => {
+          const validWorkItems = workItemRefs.current.filter(Boolean);
+          gsap.set(validWorkItems, { opacity: 0, y: 16 });
+
+          gsap.timeline({
+            defaults:   { ease: "expo.out" },
+            onComplete: () => { isAnimatingRef.current = false; },
+          })
+            .to(detail,         { opacity: 1,  duration: 0.3 }, 0)
+            .to(portfolio,      { opacity: 1, y: 0, duration: 0.5 }, 0.1)
+            .to(closeBtn,       { opacity: 1,  duration: 0.3 }, 0.2)
+            .to(validWorkItems, { opacity: 1, y: 0, stagger: 0.06, duration: 0.45 }, 0.25);
+        });
+      });
+      return;
+    }
+
+    // ── Desktop: FLIP-анимация ─────────────────────────────────────────
+    if (scrollTriggerRef.current) scrollTriggerRef.current.disable();
+    lockBodyScroll();
+
+    const rect        = cardEl.getBoundingClientRect();
     const sectionRect = sectionRef.current.getBoundingClientRect();
     originRectRef.current = rect;
 
-    const detail = detailRef.current;
-    const portfolio = portfolioRef.current;
     const detailCard = detailCardRef.current;
-    const closeBtn = closeBtnRef.current;
     const otherCards = cardRefs.current.filter(c => c && c !== cardEl);
 
-    gsap.set(detail, { display: "flex", opacity: 0 });
+    gsap.set(detail,     { display: "flex", opacity: 0 });
     gsap.set(detailCard, {
-      position: "absolute",
-      top: rect.top - sectionRect.top,
-      left: rect.left - sectionRect.left,
-      width: rect.width,
-      height: rect.height,
+      position:    "absolute",
+      top:         rect.top  - sectionRect.top,
+      left:        rect.left - sectionRect.left,
+      width:       rect.width,
+      height:      rect.height,
       borderRadius: 24,
-      opacity: 1,
-      clearProps: "scale,xPercent,yPercent",
+      opacity:     1,
+      clearProps:  "scale,xPercent,yPercent",
     });
     gsap.set(portfolio, { opacity: 0, x: -48 });
-    gsap.set(closeBtn, { opacity: 0, y: -16 });
+    gsap.set(closeBtn,  { opacity: 0, y: -16 });
 
     setSelectedService(service);
     setDetailVisible(true);
@@ -212,17 +225,15 @@ export default function ServicesSlider() {
         const validWorkItems = workItemRefs.current.filter(Boolean);
         gsap.set(validWorkItems, { opacity: 0, x: -36 });
 
-        const tl = gsap.timeline({
-          defaults: { ease: "expo.out" },
+        gsap.timeline({
+          defaults:   { ease: "expo.out" },
           onComplete: () => { isAnimatingRef.current = false; },
-        });
-
-        tl
-          .to(otherCards, { opacity: 0, scale: 0.9, y: 16, stagger: 0.035, duration: 0.4, ease: "power2.in" }, 0)
-          .to(detail, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.08)
-          .to(detailCard, { top: 0, left: "50%", width: "50%", height: "100%", borderRadius: 0, duration: 0.8, ease: "expo.inOut" }, 0.12)
-          .to(portfolio, { opacity: 1, x: 0, duration: 0.65 }, 0.45)
-          .to(closeBtn, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.5)
+        })
+          .to(otherCards,     { opacity: 0, scale: 0.9, y: 16, stagger: 0.035, duration: 0.4, ease: "power2.in" }, 0)
+          .to(detail,         { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.08)
+          .to(detailCard,     { top: 0, left: "50%", width: "50%", height: "100%", borderRadius: 0, duration: 0.8, ease: "expo.inOut" }, 0.12)
+          .to(portfolio,      { opacity: 1, x: 0, duration: 0.65 }, 0.45)
+          .to(closeBtn,       { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.5)
           .to(validWorkItems, { opacity: 1, x: 0, stagger: 0.065, duration: 0.55 }, 0.58);
       });
     });
@@ -234,59 +245,84 @@ export default function ServicesSlider() {
     isAnimatingRef.current = true;
     cancelAnimationFrame(openRafRef.current);
 
-    const detail = detailRef.current;
-    const portfolio = portfolioRef.current;
-    const detailCard = detailCardRef.current;
-    const closeBtn = closeBtnRef.current;
-    const allCards = cardRefs.current.filter(Boolean);
+    const detail         = detailRef.current;
+    const portfolio      = portfolioRef.current;
+    const closeBtn       = closeBtnRef.current;
     const validWorkItems = workItemRefs.current.filter(Boolean);
 
-    const sectionRect = sectionRef.current.getBoundingClientRect();
-    const origin = originRectRef.current;
-    const flipTop = origin ? origin.top - sectionRect.top : "50%";
-    const flipLeft = origin ? origin.left - sectionRect.left : "50%";
-    const flipW = origin ? origin.width : 400;
-    const flipH = origin ? origin.height : 460;
+    // ── Mobile: простой fade out ───────────────────────────────────────
+    if (isMobileRef.current) {
+      gsap.timeline({
+        onComplete: () => {
+          gsap.set(detail, { display: "none" });
+          setDetailVisible(false);
+          setSelectedService(null);
+          isAnimatingRef.current = false;
+          unlockBodyScroll();
+        },
+      })
+        .to(validWorkItems, { opacity: 0, y: 10, stagger: 0.03, duration: 0.2, ease: "power2.in" }, 0)
+        .to(portfolio,      { opacity: 0, y: 16, duration: 0.25, ease: "power2.in" }, 0.05)
+        .to(detail,         { opacity: 0, duration: 0.25 }, 0.15);
+      return;
+    }
 
-    const tl = gsap.timeline({
-      defaults: { ease: "expo.inOut" },
+    // ── Desktop: FLIP назад ────────────────────────────────────────────
+    const detailCard = detailCardRef.current;
+    const allCards   = cardRefs.current.filter(Boolean);
+
+    const sectionRect = sectionRef.current.getBoundingClientRect();
+    const origin      = originRectRef.current;
+    const flipTop     = origin ? origin.top  - sectionRect.top  : "50%";
+    const flipLeft    = origin ? origin.left - sectionRect.left : "50%";
+    const flipW       = origin ? origin.width  : 400;
+    const flipH       = origin ? origin.height : 460;
+
+    gsap.timeline({
+      defaults:   { ease: "expo.inOut" },
       onComplete: () => {
         gsap.set(detail, { display: "none" });
         setDetailVisible(false);
         setSelectedService(null);
         isAnimatingRef.current = false;
-        originRectRef.current = null;
+        originRectRef.current  = null;
+        unlockBodyScroll();
         if (scrollTriggerRef.current) scrollTriggerRef.current.enable();
       },
-    });
-
-    tl
+    })
       .to(validWorkItems, { opacity: 0, x: -28, stagger: 0.03, duration: 0.28, ease: "power2.in" }, 0)
-      .to(closeBtn, { opacity: 0, y: -14, duration: 0.22, ease: "power2.in" }, 0)
-      .to(portfolio, { opacity: 0, x: -48, duration: 0.35, ease: "power2.in" }, 0.04)
-      .to(detailCard, { top: flipTop, left: flipLeft, width: flipW, height: flipH, borderRadius: 24, duration: 0.72, clearProps: "xPercent,yPercent" }, 0.08)
-      .to(detail, { opacity: 0, duration: 0.3, ease: "power2.in" }, 0.5)
-      .to(allCards, { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.55, ease: "power3.out" }, 0.45);
+      .to(closeBtn,       { opacity: 0, y: -14,                duration: 0.22, ease: "power2.in" }, 0)
+      .to(portfolio,      { opacity: 0, x: -48,                duration: 0.35, ease: "power2.in" }, 0.04)
+      .to(detailCard,     { top: flipTop, left: flipLeft, width: flipW, height: flipH, borderRadius: 24, duration: 0.72, clearProps: "xPercent,yPercent" }, 0.08)
+      .to(detail,         { opacity: 0,                         duration: 0.3,  ease: "power2.in" }, 0.5)
+      .to(allCards,       { opacity: 1, scale: 1, y: 0, stagger: 0.04, duration: 0.55, ease: "power3.out" }, 0.45);
   }, [gsap, detailVisible]);
 
+  useEffect(() => () => cancelAnimationFrame(openRafRef.current), []);
+
+  // Снимаем лок при анмаунте — на случай ухода со страницы с открытым оверлеем
   useEffect(() => {
-    return () => cancelAnimationFrame(openRafRef.current);
+    return () => {
+      if (document.body.style.position === "fixed") unlockBodyScroll();
+    };
   }, []);
 
+  // ── Render ─────────────────────────────────────────────────────────────
   return (
     <section className="services" ref={sectionRef}>
+
       {/* HEADER */}
       <div className="services__header">
         <div className="services__meta">
-          {/* <span className="services__label">— Our Services</span> */}
           <div className="services__title" ref={titleRef}>
             <h2>Services</h2>
             <span className="services__title-sub">
-                Будучи сплоченной командой экспертов, мы создаем запоминающиеся и<br /> вызывающие 
-                эмоции веб-сайты, цифровые решения и нативные приложения.
+              Будучи сплоченной командой экспертов, мы создаем запоминающиеся и
+              <br /> вызывающие эмоции веб-сайты, цифровые решения и нативные приложения.
             </span>
           </div>
         </div>
+        {/* Counter — desktop only (hidden via CSS on mobile) */}
         <div className="services__counter" ref={counterRef}>
           <span className="services__current" ref={currentRef}>01</span>
           <span className="services__total">/ {String(services.length).padStart(2, "0")}</span>
@@ -331,16 +367,18 @@ export default function ServicesSlider() {
         </div>
       </div>
 
-      {/* PROGRESS */}
+      {/* PROGRESS — desktop only */}
       <div className="services__progress-wrap">
         <div className="services__progress-track">
           <div className="services__progress-fill" ref={progressRef} />
         </div>
-        {/* <span className="services__scroll-hint" ref={hintRef}>Scroll to explore</span> */}
+        <span className="services__scroll-hint" ref={hintRef}>Scroll</span>
       </div>
 
       {/* DETAIL OVERLAY */}
       <div className="services__detail" ref={detailRef} style={{ display: "none" }}>
+
+        {/* Left panel: portfolio list */}
         <div className="detail__portfolio" ref={portfolioRef}>
           <div className="detail__portfolio-header">
             <button className="detail__close" ref={closeBtnRef} onClick={closeDetail} aria-label="Close">
@@ -390,8 +428,12 @@ export default function ServicesSlider() {
           </div>
         </div>
 
-        {/* Detail Card */}
-        <div className="detail__card" ref={detailCardRef} style={selectedService ? { "--card-color": selectedService.color } : {}}>
+        {/* Right panel: expanded card (desktop only, hidden on mobile via CSS) */}
+        <div
+          className="detail__card"
+          ref={detailCardRef}
+          style={selectedService ? { "--card-color": selectedService.color } : {}}
+        >
           {selectedService && (
             <>
               <div className="detail__card-bg-img" style={{ backgroundImage: `url(${selectedService.image})` }} />

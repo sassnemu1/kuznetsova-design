@@ -25,8 +25,6 @@ export default function HeroSection() {
 
   const { gsap, ScrollTrigger } = useGSAP();
 
-  // useEffect (not useLayoutEffect) — GSAP arrives async from the hook,
-  // so the DOM is always ready by the time gsap/ScrollTrigger are non-null.
   useEffect(() => {
     if (!gsap || !ScrollTrigger) return;
 
@@ -34,62 +32,90 @@ export default function HeroSection() {
       const hero = heroRef.current;
       if (!hero) return;
 
-      // ── Entry animation ──────────────────────────────────────────
-      const enterTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // ── Set initial states ─────────────────────────────────────
+      gsap.set(navRef.current, { y: -48, opacity: 0 });
+      gsap.set(lettersRef.current, { y: 110, opacity: 0, rotateX: -55, filter: "blur(6px)" });
+      gsap.set(designRef.current, { y: 200, scale: 1.22, opacity: 0, filter: "blur(10px)" });
+      gsap.set([socialLeftRef.current, socialRightRef.current], { opacity: 0, x: (i) => (i === 0 ? -36 : 36) });
+      gsap.set(bgTextRef.current, { opacity: 0 });
+      gsap.set(taglineRef.current, { opacity: 0, y: 12 });
 
-      enterTL
-        .fromTo(
-          navRef.current,
-          { y: -48, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9 }
-        )
-        .fromTo(
-          lettersRef.current,
-          { y: 110, opacity: 0, rotateX: -55, filter: "blur(6px)" },
-          {
-            y: 0,
-            opacity: 1,
-            rotateX: 0,
-            filter: "blur(0px)",
-            stagger: 0.042,
-            duration: 0.85,
-            ease: "power4.out",
-          },
-          "-=0.45"
-        )
-        .fromTo(
-          designRef.current,
-          { y: 200, scale: 1.22, opacity: 0, filter: "blur(10px)" },
-          {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 1.05,
-            ease: "expo.out",
-          },
-          "-=0.45"
-        )
-        .fromTo(
-          [socialLeftRef.current, socialRightRef.current],
-          { opacity: 0, x: (i) => (i === 0 ? -36 : 36) },
-          { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 },
-          "-=0.65"
-        )
-        .fromTo(
-          bgTextRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 2.5 },
-          "-=1.8"
-        )
-        .fromTo(
-          taglineRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
-          "-=1.2"
-        );
+      // ── Check if we should play intro animation ───────────────
+      const scrollY = window.scrollY;
+      const shouldPlayIntro = scrollY < 80; // небольшая погрешность
 
-      // ── Scroll-out animation ─────────────────────────────────────
+      if (shouldPlayIntro) {
+        // Entry animation
+        const intro = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        intro
+          .fromTo(
+            navRef.current,
+            { y: -48, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9 }
+          )
+          .fromTo(
+            lettersRef.current,
+            { y: 110, opacity: 0, rotateX: -55, filter: "blur(6px)" },
+            {
+              y: 0,
+              opacity: 1,
+              rotateX: 0,
+              filter: "blur(0px)",
+              stagger: 0.042,
+              duration: 0.85,
+              ease: "power4.out",
+            },
+            "-=0.45"
+          )
+          .fromTo(
+            designRef.current,
+            { y: 200, scale: 1.22, opacity: 0, filter: "blur(10px)" },
+            {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 1.05,
+              ease: "expo.out",
+            },
+            "-=0.45"
+          )
+          .fromTo(
+            [socialLeftRef.current, socialRightRef.current],
+            { opacity: 0, x: (i) => (i === 0 ? -36 : 36) },
+            { opacity: 1, x: 0, duration: 0.9, stagger: 0.08 },
+            "-=0.65"
+          )
+          .fromTo(
+            bgTextRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 2.5 },
+            "-=1.8"
+          )
+          .fromTo(
+            taglineRef.current,
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+            "-=1.2"
+          );
+      } else {
+        // Already scrolled — set final state immediately
+        gsap.set(navRef.current, { y: 0, opacity: 1 });
+        gsap.set(lettersRef.current, { y: 0, opacity: 1, rotateX: 0, filter: "blur(0px)" });
+        gsap.set(designRef.current, { y: 0, scale: 1, opacity: 1, filter: "blur(0px)" });
+        gsap.set([socialLeftRef.current, socialRightRef.current], { opacity: 1, x: 0 });
+        gsap.set(bgTextRef.current, { opacity: 1 });
+        gsap.set(taglineRef.current, { opacity: 1, y: 0 });
+      }
+
+      // ── Scroll-out animation (always active) ───────────────────
       const scrollTL = gsap.timeline({
         scrollTrigger: {
           trigger: hero,
@@ -101,18 +127,30 @@ export default function HeroSection() {
       });
 
       scrollTL
-        .to(navRef.current,          { y: -80, opacity: 0, ease: "none" }, 0)
-        .to(socialLeftRef.current,   { x: -70, opacity: 0, ease: "none" }, 0)
-        .to(socialRightRef.current,  { x: 70,  opacity: 0, ease: "none" }, 0)
-        .to(lettersRef.current,      { y: -130, opacity: 0, stagger: 0.02, ease: "none" }, 0)
-        .to(designRef.current,       { y: 110, scale: 0.9, opacity: 0, ease: "none" }, 0)
-        .to(taglineRef.current,      { opacity: 0, ease: "none" }, 0);
+        .to(navRef.current, { y: -80, opacity: 0, ease: "none" }, 0)
+        .to(socialLeftRef.current, { x: -70, opacity: 0, ease: "none" }, 0)
+        .to(socialRightRef.current, { x: 70, opacity: 0, ease: "none" }, 0)
+        .to(lettersRef.current, { y: -130, opacity: 0, stagger: 0.02, ease: "none" }, 0)
+        .to(designRef.current, { y: 110, scale: 0.9, opacity: 0, ease: "none" }, 0)
+        .to(taglineRef.current, { opacity: 0, ease: "none" }, 0);
     }, heroRef);
 
-    const t = setTimeout(() => ScrollTrigger.refresh(), 150);
+    // Лучшая стратегия refresh для Next.js + GSAP
+    const refresh = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
+      });
+    };
+
+    refresh();
+
+    // Дополнительно на load
+    window.addEventListener("load", refresh);
 
     return () => {
-      clearTimeout(t);
+      window.removeEventListener("load", refresh);
       ctx.revert();
     };
   }, [gsap, ScrollTrigger]);
@@ -125,7 +163,7 @@ export default function HeroSection() {
         MOSCOW
       </div>
 
-      {/* ── NAV ─────────────────────────────────────────────── */}
+      {/* NAV */}
       <nav className={styles.nav} ref={navRef}>
         <div className={styles.navLogo}>
           <div className={styles.logoMark}>
@@ -148,14 +186,14 @@ export default function HeroSection() {
         </div>
       </nav>
 
-      {/* ── SOCIAL LEFT ─────────────────────────────────────── */}
+      {/* SOCIAL LEFT */}
       <div className={styles.socialLeft} ref={socialLeftRef}>
         <a href="#" aria-label="Instagram"><FaInstagram /></a>
         <a href="#" aria-label="Behance"><FaBehance /></a>
         <a href="#" aria-label="Dribbble"><FaDribbble /></a>
       </div>
 
-      {/* ── SOCIAL RIGHT ────────────────────────────────────── */}
+      {/* SOCIAL RIGHT */}
       <div className={styles.socialRight} ref={socialRightRef}>
         <a href="#" aria-label="Telegram"><FaTelegramPlane /></a>
         <a href="#" aria-label="VK"><FaVk /></a>
@@ -164,7 +202,7 @@ export default function HeroSection() {
         </a>
       </div>
 
-      {/* ── TITLE ───────────────────────────────────────────── */}
+      {/* TITLE */}
       <div className={styles.titleWrap}>
         <div className={styles.titlePerspective}>
           <div className={styles.titleTop}>
