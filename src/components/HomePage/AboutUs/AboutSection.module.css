@@ -1,0 +1,326 @@
+.about {
+  position: relative;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 0 6vw 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heroBgIndex {
+  position: absolute;
+  bottom: -0.1em;
+  right: 3vw;
+  font-family: var(--font-bold);
+  font-size: clamp(160px, 28vw, 420px);
+  line-height: 1;
+  letter-spacing: -0.07em;
+  color: rgba(56, 100, 219, 0.028);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  z-index: 1;
+}
+
+.heroLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7vw;
+  align-items: start;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding-top: 60px;
+  z-index: 2;
+}
+
+/* Левая колонка */
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroEyebrow, .sectionLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.65;
+  margin-bottom: 24px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 6vw, 132px);
+  font-weight: 600;
+  line-height: 0.91;
+  letter-spacing: -0.048em;
+  margin-bottom: 32px;
+}
+
+.heroClip { overflow: hidden; }
+.heroTitleLine { display: block; opacity: 0; }
+.heroTitleLineAccent { color: var(--accent); font-style: italic; }
+
+.heroSub {
+  font-size: clamp(13.5px, 1vw, 16px);
+  line-height: 1.65;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+
+.heroBtn {
+  width: 200px;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 26px;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 100, 219, 0.3);
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.heroBtn:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-4px);
+}
+
+/* Статистика 2×2 */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.statCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  transition: all 0.4s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.statNum {
+  font-family: var(--font-bold);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  letter-spacing: 1px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+/* Правая колонка — услуги */
+.heroRight {
+  /* padding-top: 80px; */
+}
+
+.servIntro {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 48px;
+  letter-spacing: 1px;
+}
+
+.servGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.servCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 34px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.servCard:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow: 0 30px 60px -15px rgba(56, 100, 219, 0.15);
+}
+
+.servCardTop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.servCardIndex {
+  font-family: var(--font-bold);
+  font-size: 14px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.servCardLine {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.servCardTitle {
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.servCardDesc {
+  font-size: 14.8px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Нижняя линия */
+.heroRuler {
+  position: absolute;
+  bottom: 0;
+  left: 6vw;
+  right: 6vw;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(56,100,219,0.18) 50%, transparent);
+  transform: scaleX(0);
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
+  .heroLayout { grid-template-columns: 1fr; gap: 80px; }
+  .heroRight { padding-top: 0; }
+  .statsGrid { margin-top: 40px; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 0 24px 100px; }
+  .statsGrid { grid-template-columns: 1fr; }
+}
+
+.heroRight {
+  padding-top: 40px;
+}
+
+.servGrid {
+  display: flex;
+}
+
+.servCard {
+  position: relative;
+  padding: 48px 42px 52px;
+  border-radius: 20px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.servCard:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 70px -15px rgba(56, 100, 219, 0.2);
+}
+
+/* Большой заголовок */
+.servCardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+/* Описание */
+.servCardDesc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+  margin-bottom: 32px;
+}
+
+/* Разделитель */
+.servCardDivider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 28px;
+  width: 80%;
+}
+
+/* Теги */
+.servCardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.servTag {
+  font-size: 11.5px;
+  padding: 6px 16px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 9999px;
+  color: var(--text);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+}
+
+.servCard:hover .servTag {
+  background: white;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
+  .servGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .servCard {
+    min-height: auto;
+    padding: 42px 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servCard {
+    padding: 38px 32px;
+  }
+}
+

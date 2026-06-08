@@ -130,8 +130,8 @@ export default function Footer() {
 
             <div>
               <h4>Contact</h4>
-              <a href="mailto:hello@kuznetsova.design">hello@kuznetsova.design</a>
-              <a href="#">Moscow, Russia</a>
+              <a href="mailto:hello@kuznetsova.design">info@kuznetsova.design</a>
+              <a href="#">Москва, Россия</a>
             </div>
           </div>
 
@@ -152,8 +152,8 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className={styles.copyright} ref={copyrightRef}>
-          <p>© {new Date().getFullYear()} Kuznetsova Design. All rights reserved.</p>
-          <p className={styles.legal}>Privacy • Legal</p>
+          <p>© {new Date().getFullYear()} Kuznetsova Design. Все права защищены.</p>
+          <p className={styles.legal}>Политика конфиденциальности • Правовая информация</p>
         </div>
       </div>
     </footer>

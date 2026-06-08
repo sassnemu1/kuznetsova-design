@@ -278,9 +278,13 @@ export default function ServicesSlider() {
       {/* HEADER */}
       <div className="services__header">
         <div className="services__meta">
-          <span className="services__label">— Our Services</span>
+          {/* <span className="services__label">— Our Services</span> */}
           <div className="services__title" ref={titleRef}>
             <h2>Services</h2>
+            <span className="services__title-sub">
+                Будучи сплоченной командой экспертов, мы создаем запоминающиеся и<br /> вызывающие 
+                эмоции веб-сайты, цифровые решения и нативные приложения.
+            </span>
           </div>
         </div>
         <div className="services__counter" ref={counterRef}>
@@ -332,7 +336,7 @@ export default function ServicesSlider() {
         <div className="services__progress-track">
           <div className="services__progress-fill" ref={progressRef} />
         </div>
-        <span className="services__scroll-hint" ref={hintRef}>Scroll to explore</span>
+        {/* <span className="services__scroll-hint" ref={hintRef}>Scroll to explore</span> */}
       </div>
 
       {/* DETAIL OVERLAY */}
