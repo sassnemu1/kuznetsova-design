@@ -4,7 +4,8 @@ import HeroSection from "@/components/HomePage/HeroSection/HeroSection";
 import ServicesSlider from "@/components/HomePage/ServicesSlider/ServicesSlider";
 
 import Footer from "@/components/Footer/Footer.jsx";
-import AboutSection from "@/components/HomePage/AboutUs/AboutUs";
+import AboutSection from "@/components/HomePage/AboutUs/AboutSection";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Home() {
   return (
@@ -12,6 +13,8 @@ export default function Home() {
       <HeroSection />
 
       <ServicesSlider />
+
+      <Navbar />
 
       <AboutSection />
 

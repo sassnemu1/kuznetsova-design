@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import styles from "./AboutSection.module.css";
 import useGSAP from "@/hooks/useGSAP";
+import Navbar from "@/components/Navbar/Navbar";
 
 const services = [
   {
@@ -160,6 +161,8 @@ export default function AboutSection() {
 
   return (
     <section ref={sectionRef} className={styles.about} id="studio">
+      
+
       <div ref={heroRef} className={styles.hero}>
         <div className={styles.heroLayout}>
 
