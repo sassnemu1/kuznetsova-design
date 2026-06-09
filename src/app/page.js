@@ -6,19 +6,29 @@ import ServicesSlider from "@/components/HomePage/ServicesSlider/ServicesSlider"
 import Footer from "@/components/Footer/Footer.jsx";
 import AboutSection from "@/components/HomePage/AboutUs/AboutSection";
 import Navbar from "@/components/Navbar/Navbar";
+import ProcessSection from "@/components/HomePage/ProcessSection/ProcessSection";
+import Ticker from "@/components/UI/Ticker/Ticker";
 
 export default function Home() {
   return (
     <main>
+      <Navbar />
+
+      <div id="menu-start"></div>
+
       <HeroSection />
 
       <ServicesSlider />
 
-      <Navbar />
-
       <AboutSection />
 
+      <Ticker />
+
+      <ProcessSection />
+
       <Footer />
+
+      <div id="menu-end"></div>
     </main>
   );
 }

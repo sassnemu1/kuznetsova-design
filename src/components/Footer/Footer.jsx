@@ -85,23 +85,30 @@ export default function Footer() {
         {/* Большой центральный тайтл */}
         <div className={styles.titleSection}>
           <div className={styles.titlePerspective}>
-            <div>
-            <div className={styles.titleTop}>
-              {kuznetsova.map((char, i) => (
-                <span
-                  key={i}
-                  className={styles.letter}
-                  ref={(el) => (titleLettersRef.current[i] = el)}
-                >
-                  {char}
-                </span>
-              ))}
-            </div>
-          </div>
 
-          <div className={styles.titleBottom} ref={designRef}>
-            <span className={styles.designText}>DESIGN.</span>
-          </div>
+            <div className={styles.FooterLogoSection}>
+              <div className={styles.FooterLogoMark}>
+                <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+              </div>
+              <div>
+                <div className={styles.titleTop}>
+                  {kuznetsova.map((char, i) => (
+                    <span
+                      key={i}
+                      className={styles.letter}
+                      ref={(el) => (titleLettersRef.current[i] = el)}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </div>
+              
+
+                <div className={styles.titleBottom} ref={designRef}>
+                  <span className={styles.designText}>DESIGN.</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <p className={styles.tagline} ref={taglineRef}>

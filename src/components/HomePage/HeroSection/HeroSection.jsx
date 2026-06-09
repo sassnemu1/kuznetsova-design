@@ -158,9 +158,9 @@ export default function HeroSection() {
         </ul>
 
         <div className={styles.navContact}>
-          <a href="#contact" className={styles.contactBtn}>
+          {/* <a href="#contact" className={styles.contactBtn}>
             Cтать клиентом ↗
-          </a>
+          </a> */}
         </div>
       </nav>
 

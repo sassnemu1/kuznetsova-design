@@ -54,6 +54,7 @@
   top: 20px;
   align-self: flex-start;
   height: fit-content;
+  margin-bottom: 60px;
 }
 
 .heroEyebrow, .sectionLabel {
@@ -146,34 +147,26 @@
   opacity: 0.65;
 }
 
-/* ── Правая колонка ── */
-.heroRight {
-  /* просто поток, карточки скроллятся */
-}
-
-.servicesBlock {
-  /* обёртка */
-}
-
 .servTop {
   margin-bottom: 48px;
 }
 
 .servIntro {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 500;
-  line-height: 1.35;
-  margin-bottom: 0;
-  letter-spacing: 1px;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  color: var(--text);
 }
 
 /* ── Грид карточек — gap = "пауза" при скролле ── */
 .servGrid {
   display: flex;
   flex-direction: column;
-  gap: 28vh; /* расстояние между карточками = пауза при скролле */
-  padding-bottom: 120px; /* отступ снизу = завершение секции */
+  gap: 21vh; /* расстояние между карточками = пауза при скролле */
+  padding-bottom: 60px; /* отступ снизу = завершение секции */
 }
 
 /* ── Карточка ── */
@@ -181,7 +174,7 @@
   position: relative;
   padding: 48px 42px 52px;
   border-radius: 16px;
-  min-height: 400px;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   overflow: hidden;

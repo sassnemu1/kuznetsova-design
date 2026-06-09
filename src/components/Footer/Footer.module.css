@@ -25,11 +25,34 @@
   perspective-origin: center bottom;
 }
 
+.FooterLogoSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.FooterLogoMark {
+  width: 98px;
+  height: 98px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--accent);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.FooterLogoMark img {
+  width: 200px;
+  height: 200px;
+}
+
 .titleTop {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   font-family: var(--font-display);
-  font-size: clamp(68px, 3vw, 138px);
+  font-size: clamp(48px, 3vw, 108px);
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 0.88;
@@ -44,17 +67,18 @@
 
 .titleBottom {
   display: flex;
-  justify-content: center;
-  margin-bottom: 28px;
+  /* justify-content: center; */
+  margin-left: 2px;
+  margin-bottom: 8px;
 }
 
 .designText {
   font-family: var(--font-bold);
-  font-size: clamp(92px, 5vw, 178px);
+  font-size: clamp(52px, 5vw, 108px);
   font-weight: 900;
   letter-spacing: -0.04em;
   color: var(--accent);
-  line-height: 0.85;
+  line-height: 0.45;
 }
 
 .tagline {
