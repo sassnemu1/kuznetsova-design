@@ -346,13 +346,13 @@ export default function ServicesSlider() {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <section className="services" ref={sectionRef} id="services">
+    <section className="services" ref={sectionRef} id="portfolio">
 
       {/* HEADER */}
       <div className="services__header">
         <div className="services__meta">
           <div className="services__title" ref={titleRef}>
-            <h2>Services</h2>
+            <h2>Portfolio</h2>
             <span className="services__title-sub">
               Будучи сплоченной командой экспертов, мы создаем запоминающиеся и
               <br /> вызывающие эмоции веб-сайты, цифровые решения и нативные приложения.

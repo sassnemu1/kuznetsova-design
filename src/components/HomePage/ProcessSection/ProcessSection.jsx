@@ -4,37 +4,39 @@ import { useEffect, useRef } from "react";
 import styles from "./ProcessSection.module.css";
 import useGSAP from "@/hooks/useGSAP";
 
-const processSteps = [
+const steps = [
   {
-    number: "01",
+    num: "01",
     title: "Брифинг",
-    desc: "Изучаем задачу, фиксируем цели проекта, сроки и объём работ."
+    desc: "Знакомимся, фиксируем задачу письменно, согласовываем объём, бюджет и сроки. Без брифа не начинаем.",
   },
   {
-    number: "02",
+    num: "02",
     title: "Концепция",
-    desc: "Создаём визуальную систему проекта и определяем направление дизайна."
+    desc: "Кристина разрабатывает визуальное решение. Внутренняя проверка перед показом клиенту.",
   },
   {
-    number: "03",
-    title: "Презентация",
-    desc: "Показываем решение, обсуждаем детали и собираем обратную связь."
+    num: "03",
+    title: "Презентация и правки",
+    desc: "Показываем, обсуждаем, дорабатываем. До двух раундов правок включено в договор.",
   },
   {
-    number: "04",
+    num: "04",
     title: "Производство",
-    desc: "Готовим финальные материалы, адаптации и все необходимые файлы."
+    desc: "Финальные файлы, вёрстка, рендеры, передача исходников. Всё, что нужно для запуска.",
   },
   {
-    number: "05",
-    title: "Запуск",
-    desc: "Передаём проект, сопровождаем внедрение и закрываем задачу."
-  }
+    num: "05",
+    title: "Сдача",
+    desc: "Подписание акта, передача материалов, запрос обратной связи. Проект закрыт — кейс готов.",
+  },
 ];
 
 export default function ProcessSection() {
   const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+  const headerRef = useRef(null);
+  const titleRef = useRef(null);
+  const stepsRef = useRef([]);
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -42,24 +44,59 @@ export default function ProcessSection() {
     if (!gsap || !ScrollTrigger) return;
 
     const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card) => {
-        if (!card) return;
-
-        gsap.fromTo(
-          card,
-          {
-            opacity: 0,
-            y: 120
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
+        }
+      );
+
+      // Анимация строк заголовка
+      if (titleRef.current) {
+        const lines = titleRef.current.querySelectorAll(".heroTitleLine");
+        gsap.fromTo(
+          lines,
+          { opacity: 0, y: 60 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: "power4.out",
+            duration: 1.2,
+            ease: "power3.out",
+            stagger: 0.12,
             scrollTrigger: {
-              trigger: card,
-              start: "top 85%"
-            }
+              trigger: sectionRef.current,
+              start: "top 75%",
+            },
+          }
+        );
+      }
+
+      // Шаги
+      stepsRef.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: i * 0.08,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 72%",
+              toggleActions: "play none none reverse",
+            },
           }
         );
       });
@@ -69,48 +106,51 @@ export default function ProcessSection() {
   }, [gsap, ScrollTrigger]);
 
   return (
-    <section ref={sectionRef} className={styles.process}>
-  <div className={styles.container}>
-    <div className={styles.layout}>
+    <section ref={sectionRef} className={styles.section} id="process">
+      <div className={styles.inner}>
+        <div ref={headerRef} className={styles.hero}>
+          {/* Большой декоративный номер */}
+          <div className={styles.heroBgIndex}>05</div>
 
-      <div className={styles.left}>
-        <span className={styles.eyebrow}>
-          — Как мы работаем
-        </span>
+          <div className={styles.heroLayout}>
+            {/* Шаги теперь СЛЕВА */}
+            <div className={styles.steps}>
+              {steps.map((step, i) => (
+                <div
+                  key={i}
+                  ref={el => { stepsRef.current[i] = el; }}
+                  className={styles.step}
+                >
+                  <div className={styles.stepLeft}>
+                    <span className={styles.stepNum}>{step.num}</span>
+                    {i < steps.length - 1 && <div className={styles.connector} />}
+                  </div>
 
-        <h2 className={styles.title}>
-          Процесс
-          <br />
-          работы
-        </h2>
-
-        <p className={styles.subtitle}>
-          От первого сообщения до передачи файлов.
-          Каждый этап прозрачен и контролируется.
-        </p>
-      </div>
-
-      <div className={styles.right}>
-        {processSteps.map((step, index) => (
-          <div
-            key={index}
-            ref={(el) => (cardsRef.current[index] = el)}
-            className={styles.step}
-          >
-            <div className={styles.stepNumber}>
-              {step.number}
+                  <div className={styles.stepBody}>
+                    <h3 className={styles.stepTitle}>{step.title}</h3>
+                    <p className={styles.stepDesc}>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className={styles.stepContent}>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
+            {/* Заголовок теперь СПРАВА */}
+            <div className={styles.heroRight}>
+              <span className={styles.heroEyebrow}>— Как мы работаем</span>
+              
+              <h2 ref={titleRef} className={styles.heroTitle}>
+                <span className="heroTitleLine">Процесс</span>{" "}
+                <span className="heroTitleLine heroTitleLineAccent">работы</span>
+              </h2>
+
+              <p className={styles.heroSub}>
+                От первого сообщения до передачи файлов.<br />
+                Каждый этап прозрачен и контролируется.
+              </p>
             </div>
           </div>
-        ))}
+        </div>
       </div>
-
-    </div>
-  </div>
-</section>
+    </section>
   );
 }

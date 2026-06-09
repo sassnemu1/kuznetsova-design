@@ -137,6 +137,10 @@ export default function HeroSection() {
 
   return (
     <section ref={heroRef} className={styles.hero}>
+      <div className={styles.bgImage} ref={bgTextRef}>
+        <img src="/bg-hero2.svg" alt="bg-image" />
+      </div>
+
       <div className={styles.bgText} ref={bgTextRef}>
         MOSCOW
       </div>
@@ -151,17 +155,12 @@ export default function HeroSection() {
         </div>
 
         <ul className={styles.navLinks}>
-          <li><a href="#work">Work</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#studio">About Us</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="#howtowork">How to Work</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
-        <div className={styles.navContact}>
-          {/* <a href="#contact" className={styles.contactBtn}>
-            Cтать клиентом ↗
-          </a> */}
-        </div>
       </nav>
 
       {/* SOCIAL LEFT */}
