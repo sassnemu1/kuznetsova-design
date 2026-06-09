@@ -50,6 +50,9 @@
   font-family: var(--font-body);
   transition: 0.3s ease;
 }
+.clientBtn span {
+  padding-right: 8px;
+}
 
 .clientBtn:hover {
   background: var(--accent);

@@ -301,3 +301,118 @@
   .servCard { padding: 38px 32px; min-height: 320px; }
   .servGrid { gap: 32px; padding-bottom: 60px; }
 }
+/* ════════════════════════════════════════════
+   ИСТОРИЯ БРЕНДА
+   ════════════════════════════════════════════ */
+
+.story {
+  padding: 60px 6vw 160px;
+  /* border-top: 1px solid var(--border, rgba(0,0,0,0.07)); */
+}
+
+.storyLeftTitle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.storyInner {
+  max-width: 1520px;
+  margin: 0 auto;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7vw; */
+  align-items: flex-start;
+}
+
+.storyEyebrow {
+  display: block;
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent, #3864db);
+  opacity: 0.65;
+  margin-bottom: 28px;
+}
+
+.storyHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 5.5vw, 112px);
+  font-weight: 600;
+  line-height: 0.91;
+  letter-spacing: -0.048em;
+  margin-bottom: 32px;
+}
+
+.storyItem {
+  padding: 40px 0;
+  border-top: 1px solid var(--border, rgba(0,0,0,0.07));
+  opacity: 0;
+}
+
+.storyItem:last-of-type {
+  border-bottom: 1px solid var(--border, rgba(0,0,0,0.07));
+}
+
+.storyMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.storyName {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text, #111);
+  text-transform: uppercase;
+}
+
+.storyRole {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent, #3864db);
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.storyText {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.75;
+  color: var(--text-secondary, #666);
+  margin: 0;
+  max-width: 560px;
+}
+
+.storyClosing {
+  margin-top: 48px;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: clamp(24px, 2.2vw, 36px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text, #111);
+  opacity: 0;
+}
+
+@media (max-width: 1024px) {
+  .story { padding: 100px 6vw 120px; }
+  .storyInner { grid-template-columns: 1fr; gap: 48px; }
+  .storyLeft { position: relative; top: auto; }
+}
+
+@media (max-width: 768px) {
+  .story { padding: 80px 24px 100px; }
+  .storyHeadline { font-size: clamp(44px, 12vw, 72px); }
+  .storyItem { padding: 32px 0; }
+  .storyText { font-size: 15px; }
+  .storyClosing { font-size: clamp(20px, 6vw, 28px); margin-top: 36px; }
+}

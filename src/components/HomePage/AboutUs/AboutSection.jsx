@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
 import styles from "./AboutSection.module.css";
+
 import useGSAP from "@/hooks/useGSAP";
-import Navbar from "@/components/Navbar/Navbar";
+import BecomeClient from "@/components/BecomeClient/BecomeClient";
 
 const services = [
   {
@@ -36,9 +38,23 @@ const stats = [
   { num: "100%", label: "на чистом коде" },
 ];
 
+const story = [
+  {
+    name: "Кристина Кузнецова",
+    role: "Основатель · Арт-директор",
+    text: "Дизайнер, который не признаёт границ между дисциплинами. Графический дизайн, веб-разработка, 3D-визуализация — для неё это не разные профессии, а один инструментарий. Бюро создано, чтобы доказывать это проектами.",
+  },
+  {
+    name: "Ярослав Киселев",
+    role: "CEO · Финансовый директор",
+    text: "Он отвечает за то, чтобы каждый проект имел чёткий план, бюджет и дедлайн. Чтобы клиент получал результат, а не оправдания.",
+  },
+];
+
 export default function AboutSection() {
   const sectionRef = useRef(null);
   const heroRef = useRef(null);
+  const storyRef = useRef(null);
 
   const heroEyebrowRef = useRef(null);
   const heroLine1Ref = useRef(null);
@@ -50,6 +66,11 @@ export default function AboutSection() {
   const servIntroRef = useRef(null);
   const servCardsRef = useRef([]);
   const statsRefs = useRef([]);
+  const storyItemRefs = useRef([]);
+  const storyHeadlineRef = useRef(null);
+  const storyClosingRef = useRef(null);
+
+  const [isClientFormOpen, setIsClientFormOpen] = useState(false);
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -112,37 +133,51 @@ export default function AboutSection() {
         },
       });
 
-      // ─── Карточки: появляются одна за одной при скролле ──────────────
-      // CSS sticky держит левую колонку.
-      // gap: 28vh между карточками = естественная пауза.
-      // Каждая карточка анимируется от своего собственного trigger-а.
-      servCardsRef.current.forEach((card, i) => {
+      // ─── Карточки услуг ───────────────────────────────────────────────
+      servCardsRef.current.forEach((card) => {
         if (!card) return;
-
         gsap.set(card, { opacity: 0, y: 70 });
-
         ScrollTrigger.create({
           trigger: card,
           start: "top 80%",
           end: "bottom 10%",
-          onEnter: () => {
-            gsap.to(card, {
-              opacity: 1,
-              y: 0,
-              duration: 1.0,
-              ease: "power3.out",
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(card, {
-              opacity: 0,
-              y: 70,
-              duration: 0.5,
-              ease: "power2.in",
-            });
-          },
+          onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }),
+          onLeaveBack: () => gsap.to(card, { opacity: 0, y: 70, duration: 0.5, ease: "power2.in" }),
         });
       });
+
+      // ─── Story section ────────────────────────────────────────────────
+      if (storyHeadlineRef.current) {
+        gsap.fromTo(storyHeadlineRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1, y: 0, duration: 1.1, ease: "power4.out",
+            scrollTrigger: { trigger: storyHeadlineRef.current, start: "top 82%" },
+          }
+        );
+      }
+
+      storyItemRefs.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 84%" },
+            delay: i * 0.12,
+          }
+        );
+      });
+
+      if (storyClosingRef.current) {
+        gsap.fromTo(storyClosingRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0, duration: 1.0, ease: "power3.out",
+            scrollTrigger: { trigger: storyClosingRef.current, start: "top 86%" },
+          }
+        );
+      }
 
     }, sectionRef);
 
@@ -160,100 +195,148 @@ export default function AboutSection() {
   }, [gsap, ScrollTrigger]);
 
   return (
-    <section ref={sectionRef} className={styles.about} id="studio">
-      
+    <>
+      <section ref={sectionRef} className={styles.about} id="studio">
 
-      <div ref={heroRef} className={styles.hero}>
-        <div className={styles.heroLayout}>
+        <div ref={heroRef} className={styles.hero}>
+          <div className={styles.heroLayout}>
 
-          {/* ── Левая колонка — sticky через CSS ── */}
-          <div className={styles.heroLeft}>
-            <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— О нас</span>
+            {/* ── Левая колонка — sticky ── */}
+            <div className={styles.heroLeft}>
+              <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— О нас</span>
 
-            <h1 className={styles.heroTitle}>
-              <div className={styles.heroClip}>
-                <span ref={heroLine1Ref} className={styles.heroTitleLine}>
-                  Мы стремимся к инновациям.
-                </span>
-              </div>
-            </h1>
-
-            <p ref={heroSubRef} className={styles.heroSub}>
-              Создаём визуальные системы, которые работают во всех измерениях —<br />
-              от брендинга и кода до объёмного 3D.
-            </p>
-
-            <a ref={heroBtnRef} href="#contact" className={styles.heroBtn}>
-              Начать проект
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M2.5 7h9M7.5 3l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-
-            <div className={styles.statsGrid}>
-              {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  ref={(el) => { statsRefs.current[i] = el; }}
-                  className={styles.statCard}
-                >
-                  <div className={styles.statNum}>{stat.num}</div>
-                  <div className={styles.statLabel}>{stat.label}</div>
+              <h1 className={styles.heroTitle}>
+                <div className={styles.heroClip}>
+                  <span ref={heroLine1Ref} className={styles.heroTitleLine}>
+                    Мы стремимся к инновациям.
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
+              </h1>
 
-          {/* ── Правая колонка — карточки скроллятся ── */}
-          <div className={styles.heroRight}>
-            <div className={styles.servicesBlock}>
-              <div className={styles.servTop}>
-                <div className={styles.sectionLabel}>— Что мы делаем</div>
-                <p ref={servIntroRef} className={styles.servIntro}>
-                  Три направления, в которых мы создаём выдающийся результат
-                </p>
-              </div>
+              <p ref={heroSubRef} className={styles.heroSub}>
+                Создаём визуальные системы, которые работают во всех измерениях —
+                от брендинга и кода до объёмного 3D.
+              </p>
 
-              <div className={styles.servGrid}>
-                {services.map((service, i) => (
+              <button
+                ref={heroBtnRef}
+                className={styles.heroBtn}
+                onClick={() => setIsClientFormOpen(true)}
+              >
+                Начать проект
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              <div className={styles.statsGrid}>
+                {stats.map((stat, i) => (
                   <div
                     key={i}
-                    ref={(el) => { servCardsRef.current[i] = el; }}
-                    className={styles.servCard}
-                    style={{ backgroundColor: service.bgColor }}
+                    ref={(el) => { statsRefs.current[i] = el; }}
+                    className={styles.statCard}
                   >
-                    <div
-                      className={styles.servCardBg}
-                      style={{ backgroundImage: `url(${service.image})` }}
-                    />
-                    <div className={styles.servCardContent}>
-                      <h3 className={styles.servCardTitle}>{service.title}</h3>
-                      <p className={styles.servCardDesc}>{service.desc}</p>
-                      <div className={styles.servCardDivider} />
-                      <div className={styles.servCardTags}>
-                        {service.tags.map((tag, idx) => (
-                          <span key={idx} className={styles.servTag}>{tag}</span>
-                        ))}
-                      </div>
-                    </div>
+                    <div className={styles.statNum}>{stat.num}</div>
+                    <div className={styles.statLabel}>{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
 
+            {/* ── Правая колонка — карточки ── */}
+            <div className={styles.heroRight}>
+              <div className={styles.servicesBlock}>
+                <div className={styles.servTop}>
+                  <div className={styles.sectionLabel}>— Что мы делаем</div>
+                  <p ref={servIntroRef} className={styles.servIntro}>
+                    Три направления, в которых мы создаём выдающийся результат
+                  </p>
+                </div>
+
+                <div className={styles.servGrid}>
+                  {services.map((service, i) => (
+                    <div
+                      key={i}
+                      ref={(el) => { servCardsRef.current[i] = el; }}
+                      className={styles.servCard}
+                      style={{ backgroundColor: service.bgColor }}
+                    >
+                      <div
+                        className={styles.servCardBg}
+                        style={{ backgroundImage: `url(${service.image})` }}
+                      />
+                      <div className={styles.servCardContent}>
+                        <h3 className={styles.servCardTitle}>{service.title}</h3>
+                        <p className={styles.servCardDesc}>{service.desc}</p>
+                        <div className={styles.servCardDivider} />
+                        <div className={styles.servCardTags}>
+                          {service.tags.map((tag, idx) => (
+                            <span key={idx} className={styles.servTag}>{tag}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        {/* Декоративные элементы */}
-        {/* <div ref={heroIndexRef} className={styles.heroBgIndex} aria-hidden>II</div> */}
-        {/* <div ref={heroRulerRef} className={styles.heroRuler} /> */}
-      </div>
-    </section>
+        {/* ════════════════════════════════
+            ИСТОРИЯ БРЕНДА
+            ════════════════════════════════ */}
+        <div ref={storyRef} className={styles.story}>
+          <div className={styles.storyInner}>
+
+            {/* Левая колонка — заголовок */}
+            <div className={styles.storyLeft}>
+              <div className={styles.storyLeftTitle}>
+                <div>
+                  <span className={styles.storyEyebrow}>— История бренда</span>
+                  <h2 ref={storyHeadlineRef} className={styles.storyHeadline}>
+                    Одно имя.
+                    <br />
+                    Все виды дизайна.
+                  </h2>
+                </div>
+                <p
+                  ref={storyClosingRef}
+                  className={styles.storyClosing}
+                >
+                  Вместе мы строим студию, где дизайн уважают как бизнес&#8209;инструмент,
+                  а не как украшение.
+                </p>
+              </div>
+
+              <div>
+                {story.map((item, i) => (
+                  <div
+                    key={i}
+                    ref={(el) => { storyItemRefs.current[i] = el; }}
+                    className={styles.storyItem}
+                  >
+                    <div className={styles.storyMeta}>
+                      <span className={styles.storyName}>{item.name}</span>
+                      <span className={styles.storyRole}>{item.role}</span>
+                    </div>
+                    <p className={styles.storyText}>{item.text}</p>
+                  </div>
+                ))}
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <BecomeClient
+        isOpen={isClientFormOpen}
+        onClose={() => setIsClientFormOpen(false)}
+      />
+    </>
   );
 }

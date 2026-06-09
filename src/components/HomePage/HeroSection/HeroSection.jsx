@@ -160,7 +160,6 @@ export default function HeroSection() {
           <li><a href="#howtowork">How to Work</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-
       </nav>
 
       {/* SOCIAL LEFT */}
@@ -200,7 +199,7 @@ export default function HeroSection() {
         </div>
 
         <p className={styles.tagline} ref={taglineRef}>
-          Visual systems · Brand identity · Digital experiences
+          Visual systems · Brand identity · Digital experiences · Web Development
         </p>
       </div>
     </section>

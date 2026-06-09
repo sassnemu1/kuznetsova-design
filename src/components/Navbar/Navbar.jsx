@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { HiOutlineMenu } from "react-icons/hi";
+import { IoIosArrowForward } from "react-icons/io";
+
 import styles from "./Navbar.module.css";
+
 import FullMenu from "./FullMenu/FullMenu";
+import BecomeClient from "../BecomeClient/BecomeClient";
 
 export default function Navbar() {
     const [visible, setVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isClientFormOpen, setIsClientFormOpen] = useState(false);
 
     useEffect(() => {
         const start = document.getElementById("menu-start");
@@ -49,8 +55,13 @@ export default function Navbar() {
             >
                 <div className={styles.navContainer}>
                     <div className={styles.navRight}>
-                        <button className={styles.clientBtn}>
-                            Стать клиентом ↗
+                        <button 
+                            className={styles.clientBtn}
+                            aria-label="Оставить заявку"
+                            onClick={() => setIsClientFormOpen(true)}
+                        >
+                            <span>Начните проект</span>
+                            <IoIosArrowForward size={16} />
                         </button>
 
                         <button
@@ -63,8 +74,9 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-
+            
             <FullMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}/>
+            <BecomeClient isOpen={isClientFormOpen} onClose={() => setIsClientFormOpen(false)} />
         </>
     );
 }
