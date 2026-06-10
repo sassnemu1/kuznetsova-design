@@ -9,6 +9,7 @@ import BecomeClient from "@/components/BecomeClient/BecomeClient";
 
 const services = [
   {
+    num: "01",
     title: "БРЕНДИНГ И ГРАФИКА",
     desc: "Логотипы, брендбуки, упаковка, мерч и полная айдентика, которую запоминают.",
     tags: ["Figma", "Illustrator", "After Effects", "Branding"],
@@ -16,14 +17,16 @@ const services = [
     image: "/design-solutions.webp",
   },
   {
-    title: "ВЕБ И DIGITAL",
+    num: "02",
+    title: "WEB & DIGITAL",
     desc: "Современные сайты и цифровые продукты на чистом коде. Без шаблонов и компромиссов.",
     tags: ["React", "Next.js", "TypeScript", "Framer Motion"],
     bgColor: "#f0f4ff",
     image: "/web-dev.webp",
   },
   {
-    title: "3D-ДИЗАЙН",
+    num: "03",
+    title: "3D-DESIGN",
     desc: "Визуализация, 3D-моделинг, моушн и AR/VR решения. Объём, который продаёт.",
     tags: ["Blender", "Cinema 4D", "Spline", "Three.js"],
     bgColor: "#f5f0f8",
@@ -60,8 +63,6 @@ export default function AboutSection() {
   const heroLine1Ref = useRef(null);
   const heroSubRef = useRef(null);
   const heroBtnRef = useRef(null);
-  const heroRulerRef = useRef(null);
-  const heroIndexRef = useRef(null);
 
   const servIntroRef = useRef(null);
   const servCardsRef = useRef([]);
@@ -69,6 +70,8 @@ export default function AboutSection() {
   const storyItemRefs = useRef([]);
   const storyHeadlineRef = useRef(null);
   const storyClosingRef = useRef(null);
+  const storyQuoteRef = useRef(null);
+  const storyStatsRef = useRef(null);
 
   const [isClientFormOpen, setIsClientFormOpen] = useState(false);
 
@@ -85,8 +88,8 @@ export default function AboutSection() {
         const bg = card.querySelector(`.${styles.servCardBg}`);
         if (!bg) return;
 
-        const onEnter = () => gsap.to(bg, { scale: 1.08, y: -12, duration: 0.9, ease: "power2.out" });
-        const onLeave = () => gsap.to(bg, { scale: 1, y: 0, duration: 0.85, ease: "power2.out" });
+        const onEnter = () => gsap.to(bg, { scale: 1.07, y: -10, duration: 0.85, ease: "power2.out" });
+        const onLeave = () => gsap.to(bg, { scale: 1, y: 0, duration: 0.8, ease: "power2.out" });
 
         card.addEventListener("mouseenter", onEnter);
         card.addEventListener("mouseleave", onLeave);
@@ -107,49 +110,47 @@ export default function AboutSection() {
         .fromTo(heroEyebrowRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8 })
         .fromTo(heroLine1Ref.current, { y: "110%", opacity: 0 }, { y: "0%", opacity: 1, duration: 1.15 }, "-=0.5")
         .fromTo(heroSubRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.95 }, "-=0.65")
-        .fromTo(heroBtnRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.85 }, "-=0.55")
-        .fromTo(heroRulerRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1.8, ease: "expo.out" }, "-=1.1")
-        .fromTo(heroIndexRef.current, { opacity: 0 }, { opacity: 1, duration: 2 }, "-=1.3");
+        .fromTo(heroBtnRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.85 }, "-=0.55");
 
       // Stats
       statsRefs.current.forEach((el, i) => {
         if (!el) return;
-        gsap.fromTo(el, { opacity: 0, y: 40 }, {
-          opacity: 1, y: 0, duration: 0.9, delay: i * 0.08,
+        gsap.fromTo(el, { opacity: 0, y: 30 }, {
+          opacity: 1, y: 0, duration: 0.8, delay: i * 0.07,
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
+            start: "top 88%",
             toggleActions: "play none none reverse",
           },
         });
       });
 
       // Intro правой колонки
-      gsap.fromTo(servIntroRef.current, { opacity: 0, y: 35 }, {
-        opacity: 1, y: 0, duration: 1.1,
+      gsap.fromTo(servIntroRef.current, { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 1.0,
         scrollTrigger: {
           trigger: servIntroRef.current,
-          start: "top 82%",
+          start: "top 84%",
         },
       });
 
       // ─── Карточки услуг ───────────────────────────────────────────────
       servCardsRef.current.forEach((card) => {
         if (!card) return;
-        gsap.set(card, { opacity: 0, y: 70 });
+        gsap.set(card, { opacity: 0, y: 48 });
         ScrollTrigger.create({
           trigger: card,
-          start: "top 80%",
+          start: "top 84%",
           end: "bottom 10%",
-          onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }),
-          onLeaveBack: () => gsap.to(card, { opacity: 0, y: 70, duration: 0.5, ease: "power2.in" }),
+          onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.85, ease: "power3.out" }),
+          onLeaveBack: () => gsap.to(card, { opacity: 0, y: 48, duration: 0.4, ease: "power2.in" }),
         });
       });
 
       // ─── Story section ────────────────────────────────────────────────
       if (storyHeadlineRef.current) {
         gsap.fromTo(storyHeadlineRef.current,
-          { opacity: 0, y: 50 },
+          { opacity: 0, y: 40 },
           {
             opacity: 1, y: 0, duration: 1.1, ease: "power4.out",
             scrollTrigger: { trigger: storyHeadlineRef.current, start: "top 82%" },
@@ -160,21 +161,43 @@ export default function AboutSection() {
       storyItemRefs.current.forEach((el, i) => {
         if (!el) return;
         gsap.fromTo(el,
-          { opacity: 0, y: 40 },
+          { opacity: 0, y: 30 },
           {
-            opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 84%" },
-            delay: i * 0.12,
+            opacity: 1, y: 0, duration: 0.85, ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 86%" },
+            delay: i * 0.1,
           }
         );
       });
 
       if (storyClosingRef.current) {
         gsap.fromTo(storyClosingRef.current,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 24 },
           {
             opacity: 1, y: 0, duration: 1.0, ease: "power3.out",
-            scrollTrigger: { trigger: storyClosingRef.current, start: "top 86%" },
+            scrollTrigger: { trigger: storyClosingRef.current, start: "top 88%" },
+          }
+        );
+      }
+
+      // Right column — quote & stats
+      if (storyQuoteRef.current) {
+        gsap.fromTo(storyQuoteRef.current,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 1.1, ease: "power3.out",
+            scrollTrigger: { trigger: storyRef.current, start: "top 75%" },
+          }
+        );
+      }
+
+      if (storyStatsRef.current) {
+        gsap.fromTo(storyStatsRef.current,
+          { opacity: 0, y: 32 },
+          {
+            opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+            scrollTrigger: { trigger: storyRef.current, start: "top 70%" },
+            delay: 0.15,
           }
         );
       }
@@ -198,12 +221,13 @@ export default function AboutSection() {
     <>
       <section ref={sectionRef} className={styles.about} id="studio">
 
+        {/* ════════════ HERO ════════════ */}
         <div ref={heroRef} className={styles.hero}>
           <div className={styles.heroLayout}>
 
             {/* ── Левая колонка — sticky ── */}
             <div className={styles.heroLeft}>
-              <span ref={heroEyebrowRef} className={styles.heroEyebrow}>— О нас</span>
+              <span ref={heroEyebrowRef} className={styles.heroEyebrow}>О нас</span>
 
               <h1 className={styles.heroTitle}>
                 <div className={styles.heroClip}>
@@ -247,7 +271,7 @@ export default function AboutSection() {
             <div className={styles.heroRight}>
               <div className={styles.servicesBlock}>
                 <div className={styles.servTop}>
-                  <div className={styles.sectionLabel}>— Что мы делаем</div>
+                  <div className={styles.sectionLabel}>Что мы делаем</div>
                   <p ref={servIntroRef} className={styles.servIntro}>
                     Три направления, в которых мы создаём выдающийся результат
                   </p>
@@ -266,6 +290,7 @@ export default function AboutSection() {
                         style={{ backgroundImage: `url(${service.image})` }}
                       />
                       <div className={styles.servCardContent}>
+                        <span className={styles.servCardNum}>{service.num}</span>
                         <h3 className={styles.servCardTitle}>{service.title}</h3>
                         <p className={styles.servCardDesc}>{service.desc}</p>
                         <div className={styles.servCardDivider} />
@@ -284,33 +309,22 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* ════════════════════════════════
-            ИСТОРИЯ БРЕНДА
-            ════════════════════════════════ */}
+        {/* ════════════ ИСТОРИЯ БРЕНДА ════════════ */}
         <div ref={storyRef} className={styles.story}>
           <div className={styles.storyInner}>
 
-            {/* Левая колонка — заголовок */}
+            {/* Левая колонка — заголовок + биографии */}
             <div className={styles.storyLeft}>
-              <div className={styles.storyLeftTitle}>
-                <div>
-                  <span className={styles.storyEyebrow}>— История бренда</span>
-                  <h2 ref={storyHeadlineRef} className={styles.storyHeadline}>
-                    Одно имя.
-                    <br />
-                    Все виды дизайна.
-                  </h2>
-                </div>
-                <p
-                  ref={storyClosingRef}
-                  className={styles.storyClosing}
-                >
-                  Вместе мы строим студию, где дизайн уважают как бизнес&#8209;инструмент,
-                  а не как украшение.
-                </p>
+              <div>
+                <span className={styles.storyEyebrow}>История бренда</span>
+                <h2 ref={storyHeadlineRef} className={styles.storyHeadline}>
+                  Одно имя.
+                  <br />
+                  Все виды дизайна.
+                </h2>
               </div>
 
-              <div>
+              <div className={styles.storyItems}>
                 {story.map((item, i) => (
                   <div
                     key={i}
@@ -324,8 +338,45 @@ export default function AboutSection() {
                     <p className={styles.storyText}>{item.text}</p>
                   </div>
                 ))}
-
               </div>
+
+              <p ref={storyClosingRef} className={styles.storyClosing}>
+                Вместе мы строим студию, где дизайн уважают как бизнес&#8209;инструмент,
+                а не как украшение.
+              </p>
+            </div>
+
+            {/* Правая колонка — цитата + мини-статы (sticky) */}
+            <div className={styles.storyRight}>
+              <div className={styles.storyQuote}>
+                <div className={styles.storyQuoteOverlay} />
+                <p className={styles.storyQuoteText}>
+                  Дизайн — это не то, как вещь выглядит. Это то, как она работает.
+                </p>
+
+                <span className={styles.storyQuoteAuthor}>
+                  Принцип студии
+                </span>
+
+                {/* -------------------------------- */}
+                {/* Сделать тут контакты !!!! */}
+                {/* -------------------------------- */}
+                
+                {/* <span className={styles.storyContactTitle}>
+                  Контакты
+                </span> */}
+              </div>
+
+              {/* <div ref={storyStatsRef} className={styles.storyStats}>
+                <div className={styles.storyStatItem}>
+                  <div className={styles.storyStatNum}>80+</div>
+                  <div className={styles.storyStatLabel}>Проектов</div>
+                </div>
+                <div className={styles.storyStatItem}>
+                  <div className={styles.storyStatNum}>5+</div>
+                  <div className={styles.storyStatLabel}>Лет опыта</div>
+                </div>
+              </div> */}
             </div>
 
           </div>

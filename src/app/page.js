@@ -14,8 +14,6 @@ export default function Home() {
     <main>
       <Navbar />
 
-      <div id="menu-start"></div>
-
       <HeroSection />
 
       <ServicesSlider />
@@ -27,8 +25,6 @@ export default function Home() {
       <ProcessSection />
 
       <Footer />
-
-      <div id="menu-end"></div>
     </main>
   );
 }

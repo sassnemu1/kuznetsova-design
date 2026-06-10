@@ -1,24 +1,15 @@
 .stickyNav {
   position: fixed;
-  top: 0;
+  top: 20px;
   
-  right: 0;
+  right: -40px;
   z-index: 30;
-
-  opacity: 0;
-  pointer-events: none;
 
   transition:
     opacity 0.4s ease,
     transform 0.4s ease;
 
   transform: translateY(-20px);
-}
-
-.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
 }
 
 .navContainer {
@@ -48,7 +39,7 @@
   color: var(--accent);
   font-size: 13px;
   font-family: var(--font-body);
-  transition: 0.3s ease;
+  transition: all 0.35s ease;
 }
 .clientBtn span {
   padding-right: 8px;
@@ -73,12 +64,12 @@
   border-radius: 50%;
   color: var(--accent);
   transition: all 0.35s ease;
-  backdrop-filter: blur(20px);
 }
 
 .menuBtn:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
   transform: scale(1.08);
 }
 
@@ -96,4 +87,16 @@
     width: 46px;
     height: 46px;
   }
+}
+
+.darkMode .clientBtn {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.darkMode .menuBtn {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.15);
 }

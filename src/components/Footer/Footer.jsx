@@ -111,9 +111,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className={styles.tagline} ref={taglineRef}>
+          {/* <p className={styles.tagline} ref={taglineRef}>
             Visual systems · Brand identity · Digital experiences
-          </p>
+          </p> */}
         </div>
 
         {/* Контент футера */}
