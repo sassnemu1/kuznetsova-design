@@ -33,13 +33,17 @@
 /* Грид: теперь шаги слева (шире), заголовок справа */
 .heroLayout {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;   /* шаги шире, заголовок уже */
+  grid-template-columns: 1fr 1.4fr;
   gap: clamp(60px, 8vw, 140px);
+
   align-items: start;
   max-width: 1520px;
   margin: 0 auto;
+
+  position: relative;
   z-index: 2;
 }
+
 
 /* Шаги слева */
 .steps {
@@ -153,6 +157,57 @@
   color: var(--text-secondary);
 }
 
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  margin-top: 40px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 56px;
+  padding: 0 28px;
+
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: all .35s ease;
+}
+
+.primaryBtn {
+  background: #fff;
+  color: #111;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-3px);
+}
+
+.secondaryBtn {
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(12px);
+}
+
+.secondaryBtn:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.08);
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .heroLayout {
@@ -178,3 +233,4 @@
   .step  { grid-template-columns: 44px 1fr; gap: 0 20px; }
   .stepBody { padding-bottom: 36px; }
 }
+

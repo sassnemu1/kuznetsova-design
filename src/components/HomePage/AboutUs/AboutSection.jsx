@@ -4,6 +4,15 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "./AboutSection.module.css";
 
+import {
+  FaInstagram,
+  FaBehance,
+  FaDribbble,
+  FaTelegramPlane,
+  FaVk,
+} from "react-icons/fa";
+import { MdOutlineMail } from "react-icons/md";
+
 import useGSAP from "@/hooks/useGSAP";
 import BecomeClient from "@/components/BecomeClient/BecomeClient";
 
@@ -310,7 +319,7 @@ export default function AboutSection() {
         </div>
 
         {/* ════════════ ИСТОРИЯ БРЕНДА ════════════ */}
-        <div ref={storyRef} className={styles.story}>
+        <div ref={storyRef} className={styles.story} id="contact">
           <div className={styles.storyInner}>
 
             {/* Левая колонка — заголовок + биографии */}
@@ -348,8 +357,9 @@ export default function AboutSection() {
 
             {/* Правая колонка — цитата + мини-статы (sticky) */}
             <div className={styles.storyRight}>
-              <div className={styles.storyQuote}>
+             <div className={styles.storyQuote}>
                 <div className={styles.storyQuoteOverlay} />
+
                 <p className={styles.storyQuoteText}>
                   Дизайн — это не то, как вещь выглядит. Это то, как она работает.
                 </p>
@@ -358,27 +368,69 @@ export default function AboutSection() {
                   Принцип студии
                 </span>
 
-                {/* -------------------------------- */}
-                {/* Сделать тут контакты !!!! */}
-                {/* -------------------------------- */}
-                
-                {/* <span className={styles.storyContactTitle}>
-                  Контакты
-                </span> */}
+                <div className={styles.storyContacts}>
+                    <span className={styles.storyContactsTitle}>
+                      Наши контакты
+                    </span>
+
+                    <a
+                      href="mailto:kristina@kuznetsova.design"
+                      className={styles.storyContactItem}
+                    >
+                      <span className={styles.storyContactLabel}>Email Кристины Кузнецовой</span>
+                      <span className={styles.storyContactValue}>
+                        kristina@kuznetsova.design
+                      </span>
+                    </a>
+                    <a
+                      href="mailto:kiselev@kuznetsova.design"
+                      className={styles.storyContactItem}
+                    >
+                      <span className={styles.storyContactLabel}>Email Ярослава Киселева</span>
+                      <span className={styles.storyContactValue}>
+                        kiselev@kuznetsova.design
+                      </span>
+                    </a>
+
+                    <a
+                      href="tel:+79991112233"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.storyContactItem}
+                    >
+                      <span className={styles.storyContactLabel}>НОМЕР ТЕЛЕФОНА</span>
+                      <span className={styles.storyContactValue}>
+                        +7 (999) 111 22-33
+                      </span>
+                    </a>
+
+                    <div className={styles.storySocials}>
+                        <a href="#">
+                          <FaInstagram />
+                        </a>
+
+                        <a href="#">
+                          <FaBehance />
+                        </a>
+
+                        <a href="#">
+                          <FaDribbble />
+                        </a>
+
+                        <a href="#">
+                          <FaTelegramPlane />
+                        </a>
+
+                        <a href="#">
+                          <MdOutlineMail />
+                        </a>
+                    </div>
+                </div>
               </div>
-
-              {/* <div ref={storyStatsRef} className={styles.storyStats}>
-                <div className={styles.storyStatItem}>
-                  <div className={styles.storyStatNum}>80+</div>
-                  <div className={styles.storyStatLabel}>Проектов</div>
-                </div>
-                <div className={styles.storyStatItem}>
-                  <div className={styles.storyStatNum}>5+</div>
-                  <div className={styles.storyStatLabel}>Лет опыта</div>
-                </div>
-              </div> */}
+              {/* <span className={styles.storyContactTitle}>
+                Контакты
+              </span> */}
             </div>
-
           </div>
         </div>
 

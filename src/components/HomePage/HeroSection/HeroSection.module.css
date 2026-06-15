@@ -24,7 +24,7 @@
   font-family: var(--font-bold);
   font-size: clamp(180px, 35vw, 420px);
   font-weight: 900;
-  color: #efebeb9f;
+  color: rgba(56, 100, 219, 0.051);
   opacity: 0; /* GSAP animates this in */
 
   white-space: nowrap;

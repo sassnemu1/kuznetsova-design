@@ -106,47 +106,64 @@ export default function ProcessSection() {
   }, [gsap, ScrollTrigger]);
 
   return (
-    <section ref={sectionRef} className={styles.section} id="process">
+    <section ref={sectionRef} className={styles.section} id="howtowork">
       <div className={styles.inner}>
         <div ref={headerRef} className={styles.hero}>
           {/* Большой декоративный номер */}
-          <div className={styles.heroBgIndex}>05</div>
+          <div className={styles.heroBgIndex}>HOW TO WORK</div>
 
           <div className={styles.heroLayout}>
-            {/* Шаги теперь СЛЕВА */}
+            {/* ЛЕВАЯ КОЛОНКА */}
+            <div className={styles.heroRight}>
+              <span className={styles.heroEyebrow}>
+                — Как мы работаем
+              </span>
+
+              <h2 ref={titleRef} className={styles.heroTitle}>
+                <span className="heroTitleLine">Процесс</span>{" "}
+                <span className="heroTitleLine heroTitleLineAccent">
+                  работы
+                </span>
+              </h2>
+
+              <p className={styles.heroSub}>
+                От первого сообщения до передачи файлов.
+                <br />
+                Каждый этап прозрачен и контролируется.
+              </p>
+            </div>
+
+            {/* ПРАВАЯ КОЛОНКА */}
             <div className={styles.steps}>
               {steps.map((step, i) => (
                 <div
                   key={i}
-                  ref={el => { stepsRef.current[i] = el; }}
+                  ref={(el) => {
+                    stepsRef.current[i] = el;
+                  }}
                   className={styles.step}
                 >
                   <div className={styles.stepLeft}>
-                    <span className={styles.stepNum}>{step.num}</span>
-                    {i < steps.length - 1 && <div className={styles.connector} />}
+                    <span className={styles.stepNum}>
+                      {step.num}
+                    </span>
+
+                    {i < steps.length - 1 && (
+                      <div className={styles.connector} />
+                    )}
                   </div>
 
                   <div className={styles.stepBody}>
-                    <h3 className={styles.stepTitle}>{step.title}</h3>
-                    <p className={styles.stepDesc}>{step.desc}</p>
+                    <h3 className={styles.stepTitle}>
+                      {step.title}
+                    </h3>
+
+                    <p className={styles.stepDesc}>
+                      {step.desc}
+                    </p>
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Заголовок теперь СПРАВА */}
-            <div className={styles.heroRight}>
-              <span className={styles.heroEyebrow}>— Как мы работаем</span>
-              
-              <h2 ref={titleRef} className={styles.heroTitle}>
-                <span className="heroTitleLine">Процесс</span>{" "}
-                <span className="heroTitleLine heroTitleLineAccent">работы</span>
-              </h2>
-
-              <p className={styles.heroSub}>
-                От первого сообщения до передачи файлов.<br />
-                Каждый этап прозрачен и контролируется.
-              </p>
             </div>
           </div>
         </div>

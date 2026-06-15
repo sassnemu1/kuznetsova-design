@@ -314,6 +314,7 @@
 
 .story {
   padding: 100px 6vw 140px;
+  /* position: relative; */
 }
 
 .storyInner {
@@ -338,6 +339,8 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .storyEyebrow {
@@ -436,7 +439,7 @@
   overflow: hidden;
 } */
 
-.storyQuote::before {
+/* .storyQuote::before {
   content: '\201C';
   position: absolute;
   top: -16px;
@@ -448,7 +451,7 @@
   opacity: 0.07;
   pointer-events: none;
   user-select: none;
-}
+} */
 
 .storyQuoteText {
   font-family: var(--font-display);
@@ -527,7 +530,7 @@
 @media (max-width: 1024px) {
   .story { padding: 80px 6vw 100px; }
   .storyInner { grid-template-columns: 1fr; gap: 56px; }
-  .storyRight { position: relative; top: auto; }
+  /* .storyRight { position: relative; top: auto; } */
   .storyHeadline { opacity: 1; }
   .storyClosing { opacity: 1; }
 }
@@ -551,6 +554,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: -100;
 }
 
 .storyQuoteOverlay {
@@ -560,7 +564,7 @@
   background: rgba(132, 132, 132, 0.287);
   backdrop-filter: blur(12px);
 
-  z-index: 1;
+  z-index: -100;
 }
 
 .storyQuoteText,
@@ -571,7 +575,7 @@
 }
 
 .storyContactTitle {
-  z-index: 10;
+  z-index: 100;
 }
 
 .storyContactTitle {
@@ -592,4 +596,90 @@
 
   /* делает буквы видимыми на любом фоне */
   mix-blend-mode: difference;
+}
+
+.storyContacts {
+  margin-top: 42px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.storyContactsTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+
+  margin-bottom: 8px;
+}
+
+.storyContactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  text-decoration: none;
+
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+
+  transition: .3s ease;
+}
+
+.storyContactItem:hover {
+  transform: translateX(8px);
+}
+
+.storyContactLabel {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+}
+
+.storyContactValue {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.storySocials {
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding-top: 8px;
+}
+
+.storySocials a {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #fff;
+  font-size: 18px;
+
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+
+  transition: .35s ease;
+}
+
+.storySocials a:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.08);
 }
