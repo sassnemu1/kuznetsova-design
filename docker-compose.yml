@@ -1,0 +1,8 @@
+services:
+  kuznetsova:
+    build: .
+    container_name: kuznetsova
+    restart: always
+    env_file: .env.production
+    ports:
+      - "3000:3000"
