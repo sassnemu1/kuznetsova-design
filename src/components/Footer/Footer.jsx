@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaBehance,
   FaDribbble,
+  FaPinterest,
   FaTelegramPlane,
   FaVk,
 } from "react-icons/fa";
@@ -110,18 +111,15 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
-          {/* <p className={styles.tagline} ref={taglineRef}>
-            Visual systems · Brand identity · Digital experiences
-          </p> */}
         </div>
 
         {/* Контент футера */}
         <div className={styles.footerContent}>
+
           <div className={styles.footerLinks} ref={linksRef}>
             <div>
               <h4>Navigation</h4>
-              <a href="#work">Work</a>
+              <a href="#portfolio">Work</a>
               <a href="#studio">Studio</a>
               <a href="#services">Services</a>
               <a href="#contact">Contact</a>
@@ -137,24 +135,24 @@ export default function Footer() {
 
             <div>
               <h4>Contact</h4>
-              <a href="mailto:hello@kuznetsova.design">info@kuznetsova.design</a>
-              <a href="#">Москва, Россия</a>
+              <a href="mailto:kristina@kuznetsova.design">kristina@kuznetsova.design</a>
+              <span>Москва, Россия</span>
             </div>
           </div>
 
           {/* Социальные сети */}
           <div className={styles.socialWrapper} ref={socialRef}>
             <div className={styles.socialLinks}>
-              <a href="#" aria-label="Instagram"><FaInstagram /></a>
-              <a href="#" aria-label="Behance"><FaBehance /></a>
+              <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+              <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
               <a href="#" aria-label="Dribbble"><FaDribbble /></a>
-              <a href="#" aria-label="Telegram"><FaTelegramPlane /></a>
-              <a href="#" aria-label="VK"><FaVk /></a>
-              <a href="mailto:hello@kuznetsova.design" aria-label="Email">
-                <MdOutlineMail />
-              </a>
+              <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest /></a>
+              <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane /></a>
+              <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer" aria-label="VK"><FaVk /></a>
+              {/* <a href="mailto:kristina@kuznetsova.design" aria-label="Email"><MdOutlineMail /></a> */}
             </div>
           </div>
+          
         </div>
 
         {/* Copyright */}

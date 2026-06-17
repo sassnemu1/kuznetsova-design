@@ -175,6 +175,13 @@
   color: #aaa;
 }
 
+.footerLinks span {
+  display: block;
+  color: #222;
+  font-size: 15px;
+  line-height: 2.1;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 900px) {
   .footer {

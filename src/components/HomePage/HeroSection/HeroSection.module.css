@@ -22,9 +22,9 @@
   transform: translate(-50%, -50%);
 
   font-family: var(--font-bold);
-  font-size: clamp(180px, 35vw, 420px);
+  font-size: clamp(180px, 35vw, 820px);
   font-weight: 900;
-  color: rgba(56, 100, 219, 0.051);
+  color: rgba(56, 100, 219, 0.087);
   opacity: 0; /* GSAP animates this in */
 
   white-space: nowrap;
@@ -285,8 +285,8 @@
   }
 
   .bgText {
-    font-size: 140px;
-    top: 65%;
+    font-size: 200px;
+    top: 60%;
     opacity: 0.015;
   }
 

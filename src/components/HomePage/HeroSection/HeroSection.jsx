@@ -7,10 +7,12 @@ import {
   FaInstagram,
   FaBehance,
   FaDribbble,
+  FaPinterest,
   FaTelegramPlane,
   FaVk,
 } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
+
 import useGSAP from "@/hooks/useGSAP.js";
 
 export default function HeroSection() {
@@ -156,7 +158,7 @@ export default function HeroSection() {
 
         <ul className={styles.navLinks}>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#studio">About Us</a></li>
+          <li><a href="#services">About Us</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#howtowork">How to Work</a></li>
         </ul>
@@ -164,18 +166,15 @@ export default function HeroSection() {
 
       {/* SOCIAL LEFT */}
       <div className={styles.socialLeft} ref={socialLeftRef}>
-        <a href="#" aria-label="Instagram"><FaInstagram /></a>
-        <a href="#" aria-label="Behance"><FaBehance /></a>
+        <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
         <a href="#" aria-label="Dribbble"><FaDribbble /></a>
+        <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest /></a>
       </div>
 
-      {/* SOCIAL RIGHT */}
       <div className={styles.socialRight} ref={socialRightRef}>
-        <a href="#" aria-label="Telegram"><FaTelegramPlane /></a>
-        <a href="#" aria-label="VK"><FaVk /></a>
-        <a href="mailto:hello@kuznetsova.design" aria-label="Email">
-          <MdOutlineMail />
-        </a>
+        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane /></a>
+        <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer" aria-label="VK"><FaVk /></a>
+        <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
       </div>
 
       {/* TITLE */}

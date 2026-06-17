@@ -102,14 +102,16 @@ export default function FullMenu({ isOpen, onClose }) {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <div className={styles.contact}>
-            <span className={styles.contactTitle}>Telegram</span>
-            <a
-              href="https://t.me/kuznetsova_design"
-              className={styles.contactLink}
-            >
-              @kuznetsova_design
-            </a>
-          </div>
+          <span className={styles.contactTitle}>Telegram</span>
+          <a
+            href="https://t.me/KUZNETSOVA_designn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.contactLink}
+          >
+            @KUZNETSOVA_designn
+          </a>
+        </div>
           <div className={styles.legal}>
             <span>Политика конфиденциальности</span>
             <span>© Kuznetsova Design 2026</span>

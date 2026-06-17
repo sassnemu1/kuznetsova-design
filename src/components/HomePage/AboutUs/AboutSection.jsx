@@ -8,6 +8,7 @@ import {
   FaInstagram,
   FaBehance,
   FaDribbble,
+  FaPinterest,
   FaTelegramPlane,
   FaVk,
 } from "react-icons/fa";
@@ -228,7 +229,7 @@ export default function AboutSection() {
 
   return (
     <>
-      <section ref={sectionRef} className={styles.about} id="studio">
+      <section ref={sectionRef} className={styles.about} id="services">
 
         {/* ════════════ HERO ════════════ */}
         <div ref={heroRef} className={styles.hero}>
@@ -405,25 +406,13 @@ export default function AboutSection() {
                     </a>
 
                     <div className={styles.storySocials}>
-                        <a href="#">
-                          <FaInstagram />
-                        </a>
-
-                        <a href="#">
-                          <FaBehance />
-                        </a>
-
-                        <a href="#">
-                          <FaDribbble />
-                        </a>
-
-                        <a href="#">
-                          <FaTelegramPlane />
-                        </a>
-
-                        <a href="#">
-                          <MdOutlineMail />
-                        </a>
+                        <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                        <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer"><FaBehance /></a>
+                        <a href="#"><FaDribbble /></a>
+                        <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer"><FaPinterest /></a>
+                        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer"><FaTelegramPlane /></a>
+                        <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer"><FaVk /></a>
+                        {/* <a href="mailto:kristina@kuznetsova.design"><MdOutlineMail /></a> */}
                     </div>
                 </div>
               </div>
