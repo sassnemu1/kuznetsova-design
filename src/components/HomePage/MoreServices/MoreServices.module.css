@@ -1,0 +1,400 @@
+/* ─── SECTION ────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  background: #0d0d0d;
+  padding: 60px 0 160px 0;
+  overflow: hidden;
+}
+
+/* лёгкая точечная сетка фона — тех. атмосфера, очень тихо */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 0%, transparent 75%);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.header {
+  max-width: 680px;
+  margin-bottom: 88px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 15px;
+  height: 1px;
+  background: white;
+}
+
+.title {
+  font-family: var(--font-bold);
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.intro {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: white;
+  max-width: 660px;
+}
+
+/* ─── GRID ───────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* ─── CARD ───────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  border: 1px solid color-mix(in srgb, var(--service-color, #3864db) 18%, rgba(255, 255, 255, 0.08));
+  background: rgba(255, 255, 255, 0.015);
+  overflow: hidden;
+  padding: 28px;
+  transition:
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.4s ease,
+    box-shadow 0.5s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--service-color, #3864db) 30%, transparent), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--service-color, #3864db) 38%, transparent);
+  box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover::before { opacity: 0.9; }
+
+.cardNum {
+  position: absolute;
+  bottom: 12px;
+  right: 24px;
+  font-family: var(--font-bold);
+  font-size: 8rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ─── MOCK WINDOW (общий каркас для чата и графа) ─────────────── */
+.mock {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 236px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.mockHeader {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mockDots {
+  display: flex;
+  gap: 6px;
+}
+
+.mockDots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.mockLabel {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-right: auto;
+}
+
+.onlineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--service-color, #3864db);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--service-color, #3864db) 55%, transparent); }
+  50%      { box-shadow: 0 0 0 6px color-mix(in srgb, var(--service-color, #3864db) 0%, transparent); }
+}
+
+/* ─── CHAT MOCK ──────────────────────────────────────────────── */
+.chatBody {
+  flex: 1;
+  padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bubble {
+  max-width: 78%;
+  padding: 9px 14px;
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.5;
+  opacity: 0; /* GSAP reveals on scroll */
+}
+
+.bubbleUser {
+  align-self: flex-end;
+  background: var(--service-color, #3864db);
+  color: #07101c;
+  border-bottom-right-radius: 4px;
+}
+
+.bubbleBot {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom-left-radius: 4px;
+}
+
+/* ─── NETWORK MOCK ───────────────────────────────────────────── */
+.network {
+  position: relative;
+  flex: 1;
+  padding: 28px 22px 18px;
+}
+
+.networkTrack {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--service-color, #3864db) 35%, transparent) 15%,
+    color-mix(in srgb, var(--service-color, #3864db) 35%, transparent) 85%,
+    transparent
+  );
+}
+
+.networkPulse {
+  position: absolute;
+  top: 50%;
+  left: 22px;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--service-color, #3864db);
+  box-shadow: 0 0 12px 2px var(--service-color, #3864db);
+  animation: travel 4.4s linear infinite;
+}
+
+@keyframes travel {
+  0%   { left: 22px; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: calc(100% - 30px); opacity: 0; }
+}
+
+.networkNodes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.nodeDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #0d0d0d;
+  border: 2px solid var(--service-color, #3864db);
+  animation: nodePulse 4.4s ease-in-out infinite;
+  animation-delay: calc(var(--n) * 0.45s);
+}
+
+@keyframes nodePulse {
+  0%, 85%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--service-color, #3864db) 0%, transparent); }
+  10%           { box-shadow: 0 0 0 6px color-mix(in srgb, var(--service-color, #3864db) 25%, transparent); }
+}
+
+.nodeLabel {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+
+/* ─── CONTENT ────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tag {
+  width: fit-content;
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--service-color, var(--accent));
+  border: 1px solid color-mix(in srgb, var(--service-color, #3864db) 35%, transparent);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.cardTitle {
+  font-family: var(--font-bold);
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.cardDesc {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.chip {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 11px;
+  border-radius: 7px;
+}
+
+.cta {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--service-color, #3864db) 40%, transparent);
+  background: transparent;
+  color: var(--service-color, var(--accent));
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+}
+
+.cta:hover {
+  background: var(--service-color, var(--accent));
+  color: #0d0d0d;
+  transform: translateY(-2px);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 96px 0; }
+  .inner { padding: 0 24px; }
+  .header { margin-bottom: 56px; }
+  .card { padding: 22px; border-radius: 22px; }
+  .cardNum { font-size: 5.5rem; }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .onlineDot,
+  .networkPulse,
+  .nodeDot {
+    animation: none !important;
+  }
+  .card {
+    transition: none;
+  }
+}

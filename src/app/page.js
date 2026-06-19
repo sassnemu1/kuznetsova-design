@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import ProcessSection from "@/components/HomePage/ProcessSection/ProcessSection";
 import Ticker from "@/components/UI/Ticker/Ticker";
 import Reviews from "@/components/HomePage/Reviews/Reviews";
+import MoreServices from "@/components/HomePage/MoreServices/MoreServices";
 
 export default function Home() {
   return (
@@ -18,6 +19,8 @@ export default function Home() {
       <HeroSection />
 
       <ServicesSlider />
+
+      <MoreServices />
 
       <AboutSection />
 

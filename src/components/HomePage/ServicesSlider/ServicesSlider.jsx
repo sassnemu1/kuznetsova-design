@@ -5,6 +5,11 @@ import useGSAP from "@/hooks/useGSAP";
 
 import { SERVICES_DATA } from "@/data/ServicesData";
 
+import ServicesHeader from "./ServicesHeader/ServicesHeader";
+import ServicesTrack from "./ServicesTrack/ServicesTrack";
+import ServicesProgress from "./ServicesProgress/ServicesProgress";
+import DetailOverlay from "./DetailOverlay/DetailOverlay";
+
 import "./ServicesSlider.css";
 
 export default function ServicesSlider() {
@@ -28,7 +33,7 @@ export default function ServicesSlider() {
     const openRafRef          = useRef(null);
     const isMobileRef         = useRef(false);
     const savedScrollYRef     = useRef(0);
-    const savedSTProgressRef  = useRef(0); // сохраняем прогресс ScrollTrigger
+    const savedSTProgressRef  = useRef(0);
 
     const [activeIndex,     setActiveIndex]     = useState(0);
     const [selectedService, setSelectedService] = useState(null);
@@ -39,18 +44,15 @@ export default function ServicesSlider() {
     const services = SERVICES_DATA;
 
     // ── Scroll lock helpers ────────────────────────────────────────────────
-    // Сохраняем scrollY и фиксируем body — страница не скроллится под оверлеем,
-    // и при закрытии пользователь остаётся ровно там, где был.
     const lockBodyScroll = () => {
         savedScrollYRef.current = window.scrollY;
-    
-        // Скрываем всё кроме нашей секции — никакого белого фона
+
         const section = sectionRef.current;
-            if (section) {
-                Array.from(document.body.children).forEach(el => {
-                    if (!el.contains(section) && el !== section) {
-                        el.dataset.hiddenByServices = el.style.visibility || "";
-                        el.style.visibility = "hidden";
+        if (section) {
+            Array.from(document.body.children).forEach(el => {
+                if (!el.contains(section) && el !== section) {
+                    el.dataset.hiddenByServices = el.style.visibility || "";
+                    el.style.visibility = "hidden";
                 }
             });
         }
@@ -63,11 +65,10 @@ export default function ServicesSlider() {
     };
 
     const unlockBodyScroll = () => {
-        // Восстанавливаем видимость
         Array.from(document.body.children).forEach(el => {
             if ("hiddenByServices" in el.dataset) {
-            el.style.visibility = el.dataset.hiddenByServices;
-            delete el.dataset.hiddenByServices;
+                el.style.visibility = el.dataset.hiddenByServices;
+                delete el.dataset.hiddenByServices;
             }
         });
 
@@ -98,7 +99,6 @@ export default function ServicesSlider() {
       const progress = progressRef.current;
       if (!section || !track) return;
 
-      // On mobile — only entrance animation, no pinning
       if (isMobileRef.current) {
         gsap.fromTo(
           cardRefs.current.filter(Boolean),
@@ -114,7 +114,6 @@ export default function ServicesSlider() {
         return -(overflowWidth + window.innerWidth * 0.05);
       };
 
-      // Entrance
       gsap.timeline({ delay: 0.15 })
         .fromTo(titleRef.current,   { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1,   ease: "power3.out" })
         .fromTo(counterRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.65")
@@ -147,7 +146,6 @@ export default function ServicesSlider() {
 
       scrollTriggerRef.current = st;
 
-      // Parallax
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
         const dir = i % 2 === 0 ? -20 : 20;
@@ -183,7 +181,6 @@ export default function ServicesSlider() {
     const portfolio = portfolioRef.current;
     const closeBtn  = closeBtnRef.current;
 
-    // ── Mobile: простой fade без FLIP ──────────────────────────────────
     if (isMobileRef.current) {
       gsap.set(detail,    { display: "flex", opacity: 0 });
       gsap.set(portfolio, { opacity: 0, y: 24 });
@@ -212,7 +209,6 @@ export default function ServicesSlider() {
       return;
     }
 
-    // ── Desktop: FLIP-анимация ─────────────────────────────────────────
     if (scrollTriggerRef.current) {
       savedSTProgressRef.current = scrollTriggerRef.current.progress;
       scrollTriggerRef.current.disable();
@@ -274,7 +270,6 @@ export default function ServicesSlider() {
     const closeBtn       = closeBtnRef.current;
     const validWorkItems = workItemRefs.current.filter(Boolean);
 
-    // ── Mobile: простой fade out ───────────────────────────────────────
     if (isMobileRef.current) {
       gsap.timeline({
         onComplete: () => {
@@ -291,7 +286,6 @@ export default function ServicesSlider() {
       return;
     }
 
-    // ── Desktop: FLIP назад ────────────────────────────────────────────
     const detailCard = detailCardRef.current;
     const allCards   = cardRefs.current.filter(Boolean);
 
@@ -313,7 +307,6 @@ export default function ServicesSlider() {
         unlockBodyScroll();
         if (scrollTriggerRef.current) {
           scrollTriggerRef.current.enable();
-          // Восстанавливаем позицию горизонтального скролла
           requestAnimationFrame(() => {
             if (scrollTriggerRef.current) {
               const st = scrollTriggerRef.current;
@@ -334,188 +327,44 @@ export default function ServicesSlider() {
 
     useEffect(() => () => cancelAnimationFrame(openRafRef.current), []);
 
-    // Снимаем лок при анмаунте — на случай ухода со страницы с открытым оверлеем
     useEffect(() => {
         return () => {
             if (document.body.style.position === "fixed") {
-            document.documentElement.classList.remove("services-open"); // ← добавить
-            unlockBodyScroll();
+                document.documentElement.classList.remove("services-open");
+                unlockBodyScroll();
             }
         };
     }, []);
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <section className="services" ref={sectionRef} id="portfolio">
+    <section className="services nav-dark-zone" ref={sectionRef} id="portfolio">
+      <ServicesHeader
+        titleRef={titleRef}
+        counterRef={counterRef}
+        currentRef={currentRef}
+        total={services.length}
+      />
 
-      {/* HEADER */}
-      <div className="services__header">
-        <div className="services__meta">
-          <div className="services__title" ref={titleRef}>
-            <h2>Portfolio</h2>
-            <span className="services__title-sub">
-              Будучи сплоченной командой экспертов, мы создаем запоминающиеся и
-              <br /> вызывающие эмоции веб-сайты, цифровые решения и нативные приложения.
-            </span>
-          </div>
-        </div>
-        {/* Counter — desktop only (hidden via CSS on mobile) */}
-        <div className="services__counter" ref={counterRef}>
-          <span className="services__current" ref={currentRef}>01</span>
-          <span className="services__total">/ {String(services.length).padStart(2, "0")}</span>
-        </div>
-      </div>
+      <ServicesTrack
+        trackRef={trackRef}
+        services={services}
+        activeIndex={activeIndex}
+        cardRefs={cardRefs}
+        onCardClick={openDetail}
+      />
 
-      {/* TRACK */}
-      <div className="services__track-outer">
-        <div className="services__track" ref={trackRef}>
-          {services.map((item, index) => (
-            <div
-              className={`serviceCard${activeIndex === index ? " serviceCard--active" : ""}`}
-              key={item.id}
-              ref={el => { cardRefs.current[index] = el; }}
-              style={{ "--card-color": item.color }}
-              onClick={() => openDetail(item, cardRefs.current[index])}
-            >
-              <div className="serviceCard__bg-img" style={{ backgroundImage: `url(${item.image})` }} />
+      <ServicesProgress progressRef={progressRef} hintRef={hintRef} />
 
-              <div className="serviceCard__top">
-                <span className="serviceCard__id">{item.id}</span>
-                <span className="serviceCard__tag">{item.tag}</span>
-              </div>
-              <div className="serviceCard__bg-num">{item.id}</div>
-              <div className="serviceCard__line" />
-              <div className="serviceCard__content">
-                <h3 className="serviceCard__title">
-                  {item.title.split("\n").map((line, li) => (
-                    <span key={li} style={{ display: "block" }}>{line}</span>
-                  ))}
-                </h3>
-                <p className="serviceCard__desc">{item.desc}</p>
-              </div>
-              <div className="serviceCard__cta">
-                <span>View work</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* PROGRESS — desktop only */}
-      <div className="services__progress-wrap">
-        <div className="services__progress-track">
-          <div className="services__progress-fill" ref={progressRef} />
-        </div>
-        <span className="services__scroll-hint" ref={hintRef}>Scroll</span>
-      </div>
-
-      {/* DETAIL OVERLAY */}
-      <div className="services__detail" ref={detailRef} style={{ display: "none" }}>
-
-        {/* Left panel: portfolio */}
-        <div className="detail__portfolio" ref={portfolioRef}>
-
-          {/* Sticky header */}
-          <div className="detail__portfolio-header">
-            <div className="detail__header-top">
-              <button className="detail__close" ref={closeBtnRef} onClick={closeDetail} aria-label="Close">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
-              {selectedService && (
-                <span className="detail__portfolio-tag">{selectedService.tag}</span>
-              )}
-            </div>
-            {selectedService && (
-              <div className="detail__portfolio-meta">
-                <h3 className="detail__portfolio-title">{selectedService.title.replace("\n", " ")}</h3>
-                <p className="detail__portfolio-sub">{selectedService.desc}</p>
-                <div className="detail__portfolio-stats">
-                  <span className="detail__stat">
-                    <span className="detail__stat-num">{selectedService.works?.length ?? 0}</span>
-                    <span className="detail__stat-label">Projects</span>
-                  </span>
-                  <span className="detail__stat-divider" />
-                  <span className="detail__stat">
-                    <span className="detail__stat-num">2023–24</span>
-                    <span className="detail__stat-label">Period</span>
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* 2-column work grid */}
-          <div className="detail__work-grid">
-            {(selectedService?.works ?? []).map((work, i) => (
-              <div
-                className="detail__work-card"
-                key={`${selectedService?.id}-${i}`}
-                ref={el => { workItemRefs.current[i] = el; }}
-              >
-                <div className="detail__work-card-thumb" style={{ background: work.thumbBg }}>
-                  <div className="detail__work-card-overlay" />
-                  <span className="detail__work-card-year">{work.year}</span>
-                </div>
-                <div className="detail__work-card-body">
-                  <span className="detail__work-card-title">{work.title}</span>
-                  <span className="detail__work-card-sub">{work.sub}</span>
-                </div>
-                <div className="detail__work-card-arrow">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="detail__cta-row">
-            <button className="detail__all-btn">
-              See all work
-              <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Right panel: expanded card (desktop only) */}
-        <div
-          className="detail__card"
-          ref={detailCardRef}
-          style={selectedService ? { "--card-color": selectedService.color } : {}}
-        >
-          {selectedService && (
-            <>
-              <div className="detail__card-bg-img" style={{ backgroundImage: `url(${selectedService.image})` }} />
-              <div className="serviceCard__top">
-                <span className="serviceCard__id">{selectedService.id}</span>
-                <span className="serviceCard__tag">{selectedService.tag}</span>
-              </div>
-              <div className="serviceCard__bg-num" style={{ fontSize: "14rem", opacity: 0.05 }}>
-                {selectedService.id}
-              </div>
-              <div className="serviceCard__line" style={{ transform: "scaleX(1)" }} />
-              <div className="serviceCard__content">
-                <h3 className="serviceCard__title" style={{ fontSize: "3rem" }}>
-                  {selectedService.title.split("\n").map((line, li) => (
-                    <span key={li} style={{ display: "block" }}>{line}</span>
-                  ))}
-                </h3>
-                <p className="serviceCard__desc" style={{ fontSize: "1rem", maxWidth: "none" }}>
-                  {selectedService.desc}
-                </p>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+      <DetailOverlay
+        detailRef={detailRef}
+        portfolioRef={portfolioRef}
+        detailCardRef={detailCardRef}
+        closeBtnRef={closeBtnRef}
+        workItemRefs={workItemRefs}
+        selectedService={selectedService}
+        onClose={closeDetail}
+      />
     </section>
   );
 }

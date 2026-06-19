@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  
 }
 
 /* ─── HEADER ─────────────────────────────────────────────────── */
@@ -30,15 +29,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.services__label {
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #3864db;
-  opacity: 1;
-  font-family: var(--font-body);
 }
 
 .services__title h2 {
@@ -62,8 +52,7 @@
   align-items: flex-end;
   gap: 8px;
   padding-top: 8px;
-  /* GSAP reveals */
-  opacity: 0;
+  opacity: 0; /* GSAP reveals */
 }
 
 .services__current {
@@ -214,74 +203,6 @@
 
 .serviceCard--active::after { opacity: 1; }
 
-/* ─── CARD IMAGE ─────────────────────────────────────────────── */
-.serviceCard__image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 24px 24px 0 0;
-  z-index: 0;
-}
-
-.serviceCard__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.serviceCard:hover .serviceCard__image img {
-  transform: scale(1.06);
-}
-
-/* Fade image into card background */
-.serviceCard__image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(8, 8, 8, 0.9) 100%
-  );
-  pointer-events: none;
-}
-
-/* ─── PLACEHOLDER IMAGE ──────────────────────────────────────── */
-.placeholderImg {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.placeholderImg__pattern {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.placeholderImg__label {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
-  font-family: var(--font-body);
-  white-space: nowrap;
-}
-
 /* ─── CARD PARTS ─────────────────────────────────────────────── */
 .serviceCard__top {
   position: relative;
@@ -391,6 +312,65 @@
 
 .serviceCard:hover .serviceCard__cta { opacity: 1; transform: translateY(0); }
 
+/* ─── BACKGROUND IMAGES (карточки в треке + detail-карточка) ──── */
+.serviceCard__bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.serviceCard:hover .serviceCard__bg-img {
+  transform: scale(1.06);
+}
+
+.serviceCard__bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, 0.35) 30%,
+    rgba(8, 8, 8, 0.85) 65%,
+    rgba(8, 8, 8, 0.95) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.detail__card-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.detail__card-bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 20, 0.25) 20%,
+    rgba(9, 9, 20, 0.8) 55%,
+    rgba(9, 9, 20, 0.97) 100%
+  );
+  pointer-events: none;
+}
+
+/* Убеждаемся, что весь текст поверх изображений */
+.serviceCard__top,
+.serviceCard__content,
+.serviceCard__line,
+.serviceCard__cta,
+.serviceCard__bg-num {
+  position: relative;
+  z-index: 3;
+}
+
 /* ─── DETAIL OVERLAY ─────────────────────────────────────────── */
 .services__detail {
   position: fixed;
@@ -402,11 +382,11 @@
   overflow: hidden;
 }
 
-/* ─── PORTFOLIO PANEL (left, 60%) ────────────────────────────── */
+/* ─── PORTFOLIO PANEL (левая, полная ширина; карточка поверх через absolute) ── */
 .detail__portfolio {
   width: 100%;
   height: 100%;
-  padding: 44px 4vw 0;
+  padding: 52px 5vw;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -415,26 +395,29 @@
   touch-action: pan-y;
   pointer-events: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(56, 100, 219, 0.25) transparent;
-  /* Reserve 40% right for the card */
-  padding-right: calc(40% + 3vw);
+  scrollbar-color: rgba(56, 100, 219, 0.3) transparent;
+  /* Оставляем правую половину под карточку на десктопе */
+  padding-right: calc(50% + 2vw);
 }
 
-.detail__portfolio::-webkit-scrollbar { width: 4px; }
+.detail__portfolio::-webkit-scrollbar { width: 6px; }
 .detail__portfolio::-webkit-scrollbar-thumb {
-  background: rgba(56, 100, 219, 0.25);
+  background: rgba(56, 100, 219, 0.3);
   border-radius: 10px;
 }
+.detail__portfolio::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 158, 255, 0.4);
+}
 
-/* Divider line */
+/* Разделитель между панелями */
 .detail__portfolio::after {
   content: '';
   position: fixed;
   top: 0;
-  left: 60%;
+  left: 50%;
   width: 1px;
   height: 100%;
-  background: rgba(56, 100, 219, 0.08);
+  background: rgba(56, 100, 219, 0.1);
   pointer-events: none;
 }
 
@@ -543,7 +526,7 @@
   background: rgba(56, 100, 219, 0.15);
 }
 
-/* ─── 2-COLUMN WORK GRID ─────────────────────────────────────── */
+/* ─── WORK GRID + CARDS ──────────────────────────────────────── */
 .detail__work-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -554,95 +537,165 @@
 
 .detail__work-card {
   position: relative;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(56, 100, 219, 0.1);
   background: rgba(255, 255, 255, 0.02);
   cursor: pointer;
-  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  text-decoration: none;
   display: flex;
   flex-direction: column;
+  transition:
+    border-color 0.4s ease,
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.45s ease;
 }
 
 .detail__work-card:hover {
-  border-color: rgba(107, 158, 255, 0.22);
-  background: rgba(56, 100, 219, 0.05);
-  transform: translateY(-3px);
+  border-color: rgba(107, 158, 255, 0.28);
+  transform: translateY(-5px);
+  box-shadow: 0 24px 56px rgba(4, 4, 20, 0.6);
 }
 
-.detail__work-card:hover .detail__work-card-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-}
-
-.detail__work-card-thumb {
+.detail__work-card-img {
   position: relative;
-  height: 88px;
+  height: 160px;
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
 }
 
-.detail__work-card-overlay {
+.detail__work-card-img::after {
+  content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    transparent 30%,
-    rgba(4, 4, 12, 0.7) 100%
+    rgba(4, 4, 20, 0.05) 0%,
+    rgba(4, 4, 20, 0.55) 100%
   );
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
-.detail__work-card-year {
+.detail__work-card:hover .detail__work-card-img::after {
+  opacity: 0.7;
+}
+
+/* Внутренний элемент для scale-анимации без overflow-проблем */
+.detail__work-card-img-inner {
   position: absolute;
-  bottom: 8px;
-  left: 10px;
+  inset: -4px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.detail__work-card:hover .detail__work-card-img-inner {
+  transform: scale(1.06);
+}
+
+.detail__work-card-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-body);
+  background: rgba(56, 100, 219, 0.2);
+  border: 1px solid rgba(107, 158, 255, 0.22);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.detail__work-card-year-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
   font-size: 10px;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
   font-family: var(--font-body);
 }
 
 .detail__work-card-body {
-  padding: 10px 12px 12px;
+  padding: 14px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(56, 100, 219, 0.08);
+  transition: border-color 0.35s ease;
+}
+
+.detail__work-card:hover .detail__work-card-body {
+  border-color: rgba(107, 158, 255, 0.15);
+}
+
+.detail__work-card-info {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  flex: 1;
+  min-width: 0;
 }
 
 .detail__work-card-title {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: #fff;
   font-family: var(--font-body);
-  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detail__work-card-sub {
   font-size: 10px;
-  color: rgba(56, 100, 219, 0.45);
+  color: rgba(107, 158, 255, 0.45);
   font-family: var(--font-body);
   letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detail__work-card-arrow {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(56, 100, 219, 0.12);
-  border: 1px solid rgba(56, 100, 219, 0.2);
+  background: rgba(56, 100, 219, 0.08);
+  border: 1px solid rgba(56, 100, 219, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(107, 158, 255, 0.7);
-  opacity: 0;
-  transform: translate(0, 0);
-  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  color: rgba(107, 158, 255, 0.5);
+  flex-shrink: 0;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.detail__work-card:hover .detail__work-card-arrow {
+  background: rgba(56, 100, 219, 0.22);
+  border-color: rgba(107, 158, 255, 0.35);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .detail__work-card-img { height: 130px; }
 }
 
 /* ─── CTA ROW ────────────────────────────────────────────────── */
@@ -676,194 +729,24 @@
   background: rgba(56, 100, 219, 0.12);
 }
 
-/* ─── DETAIL CARD (right half, GSAP-positioned) ──────────────── */
+/* ─── DETAIL CARD (правая панель, позиционируется GSAP при открытии) ── */
 .detail__card {
   position: absolute;
-  background: color-mix(in srgb, var(--card-color, #3864db) 7%, #090914);
-  border: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
-  overflow: hidden;
-}
-
-.detail__card-image {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.detail__card-image img,
-.detail__card-image .placeholderImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.detail__card-image--placeholder {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* gradient fade so text stays readable */
-.detail__card-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 20, 0.2) 0%,
-    rgba(9, 9, 20, 0.75) 55%,
-    rgba(9, 9, 20, 0.97) 100%
-  );
-  pointer-events: none;
-}
-
-.detail__card-body {
-  position: absolute;
-  inset: 0;
-  padding: 40px 36px;
-  display: flex;
-  flex-direction: column;
-}
-
-.detail__card-content {
-  position: absolute;
-  bottom: 56px;
-  left: 36px;
-  right: 36px;
-}
-
-.detail__card .serviceCard__id { color: var(--card-color, #3864db); }
-
-
-/* ─── BACKGROUND IMAGES ─────────────────────────────────────── */
-.serviceCard__bg-img {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.serviceCard:hover .serviceCard__bg-img {
-  transform: scale(1.06);
-}
-
-/* Более тёмный оверлей — теперь текст отлично читается */
-.serviceCard__bg-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, 0.35) 30%,
-    rgba(8, 8, 8, 0.85) 65%,
-    rgba(8, 8, 8, 0.95) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Detail card background */
-.detail__card-bg-img {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-
-.detail__card-bg-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(9, 9, 20, 0.25) 20%,
-    rgba(9, 9, 20, 0.8) 55%,
-    rgba(9, 9, 20, 0.97) 100%
-  );
-  pointer-events: none;
-}
-
-/* Убеждаемся, что весь текст поверх изображений */
-.serviceCard__top,
-.serviceCard__content,
-.serviceCard__line,
-.serviceCard__cta,
-.serviceCard__bg-num {
-  position: relative;
-  z-index: 3;
-}
-
-/* ─── DETAIL OVERLAY ─────────────────────────────────────────── */
-.services__detail {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: none;
-  background: rgba(4, 4, 12, 0.97);
-  backdrop-filter: blur(28px);
-  overflow: hidden;
-}
-
-/* Левая панель — полная ширина, карточка поверх через absolute */
-.detail__portfolio {
-  width: 100%;
-  height: 100%;
-  padding: 52px 5vw;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  pointer-events: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 100, 219, 0.3) transparent;
-  /* Оставляем правую половину под карточку на десктопе */
-  padding-right: calc(50% + 2vw);
-}
-
-.detail__portfolio::-webkit-scrollbar { width: 6px; }
-.detail__portfolio::-webkit-scrollbar-thumb {
-  background: rgba(56, 100, 219, 0.3);
-  border-radius: 10px;
-}
-.detail__portfolio::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 158, 255, 0.4);
-}
-
-/* Разделитель между панелями */
-.detail__portfolio::after {
-  content: '';
-  position: fixed;
   top: 0;
-  left: 50%;
-  width: 1px;
-  height: 100%;
-  background: rgba(56, 100, 219, 0.1);
-  pointer-events: none;
-}
-
-/* Правая панель — абсолютная, поверх */
-.detail__card {
-  position: absolute;
   right: 0;
-  top: 0;
   width: 50%;
   height: 100%;
   background: color-mix(in srgb, var(--card-color, #3864db) 7%, #090914);
-  border-left: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-color, #3864db) 22%, transparent);
   overflow: hidden;
   pointer-events: none; /* не перехватывает скролл портфолио */
 }
 
-/* mobile overrides consolidated above */
+.detail__card .serviceCard__id { color: var(--card-color, #3864db); }
 
+/* ─── RESPONSIVE (desktop tweaks) ──────────────────────────────── */
 @media (max-width: 1024px) {
   .serviceCard { width: 340px; height: 460px; }
-  .serviceCard__image { height: 170px; }
   .detail__portfolio { padding: 40px 32px; }
 }
 
@@ -893,7 +776,6 @@
     display: none;
   }
 
-  /* Title slightly smaller */
   .services__title h2 {
     font-size: clamp(2.8rem, 10vw, 4rem);
   }
@@ -933,7 +815,6 @@
     transform: none; /* no lift on mobile tap */
   }
 
-  /* Card layout adjustments */
   .serviceCard__top    { padding: 20px 22px 0; }
   .serviceCard__content {
     bottom: 52px;
@@ -952,7 +833,6 @@
     overflow: hidden;
   }
 
-  /* Portfolio panel takes full screen, no right-padding for card */
   .detail__portfolio {
     width: 100%;
     height: 100%;
@@ -994,19 +874,8 @@
   .detail__portfolio-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
   .detail__portfolio-sub   { font-size: 0.88rem; }
 
-  .detail__work-list {
-    flex: 1;
+  .detail__work-grid {
     padding: 8px 5vw 0;
-    overflow: visible;
-  }
-
-  .detail__work-item {
-    padding: 16px 6px;
-  }
-
-  .detail__work-thumb {
-    width: 48px;
-    height: 36px;
   }
 
   .detail__cta-row {
@@ -1021,4 +890,3 @@
     display: none !important;
   }
 }
-

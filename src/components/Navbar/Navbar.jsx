@@ -16,23 +16,32 @@ export default function Navbar() {
   const [isServicesVisible, setIsServicesVisible] = useState(false);
 
   useEffect(() => {
-    const section = document.getElementById("portfolio");
+  const sections = document.querySelectorAll(".nav-dark-zone");
 
-    if (!section) return;
+  if (!sections.length) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsServicesVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.3,
-      }
-    );
+  const observer = new IntersectionObserver(
+    () => {
+      const isVisible = [...sections].some((section) => {
+        const rect = section.getBoundingClientRect();
 
-    observer.observe(section);
+        return (
+          rect.top < window.innerHeight * 0.7 &&
+          rect.bottom > window.innerHeight * 0.3
+        );
+      });
 
-    return () => observer.disconnect();
-  }, []);
+      setIsServicesVisible(isVisible);
+    },
+    {
+      threshold: [0, 0.1, 0.3, 0.5, 1],
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  return () => observer.disconnect();
+}, []);
 
   return (
     <>
