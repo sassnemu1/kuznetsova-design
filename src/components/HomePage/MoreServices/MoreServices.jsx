@@ -7,6 +7,7 @@ import BecomeClient from "@/components/BecomeClient/BecomeClient";
 import ChatMock from "./ChatMock";
 import NetworkMock from "./NetworkMock";
 import styles from "./MoreServices.module.css";
+import RunningText from "@/components/UI/RunningText/RunningText";
 
 export default function MoreServices() {
   const sectionRef = useRef(null);
@@ -63,12 +64,20 @@ export default function MoreServices() {
   return (
     <>
       <section ref={sectionRef} className={`${styles.section} nav-dark-zone`} id="more-services">
+        <RunningText rows={[
+            "KUZNETSOVA DESIGN",
+            "WEB DEVELOPMENT",
+            "KUZNETSOVA DESIGN",
+          ]}
+        />
+
         <div className={styles.inner}>
 
           <div ref={headerRef} className={styles.header}>
             <span className={styles.eyebrow}>Code</span>
             <h2 className={styles.title}>
               {"{ More Development }"}
+              <span className={styles.scaleBadge}>{"<Code />"}</span>
             </h2>
             <p className={styles.intro}>
               Берём задачи на стыке дизайна и технологий: автоматизируем

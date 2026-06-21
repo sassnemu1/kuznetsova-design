@@ -2,7 +2,7 @@
 .section {
   position: relative;
   background: #0d0d0d;
-  padding: 60px 0 160px 0;
+  padding: 60px 0 60px 0;
   overflow: hidden;
 }
 
@@ -67,6 +67,19 @@
   letter-spacing: 1px;
   color: white;
   max-width: 660px;
+}
+.scaleBadge {
+  display: inline-flex;
+  align-items: center;
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 0.4em;
+  color: var(--accent);
+  background: rgba(56, 100, 219, 0.12);
+  border: 1px solid rgba(56, 100, 219, 0.28);
+  border-radius: 10px;
+  padding: 6px 14px;
+  margin-left: 14px;
+  vertical-align: middle;
 }
 
 /* ─── GRID ───────────────────────────────────────────────────── */

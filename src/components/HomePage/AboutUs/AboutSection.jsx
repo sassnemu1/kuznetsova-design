@@ -229,7 +229,7 @@ export default function AboutSection() {
 
   return (
     <>
-      <section ref={sectionRef} className={styles.about} id="services">
+      <section ref={sectionRef} className={styles.about} id="studio">
 
         {/* ════════════ HERO ════════════ */}
         <div ref={heroRef} className={styles.hero}>

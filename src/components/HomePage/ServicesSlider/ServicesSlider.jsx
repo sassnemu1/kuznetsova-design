@@ -338,7 +338,7 @@ export default function ServicesSlider() {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <section className="services nav-dark-zone" ref={sectionRef} id="portfolio">
+    <section className="services nav-dark-zone" ref={sectionRef} id="services">
       <ServicesHeader
         titleRef={titleRef}
         counterRef={counterRef}

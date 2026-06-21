@@ -5,7 +5,7 @@ export default function ServicesHeader({ titleRef, counterRef, currentRef, total
     <div className="services__header">
       <div className="services__meta">
         <div className="services__title" ref={titleRef}>
-          <h2>Portfolio</h2>
+          <h2>services</h2>
           <span className="services__title-sub">
             Будучи сплоченной командой экспертов, мы создаем запоминающиеся и
             <br /> вызывающие эмоции веб-сайты, цифровые решения и нативные приложения.

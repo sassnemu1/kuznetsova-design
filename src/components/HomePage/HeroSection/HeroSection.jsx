@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import styles from "./HeroSection.module.css";
 
+import useGSAP from "@/hooks/useGSAP.js";
+
 import {
   FaInstagram,
   FaBehance,
@@ -11,9 +13,6 @@ import {
   FaTelegramPlane,
   FaVk,
 } from "react-icons/fa";
-import { MdOutlineMail } from "react-icons/md";
-
-import useGSAP from "@/hooks/useGSAP.js";
 
 export default function HeroSection() {
   const heroRef = useRef(null);
@@ -157,8 +156,8 @@ export default function HeroSection() {
         </div>
 
         <ul className={styles.navLinks}>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#services">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#studio">About Us</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#howtowork">How to Work</a></li>
         </ul>

@@ -6,7 +6,7 @@ export default function ServicesProgress({ progressRef, hintRef }) {
       <div className="services__progress-track">
         <div className="services__progress-fill" ref={progressRef} />
       </div>
-      <span className="services__scroll-hint" ref={hintRef}>Scroll</span>
+      {/* <span className="services__scroll-hint" ref={hintRef}>Scroll</span> */}
     </div>
   );
 }

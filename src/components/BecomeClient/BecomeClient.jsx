@@ -129,7 +129,9 @@ export default function BecomeClient({ isOpen, onClose }) {
         <aside className={styles.left}>
           <div className={styles.leftInner}>
             <div className={styles.brand}>
-              <div className={styles.brandMark}>КД</div>
+              <div className={styles.logoMark}>
+                <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+              </div>
               <span className={styles.brandName}>Kuznetsova Design</span>
             </div>
 
