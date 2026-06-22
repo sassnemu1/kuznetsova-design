@@ -11,6 +11,7 @@ import Ticker from "@/components/UI/Ticker/Ticker";
 import Reviews from "@/components/HomePage/Reviews/Reviews";
 import MoreServices from "@/components/HomePage/MoreServices/MoreServices";
 import TechnicalDesign from "@/components/HomePage/TechnicalDesign/TechnicalDesign";
+import InfoSection from "@/components/HomePage/InfoSection/InfoSection";
 
 export default function Home() {
   return (
@@ -24,6 +25,8 @@ export default function Home() {
       <MoreServices />
 
       <TechnicalDesign />
+
+      <InfoSection />
 
       <AboutSection />
 

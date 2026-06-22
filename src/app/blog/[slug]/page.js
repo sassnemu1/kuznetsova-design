@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }) {
       <Navbar />
 
       <div className={styles.page}>
-        <BackLink href="/blog" label="Журнал" />
+        <BackLink href="/blog" label="Вернуться" />
 
         <ArticleHero post={post} />
 

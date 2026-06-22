@@ -415,9 +415,6 @@ export default function AboutSection() {
                     </div>
                 </div>
               </div>
-              {/* <span className={styles.storyContactTitle}>
-                Контакты
-              </span> */}
             </div>
           </div>
         </div>
