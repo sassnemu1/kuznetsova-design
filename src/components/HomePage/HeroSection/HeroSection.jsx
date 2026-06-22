@@ -17,6 +17,7 @@ import {
 export default function HeroSection() {
   const heroRef = useRef(null);
   const bgTextRef = useRef(null);
+  const bgImageRef = useRef(null);
   const navRef = useRef(null);
   const socialLeftRef = useRef(null);
   const socialRightRef = useRef(null);
@@ -138,7 +139,7 @@ export default function HeroSection() {
 
   return (
     <section ref={heroRef} className={styles.hero}>
-      <div className={styles.bgImage} ref={bgTextRef}>
+      <div className={styles.bgImage} ref={bgImageRef}>
         <img src="/bg-hero2.svg" alt="bg-image" />
       </div>
 
