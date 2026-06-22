@@ -28,7 +28,7 @@
   width: 480px;
   height: 480px;
   background: radial-gradient(circle, rgba(56, 100, 219, 0.2), transparent 68%);
-  filter: blur(24px);
+  filter: blur(8px);
   pointer-events: none;
 }
 .glow2 {
@@ -38,7 +38,7 @@
   width: 480px;
   height: 480px;
   background: radial-gradient(circle, rgba(129, 56, 219, 0.2), transparent 68%);
-  filter: blur(24px);
+  filter: blur(8px);
   pointer-events: none;
 }
 .glow3 {
@@ -48,7 +48,7 @@
   width: 480px;
   height: 480px;
   background: radial-gradient(circle, rgba(219, 184, 56, 0.2), transparent 68%);
-  filter: blur(24px);
+  filter: blur(8px);
   pointer-events: none;
 }
 
@@ -127,14 +127,6 @@
   50%       { box-shadow: 0 0 0 7px rgba(56, 100, 219, 0); }
 }
 
-.issueLabel {
-  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
-  text-transform: uppercase;
-}
-
 /* ─── TITLE ──────────────────────────────────────────────────── */
 .titleWrap {
   position: relative;
@@ -153,16 +145,6 @@
 .titleClip h2 {
     font-family: var(--font-bold);
     font-size: clamp(72px, 8vw, 150px);
-}
-
-.letter {
-  display: inline-block;
-  font-family: var(--font-bold);
-  font-size: clamp(120px, 22vw, 320px);
-  line-height: 0.88;
-  letter-spacing: -0.01em;
-  color: #fff;
-  transform-origin: bottom center;
 }
 
 /* ─── BOTTOM ─────────────────────────────────────────────────── */
@@ -197,34 +179,33 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
-.scrollHint {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.scrollLine {
-  display: block;
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.scrollText {
-  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
-}
-
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero { min-height: 70vh; padding: 0 24px; }
-  .topBar { padding-top: 28px; padding-bottom: 24px; }
+  .topBar { padding: 18px 5px; }
   .letter { font-size: clamp(80px, 20vw, 160px); }
   .brandSub { display: none; }
   .scrollHint { display: none; }
+
+  .brandName {display: none;}
+
+  .glow {
+    top: -60px;
+  }
+  .glow2 {
+    top: 120px;
+  }
+  .glow3 {
+    top: 260px;
+  }
+
+  .glow,
+  .glow2,
+  .glow3 {
+    width: 280px;
+    height: 280px;
+    /* display: none; */
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

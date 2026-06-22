@@ -288,10 +288,10 @@
   }
 
   .bgText {
-    /* display: none; */
-    font-size: clamp(80px, 22vw, 180px);
-    top: 60%; /* adjust position if needed */
-    /* -webkit-text-stroke: 0.8px rgba(56, 100, 219, 0.12); */
+    display: none;
+    /* font-size: clamp(80px, 22vw, 180px);
+    top: 60%; 
+    -webkit-text-stroke: 0.8px rgba(56, 100, 219, 0.12); */
   }
 
   .socialLeft,

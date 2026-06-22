@@ -5,7 +5,7 @@ import useGSAP from "@/hooks/useGSAP";
 
 import styles from "./RunningText.module.css";
 
-export default function RunningText({ rows = [] }) {
+export default function RunningText({ rows }) {
   const wrapperRef = useRef(null);
   const rowsRef = useRef([]);
 

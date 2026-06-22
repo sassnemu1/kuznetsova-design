@@ -5,8 +5,6 @@ import useGSAP from "@/hooks/useGSAP";
 import styles from "./BlogHero.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
 
-// const TITLE = "ЖУРНАЛ".split("");
-
 export default function BlogHero() {
   const sectionRef = useRef(null);
   const topBarRef = useRef(null);
@@ -32,8 +30,8 @@ export default function BlogHero() {
           { y: "0%", opacity: 1, stagger: 0.055, duration: 1.15 },
           "-=0.45"
         )
-        .to(dividerRef.current, { scaleX: 1, duration: 1.3, ease: "expo.inOut" }, "-=0.75")
-        .to(bottomRef.current, { opacity: 1, y: 0, duration: 0.9 }, "-=0.85");
+        .to(dividerRef.current, { scaleX: 1, duration: 1.3, ease: "expo.inOut" }, "-=1.45")
+        .to(bottomRef.current, { opacity: 1, y: 0, duration: 0.9 }, "-=1.45");
     }, sectionRef);
 
     return () => ctx.revert();
@@ -41,6 +39,7 @@ export default function BlogHero() {
 
   return (
     <section ref={sectionRef} className={`${styles.hero} nav-dark-zone`}>
+      <RunningText rows={["Blog", "News", "Kuznetsova Design"]}/>
       {/* Точечная сетка */}
       <div className={styles.dotGrid} />
       {/* Глоу */}
@@ -62,26 +61,14 @@ export default function BlogHero() {
 
         <div className={styles.issue}>
           <span className={styles.issueDot} />
-          {/* <span className={styles.issueLabel}>
-            Журнал · {new Date().getFullYear()}
-          </span> */}
         </div>
       </div>
 
       {/* Заголовок */}
       <div className={styles.titleWrap}>
-        <RunningText rows={["Blog", "News", "Kuznetsova Design"]}/>
+        
         <div className={styles.titleClip}>
             <h2>Blog & News </h2>
-          {/* {TITLE.map((char, i) => (
-            <span
-              key={i}
-              ref={(el) => { lettersRef.current[i] = el; }}
-              className={styles.letter}
-            >
-              {char}
-            </span>
-          ))} */}
         </div>
       </div>
 
@@ -92,10 +79,6 @@ export default function BlogHero() {
           <p className={styles.desc}>
             Работы, события и заметки из жизни студии
           </p>
-          {/* <div className={styles.scrollHint}>
-            <span className={styles.scrollLine} />
-            <span className={styles.scrollText}>Scroll</span>
-          </div> */}
         </div>
       </div>
     </section>
