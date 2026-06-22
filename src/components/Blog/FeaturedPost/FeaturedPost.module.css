@@ -1,0 +1,106 @@
+.featured {
+  position: relative;
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 480px;
+  margin-bottom: 64px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+}
+
+.featured:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 64px -16px rgba(17, 17, 17, 0.18);
+}
+
+.media {
+  position: absolute;
+  inset: -4px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 8s ease;
+}
+
+.featured:hover .media {
+  transform: scale(1.04);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0.05) 0%,
+    rgba(13, 13, 13, 0.55) 60%,
+    rgba(13, 13, 13, 0.9) 100%
+  );
+}
+
+.body {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 44px;
+}
+
+.category {
+  width: fit-content;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(56, 100, 219, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 14px;
+  max-width: 720px;
+}
+
+.excerpt {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 560px;
+  margin-bottom: 20px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 768px) {
+  .featured { height: 400px; margin-bottom: 48px; }
+  .body { padding: 28px 24px; }
+}

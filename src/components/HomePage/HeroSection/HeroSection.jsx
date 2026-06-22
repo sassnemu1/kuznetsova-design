@@ -157,9 +157,10 @@ export default function HeroSection() {
 
         <ul className={styles.navLinks}>
           <li><a href="#services">Services</a></li>
-          <li><a href="#studio">About Us</a></li>
+          <li><a href="#studio">Studio</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#howtowork">How to Work</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </nav>
 

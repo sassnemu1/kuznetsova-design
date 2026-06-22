@@ -128,7 +128,7 @@ export default function Footer() {
             <div>
               <h4>Studio</h4>
               <a href="#">About</a>
-              <a href="#">Journal</a>
+              <a href="/blog">Journal</a>
               <a href="#">Careers</a>
               <a href="#">Press</a>
             </div>

@@ -394,14 +394,14 @@ export default function AboutSection() {
                     </a>
 
                     <a
-                      href="tel:+79991112233"
+                      href="tel:+79685002666"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.storyContactItem}
                     >
                       <span className={styles.storyContactLabel}>НОМЕР ТЕЛЕФОНА</span>
                       <span className={styles.storyContactValue}>
-                        +7 (999) 111 22-33
+                        +7 (968) 500 26-66
                       </span>
                     </a>
 
@@ -412,7 +412,6 @@ export default function AboutSection() {
                         <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer"><FaPinterest /></a>
                         <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer"><FaTelegramPlane /></a>
                         <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer"><FaVk /></a>
-                        {/* <a href="mailto:kristina@kuznetsova.design"><MdOutlineMail /></a> */}
                     </div>
                 </div>
               </div>

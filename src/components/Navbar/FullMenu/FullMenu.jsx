@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { num: "02", label: "Услуги",    href: "#services" },
   { num: "03", label: "О студии",  href: "#studio" },
   { num: "04", label: "Портфолио", href: "#portfolio" },
-  { num: "05", label: "Отзывы",    href: "#reviews" },
+  { num: "05", label: "Наш блог",    href: "/blog" },
   { num: "06", label: "Контакт",   href: "#contact" },
 ];
 

@@ -1,0 +1,14 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 6vw 120px;
+}
+
+@media (max-width: 768px) {
+  .inner { padding: 48px 24px 80px; }
+}

@@ -1,0 +1,13 @@
+.page {
+  background: var(--bg);
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 6vw 120px;
+}
+
+@media (max-width: 768px) {
+  .content { padding: 56px 24px 80px; }
+}
