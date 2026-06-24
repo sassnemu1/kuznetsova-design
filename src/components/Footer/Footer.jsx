@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import styles from "./Footer.module.css";
 import useGSAP from "@/hooks/useGSAP";
 import {
@@ -17,7 +19,6 @@ export default function Footer() {
   const footerRef = useRef(null);
   const titleLettersRef = useRef([]);
   const designRef = useRef(null);
-  const taglineRef = useRef(null);
   const linksRef = useRef(null);
   const socialRef = useRef(null);
   const copyrightRef = useRef(null);
@@ -56,12 +57,6 @@ export default function Footer() {
           "-=0.9"
         )
         .fromTo(
-          taglineRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.9 },
-          "-=1.1"
-        )
-        .fromTo(
           [linksRef.current, socialRef.current],
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 },
@@ -89,7 +84,7 @@ export default function Footer() {
 
             <div className={styles.FooterLogoSection}>
               <div className={styles.FooterLogoMark}>
-                <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+                <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
               </div>
               <div>
                 <div className={styles.titleTop}>
@@ -119,7 +114,7 @@ export default function Footer() {
           <div className={styles.footerLinks} ref={linksRef}>
             <div>
               <h4>Navigation</h4>
-              <a href="#portfolio">Work</a>
+              <Link href="/work">Work</Link>
               <a href="#studio">Studio</a>
               <a href="#services">Services</a>
               <a href="#contact">Contact</a>
@@ -128,7 +123,7 @@ export default function Footer() {
             <div>
               <h4>Studio</h4>
               <a href="#">About</a>
-              <a href="/blog">Journal</a>
+              <Link href="/blog">Journal</Link>
               <a href="#">Careers</a>
               <a href="#">Press</a>
             </div>

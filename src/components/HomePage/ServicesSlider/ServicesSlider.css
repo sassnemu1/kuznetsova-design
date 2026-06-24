@@ -710,6 +710,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;

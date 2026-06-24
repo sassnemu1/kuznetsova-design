@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { getWorkBySlug, getAdjacentWorks } from "@/data/ServicesData";
+import BackLink from "@/components/Work/BackLink/BackLink";
 import styles from "./page.module.css";
 
 export default function WorkPage() {
@@ -30,23 +31,16 @@ export default function WorkPage() {
     <div className={styles.page}>
 
       {/* ── НАЗАД ── */}
-      <Link href="/#portfolio" className={styles.back}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        Портфолио
-      </Link>
+      <BackLink href="/work" label="Портфолио" />
 
       {/* ── HERO ── */}
       <div ref={heroRef} className={styles.hero}>
         {/* Фон */}
         <div
           className={styles.heroBg}
-          style={
-            work.image
-              ? { backgroundImage: `url(${work.image})` }
-              : { background: work.thumbBg }
-          }
+          style={{
+            backgroundImage: work.image ? `url(${work.image}), ${work.thumbBg}` : work.thumbBg,
+          }}
         />
         <div className={styles.heroBgOverlay} />
 
@@ -99,10 +93,9 @@ export default function WorkPage() {
             <div className={styles.gallery}>
               <div
                 className={`${styles.galleryItem} ${styles.galleryItemFull}`}
-                style={work.image
-                  ? { backgroundImage: `url(${work.image})` }
-                  : { background: work.thumbBg }
-                }
+                style={{
+                  backgroundImage: work.image ? `url(${work.image}), ${work.thumbBg}` : work.thumbBg,
+                }}
               >
                 <span className={styles.galleryLabel}>Главный экран</span>
               </div>

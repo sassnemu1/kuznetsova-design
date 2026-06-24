@@ -8,11 +8,11 @@ import { IoIosArrowForward } from "react-icons/io";
 import styles from "./Navbar.module.css";
 
 import FullMenu from "./FullMenu/FullMenu";
-import BecomeClient from "../BecomeClient/BecomeClient";
+import { useBecomeClient } from "@/context/BecomeClientContext";
 
 export default function Navbar() {
+  const openClientForm = useBecomeClient();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isClientFormOpen, setIsClientFormOpen] = useState(false);
   const [isServicesVisible, setIsServicesVisible] = useState(false);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Navbar() {
           <div className={styles.navRight}>
             <button
               className={styles.clientBtn}
-              onClick={() => setIsClientFormOpen(true)}
+              onClick={openClientForm}
             >
               <span>Начните проект</span>
               <IoIosArrowForward size={16} />
@@ -73,11 +73,6 @@ export default function Navbar() {
       <FullMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
-      />
-
-      <BecomeClient
-        isOpen={isClientFormOpen}
-        onClose={() => setIsClientFormOpen(false)}
       />
     </>
   );

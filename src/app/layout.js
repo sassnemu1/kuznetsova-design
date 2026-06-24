@@ -1,15 +1,20 @@
 import "./globals.css";
+import { BecomeClientProvider } from "@/context/BecomeClientContext";
+
+const SITE_URL = "https://kuznetsova.design";
+const SITE_TITLE = "Kuznetsova Design — дизайн-бюро";
+const SITE_DESCRIPTION =
+  "Дизайн-бюро в Москве: брендинг, веб-дизайн и разработка, 3D и техническая документация. Полный цикл — от концепции до готового продукта.";
 
 export const metadata = {
-  metadataBase: new URL("https://kuznetsova.design"),
+  metadataBase: new URL(SITE_URL),
 
   title: {
-    default: "Kuznetsova Design Bureau",
-    template: "%s | Kuznetsova Design Bureau",
+    default: SITE_TITLE,
+    template: "%s | Kuznetsova Design",
   },
 
-  description:
-    "Premium design studio focused on branding, web development and digital experiences.",
+  description: SITE_DESCRIPTION,
 
   icons: {
     icon: [
@@ -28,21 +33,29 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Kuznetsova Design Bureau",
-    description:
-      "Premium design studio focused on branding and web development.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     type: "website",
-    locale: "en_US",
-    url: "https://kuznetsova-design.com",
-    siteName: "Kuznetsova Design Bureau",
-    images: ["/og-image.jpg"],
+    locale: "ru_RU",
+    url: SITE_URL,
+    siteName: "Kuznetsova Design",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="ru">
+      <body>
+        <BecomeClientProvider>
+          {children}
+        </BecomeClientProvider>
+      </body>
     </html>
   );
 }

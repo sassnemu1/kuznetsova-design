@@ -1,0 +1,27 @@
+.page {
+  background: var(--bg);
+}
+
+.content {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 88px 6vw 128px;
+}
+
+/* Секции-слайдеры — позволяем им выступать за правый край */
+.sections {
+  position: relative;
+}
+
+/* Слайдеры могут немного выходить вправо от контейнера */
+.sections > * .track {
+  padding-right: 6vw;
+}
+
+@media (max-width: 900px) {
+  .content { padding: 64px 24px 96px; }
+}
+
+@media (max-width: 600px) {
+  .content { padding: 48px 16px 80px; }
+}

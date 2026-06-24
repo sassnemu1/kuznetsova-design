@@ -15,7 +15,6 @@ export const SERVICES_DATA = [
         client: "Noir Coffee Co.",
         description: "Комплексный ребрендинг кофейной сети — от логотипа и упаковки до брендбука и мерча.",
         tags: ["Figma", "Illustrator", "After Effects"],
-        image: "/works/noir-coffee.jpg",
         thumbBg: "linear-gradient(135deg,#0d1a3d,#3864db)",
       },
       {
@@ -26,7 +25,6 @@ export const SERVICES_DATA = [
         client: "Solara Energy",
         description: "Визуальная система для компании в сфере возобновляемой энергетики с моушн-айдентикой.",
         tags: ["Figma", "After Effects", "Lottie"],
-        image: "/works/solara-energy.jpg",
         thumbBg: "linear-gradient(135deg,#1a3a8f,#6b9eff)",
       },
       {
@@ -37,7 +35,6 @@ export const SERVICES_DATA = [
         client: "Arca Studio",
         description: "Полный ребрендинг архитектурной студии: логотип, типографика, носители.",
         tags: ["Figma", "Illustrator"],
-        image: "/works/arca-studio.jpg",
         thumbBg: "linear-gradient(135deg,#0a1628,#2248a8)",
       },
       {
@@ -48,7 +45,6 @@ export const SERVICES_DATA = [
         client: "Vend Capital",
         description: "Корпоративная айдентика для венчурного фонда: строго, современно, без лишнего.",
         tags: ["Figma", "Illustrator"],
-        image: "/works/vend-capital.jpg",
         thumbBg: "linear-gradient(135deg,#06101f,#1a3a8f)",
       },
     ],
@@ -69,7 +65,6 @@ export const SERVICES_DATA = [
         client: "Studio Kuma",
         description: "Портфолио-сайт с кастомной CMS, авторскими переходами и GSAP-анимациями.",
         tags: ["Next.js", "GSAP", "Sanity CMS"],
-        image: "/works/studio-kuma.jpg",
         thumbBg: "linear-gradient(135deg,#060d1f,#2248a8)",
       },
       {
@@ -80,7 +75,6 @@ export const SERVICES_DATA = [
         client: "Maison Blanc",
         description: "Интернет-магазин премиум-класса с кастомной корзиной и анимированным каталогом.",
         tags: ["Next.js", "Shopify", "Framer Motion"],
-        image: "/works/maison-blanc.jpg",
         thumbBg: "linear-gradient(135deg,#0a1628,#3864db)",
       },
       {
@@ -91,7 +85,6 @@ export const SERVICES_DATA = [
         client: "Terrain Agency",
         description: "Сайт агентства с горизонтальным скроллом портфолио и кинематографическими переходами.",
         tags: ["React", "GSAP", "Three.js"],
-        image: "/works/terrain-agency.jpg",
         thumbBg: "linear-gradient(135deg,#06101f,#1a3a8f)",
       },
       {
@@ -102,7 +95,6 @@ export const SERVICES_DATA = [
         client: "Forrest Labs",
         description: "Лендинг для tech-стартапа с интерактивным 3D-фоном и конверсионной структурой.",
         tags: ["Next.js", "Three.js", "GSAP"],
-        image: "/works/forrest-labs.jpg",
         thumbBg: "linear-gradient(135deg,#040810,#2248a8)",
       },
     ],
@@ -123,7 +115,6 @@ export const SERVICES_DATA = [
         client: "Apex Creative",
         description: "Монтаж и анимация шоурила для продакшн-студии с 3D-интро.",
         tags: ["Cinema 4D", "After Effects", "Premiere"],
-        image: "/works/apex-reel.jpg",
         thumbBg: "linear-gradient(135deg,#0d1a3d,#9db4f5)",
       },
       {
@@ -134,7 +125,6 @@ export const SERVICES_DATA = [
         client: "Luma Studio",
         description: "Анимационный брендинг для видео-продакшна: логотип-анимация и джинглы.",
         tags: ["After Effects", "Lottie"],
-        image: "/works/luma-intro.jpg",
         thumbBg: "linear-gradient(135deg,#1a3a8f,#6b9eff)",
       },
       {
@@ -145,7 +135,6 @@ export const SERVICES_DATA = [
         client: "Waves Audio",
         description: "Интерактивный скролл-сайт с Three.js визуализацией аудиоволн.",
         tags: ["Three.js", "GSAP", "WebGL"],
-        image: "/works/waves-audio.jpg",
         thumbBg: "linear-gradient(135deg,#0a1628,#3864db)",
       },
       {
@@ -156,7 +145,6 @@ export const SERVICES_DATA = [
         client: "Yonder Film",
         description: "Титульная последовательность для короткометражки — Cinema 4D + After Effects.",
         tags: ["Cinema 4D", "After Effects"],
-        image: "/works/yonder-film.jpg",
         thumbBg: "linear-gradient(135deg,#06101f,#9db4f5)",
       },
     ],
@@ -177,7 +165,6 @@ export const SERVICES_DATA = [
         client: "Pulse Health",
         description: "Дизайн мобильного приложения для трекинга здоровья с геймификацией.",
         tags: ["Figma", "Protopie"],
-        image: "/works/pulse-health.jpg",
         thumbBg: "linear-gradient(135deg,#0d1a3d,#6b9eff)",
       },
       {
@@ -188,7 +175,6 @@ export const SERVICES_DATA = [
         client: "Trove",
         description: "UX/UI аналитического дашборда для SaaS-платформы: 40+ экранов, дизайн-система.",
         tags: ["Figma", "Storybook"],
-        image: "/works/trove-platform.jpg",
         thumbBg: "linear-gradient(135deg,#1a3a8f,#9db4f5)",
       },
       {
@@ -199,7 +185,6 @@ export const SERVICES_DATA = [
         client: "Flow Finance",
         description: "Интерфейс финтех-приложения с акцентом на простоту сложных операций.",
         tags: ["Figma", "Protopie"],
-        image: "/works/flow-finance.jpg",
         thumbBg: "linear-gradient(135deg,#06101f,#3864db)",
       },
       {
@@ -210,7 +195,6 @@ export const SERVICES_DATA = [
         client: "Kite Tools",
         description: "Полноценная дизайн-система с токенами, компонентами и документацией.",
         tags: ["Figma", "Tokens Studio"],
-        image: "/works/kite-tools.jpg",
         thumbBg: "linear-gradient(135deg,#0a1628,#2248a8)",
       },
     ],
@@ -231,7 +215,6 @@ export const SERVICES_DATA = [
         client: "Grand Hotel Moscow",
         description: "Арт-дирекция рекламной кампании для бутик-отеля: фото, типографика, OOH.",
         tags: ["Art Direction", "Photography", "Figma"],
-        image: "/works/grand-hotel.jpg",
         thumbBg: "linear-gradient(135deg,#040810,#1a3a8f)",
       },
       {
@@ -242,7 +225,6 @@ export const SERVICES_DATA = [
         client: "Celeste Records",
         description: "Концепция и исполнение визуала альбома: обложка, видеоклип, мерч.",
         tags: ["Art Direction", "Illustrator", "Photoshop"],
-        image: "/works/celeste-label.jpg",
         thumbBg: "linear-gradient(135deg,#060d1f,#2248a8)",
       },
       {
@@ -253,7 +235,6 @@ export const SERVICES_DATA = [
         client: "Odessa Magazine",
         description: "Вёрстка и арт-дирекция независимого культурного журнала — print + digital.",
         tags: ["InDesign", "Figma", "Illustrator"],
-        image: "/works/odessa-mag.jpg",
         thumbBg: "linear-gradient(135deg,#0a1628,#3864db)",
       },
       {
@@ -264,7 +245,6 @@ export const SERVICES_DATA = [
         client: "Nox Studio",
         description: "Айдентика для фотостудии: минималистичный стиль с акцентом на тёмную палитру.",
         tags: ["Figma", "Illustrator"],
-        image: "/works/nox-studio.jpg",
         thumbBg: "linear-gradient(135deg,#040810,#1a3a8f)",
       },
     ],

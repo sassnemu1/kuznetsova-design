@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "./BecomeClient.module.css";
 
 const SERVICES = [
@@ -28,6 +29,7 @@ const INITIAL_FORM_DATA = {
   services: [],
   budget: "",
   message: "",
+  website: "",
 };
 
 export default function BecomeClient({ isOpen, onClose }) {
@@ -130,7 +132,7 @@ export default function BecomeClient({ isOpen, onClose }) {
           <div className={styles.leftInner}>
             <div className={styles.brand}>
               <div className={styles.logoMark}>
-                <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+                <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
               </div>
               <span className={styles.brandName}>Kuznetsova Design</span>
             </div>
@@ -196,6 +198,18 @@ export default function BecomeClient({ isOpen, onClose }) {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.form} noValidate>
+                {/* Honeypot — скрыто от людей, ловит ботов */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={(e) => updateField("website", e.target.value)}
+                  className={styles.honeypot}
+                  aria-hidden="true"
+                />
+
                 {/* Row 1 */}
                 <div className={styles.row}>
                   <div className={styles.field}>

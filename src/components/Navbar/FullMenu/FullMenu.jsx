@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import styles from "./FullMenu.module.css";
 
 const NAV_ITEMS = [
   { num: "01", label: "Главная",   href: "/" },
-  { num: "02", label: "Услуги",    href: "#services" },
-  { num: "03", label: "О студии",  href: "#studio" },
-  { num: "04", label: "Портфолио", href: "#portfolio" },
+  { num: "02", label: "Услуги",    href: "/#services" },
+  { num: "03", label: "О студии",  href: "/#studio" },
+  { num: "04", label: "Портфолио", href: "/work" },
   { num: "05", label: "Наш блог",    href: "/blog" },
-  { num: "06", label: "Контакт",   href: "#contact" },
+  { num: "06", label: "Контакт",   href: "/#contact" },
 ];
 
 export default function FullMenu({ isOpen, onClose }) {
@@ -44,7 +45,7 @@ export default function FullMenu({ isOpen, onClose }) {
         <div className={styles.logo}>
           {/* Replace with your actual logo component / image */}
           <div className={styles.logoMark}>
-            <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+            <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
           </div>
           <span className={styles.logoText}>
             Kuznetsova<br />Design

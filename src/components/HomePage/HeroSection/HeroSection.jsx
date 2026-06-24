@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import styles from "./HeroSection.module.css";
 
 import useGSAP from "@/hooks/useGSAP.js";
@@ -140,7 +142,7 @@ export default function HeroSection() {
   return (
     <section ref={heroRef} className={styles.hero}>
       <div className={styles.bgImage} ref={bgImageRef}>
-        <img src="/bg-hero2.svg" alt="bg-image" />
+        <Image src="/bg-hero2.svg" alt="" fill priority sizes="100vw" />
       </div>
 
       <div className={styles.bgText} ref={bgTextRef}>
@@ -151,7 +153,7 @@ export default function HeroSection() {
       <nav className={styles.nav} ref={navRef}>
         <div className={styles.navLogo}>
           <div className={styles.logoMark}>
-            <img src="/logo-w.svg" alt="Kuznetsova Design logo" width={60} height={60} />
+            <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
           </div>
           <span className={styles.logoText}>Kuznetsova Design</span>
         </div>
@@ -160,8 +162,8 @@ export default function HeroSection() {
           <li><a href="#services">Services</a></li>
           <li><a href="#studio">Studio</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#howtowork">How to Work</a></li>
-          <li><a href="/blog">Blog</a></li>
+          <li><Link href="/work">Portfolio</Link></li>
+          <li><Link href="/blog">Blog</Link></li>
         </ul>
       </nav>
 

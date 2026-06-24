@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { TECHNICAL_DESIGN_DATA } from "@/data/TechnicalDesignData";
-import BecomeClient from "@/components/BecomeClient/BecomeClient";
+import { useBecomeClient } from "@/context/BecomeClientContext";
 import BlueprintMock from "./BlueprintMock";
 import SchematicMock from "./SchematicMock";
 import PcbMock from "./PcbMock";
@@ -20,7 +20,7 @@ export default function TechnicalDesign() {
   const headerRef = useRef(null);
   const cardRefs = useRef([]);
 
-  const [isClientFormOpen, setIsClientFormOpen] = useState(false);
+  const openClientForm = useBecomeClient();
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -71,7 +71,6 @@ export default function TechnicalDesign() {
   }, [gsap, ScrollTrigger]);
 
   return (
-    <>
       <section ref={sectionRef} className={`${styles.section} nav-dark-zone`} id="engineering">
         <div className={styles.inner}>
 
@@ -118,7 +117,7 @@ export default function TechnicalDesign() {
                       ))}
                     </div>
 
-                    <button className={styles.cta} onClick={() => setIsClientFormOpen(true)}>
+                    <button className={styles.cta} onClick={openClientForm}>
                       Обсудить проект
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -132,8 +131,5 @@ export default function TechnicalDesign() {
 
         </div>
       </section>
-
-      <BecomeClient isOpen={isClientFormOpen} onClose={() => setIsClientFormOpen(false)} />
-    </>
   );
 }

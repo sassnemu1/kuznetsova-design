@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import styles from "./AboutSection.module.css";
 
@@ -15,7 +15,7 @@ import {
 import { MdOutlineMail } from "react-icons/md";
 
 import useGSAP from "@/hooks/useGSAP";
-import BecomeClient from "@/components/BecomeClient/BecomeClient";
+import { useBecomeClient } from "@/context/BecomeClientContext";
 
 const services = [
   {
@@ -83,7 +83,7 @@ export default function AboutSection() {
   const storyQuoteRef = useRef(null);
   const storyStatsRef = useRef(null);
 
-  const [isClientFormOpen, setIsClientFormOpen] = useState(false);
+  const openClientForm = useBecomeClient();
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -228,7 +228,6 @@ export default function AboutSection() {
   }, [gsap, ScrollTrigger]);
 
   return (
-    <>
       <section ref={sectionRef} className={styles.about} id="studio">
 
         {/* ════════════ HERO ════════════ */}
@@ -255,7 +254,7 @@ export default function AboutSection() {
               <button
                 ref={heroBtnRef}
                 className={styles.heroBtn}
-                onClick={() => setIsClientFormOpen(true)}
+                onClick={openClientForm}
               >
                 Начать проект
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -420,11 +419,5 @@ export default function AboutSection() {
         </div>
 
       </section>
-
-      <BecomeClient
-        isOpen={isClientFormOpen}
-        onClose={() => setIsClientFormOpen(false)}
-      />
-    </>
   );
 }

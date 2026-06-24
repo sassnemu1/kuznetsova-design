@@ -9,7 +9,6 @@
   overflow: hidden;
 }
 
-/* Точечная сетка */
 .dotGrid {
   position: absolute;
   inset: 0;
@@ -20,7 +19,6 @@
   pointer-events: none;
 }
 
-/* Акцентный глоу */
 .glow {
   position: absolute;
   top: -120px;
@@ -83,26 +81,12 @@
   object-fit: cover;
 }
 
-.brandText {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
 .brandName {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.85);
-}
-
-.brandSub {
-  font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
 }
 
 .issue {
@@ -133,15 +117,15 @@
   align-items: center;
 }
 
-/* Клип чтобы начальная анимация y:105% не давала горизонтальный скролл */
 .titleClip {
   display: flex;
   overflow: hidden;
-  /* line-height: 0.88; */
 }
-.titleClip h2 {
-    font-family: var(--font-bold);
-    font-size: clamp(72px, 8vw, 150px);
+.titleClip h1 {
+  font-family: var(--font-bold);
+  font-size: clamp(72px, 9vw, 160px);
+  color: #fff;
+  margin: 0;
 }
 
 /* ─── BOTTOM ─────────────────────────────────────────────────── */
@@ -165,8 +149,9 @@
 
 .bottomContent {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  gap: 32px;
 }
 
 .desc {
@@ -176,32 +161,53 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
+.stats {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: #fff;
+}
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero { min-height: 70vh; padding: 0 24px; }
+  .hero { min-height: 76vh; padding: 0 24px; }
   .topBar { padding: 18px 5px; }
-  .letter { font-size: clamp(80px, 20vw, 160px); }
-  .brandSub { display: none; }
-  .scrollHint { display: none; }
+  .brandName { display: none; }
 
-  .brandName {display: none;}
-
-  .glow {
-    top: -60px;
-  }
-  .glow2 {
-    top: 120px;
-  }
-  .glow3 {
-    top: 260px;
+  .bottomContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
   }
 
-  .glow,
-  .glow2,
-  .glow3 {
+  .stats { gap: 28px; }
+
+  .glow { top: -60px; }
+  .glow2 { top: 120px; }
+  .glow3 { top: 260px; }
+
+  .glow, .glow2, .glow3 {
     width: 280px;
     height: 280px;
-    /* display: none; */
   }
 }
 

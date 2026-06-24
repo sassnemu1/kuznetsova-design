@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import DetailHeader from "./DetailHeader";
 import DetailWorkGrid from "./DetailWorkGrid";
 import DetailCardPanel from "./DetailCardPanel";
@@ -27,12 +28,12 @@ export default function DetailOverlay({
         />
 
         <div className="detail__cta-row">
-          <button className="detail__all-btn">
+          <Link href="/work" className="detail__all-btn">
             See all work
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
 
