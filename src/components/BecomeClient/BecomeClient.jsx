@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./BecomeClient.module.css";
 
 const SERVICES = [
@@ -130,12 +131,12 @@ export default function BecomeClient({ isOpen, onClose }) {
         {/* ── LEFT ── */}
         <aside className={styles.left}>
           <div className={styles.leftInner}>
-            <div className={styles.brand}>
+            <Link href="/" className={styles.brand} aria-label="На главную">
               <div className={styles.logoMark}>
                 <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
               </div>
               <span className={styles.brandName}>Kuznetsova Design</span>
-            </div>
+            </Link>
 
             <div className={styles.pitch}>
               <p className={styles.pitchEyebrow}>Начните проект</p>
@@ -350,7 +351,7 @@ export default function BecomeClient({ isOpen, onClose }) {
                     )}
                   <p className={styles.privacy}>
                     Нажимая кнопку, вы принимаете{" "}
-                    <a href="#">политику конфиденциальности</a>
+                    <Link href="/privacy" target="_blank">политику конфиденциальности</Link>
                   </p>
                 </div>
               </form>

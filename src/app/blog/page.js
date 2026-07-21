@@ -8,13 +8,26 @@ import { BLOG_DATA } from "@/data/BlogData";
 
 import styles from "./page.module.css";
 
+const SITE_URL = "https://kuznetsova.design";
+
 export const metadata = {
   title: "Блог&Новости — Kuznetsova Design",
-  description: "Новости, кейсы и инсайты дизайн-бюро Kuznetsova Design.",
+  description: "Новости, кейсы и инсайты дизайн-бюро Kuznetsova Design: брендинг, веб-разработка, 3D-дизайн.",
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Журнал — Kuznetsova Design",
     description: "Новости, кейсы и инсайты дизайн-бюро Kuznetsova Design.",
+    url: `${SITE_URL}/blog`,
   },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Главная", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Блог", item: `${SITE_URL}/blog` },
+  ],
 };
 
 export default function BlogPage() {
@@ -22,6 +35,11 @@ export default function BlogPage() {
 
   return (
     <main className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
       <Navbar />
 
       <BlogHero />

@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
-import styles from "./CategorySection.module.css";
+import styles from "./CategorySlider.module.css";
+
+const AUTOPLAY_SEC = 6;
 
 const bgFor = (w) => (w.image ? `url(${w.image}), ${w.thumbBg}` : w.thumbBg);
 
@@ -15,15 +17,23 @@ function shortestDir(from, to, len) {
   return diff < 0 ? -1 : 1;
 }
 
-export default function CategorySection({ service, index }) {
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+export default function CategorySlider({ service, index, isActive }) {
   const sectionRef = useRef(null);
   const heroRef    = useRef(null);
-  const heroImgRef = useRef(null);   // текущий слайд
-  const nextImgRef = useRef(null);   // следующий/предыдущий — едет навстречу при перетаскивании
+  const parallaxRef = useRef(null); // обёртка слоёв — двигается при скролле
+  const heroImgRef = useRef(null);  // текущий слайд
+  const nextImgRef = useRef(null);  // следующий/предыдущий — едет навстречу
   const heroContentRef = useRef(null);
+  const ghostRef   = useRef(null);
   const thumbsRef  = useRef(null);
+  const progressRef = useRef(null);
 
-  const [active, setActive]   = useState(0);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const activeRef = useRef(0);
   const tlRef = useRef(null);
 
@@ -41,9 +51,7 @@ export default function CategorySection({ service, index }) {
 
   /* ── playTransition ───────────────────────────────────────────
      Единая анимация смены слайда: текущая картинка уезжает в
-     сторону dir, следующая въезжает на её место. Принимает
-     необязательные стартовые смещения (xPercent) — так перетаскивание
-     может "доиграть" анимацию из той точки, где её бросил палец/курсор. */
+     сторону dir, следующая въезжает на её место.                  */
   const playTransition = useCallback(
     (targetIndex, dir, { fromXPercent, fromNextXPercent } = {}) => {
       const img     = heroImgRef.current;
@@ -51,19 +59,12 @@ export default function CategorySection({ service, index }) {
       const content = heroContentRef.current;
       if (!gsap || !img || !next || !content) return;
 
-      // Текущее визуальное смещение картинки — если предыдущий переход
-      // был прерван новым кликом на середине, новый переход продолжает
-      // ровно с этой точки, без визуального скачка.
       const startXPercent = fromXPercent ?? gsap.getProperty(img, "xPercent") ?? 0;
 
       tlRef.current?.kill();
 
       const targetWork = works[targetIndex];
 
-      // Индекс обновляем сразу, а не по завершении анимации — иначе
-      // быстрые повторные клики/смахивания считают "следующий" слайд от
-      // одного и того же устаревшего активного индекса и просто
-      // перезапускают один и тот же переход вместо того, чтобы идти дальше.
       activeRef.current = targetIndex;
       setActive(targetIndex);
 
@@ -76,30 +77,24 @@ export default function CategorySection({ service, index }) {
 
       const tl = gsap.timeline({
         onComplete: () => {
-          // "Подменяем" слои на финальном кадре — оба в этот момент
-          // показывают одну и ту же картинку в одной и той же точке,
-          // поэтому подмена незаметна.
           gsap.set(img,  { backgroundImage: bgFor(targetWork), xPercent: 0 });
           gsap.set(next, { display: "none", xPercent: 0 });
         },
       });
       tlRef.current = tl;
 
-      tl.to(img,  { xPercent: dir > 0 ? -100 : 100, duration: 0.5, ease: "power3.inOut" }, 0);
-      tl.to(next, { xPercent: 0,                    duration: 0.5, ease: "power3.inOut" }, 0);
+      tl.to(img,  { xPercent: dir > 0 ? -100 : 100, duration: 0.55, ease: "power3.inOut" }, 0);
+      tl.to(next, { xPercent: 0,                    duration: 0.55, ease: "power3.inOut" }, 0);
 
       tl.to(content, { y: dir > 0 ? -16 : 16, opacity: 0, duration: 0.16, ease: "power2.in" }, 0);
       tl.fromTo(content,
         { y: dir > 0 ? 20 : -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.32, ease: "power3.out" }, 0.26);
+        { y: 0, opacity: 1, duration: 0.34, ease: "power3.out" }, 0.28);
     },
     [gsap, works]
   );
 
-  /* ── Навигация ─────────────────────────────────────────────
-     Любой вызов сразу обрывает текущую анимацию (tl.kill внутри
-     playTransition) — слайдер никогда не "виснет" и не игнорирует
-     быстрые повторные нажатия.                                   */
+  /* ── Навигация ──────────────────────────────────────────── */
   const goTo = useCallback(
     (targetRaw) => {
       const len = works.length;
@@ -122,34 +117,55 @@ export default function CategorySection({ service, index }) {
     playTransition((activeRef.current - 1 + len) % len, -1);
   }, [playTransition, works.length]);
 
-  /* ── Keyboard ───────────────────────────────────────────── */
+  /* ── Keyboard (только для активной секции) ──────────────── */
   useEffect(() => {
+    if (!isActive) return;
     const fn = (e) => {
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft")  goPrev();
     };
     window.addEventListener("keydown", fn);
     return () => window.removeEventListener("keydown", fn);
-  }, [goNext, goPrev]);
+  }, [isActive, goNext, goPrev]);
 
-  /* ── Drag / swipe на hero ─────────────────────────────────────
-     Картинка тащится вживую за пальцем/курсором (xPercent = dx/width),
-     рядом подъезжает соседний слайд. На отпускании — либо доезжает до
-     него (та же playTransition, продолженная с текущего смещения),
-     либо плавно возвращается на место.                              */
+  /* ── Автоплей с прогресс-баром ──────────────────────────────
+     Тонкая линия внизу hero заполняется за AUTOPLAY_SEC секунд,
+     затем слайдер листает дальше. Пауза — на ховере/касании и
+     когда секция вне зоны внимания.                              */
+  useEffect(() => {
+    const bar = progressRef.current;
+    if (!gsap || !bar) return;
+
+    if (!isActive || paused || works.length < 2 || prefersReducedMotion()) {
+      gsap.set(bar, { scaleX: 0 });
+      return;
+    }
+
+    gsap.set(bar, { scaleX: 0 });
+    const tween = gsap.to(bar, {
+      scaleX: 1,
+      duration: AUTOPLAY_SEC,
+      ease: "none",
+      onComplete: () => goNext(),
+    });
+    return () => tween.kill();
+  }, [gsap, isActive, paused, active, goNext, works.length]);
+
+  /* ── Drag / swipe на hero ───────────────────────────────── */
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero || !gsap || works.length < 2) return;
 
+    // На touchend активных касаний уже нет — координата в changedTouches
     const getX = (e) =>
       e.changedTouches?.[0]?.clientX ??
       e.touches?.[0]?.clientX ??
       e.clientX ??
       0;
 
-    let dragStart = null;   // { x, t }
+    let dragStart = null;
     let dragged   = false;
-    let dragDir   = 0;      // 1 — тащим к следующему, -1 — к предыдущему
+    let dragDir   = 0;
     let width     = 1;
 
     const resetLayers = () => {
@@ -197,7 +213,7 @@ export default function CategorySection({ service, index }) {
       const dt = Date.now() - dragStart.t;
       dragStart = null;
 
-      if (dragDir === 0) return; // не двигали — ничего доигрывать не нужно
+      if (dragDir === 0) return;
 
       const passed = Math.abs(dx) > 40 || (Math.abs(dx) > 18 && dt < 300);
       const len = works.length;
@@ -245,14 +261,38 @@ export default function CategorySection({ service, index }) {
     };
   }, [gsap, works, playTransition]);
 
-  /* ── Scroll-in ──────────────────────────────────────────── */
+  /* ── Параллакс при прокрутке ────────────────────────────────
+     Слои картинки выше hero на ~28% и плавно едут по вертикали,
+     пока секция проходит через вьюпорт. Призрачный номер едет
+     навстречу — глубина в два слоя.                              */
+  useEffect(() => {
+    if (!gsap || !ScrollTrigger || prefersReducedMotion()) return;
+    const ctx = gsap.context(() => {
+      const st = {
+        trigger: heroRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.6,
+      };
+      gsap.fromTo(parallaxRef.current, { yPercent: -7 }, { yPercent: 7, ease: "none", scrollTrigger: st });
+      gsap.fromTo(ghostRef.current,    { y: 70 },        { y: -70,      ease: "none", scrollTrigger: { ...st } });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, [gsap, ScrollTrigger]);
+
+  /* ── Появление секции ───────────────────────────────────── */
   useEffect(() => {
     if (!gsap || !ScrollTrigger || !sectionRef.current) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(sectionRef.current,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 48 },
         { opacity: 1, y: 0, duration: 1, ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 82%" } }
+      );
+      gsap.fromTo(heroRef.current,
+        { scale: 0.965 },
+        { scale: 1, duration: 1.2, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 78%" } }
       );
     }, sectionRef);
     return () => ctx.revert();
@@ -261,11 +301,10 @@ export default function CategorySection({ service, index }) {
   /* ── Очистка анимации при размонтировании ───────────────── */
   useEffect(() => () => tlRef.current?.kill(), []);
 
-  /* ── Авто-скролл активной thumb ─────────────────────────────
-     Пропускаем самый первый рендер — иначе scrollIntoView на
-     монтировании тащит всю страницу вниз, к превьюшкам секции
-     (на каждой из 5 категорий), и в итоге страница открывается
-     проскролленной к последней секции.                          */
+  /* ── Авто-скролл активной превьюшки ─────────────────────────
+     Скроллим ТОЛЬКО ленту превью по горизонтали. scrollIntoView
+     здесь нельзя: он может прокрутить и страницу целиком — из-за
+     этого страница «улетала» к последней секции при открытии.    */
   useEffect(() => {
     const thumbs = thumbsRef.current;
     if (!thumbs) return;
@@ -298,8 +337,13 @@ export default function CategorySection({ service, index }) {
       </div>
 
       {/* ── Hero + боковые кнопки ───────────────────────────── */}
-      <div className={styles.heroWrap}>
-        {/* Кнопка влево */}
+      <div
+        className={styles.heroWrap}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={() => setPaused(true)}
+        onTouchEnd={() => setPaused(false)}
+      >
         <button
           className={`${styles.sideBtn} ${styles.sideBtnLeft}`}
           onClick={goPrev}
@@ -311,21 +355,26 @@ export default function CategorySection({ service, index }) {
           </svg>
         </button>
 
-        {/* Сам слайд */}
         <div ref={heroRef} className={styles.hero}>
-          <div
-            ref={heroImgRef}
-            className={styles.heroImg}
-            style={{
-              backgroundImage: cur.image
-                ? `url(${cur.image}), ${cur.thumbBg}`
-                : cur.thumbBg,
-            }}
-          />
-          <div ref={nextImgRef} className={styles.heroImg} style={{ display: "none" }} />
+          {/* Параллакс-обёртка: двигается при скролле страницы */}
+          <div ref={parallaxRef} className={styles.parallax}>
+            <div
+              ref={heroImgRef}
+              className={styles.heroImg}
+              style={{
+                backgroundImage: cur.image
+                  ? `url(${cur.image}), ${cur.thumbBg}`
+                  : cur.thumbBg,
+              }}
+            />
+            <div ref={nextImgRef} className={styles.heroImg} style={{ display: "none" }} />
+          </div>
+
           <div className={styles.heroOverlay} />
           <div className={styles.heroDots} />
-          <div className={styles.heroGhostNum}>{String(active + 1).padStart(2, "0")}</div>
+          <div ref={ghostRef} className={styles.heroGhostNum}>
+            {String(active + 1).padStart(2, "0")}
+          </div>
 
           <div ref={heroContentRef} className={styles.heroContent}>
             <div className={styles.heroTop}>
@@ -352,13 +401,29 @@ export default function CategorySection({ service, index }) {
                 <span key={t} className={styles.heroChip}>{t}</span>
               ))}
 
-              <Link href={`/work/${cur.slug}`} className={styles.heroCta}>
-                Смотреть кейс
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor"
-                    strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
+              <div className={styles.heroActions}>
+                {cur.url && (
+                  <a
+                    href={cur.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.siteBtn}
+                  >
+                    Открыть сайт
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 9L9 3M4.5 3H9v4.5" stroke="currentColor"
+                        strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                )}
+                <Link href={`/work/${cur.slug}`} className={styles.heroCta}>
+                  Смотреть кейс
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor"
+                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -372,9 +437,17 @@ export default function CategorySection({ service, index }) {
               {String(works.length).padStart(2, "0")}
             </span>
           </div>
+
+          {/* Прогресс автоплея */}
+          <div className={styles.autoTrack}>
+            <div
+              ref={progressRef}
+              className={styles.autoFill}
+              style={{ background: service.color }}
+            />
+          </div>
         </div>
 
-        {/* Кнопка вправо */}
         <button
           className={`${styles.sideBtn} ${styles.sideBtnRight}`}
           onClick={goNext}
@@ -400,7 +473,7 @@ export default function CategorySection({ service, index }) {
         ))}
       </div>
 
-      {/* ── Thumbnails (остальные работы) ──────────────────── */}
+      {/* ── Thumbnails ─────────────────────────────────────── */}
       {works.length > 1 && (
         <div ref={thumbsRef} className={styles.thumbs}>
           {works.map((work, i) => (

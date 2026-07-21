@@ -10,7 +10,6 @@ import useGSAP from "@/hooks/useGSAP.js";
 import {
   FaInstagram,
   FaBehance,
-  FaDribbble,
   FaPinterest,
   FaTelegramPlane,
   FaVk,
@@ -151,12 +150,12 @@ export default function HeroSection() {
 
       {/* NAV */}
       <nav className={styles.nav} ref={navRef}>
-        <div className={styles.navLogo}>
+        <Link href="/" className={styles.navLogo} aria-label="На главную">
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
           </div>
           <span className={styles.logoText}>Kuznetsova Design</span>
-        </div>
+        </Link>
 
         <ul className={styles.navLinks}>
           <li><a href="#services">Services</a></li>
@@ -170,7 +169,6 @@ export default function HeroSection() {
       {/* SOCIAL LEFT */}
       <div className={styles.socialLeft} ref={socialLeftRef}>
         <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
-        <a href="#" aria-label="Dribbble"><FaDribbble /></a>
         <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest /></a>
       </div>
 

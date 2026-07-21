@@ -1,0 +1,333 @@
+/* ─── ОБЩИЙ ЛЕЙАУТ: рейл слева + слайдеры справа ─────────── */
+.wrap {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: clamp(36px, 4.5vw, 80px);
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 96px 5vw 140px;
+  align-items: start;
+}
+
+/* ─── РЕЙЛ ────────────────────────────────────────────────── */
+.rail {
+  position: relative;
+  height: 100%;
+}
+
+.railInner {
+  position: sticky;
+  top: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.railLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.railLabelDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: railPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes railPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(0.72); }
+}
+
+.railNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Пункт категории */
+.railItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 16px 15px 20px;
+  border-radius: 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  opacity: 0; /* GSAP */
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.45s ease,
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.railItem:hover {
+  background: rgba(17, 17, 17, 0.035);
+  transform: translateX(4px);
+}
+
+.railItemActive {
+  background: #fff;
+  border-color: var(--border);
+  box-shadow: 0 18px 44px -18px rgba(17, 17, 17, 0.18);
+  transform: translateX(8px);
+}
+
+.railItemActive:hover {
+  transform: translateX(8px);
+}
+
+/* Цветная полоска слева */
+.railBar {
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--cat-color);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.railItemActive .railBar {
+  transform: scaleY(1);
+}
+
+.railNum {
+  font-family: var(--font-bold);
+  font-size: 17px;
+  line-height: 1;
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.railItemActive .railNum {
+  color: var(--cat-color);
+}
+
+.railBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.railTag {
+  font-family: var(--font-body);
+  font-size: 8.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
+
+.railItemActive .railTag {
+  color: var(--cat-color);
+}
+
+.railTitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 16.5px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.railItemActive .railTitle {
+  color: var(--text);
+}
+
+.railCount {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-light);
+  transition: all 0.35s ease;
+}
+
+.railItemActive .railCount {
+  background: var(--cat-color);
+  border-color: var(--cat-color);
+  color: #fff;
+}
+
+/* Низ рейла: счётчик + прогресс */
+.railFoot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 4px 0 20px;
+  opacity: 0; /* GSAP */
+}
+
+.railCounter {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.railCounterActive {
+  font-family: var(--font-bold);
+  font-size: 30px;
+  line-height: 1;
+  transition: color 0.4s ease;
+}
+
+.railCounterSep,
+.railCounterTotal {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.railTrack {
+  width: 2px;
+  height: 44px;
+  border-radius: 2px;
+  background: var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.railTrackFill {
+  width: 100%;
+  border-radius: 2px;
+  transition: height 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease;
+}
+
+.railHint {
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+/* ─── СЕКЦИИ СПРАВА ───────────────────────────────────────── */
+.sections {
+  min-width: 0;
+}
+
+.sectionWrap {
+  scroll-margin-top: 90px;
+}
+
+.sectionWrap:not(:last-child) {
+  margin-bottom: clamp(90px, 10vw, 150px);
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .wrap {
+    display: block;
+    padding: 72px 24px 110px;
+  }
+
+  /* Рейл → липкая горизонтальная лента чипов */
+  .rail {
+    position: sticky;
+    top: 0;
+    z-index: 25; /* под плавающим навбаром */
+    margin: 0 -24px 36px;
+  }
+
+  .railInner {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: rgba(250, 250, 248, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .railInner::-webkit-scrollbar { display: none; }
+
+  .railLabel,
+  .railFoot { display: none; }
+
+  .railNav {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .railItem {
+    flex: 0 0 auto;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    gap: 10px;
+    opacity: 1; /* без GSAP на мобиле */
+    transform: none !important;
+  }
+
+  .railItemActive {
+    box-shadow: 0 8px 22px -10px rgba(17, 17, 17, 0.22);
+  }
+
+  .railBar { display: none; }
+
+  .railTag { display: none; }
+
+  .railNum { font-size: 13px; }
+
+  .railTitle {
+    font-size: 14px;
+    max-width: 180px;
+  }
+
+  .railCount {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrap { padding: 56px 16px 90px; }
+  .rail { margin: 0 -16px 28px; }
+  .railInner { padding: 10px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railItem, .railBar, .railTrackFill, .railLabelDot {
+    transition: none !important;
+    animation: none !important;
+  }
+  .railItem, .railFoot { opacity: 1; }
+}

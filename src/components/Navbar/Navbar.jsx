@@ -63,6 +63,7 @@ export default function Navbar() {
             <button
               className={styles.menuBtn}
               onClick={() => setIsMenuOpen(true)}
+              aria-label="Открыть меню"
             >
               <HiOutlineMenu size={21} />
             </button>

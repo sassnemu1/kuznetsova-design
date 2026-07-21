@@ -170,7 +170,7 @@ export default function ServicesSlider() {
       cancelAnimationFrame(raf1);
       ctx.revert();
     };
-  }, [gsap, ScrollTrigger]);
+  }, [gsap, ScrollTrigger, services.length]);
 
   // ── Open detail ────────────────────────────────────────────────────────
   const openDetail = useCallback((service, cardEl) => {

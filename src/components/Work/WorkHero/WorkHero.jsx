@@ -2,13 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import styles from "./WorkHero.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
+import { SERVICES_DATA } from "@/data/ServicesData";
+
+// Статистика считается из данных — не разъезжается с реальным портфолио
+const totalWorks = SERVICES_DATA.reduce((sum, s) => sum + s.works.length, 0);
+const totalCategories = SERVICES_DATA.filter((s) => s.works.length > 0).length;
 
 const STATS = [
-  { num: "20+", label: "проектов" },
-  { num: "5", label: "направлений" },
+  { num: `${totalWorks}`, label: "проектов" },
+  { num: `${totalCategories}`, label: "направлений" },
   { num: "5+", label: "лет в дизайне" },
 ];
 
@@ -50,12 +56,12 @@ export default function WorkHero() {
       <div className={styles.glow3} />
 
       <div ref={topBarRef} className={styles.topBar}>
-        <div className={styles.brand}>
+        <Link href="/" className={styles.brand} aria-label="На главную">
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design" fill />
           </div>
           <span className={styles.brandName}>Kuznetsova Design</span>
-        </div>
+        </Link>
 
         <div className={styles.issue}>
           <span className={styles.issueDot} />

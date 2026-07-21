@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import styles from "./BlogHero.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
@@ -50,7 +51,7 @@ export default function BlogHero() {
 
       {/* Верхняя плашка */}
       <div ref={topBarRef} className={styles.topBar}>
-        <div className={styles.brand}>
+        <Link href="/" className={styles.brand} aria-label="На главную">
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design" fill />
           </div>
@@ -58,7 +59,7 @@ export default function BlogHero() {
             <span className={styles.brandName}>Kuznetsova Design</span>
             {/* <span className={styles.brandSub}>Дизайн-бюро · Москва</span> */}
           </div>
-        </div>
+        </Link>
 
         <div className={styles.issue}>
           <span className={styles.issueDot} />

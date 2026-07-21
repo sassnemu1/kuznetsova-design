@@ -1,39 +1,62 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer.jsx";
 import WorkHero from "@/components/Work/WorkHero/WorkHero";
-import CategorySection from "@/components/Work/CategorySection/CategorySection";
-
-import { SERVICES_DATA } from "@/data/ServicesData";
+import PortfolioShowcase from "@/components/Work/PortfolioShowcase/PortfolioShowcase";
+import { SERVICES_DATA, getAllWorkSlugs } from "@/data/ServicesData";
 
 import styles from "./page.module.css";
+
+const SITE_URL = "https://kuznetsova.design";
 
 export const metadata = {
   title: "Портфолио — Kuznetsova Design",
   description:
-    "Избранные проекты Kuznetsova Design: брендинг, веб-разработка, 3D и арт-дирекшн.",
+    "Портфолио дизайн-бюро Kuznetsova Design: логотипы, сайты, брендинг и 3D-визуализация для клиентов из Москвы и других регионов.",
+  alternates: { canonical: "/work" },
   openGraph: {
     title: "Портфолио — Kuznetsova Design",
     description:
-      "Избранные проекты Kuznetsova Design: брендинг, веб-разработка, 3D и арт-дирекшн.",
+      "Портфолио дизайн-бюро Kuznetsova Design: логотипы, сайты, брендинг и 3D-визуализация для клиентов из Москвы и других регионов.",
+    url: `${SITE_URL}/work`,
   },
 };
 
-export default function PortfolioPage() {
-  const sections = SERVICES_DATA.filter((s) => s.works.length > 0);
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Главная", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Портфолио", item: `${SITE_URL}/work` },
+  ],
+};
 
+const worksJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: getAllWorkSlugs().map((slug, i) => {
+    const work = SERVICES_DATA.flatMap((s) => s.works).find((w) => w.slug === slug);
+    return {
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${SITE_URL}/work/${slug}`,
+      name: work?.title,
+    };
+  }),
+};
+
+export default function PortfolioPage() {
   return (
     <main className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbJsonLd, worksJsonLd]) }}
+      />
+
       <Navbar />
 
       <WorkHero />
 
-      <div className={styles.content}>
-        <div className={styles.sections}>
-          {sections.map((service, i) => (
-            <CategorySection key={service.id} service={service} index={i} />
-          ))}
-        </div>
-      </div>
+      <PortfolioShowcase />
 
       <Footer />
     </main>

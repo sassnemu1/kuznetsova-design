@@ -142,6 +142,19 @@
   font-weight: 500;
 }
 
+.sidebarLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  transition: opacity 0.25s ease;
+}
+
+.sidebarLink:hover { opacity: 0.7; }
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -202,6 +215,15 @@
   letter-spacing: -0.015em;
   color: var(--text);
   max-width: 620px;
+}
+
+/* Реальные изображения галереи */
+.galleryImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
 }
 
 /* ─── GALLERY ────────────────────────────────────────────────── */

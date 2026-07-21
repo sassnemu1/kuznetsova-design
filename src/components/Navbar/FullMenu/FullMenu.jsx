@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./FullMenu.module.css";
 
 const NAV_ITEMS = [
@@ -42,15 +43,14 @@ export default function FullMenu({ isOpen, onClose }) {
     >
       {/* ── LEFT PANEL ── */}
       <div className={styles.left}>
-        <div className={styles.logo}>
-          {/* Replace with your actual logo component / image */}
+        <Link href="/" className={styles.logo} onClick={onClose} aria-label="На главную">
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
           </div>
           <span className={styles.logoText}>
             Kuznetsova<br />Design
           </span>
-        </div>
+        </Link>
 
         <div className={styles.leftBottom}>
           <div className={styles.badge}>
@@ -71,9 +71,9 @@ export default function FullMenu({ isOpen, onClose }) {
           <span className={styles.navLabel}>Навигация</span>
 
           <div className={styles.topBarRight}>
-            <a href="#contact" className={styles.clientLink} onClick={onClose}>
+            <Link href="/#contact" className={styles.clientLink} onClick={onClose}>
               + Стать клиентом
-            </a>
+            </Link>
             <button
               className={styles.closeBtn}
               onClick={onClose}
@@ -87,7 +87,7 @@ export default function FullMenu({ isOpen, onClose }) {
         {/* Main nav links */}
         <nav className={styles.nav}>
           {NAV_ITEMS.map((item, i) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className={styles.navItem}
@@ -96,7 +96,7 @@ export default function FullMenu({ isOpen, onClose }) {
             >
               <span className={styles.navNum}>{item.num}</span>
               <span className={styles.navLabel2}>{item.label}</span>
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -114,7 +114,9 @@ export default function FullMenu({ isOpen, onClose }) {
           </a>
         </div>
           <div className={styles.legal}>
-            <span>Политика конфиденциальности</span>
+            <Link href="/privacy" onClick={onClose}>
+              Политика конфиденциальности
+            </Link>
             <span>© Kuznetsova Design 2026</span>
           </div>
         </div>

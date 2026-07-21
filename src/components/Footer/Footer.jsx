@@ -8,7 +8,6 @@ import useGSAP from "@/hooks/useGSAP";
 import {
   FaInstagram,
   FaBehance,
-  FaDribbble,
   FaPinterest,
   FaTelegramPlane,
   FaVk,
@@ -83,9 +82,9 @@ export default function Footer() {
           <div className={styles.titlePerspective}>
 
             <div className={styles.FooterLogoSection}>
-              <div className={styles.FooterLogoMark}>
+              <Link href="/" className={styles.FooterLogoMark} aria-label="На главную">
                 <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
-              </div>
+              </Link>
               <div>
                 <div className={styles.titleTop}>
                   {kuznetsova.map((char, i) => (
@@ -115,17 +114,17 @@ export default function Footer() {
             <div>
               <h4>Navigation</h4>
               <Link href="/work">Work</Link>
-              <a href="#studio">Studio</a>
-              <a href="#services">Services</a>
-              <a href="#contact">Contact</a>
+              <Link href="/#studio">Studio</Link>
+              <Link href="/#services">Services</Link>
+              <Link href="/#contact">Contact</Link>
             </div>
 
             <div>
               <h4>Studio</h4>
-              <a href="#">About</a>
+              <Link href="/#studio">About</Link>
               <Link href="/blog">Journal</Link>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
+              <Link href="/#howtowork">Process</Link>
+              <Link href="/#engineering">Engineering</Link>
             </div>
 
             <div>
@@ -140,7 +139,6 @@ export default function Footer() {
             <div className={styles.socialLinks}>
               <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
               <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
-              <a href="#" aria-label="Dribbble"><FaDribbble /></a>
               <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest /></a>
               <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane /></a>
               <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer" aria-label="VK"><FaVk /></a>
@@ -153,7 +151,9 @@ export default function Footer() {
         {/* Copyright */}
         <div className={styles.copyright} ref={copyrightRef}>
           <p>© {new Date().getFullYear()} Kuznetsova Design. Все права защищены.</p>
-          <p className={styles.legal}>Политика конфиденциальности • Правовая информация</p>
+          <p className={styles.legal}>
+            <Link href="/privacy">Политика конфиденциальности</Link>
+          </p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,180 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import BackLink from "@/components/Work/BackLink/BackLink";
+import styles from "./WorkCase.module.css";
+
+export default function WorkCase({ work, prev, next }) {
+  const heroRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      heroRef.current?.classList.add(styles.visible);
+      contentRef.current?.classList.add(styles.visible);
+    }, 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className={styles.page}>
+
+      {/* ── НАЗАД ── */}
+      <BackLink href="/work" label="Портфолио" />
+
+      {/* ── HERO ── */}
+      <div ref={heroRef} className={styles.hero}>
+        <div
+          className={styles.heroBg}
+          style={{
+            backgroundImage: work.image ? `url(${work.image}), ${work.thumbBg}` : work.thumbBg,
+          }}
+        />
+        <div className={styles.heroBgOverlay} />
+
+        <div className={styles.heroMeta}>
+          <span className={styles.heroTag} style={{ color: work.serviceColor }}>
+            {work.serviceTag}
+          </span>
+          <h1 className={styles.heroTitle}>{work.title}</h1>
+          <p className={styles.heroSub}>{work.sub} · {work.year}</p>
+        </div>
+      </div>
+
+      {/* ── КОНТЕНТ ── */}
+      <div ref={contentRef} className={styles.content}>
+        <div className={styles.contentInner}>
+
+          {/* ── Левая колонка: мета ── */}
+          <aside className={styles.sidebar}>
+            <div className={styles.sidebarSection}>
+              <span className={styles.sidebarLabel}>Клиент</span>
+              <span className={styles.sidebarValue}>{work.client}</span>
+            </div>
+            <div className={styles.sidebarSection}>
+              <span className={styles.sidebarLabel}>Год</span>
+              <span className={styles.sidebarValue}>{work.year}</span>
+            </div>
+            <div className={styles.sidebarSection}>
+              <span className={styles.sidebarLabel}>Категория</span>
+              <span className={styles.sidebarValue}>{work.serviceTitle}</span>
+            </div>
+            <div className={styles.sidebarSection}>
+              <span className={styles.sidebarLabel}>Инструменты</span>
+              <div className={styles.tags}>
+                {(work.tags ?? []).map((t) => (
+                  <span key={t} className={styles.tag}>{t}</span>
+                ))}
+              </div>
+            </div>
+            {work.url && (
+              <div className={styles.sidebarSection}>
+                <span className={styles.sidebarLabel}>Сайт</span>
+                <a
+                  href={work.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.sidebarLink}
+                >
+                  {work.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 9L9 3M4.5 3H9v4.5" stroke="currentColor"
+                      strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </aside>
+
+          {/* ── Правая колонка: описание + галерея ── */}
+          <div className={styles.main}>
+            <div className={styles.intro}>
+              <span className={styles.introEyebrow}>О проекте</span>
+              <p className={styles.introText}>{work.description}</p>
+            </div>
+
+            {/* Галерея */}
+            {work.gallery?.length ? (
+              <div className={styles.gallery}>
+                {work.image && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={work.image}
+                    alt={work.title}
+                    className={styles.galleryImg}
+                  />
+                )}
+                {work.gallery.map((src, i) => (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`${work.title} — изображение ${i + 2}`}
+                    className={styles.galleryImg}
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.gallery}>
+                <div
+                  className={`${styles.galleryItem} ${styles.galleryItemFull}`}
+                  style={{
+                    backgroundImage: work.image ? `url(${work.image}), ${work.thumbBg}` : work.thumbBg,
+                  }}
+                >
+                  <span className={styles.galleryLabel}>Главный экран</span>
+                </div>
+
+                <div className={styles.galleryRow}>
+                  <div
+                    className={styles.galleryItem}
+                    style={{ background: work.thumbBg, filter: "brightness(0.85)" }}
+                  >
+                    <span className={styles.galleryLabel}>Детали</span>
+                  </div>
+                  <div
+                    className={styles.galleryItem}
+                    style={{ background: work.thumbBg, filter: "brightness(0.7)" }}
+                  >
+                    <span className={styles.galleryLabel}>Финал</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── НАВИГАЦИЯ МЕЖДУ РАБОТАМИ ── */}
+      <nav className={styles.workNav}>
+        <Link href={`/work/${prev.slug}`} className={styles.workNavItem}>
+          <span className={styles.workNavDir}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M11 7H3M6.5 3L3 7l3.5 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Предыдущий
+          </span>
+          <span className={styles.workNavTitle}>{prev.title}</span>
+          <span className={styles.workNavSub}>{prev.sub}</span>
+        </Link>
+
+        <div className={styles.workNavDivider} />
+
+        <Link href={`/work/${next.slug}`} className={`${styles.workNavItem} ${styles.workNavItemRight}`}>
+          <span className={styles.workNavDir}>
+            Следующий
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 7h8M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+          <span className={styles.workNavTitle}>{next.title}</span>
+          <span className={styles.workNavSub}>{next.sub}</span>
+        </Link>
+      </nav>
+
+    </div>
+  );
+}
