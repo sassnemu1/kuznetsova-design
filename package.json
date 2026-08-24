@@ -17,8 +17,11 @@
     "resend": "^6.12.4"
   },
   "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.7"
+    "eslint-config-next": "16.2.7",
+    "typescript": "^6.0.3"
   }
 }
