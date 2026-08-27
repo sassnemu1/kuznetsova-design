@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer.jsx";
 import WorkHero from "@/components/Work/WorkHero/WorkHero";
 import PortfolioShowcase from "@/components/Work/PortfolioShowcase/PortfolioShowcase";
+import PortfolioIndustries from "@/components/Work/PortfolioIndustries/PortfolioIndustries";
 import { SERVICES_DATA, getAllWorkSlugs } from "@/data/ServicesData";
 
 import styles from "./page.module.css";
@@ -9,7 +10,7 @@ import styles from "./page.module.css";
 const SITE_URL = "https://kuznetsova.design";
 
 export const metadata = {
-  title: "Портфолио — Kuznetsova Design",
+  title: "Портфолио",
   description:
     "Портфолио дизайн-бюро Kuznetsova Design: логотипы, сайты, брендинг и 3D-визуализация для клиентов из Москвы и других регионов.",
   alternates: { canonical: "/work" },
@@ -55,6 +56,10 @@ export default function PortfolioPage() {
       <Navbar />
 
       <WorkHero />
+
+      <div id="main">
+        <PortfolioIndustries />
+      </div>
 
       <PortfolioShowcase />
 

@@ -1,0 +1,413 @@
+/* ─── PAGE ───────────────────────────────────────────────────── */
+.page {
+  background: var(--bg);
+}
+
+.inner {
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: #0d0d0d;
+  padding: clamp(132px, 15vw, 208px) 6vw clamp(64px, 8vw, 104px);
+  overflow: hidden;
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 28% 45%, #000 0%, transparent 80%);
+  mask-image: radial-gradient(ellipse 75% 65% at 28% 45%, #000 0%, transparent 80%);
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  top: -140px;
+  right: -90px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(56, 100, 219, 0.22), transparent 68%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 1520px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.heroTitle {
+  margin-top: 20px;
+  font-family: var(--font-display), var(--font-fallback);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.heroDivider {
+  width: 100%;
+  height: 1px;
+  margin: clamp(28px, 4vw, 44px) 0 clamp(22px, 3vw, 32px);
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    rgba(56, 100, 219, 0.35) 40%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+
+.heroLead {
+  max-width: 700px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.heroMeta {
+  margin-top: 22px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ─── LIST SECTION ───────────────────────────────────────────── */
+.list {
+  padding: clamp(72px, 9vw, 128px) 0 clamp(56px, 7vw, 88px);
+  background: var(--bg);
+}
+
+.sectionHead {
+  max-width: 720px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.label::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.sectionTitle {
+  margin-top: 16px;
+  font-family: var(--font-display), var(--font-fallback);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #1a1a1a;
+}
+
+.sectionText {
+  margin-top: 16px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* ─── CARDS ──────────────────────────────────────────────────── */
+.grid {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: start;
+  padding: clamp(28px, 3.4vw, 52px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #ffffff;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 100, 219, 0.32);
+}
+
+/* Заголовок и номер */
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 1.6vw, 24px);
+}
+
+.cardNum {
+  flex-shrink: 0;
+  font-family: var(--font-bold), var(--font-fallback);
+  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.cardTitle {
+  font-family: var(--font-display), var(--font-fallback);
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: #1a1a1a;
+}
+
+/* Ссылка растягивается на всю карточку, но остаётся настоящей <a> */
+.cardLink {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+}
+
+.card:hover .cardLink {
+  color: var(--accent);
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Правая колонка */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cardLead {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ─── CATALOGUE PANEL ────────────────────────────────────────── */
+.catalogue {
+  padding: 0 0 clamp(80px, 10vw, 140px);
+  background: var(--bg);
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: center;
+  padding: clamp(32px, 4vw, 64px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-soft);
+}
+
+.panelText {
+  max-width: 640px;
+}
+
+.panelTitle {
+  margin-top: 16px;
+  font-family: var(--font-display), var(--font-fallback);
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #1a1a1a;
+}
+
+.panelLead {
+  margin-top: 14px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.panelLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  justify-content: flex-end;
+}
+
+.panelPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+}
+
+.panelPrimary:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.panelSecondary {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.panelSecondary:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .panel {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: flex-start;
+  }
+
+  .panelLinks {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 120px 24px 64px;
+  }
+
+  .inner {
+    padding: 0 24px;
+  }
+
+  .card {
+    padding: 24px;
+    border-radius: 14px;
+  }
+
+  .cardLink::after {
+    border-radius: 14px;
+  }
+
+  .panel {
+    padding: 26px;
+    border-radius: 14px;
+  }
+
+  .panelPrimary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardLink,
+  .panelPrimary,
+  .panelSecondary {
+    transition: none;
+  }
+
+  .card:hover,
+  .panelPrimary:hover {
+    transform: none;
+  }
+}

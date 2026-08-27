@@ -11,11 +11,11 @@ import styles from "./page.module.css";
 const SITE_URL = "https://kuznetsova.design";
 
 export const metadata = {
-  title: "Блог&Новости — Kuznetsova Design",
+  title: "Блог и новости",
   description: "Новости, кейсы и инсайты дизайн-бюро Kuznetsova Design: брендинг, веб-разработка, 3D-дизайн.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Журнал — Kuznetsova Design",
+    title: "Блог и новости — Kuznetsova Design",
     description: "Новости, кейсы и инсайты дизайн-бюро Kuznetsova Design.",
     url: `${SITE_URL}/blog`,
   },

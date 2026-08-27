@@ -3,9 +3,18 @@ import { getAllWorkSlugs } from "@/data/ServicesData";
 
 const SITE_URL = "https://kuznetsova.design";
 
+// /login намеренно отсутствует: страница закрыта от индексации (robots: noindex).
 const STATIC_ROUTES = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
+  { path: "/services", priority: 0.95, changeFrequency: "monthly" },
+  // Коммерческие посадочные — под них идёт семантика с «заказать» и «на заказ».
+  { path: "/uslugi", priority: 0.95, changeFrequency: "monthly" },
+  { path: "/uslugi/logotip", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/uslugi/brending", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/uslugi/sozdanie-saytov", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/uslugi/3d-vizualizaciya", priority: 0.9, changeFrequency: "monthly" },
   { path: "/work", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/plugins", priority: 0.9, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
 ];

@@ -70,7 +70,7 @@ export default function BlogHero() {
       <div className={styles.titleWrap}>
         
         <div className={styles.titleClip}>
-            <h2>Blog & News </h2>
+            <h1 className={styles.title}>Blog &amp; News</h1>
         </div>
       </div>
 

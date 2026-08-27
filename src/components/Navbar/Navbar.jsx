@@ -8,6 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import styles from "./Navbar.module.css";
 
 import FullMenu from "./FullMenu/FullMenu";
+import LanguageToggle from "@/components/UI/LanguageToggle/LanguageToggle";
 import { useBecomeClient } from "@/context/BecomeClientContext";
 
 export default function Navbar() {
@@ -52,6 +53,8 @@ export default function Navbar() {
       >
         <div className={styles.navContainer}>
           <div className={styles.navRight}>
+            <LanguageToggle dark={isServicesVisible} />
+
             <button
               className={styles.clientBtn}
               onClick={openClientForm}

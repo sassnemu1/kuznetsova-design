@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import BackLink from "@/components/Work/BackLink/BackLink";
+import { getIndustry } from "@/data/IndustriesData";
 import styles from "./WorkCase.module.css";
 
 export default function WorkCase({ work, prev, next }) {
@@ -39,6 +40,11 @@ export default function WorkCase({ work, prev, next }) {
           </span>
           <h1 className={styles.heroTitle}>{work.title}</h1>
           <p className={styles.heroSub}>{work.sub} · {work.year}</p>
+          {work.concept && (
+            <span className={styles.conceptBadge}>
+              Концепт — инициативная работа бюро
+            </span>
+          )}
         </div>
       </div>
 
@@ -60,6 +66,27 @@ export default function WorkCase({ work, prev, next }) {
               <span className={styles.sidebarLabel}>Категория</span>
               <span className={styles.sidebarValue}>{work.serviceTitle}</span>
             </div>
+            {work.industry?.length > 0 && (
+              <div className={styles.sidebarSection}>
+                <span className={styles.sidebarLabel}>Отрасль</span>
+                <div className={styles.tags}>
+                  {work.industry.map((id) => {
+                    const ind = getIndustry(id);
+                    if (!ind) return null;
+                    return (
+                      <Link
+                        key={id}
+                        href={`/work#${id}`}
+                        className={styles.industryLink}
+                        style={{ "--ind-color": ind.color }}
+                      >
+                        {ind.ru}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             <div className={styles.sidebarSection}>
               <span className={styles.sidebarLabel}>Инструменты</span>
               <div className={styles.tags}>

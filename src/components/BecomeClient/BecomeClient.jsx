@@ -162,7 +162,7 @@ export default function BecomeClient({ isOpen, onClose }) {
               </li>
               <li>
                 <span className={styles.promiseIcon}>03</span>
-                Результат в срок или деньги обратно
+                Сроки и объём работ зафиксированы в договоре
               </li>
             </ul>
 
@@ -265,7 +265,7 @@ export default function BecomeClient({ isOpen, onClose }) {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => updateField("phone", e.target.value)}
-                      placeholder="+7 (999) 123-45-67"
+                      placeholder="+7 (___) ___-__-__"
                       required
                     />
                     {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}

@@ -1,0 +1,106 @@
+/* ─── Переключатель языка RU / EN ─────────────────────────────
+   Тихий, как и вся навигация: хайрлайн-рамка, светлая подложка,
+   один аккуратный бегунок под активным языком.                 */
+
+.group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* Бегунок под активным языком */
+.indicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc((100% - 6px) / 2);
+  border-radius: 8px;
+  background: var(--accent);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+.group[data-active="en"] .indicator {
+  transform: translateX(100%);
+}
+
+.option {
+  position: relative;
+  z-index: 1;
+  min-width: 34px;
+  padding: 6px 9px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+
+  transition: color 0.3s ease;
+}
+
+.option:hover {
+  color: var(--text);
+}
+
+.optionActive,
+.optionActive:hover {
+  color: #fff;
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─── Тёмная навигация (см. .darkMode в Navbar.module.css) ─── */
+.dark {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark .option {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .option:hover {
+  color: #fff;
+}
+
+.dark .optionActive,
+.dark .optionActive:hover {
+  color: #fff;
+}
+
+.dark .option:focus-visible {
+  outline-color: #fff;
+}
+
+/* ─── Адаптив ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .option {
+    min-width: 30px;
+    padding: 6px 7px;
+    font-size: 10px;
+  }
+}
+
+/* ─── Уважаем prefers-reduced-motion ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .group,
+  .indicator,
+  .option {
+    transition: none;
+  }
+}

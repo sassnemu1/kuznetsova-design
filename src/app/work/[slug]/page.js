@@ -5,6 +5,8 @@ import {
   getAllWorkSlugs,
 } from "@/data/ServicesData";
 import WorkCase from "@/components/Work/WorkCase/WorkCase";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer.jsx";
 
 const SITE_URL = "https://kuznetsova.design";
 
@@ -81,7 +83,9 @@ export default async function WorkPage({ params }) {
           __html: JSON.stringify([breadcrumbJsonLd, creativeWorkJsonLd]),
         }}
       />
+      <Navbar />
       <WorkCase work={work} prev={prev} next={next} />
+      <Footer />
     </>
   );
 }

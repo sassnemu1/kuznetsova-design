@@ -1,0 +1,401 @@
+/* ─── PANEL ──────────────────────────────────────────────── */
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  padding: clamp(24px, 4vw, 36px);
+}
+
+/* ─── TABS ───────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-soft);
+  margin-bottom: 28px;
+}
+
+.tab {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 9px;
+  background: transparent;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tabActive {
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.05);
+}
+
+.tabPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabPanel[hidden] {
+  display: none;
+}
+
+/* ─── SIGN-IN CONTENT ────────────────────────────────────── */
+.notice {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+
+.noticeSecondary {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+.mono {
+  font-family: ui-monospace, "SF Mono", "Roboto Mono", monospace;
+  font-size: 0.92em;
+  color: var(--accent);
+}
+
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  align-self: flex-start;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.primaryLink:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.hint {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin: 16px 0 0;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 26px 0 22px;
+}
+
+.switchRow {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.switchLink {
+  padding: 0;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--accent);
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.25s ease;
+}
+
+.switchLink:hover {
+  opacity: 0.75;
+}
+
+.inlineLink {
+  color: var(--accent);
+  border-bottom: 1px solid currentColor;
+}
+
+.inlineLink:hover {
+  opacity: 0.75;
+}
+
+/* ─── LIVE REGION ────────────────────────────────────────── */
+/* Читается скринридером, визуально не занимает места. */
+.liveRegion {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ─── FORM ───────────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formIntro {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  left: -9999px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.label span {
+  color: var(--accent);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14px;
+  color: var(--text);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-light);
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: rgba(17, 17, 17, 0.16);
+}
+
+.select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-light) 50%),
+    linear-gradient(135deg, var(--text-light) 50%, transparent 50%);
+  background-position: calc(100% - 19px) 21px, calc(100% - 14px) 21px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 108px;
+  line-height: 1.65;
+}
+
+.inputError {
+  border-color: #b8433f;
+  background: rgba(184, 67, 63, 0.04);
+}
+
+.errorText {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #b8433f;
+  margin: 0;
+}
+
+/* ─── CONSENT ────────────────────────────────────────────── */
+.consentField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ─── SUBMIT ─────────────────────────────────────────────── */
+.submitBtn {
+  align-self: flex-start;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ghostBtn {
+  align-self: flex-start;
+  padding: 13px 24px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.ghostBtn:hover {
+  border-color: rgba(17, 17, 17, 0.18);
+  background: var(--bg-soft);
+}
+
+/* ─── SUCCESS ────────────────────────────────────────────── */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 6px 0 4px;
+}
+
+.successLabel {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.successTitle {
+  font-family: var(--font-display), var(--font-fallback);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(24px, 4vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0;
+}
+
+.successBody {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .panel {
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .tab {
+    font-size: 12px;
+    padding: 10px 8px;
+  }
+
+  .primaryLink,
+  .submitBtn {
+    align-self: stretch;
+    width: 100%;
+  }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .primaryLink,
+  .submitBtn,
+  .tab,
+  .ghostBtn {
+    transition: none;
+  }
+
+  .primaryLink:hover,
+  .submitBtn:hover:not(:disabled) {
+    transform: none;
+  }
+}

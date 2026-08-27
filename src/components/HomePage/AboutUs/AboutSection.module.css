@@ -550,7 +550,13 @@
   /* border: 1px solid var(--border); */
   /* border-radius: 16px; */
 
-  background-image: url("/bg-abstr.jpg");
+  /* Исходник был 5041×7113 и весил 4,2 МБ — грузился на каждом заходе на главную.
+     Пережат в WebP (45 КБ) с JPEG-фолбэком для старых браузеров. */
+  background-image: url("/bg-abstr.min.jpg");
+  background-image: image-set(
+    url("/bg-abstr.webp") type("image/webp"),
+    url("/bg-abstr.min.jpg") type("image/jpeg")
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

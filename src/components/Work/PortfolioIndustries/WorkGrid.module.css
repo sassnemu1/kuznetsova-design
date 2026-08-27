@@ -1,0 +1,274 @@
+/* ─── СЕТКА ──────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 26px);
+}
+
+/* ─── КАРТОЧКА ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  overflow: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--ind-color, #3864db) 34%, var(--border));
+}
+
+.card:focus-within {
+  border-color: color-mix(in srgb, var(--ind-color, #3864db) 34%, var(--border));
+}
+
+/* Вся карточка — одна ссылка на кейс */
+.cardLink {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(16px, 1.6vw, 22px);
+  color: #fff;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+  border-radius: 13px;
+}
+
+/* ─── ФОН ────────────────────────────────────────────────────── */
+.thumb {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.001);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover .thumb,
+.card:focus-within .thumb {
+  transform: scale(1.045);
+}
+
+.veil {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.42) 0%,
+    rgba(10, 10, 10, 0.1) 34%,
+    rgba(10, 10, 10, 0.62) 74%,
+    rgba(10, 10, 10, 0.86) 100%
+  );
+  transition: opacity 0.45s ease;
+}
+
+.card:hover .veil,
+.card:focus-within .veil {
+  opacity: 0.96;
+}
+
+/* ─── ВЕРХНЯЯ СТРОКА: бейджи ─────────────────────────────────── */
+.top {
+  position: absolute;
+  top: clamp(14px, 1.4vw, 20px);
+  left: clamp(16px, 1.6vw, 22px);
+  right: clamp(16px, 1.6vw, 22px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Место под кнопку внешней ссылки в правом верхнем углу */
+.cardHasUrl .top {
+  padding-right: 84px;
+}
+
+/* Бейдж инициативного концепта — нейтральный, без рекламной подачи */
+.concept {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(12, 12, 12, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.year {
+  margin-left: auto;
+  font-family: var(--font-bold);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ─── ТЕКСТ ──────────────────────────────────────────────────── */
+.body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* Описание раскрывается на ховере и на фокусе с клавиатуры */
+.desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.74);
+  transition:
+    max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.4s ease,
+    margin-top 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover .desc,
+.card:focus-within .desc {
+  max-height: 4.9em;
+  opacity: 1;
+  margin-top: 6px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ─── ВНЕШНЯЯ ССЫЛКА (соседняя, не вложенная в Link) ─────────── */
+.external {
+  position: absolute;
+  right: clamp(16px, 1.6vw, 22px);
+  top: clamp(12px, 1.3vw, 17px);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(12, 12, 12, 0.44);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+.external:hover {
+  background: var(--ind-color, var(--accent));
+  border-color: var(--ind-color, var(--accent));
+  color: #fff;
+}
+
+.external:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.externalText {
+  line-height: 1;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+
+  /* На тач-устройствах ховера нет — описание видно сразу */
+  .desc {
+    max-height: 4.9em;
+    opacity: 1;
+    margin-top: 6px;
+  }
+}
+
+/* На устройствах без ховера описание не должно оставаться скрытым */
+@media (hover: none) {
+  .desc {
+    max-height: 4.9em;
+    opacity: 1;
+    margin-top: 6px;
+  }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .thumb,
+  .veil,
+  .desc,
+  .external {
+    transition: none !important;
+  }
+  .card:hover { transform: none; }
+  .card:hover .thumb,
+  .card:focus-within .thumb { transform: none; }
+}

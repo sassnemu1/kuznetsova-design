@@ -1,0 +1,261 @@
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: #0d0d0d;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 6vw;
+  overflow: hidden;
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 30% 40%, #000 0%, transparent 80%);
+  mask-image: radial-gradient(ellipse 75% 65% at 30% 40%, #000 0%, transparent 80%);
+  pointer-events: none;
+}
+
+.glow,
+.glow2,
+.glow3 {
+  position: absolute;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.glow {
+  top: -120px;
+  background: radial-gradient(circle, rgba(56, 100, 219, 0.2), transparent 68%);
+}
+.glow2 {
+  top: 130px;
+  background: radial-gradient(circle, rgba(43, 158, 143, 0.16), transparent 68%);
+}
+.glow3 {
+  top: 280px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.18), transparent 68%);
+}
+
+/* ─── TOP BAR ────────────────────────────────────────────────── */
+.topBar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 36px;
+  padding-bottom: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 12px;
+}
+
+.brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.logoMark {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: var(--accent);
+  overflow: hidden;
+}
+
+.logoMark img {
+  object-fit: cover;
+}
+
+.brandName {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.issue {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.issueLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.issueDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulseDot 2.8s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56, 100, 219, 0.5); }
+  50%      { box-shadow: 0 0 0 7px rgba(56, 100, 219, 0); }
+}
+
+/* ─── TITLE ──────────────────────────────────────────────────── */
+.titleWrap {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 0;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.kicker::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.titleClip {
+  display: flex;
+  overflow: hidden;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(64px, 9vw, 150px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: #fff;
+  margin: 0;
+  /* запас под выносные элементы кириллицы — их не должно срезать клипом */
+  padding-bottom: 0.06em;
+}
+
+/* ─── BOTTOM ─────────────────────────────────────────────────── */
+.bottom {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 44px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    rgba(56, 100, 219, 0.35) 40%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  margin-bottom: 24px;
+}
+
+.bottomContent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 560px;
+}
+
+.stats {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1;
+  color: #fff;
+}
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero { min-height: 74vh; }
+  .stats { gap: 28px; }
+  .bottomContent { gap: 28px; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 0 24px; }
+  .topBar { padding: 18px 0 24px; }
+  .brandName { display: none; }
+  .issueLabel { display: none; }
+
+  .titleWrap { padding: 24px 0; }
+
+  .bottomContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .stats { gap: 22px; flex-wrap: wrap; }
+  .statNum { font-size: 24px; }
+  .statLabel { font-size: 10px; letter-spacing: 0.12em; }
+
+  .glow, .glow2, .glow3 { width: 280px; height: 280px; }
+  .glow { top: -60px; }
+  .glow2 { top: 130px; }
+  .glow3 { top: 270px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .issueDot { animation: none; }
+}

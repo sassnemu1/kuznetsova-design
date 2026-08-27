@@ -1,0 +1,90 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.inner {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: clamp(140px, 20vh, 200px) 24px clamp(96px, 14vh, 150px);
+}
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+.header {
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin: 0 0 18px;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-display), var(--font-fallback);
+  font-size: clamp(34px, 6vw, 52px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.lead {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ─── SUSPENSE FALLBACK ──────────────────────────────────── */
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-soft);
+}
+
+.fallbackLabel {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .inner {
+    padding: 118px 20px 80px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+}

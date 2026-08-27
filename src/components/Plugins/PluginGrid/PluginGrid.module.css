@@ -1,0 +1,278 @@
+/* ─── SECTION ────────────────────────────────────────────────── */
+.section {
+  background: var(--bg);
+  padding: clamp(72px, 9vw, 128px) 0 clamp(72px, 9vw, 120px);
+}
+
+.inner {
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 6vw;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.header {
+  max-width: 760px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.eyebrow {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: var(--font-display), var(--font-fallback);
+  font-size: clamp(38px, 4.6vw, 76px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+
+.intro {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+
+/* ─── TABS ───────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: clamp(28px, 4vw, 44px);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.tab:hover {
+  border-color: color-mix(in srgb, var(--tab-color, var(--accent)) 45%, var(--border));
+  color: var(--text);
+}
+
+.tabActive {
+  background: var(--bg-soft);
+  border-color: color-mix(in srgb, var(--tab-color, var(--accent)) 55%, var(--border));
+  color: var(--text);
+}
+
+.tabDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tab-color, var(--accent));
+  flex-shrink: 0;
+}
+
+.tabLabel {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.tabCount {
+  font-family: var(--font-bold), var(--font-fallback);
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+}
+
+.tabActive .tabCount {
+  color: var(--text-secondary);
+}
+
+/* ─── PANEL ──────────────────────────────────────────────────── */
+.panel {
+  outline-offset: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 1.6vw, 24px);
+  list-style: none;
+}
+
+/* ─── CARD ───────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(22px, 2.2vw, 32px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.35s ease, transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Тонкая полоса отраслевого цвета — единственный «шум» на карточке */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--mod-color, var(--accent));
+  opacity: 0.75;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--mod-color, var(--accent)) 38%, var(--border));
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.cardTitle {
+  font-family: var(--font-display), var(--font-fallback);
+  font-size: clamp(23px, 1.8vw, 30px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* ─── STATUS PILL ────────────────────────────────────────────── */
+/* Цвет несёт точка и рамка, текст остаётся контрастным — статус читается
+   и без различения цветов. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--status-color, var(--accent)) 40%, transparent);
+  background: color-mix(in srgb, var(--status-color, var(--accent)) 9%, transparent);
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.pillDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-color, var(--accent));
+}
+
+.cardIndustry {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-top: -6px;
+}
+
+.cardLead {
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ─── FEATURES ───────────────────────────────────────────────── */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 14px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.check {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--mod-color, var(--accent));
+}
+
+/* ─── CARD LINK ──────────────────────────────────────────────── */
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid color-mix(in srgb, var(--mod-color, var(--accent)) 40%, transparent);
+  font-family: var(--font-body), var(--font-fallback);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  transition: border-color 0.3s ease, color 0.3s ease, gap 0.3s ease;
+}
+
+.cardLink:hover {
+  gap: 12px;
+  color: var(--mod-color, var(--accent));
+  border-color: var(--mod-color, var(--accent));
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .inner { padding: 0 24px; }
+  .grid { grid-template-columns: 1fr; }
+  .cardHead { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .pill { margin-top: 0; }
+  .tab { padding: 9px 15px; }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardLink,
+  .tab {
+    transition: none;
+  }
+  .card:hover { transform: none; }
+}

@@ -6,12 +6,14 @@ import Link from "next/link";
 import styles from "./FullMenu.module.css";
 
 const NAV_ITEMS = [
-  { num: "01", label: "Главная",   href: "/" },
-  { num: "02", label: "Услуги",    href: "/#services" },
-  { num: "03", label: "О студии",  href: "/#studio" },
-  { num: "04", label: "Портфолио", href: "/work" },
-  { num: "05", label: "Наш блог",    href: "/blog" },
-  { num: "06", label: "Контакт",   href: "/#contact" },
+  { num: "01", label: "Главная",       href: "/" },
+  { num: "02", label: "Услуги",        href: "/services" },
+  { num: "03", label: "Портфолио",     href: "/work" },
+  { num: "04", label: "Плагины",       href: "/plugins" },
+  { num: "05", label: "О студии",      href: "/#studio" },
+  { num: "06", label: "Наш блог",      href: "/blog" },
+  { num: "07", label: "Личный кабинет", href: "/login" },
+  { num: "08", label: "Контакт",       href: "/#contact" },
 ];
 
 export default function FullMenu({ isOpen, onClose }) {
@@ -103,7 +105,7 @@ export default function FullMenu({ isOpen, onClose }) {
         {/* Bottom bar */}
         <div className={styles.bottomBar}>
           <div className={styles.contact}>
-          <span className={styles.contactTitle}>Telegram</span>
+          <span className={styles.contactTitle}>Написать в Telegram</span>
           <a
             href="https://t.me/KUZNETSOVA_designn"
             target="_blank"

@@ -15,6 +15,12 @@ import { MdOutlineMail } from "react-icons/md";
 
 import useGSAP from "@/hooks/useGSAP";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import {
+  SERVICES_DATA,
+  getAllWorks,
+  getIndustryCounts,
+} from "@/data/ServicesData";
+import { plural } from "@/lib/plural";
 
 const services = [
   {
@@ -43,11 +49,17 @@ const services = [
   },
 ];
 
+// Цифры считаются из реальных данных портфолио — иначе главная начинает
+// противоречить странице /work, где счётчик всегда честный.
+const totalWorks = getAllWorks().length;
+const totalDisciplines = SERVICES_DATA.length;
+const totalIndustries = Object.keys(getIndustryCounts()).length;
+
 const stats = [
   { num: "5+", label: "лет в дизайне" },
-  { num: "80+", label: "проектов" },
-  { num: "3", label: "дисциплины" },
-  { num: "100%", label: "на чистом коде" },
+  { num: `${totalWorks}`, label: plural(totalWorks, "проект", "проекта", "проектов") },
+  { num: `${totalDisciplines}`, label: plural(totalDisciplines, "направление", "направления", "направлений") },
+  { num: `${totalIndustries}`, label: plural(totalIndustries, "отрасль", "отрасли", "отраслей") },
 ];
 
 const story = [
@@ -365,7 +377,7 @@ export default function AboutSection() {
                 </p>
 
                 <span className={styles.storyQuoteAuthor}>
-                  Принцип студии
+                  Стив Джобс — принцип, которому следует бюро
                 </span>
 
                 <div className={styles.storyContacts}>
@@ -408,7 +420,7 @@ export default function AboutSection() {
                         <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
                         <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
                         <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer"><FaPinterest /></a>
-                        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer"><FaTelegramPlane /></a>
+                        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал бюро"><FaTelegramPlane /></a>
                         <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer"><FaVk /></a>
                     </div>
                 </div>

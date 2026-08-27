@@ -139,9 +139,15 @@
   overflow: hidden;
   /* line-height: 0.88; */
 }
-.titleClip h2 {
-    font-family: var(--font-bold);
+/* Заголовок страницы — h1 (был h2, размер и начертание сохранены один в один) */
+.titleClip .title {
+    font-family: var(--font-bold), var(--font-fallback);
     font-size: clamp(72px, 8vw, 150px);
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+    margin: 0;
 }
 
 /* ─── BOTTOM ─────────────────────────────────────────────────── */

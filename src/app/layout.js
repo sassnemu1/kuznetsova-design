@@ -1,6 +1,8 @@
 import { Cormorant_Garamond, DM_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { BecomeClientProvider } from "@/context/BecomeClientContext";
+import { LanguageProvider } from "@/context/LanguageContext";
+import ChatWidget from "@/components/Chat/ChatWidget";
 
 const SITE_URL = "https://kuznetsova.design";
 const SITE_TITLE = "Kuznetsova Design — дизайн-бюро в Москве";
@@ -85,6 +87,9 @@ export const metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
     yandex: process.env.NEXT_PUBLIC_YANDEX_SITE_VERIFICATION || undefined,
   },
+
+  // Манифест был в public/, но не подключён — браузер его не видел.
+  manifest: "/site.webmanifest",
 
   icons: {
     icon: [
@@ -184,9 +189,15 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify([organizationJsonLd, websiteJsonLd]),
           }}
         />
-        <BecomeClientProvider>
-          {children}
-        </BecomeClientProvider>
+        <a href="#main" className="skip-link">
+          Перейти к содержимому
+        </a>
+        <LanguageProvider>
+          <BecomeClientProvider>
+            {children}
+            <ChatWidget />
+          </BecomeClientProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

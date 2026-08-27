@@ -8,7 +8,7 @@ export default function InfoSection() {
       
       <div className={styles.inner}>
         <span className={styles.label}>
-          Что Мы Создаем
+          Что мы создаём
         </span>
 
         <h2 className={styles.title}>
