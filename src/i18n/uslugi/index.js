@@ -10,9 +10,11 @@
 import en from "./en";
 import es from "./es";
 import pt from "./pt";
+import fr from "./fr";
 import de from "./de";
+import tr from "./tr";
 
-const BUNDLES = { en, es, pt, de };
+const BUNDLES = { en, es, pt, fr, de, tr };
 
 /** Перевод одной услуги или null, если языка или услуги нет. */
 export function getUslugiBundle(lang, slug) {
