@@ -8,13 +8,16 @@
  * Для языка, перевода на который ещё нет, страница отдаётся на английском.
  */
 import en from "./en";
+import zh from "./zh";
 import es from "./es";
 import pt from "./pt";
 import fr from "./fr";
 import de from "./de";
+import ar from "./ar";
+import ja from "./ja";
 import tr from "./tr";
 
-const BUNDLES = { en, es, pt, fr, de, tr };
+const BUNDLES = { en, zh, es, pt, fr, de, ar, ja, tr };
 
 /** Перевод одной услуги или null, если языка или услуги нет. */
 export function getUslugiBundle(lang, slug) {
