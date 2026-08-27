@@ -63,6 +63,23 @@ export const DICT = {
      РУССКИЙ
      ══════════════════════════════════════════════════════════════ */
   ru: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Отделы портфолио",
+    "portfolio.title": "Кому мы делаем дизайн",
+    "portfolio.intro": "Слева выберите продукт — что именно мы сделали, и отрасль — для кого. Фильтры складываются: например, «Web & Mobile» и «Еда» покажут сайты для ресторанов и кафе.",
+    "portfolio.productLabel": "Продукт",
+    "portfolio.industryLabel": "Отрасль",
+    "portfolio.allProducts": "Все продукты",
+    "portfolio.everything": "Всё портфолио",
+    "portfolio.allIndustries": "Все отрасли",
+    "portfolio.everyone": "Все клиенты",
+    "portfolio.allDesc": "Полное портфолио бюро: брендинг, сайты, 3D и контент.",
+    "portfolio.worksUnit": "работ",
+    "portfolio.removeFilter": "Снять фильтр",
+    "portfolio.emptyLabel": "Раздел готовится",
+    "portfolio.emptyText": "В этой комбинации у нас пока нет опубликованных кейсов. Расскажите о своей задаче — покажем близкие по смыслу работы и обсудим, как это будет выглядеть у вас.",
+    "portfolio.discuss": "Обсудить проект",
+    "portfolio.reset": "Сбросить фильтры",
     /* ─── Общее ─────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Дизайн-бюро · Москва",
@@ -411,6 +428,23 @@ export const DICT = {
      ENGLISH
      ══════════════════════════════════════════════════════════════ */
   en: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Portfolio sections",
+    "portfolio.title": "Who we design for",
+    "portfolio.intro": "Pick a product on the left — what we actually made — and an industry, for whom. The filters combine: “Web & Mobile” plus “Food” shows sites built for restaurants and cafés.",
+    "portfolio.productLabel": "Product",
+    "portfolio.industryLabel": "Industry",
+    "portfolio.allProducts": "All products",
+    "portfolio.everything": "Entire portfolio",
+    "portfolio.allIndustries": "All industries",
+    "portfolio.everyone": "All clients",
+    "portfolio.allDesc": "The studio's full portfolio: branding, websites, 3D and content.",
+    "portfolio.worksUnit": "works",
+    "portfolio.removeFilter": "Clear filter",
+    "portfolio.emptyLabel": "Section in progress",
+    "portfolio.emptyText": "We have no published cases for this combination yet. Tell us about your project — we will show closely related work and talk through how it would look for you.",
+    "portfolio.discuss": "Discuss a project",
+    "portfolio.reset": "Reset filters",
     /* ─── Common ────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Design studio · Moscow",
@@ -760,6 +794,23 @@ export const DICT = {
      中文 (ZH)
      ══════════════════════════════════════════════════════════════ */
   zh: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "作品分类",
+    "portfolio.title": "我们为谁做设计",
+    "portfolio.intro": "在左侧选择产品——我们具体做了什么，以及行业——为谁而做。两个筛选条件可叠加：「Web & Mobile」加「餐饮」将显示为餐厅和咖啡馆打造的网站。",
+    "portfolio.productLabel": "产品",
+    "portfolio.industryLabel": "行业",
+    "portfolio.allProducts": "全部产品",
+    "portfolio.everything": "全部作品",
+    "portfolio.allIndustries": "全部行业",
+    "portfolio.everyone": "全部客户",
+    "portfolio.allDesc": "工作室的完整作品集：品牌、网站、3D 与内容。",
+    "portfolio.worksUnit": "个项目",
+    "portfolio.removeFilter": "清除筛选",
+    "portfolio.emptyLabel": "板块筹备中",
+    "portfolio.emptyText": "该组合下暂无已发布的案例。请告诉我们您的项目，我们会展示相近的作品，并说明它在您这里会是什么样子。",
+    "portfolio.discuss": "洽谈项目",
+    "portfolio.reset": "重置筛选",
     /* ─── 通用 ──────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "设计工作室 · 莫斯科",
@@ -1102,6 +1153,23 @@ export const DICT = {
      ESPAÑOL (ES)
      ══════════════════════════════════════════════════════════════ */
   es: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Secciones del portafolio",
+    "portfolio.title": "Para quién diseñamos",
+    "portfolio.intro": "Elija a la izquierda un producto —qué hicimos exactamente— y un sector, para quién. Los filtros se combinan: «Web & Mobile» más «Gastronomía» muestra sitios creados para restaurantes y cafeterías.",
+    "portfolio.productLabel": "Producto",
+    "portfolio.industryLabel": "Sector",
+    "portfolio.allProducts": "Todos los productos",
+    "portfolio.everything": "Portafolio completo",
+    "portfolio.allIndustries": "Todos los sectores",
+    "portfolio.everyone": "Todos los clientes",
+    "portfolio.allDesc": "El portafolio completo del estudio: identidad, sitios web, 3D y contenido.",
+    "portfolio.worksUnit": "proyectos",
+    "portfolio.removeFilter": "Quitar filtro",
+    "portfolio.emptyLabel": "Sección en preparación",
+    "portfolio.emptyText": "Todavía no tenemos casos publicados para esta combinación. Cuéntenos su proyecto: le mostraremos trabajos afines y hablaremos de cómo quedaría en su caso.",
+    "portfolio.discuss": "Hablar del proyecto",
+    "portfolio.reset": "Restablecer filtros",
     /* ─── General ───────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Estudio de diseño · Moscú",
@@ -1453,6 +1521,23 @@ export const DICT = {
      PORTUGUÊS (PT)
      ══════════════════════════════════════════════════════════════ */
   pt: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Secções do portfólio",
+    "portfolio.title": "Para quem desenhamos",
+    "portfolio.intro": "Escolha à esquerda um produto — o que fizemos exactamente — e um sector, para quem. Os filtros combinam-se: «Web & Mobile» mais «Restauração» mostra sites feitos para restaurantes e cafés.",
+    "portfolio.productLabel": "Produto",
+    "portfolio.industryLabel": "Sector",
+    "portfolio.allProducts": "Todos os produtos",
+    "portfolio.everything": "Portfólio completo",
+    "portfolio.allIndustries": "Todos os sectores",
+    "portfolio.everyone": "Todos os clientes",
+    "portfolio.allDesc": "O portfólio completo do estúdio: identidade, sites, 3D e conteúdo.",
+    "portfolio.worksUnit": "projectos",
+    "portfolio.removeFilter": "Remover filtro",
+    "portfolio.emptyLabel": "Secção em preparação",
+    "portfolio.emptyText": "Ainda não temos casos publicados para esta combinação. Fale-nos do seu projecto — mostramos trabalhos próximos e explicamos como ficaria no seu caso.",
+    "portfolio.discuss": "Falar sobre o projecto",
+    "portfolio.reset": "Limpar filtros",
     /* ─── Geral ─────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Estúdio de design · Moscovo",
@@ -1805,6 +1890,23 @@ export const DICT = {
      Espace insécable ( ) avant « : ; ! ? », comme le veut l'usage.
      ══════════════════════════════════════════════════════════════ */
   fr: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Sections du portfolio",
+    "portfolio.title": "Pour qui nous concevons",
+    "portfolio.intro": "Choisissez à gauche un produit — ce que nous avons réellement fait — et un secteur, pour qui. Les filtres se combinent : « Web & Mobile » et « Restauration » affichent les sites créés pour des restaurants et des cafés.",
+    "portfolio.productLabel": "Produit",
+    "portfolio.industryLabel": "Secteur",
+    "portfolio.allProducts": "Tous les produits",
+    "portfolio.everything": "Portfolio complet",
+    "portfolio.allIndustries": "Tous les secteurs",
+    "portfolio.everyone": "Tous les clients",
+    "portfolio.allDesc": "Le portfolio complet du studio : identité, sites web, 3D et contenu.",
+    "portfolio.worksUnit": "projets",
+    "portfolio.removeFilter": "Retirer le filtre",
+    "portfolio.emptyLabel": "Section en préparation",
+    "portfolio.emptyText": "Nous n'avons pas encore de cas publiés pour cette combinaison. Parlez-nous de votre projet : nous montrerons des travaux proches et verrons ce que cela donnerait chez vous.",
+    "portfolio.discuss": "Parler du projet",
+    "portfolio.reset": "Réinitialiser les filtres",
     /* ─── Général ───────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Studio de design · Moscou",
@@ -2156,6 +2258,23 @@ export const DICT = {
      DEUTSCH (DE)
      ══════════════════════════════════════════════════════════════ */
   de: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Portfolio-Bereiche",
+    "portfolio.title": "Für wen wir gestalten",
+    "portfolio.intro": "Wählen Sie links ein Produkt — was wir konkret gemacht haben — und eine Branche, für wen. Die Filter lassen sich kombinieren: „Web & Mobile“ plus „Gastronomie“ zeigt Websites für Restaurants und Cafés.",
+    "portfolio.productLabel": "Produkt",
+    "portfolio.industryLabel": "Branche",
+    "portfolio.allProducts": "Alle Produkte",
+    "portfolio.everything": "Gesamtes Portfolio",
+    "portfolio.allIndustries": "Alle Branchen",
+    "portfolio.everyone": "Alle Kunden",
+    "portfolio.allDesc": "Das vollständige Portfolio des Studios: Branding, Websites, 3D und Content.",
+    "portfolio.worksUnit": "Projekte",
+    "portfolio.removeFilter": "Filter entfernen",
+    "portfolio.emptyLabel": "Bereich in Vorbereitung",
+    "portfolio.emptyText": "Für diese Kombination haben wir noch keine veröffentlichten Cases. Erzählen Sie uns von Ihrem Projekt — wir zeigen verwandte Arbeiten und besprechen, wie es bei Ihnen aussehen würde.",
+    "portfolio.discuss": "Projekt besprechen",
+    "portfolio.reset": "Filter zurücksetzen",
     /* ─── Allgemein ─────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Designbüro · Moskau",
@@ -2508,6 +2627,23 @@ export const DICT = {
      العربية (AR) — письмо справа налево, dir="rtl"
      ══════════════════════════════════════════════════════════════ */
   ar: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "أقسام الأعمال",
+    "portfolio.title": "لمن نصمّم",
+    "portfolio.intro": "اختر من اليمين المنتج — ما الذي أنجزناه بالضبط — والقطاع، أي لمن. المرشّحات تتكامل: «Web & Mobile» مع «المطاعم» تعرض المواقع المصمّمة للمطاعم والمقاهي.",
+    "portfolio.productLabel": "المنتج",
+    "portfolio.industryLabel": "القطاع",
+    "portfolio.allProducts": "كل المنتجات",
+    "portfolio.everything": "كل الأعمال",
+    "portfolio.allIndustries": "كل القطاعات",
+    "portfolio.everyone": "كل العملاء",
+    "portfolio.allDesc": "الأعمال الكاملة للاستوديو: الهوية، المواقع، ثلاثي الأبعاد، والمحتوى.",
+    "portfolio.worksUnit": "عملاً",
+    "portfolio.removeFilter": "إزالة المرشّح",
+    "portfolio.emptyLabel": "القسم قيد الإعداد",
+    "portfolio.emptyText": "لا توجد لدينا بعد أعمال منشورة لهذه التوليفة. أخبرنا عن مشروعك، وسنعرض أعمالاً قريبة منه ونناقش كيف سيبدو لديك.",
+    "portfolio.discuss": "مناقشة المشروع",
+    "portfolio.reset": "إعادة ضبط المرشّحات",
     /* ─── عام ───────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "استوديو تصميم · موسكو",
@@ -2855,6 +2991,23 @@ export const DICT = {
      日本語 (JA)
      ══════════════════════════════════════════════════════════════ */
   ja: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "ポートフォリオの分類",
+    "portfolio.title": "私たちがデザインする相手",
+    "portfolio.intro": "左で製品——実際に何をつくったか——と業界——誰のためか——を選んでください。フィルターは組み合わせられます。「Web & Mobile」と「飲食」を選べば、レストランやカフェ向けのサイトが表示されます。",
+    "portfolio.productLabel": "製品",
+    "portfolio.industryLabel": "業界",
+    "portfolio.allProducts": "すべての製品",
+    "portfolio.everything": "ポートフォリオ全体",
+    "portfolio.allIndustries": "すべての業界",
+    "portfolio.everyone": "すべてのクライアント",
+    "portfolio.allDesc": "スタジオの全作品：ブランディング、ウェブサイト、3D、コンテンツ。",
+    "portfolio.worksUnit": "件",
+    "portfolio.removeFilter": "フィルターを解除",
+    "portfolio.emptyLabel": "準備中のセクション",
+    "portfolio.emptyText": "この組み合わせで公開している事例はまだありません。プロジェクトについてお聞かせください。近い内容の実績をお見せし、御社の場合どうなるかをご説明します。",
+    "portfolio.discuss": "プロジェクトを相談する",
+    "portfolio.reset": "フィルターをリセット",
     /* ─── 共通 ──────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "デザインスタジオ · モスクワ",
@@ -3204,6 +3357,23 @@ export const DICT = {
      TÜRKÇE (TR)
      ══════════════════════════════════════════════════════════════ */
   tr: {
+    /* ─── Объединённое меню портфолио ───────────────────── */
+    "portfolio.eyebrow": "Portföy bölümleri",
+    "portfolio.title": "Kimler için tasarlıyoruz",
+    "portfolio.intro": "Soldan bir ürün — tam olarak ne yaptığımızı — ve bir sektör — kimin için olduğunu — seçin. Filtreler birleşir: «Web & Mobile» ile «Yeme-içme», restoran ve kafeler için yapılmış siteleri gösterir.",
+    "portfolio.productLabel": "Ürün",
+    "portfolio.industryLabel": "Sektör",
+    "portfolio.allProducts": "Tüm ürünler",
+    "portfolio.everything": "Tüm portföy",
+    "portfolio.allIndustries": "Tüm sektörler",
+    "portfolio.everyone": "Tüm müşteriler",
+    "portfolio.allDesc": "Stüdyonun tam portföyü: marka kimliği, web siteleri, 3D ve içerik.",
+    "portfolio.worksUnit": "proje",
+    "portfolio.removeFilter": "Filtreyi kaldır",
+    "portfolio.emptyLabel": "Bölüm hazırlanıyor",
+    "portfolio.emptyText": "Bu kombinasyon için yayımlanmış bir çalışmamız henüz yok. Projenizi anlatın; benzer işleri gösterip sizde nasıl görüneceğini konuşalım.",
+    "portfolio.discuss": "Projeyi konuşalım",
+    "portfolio.reset": "Filtreleri sıfırla",
     /* ─── Genel ─────────────────────────────────────────────── */
     "common.brand": "Kuznetsova Design",
     "common.brandSub": "Tasarım stüdyosu · Moskova",
