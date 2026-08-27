@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { TECHNICAL_DESIGN_DATA } from "@/data/TechnicalDesignData";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import BlueprintMock from "./BlueprintMock";
 import SchematicMock from "./SchematicMock";
 import PcbMock from "./PcbMock";
@@ -16,6 +18,9 @@ const MOCKS = {
 };
 
 export default function TechnicalDesign() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const cardRefs = useRef([]);
@@ -75,14 +80,18 @@ export default function TechnicalDesign() {
         <div className={styles.inner}>
 
           <div ref={headerRef} className={styles.header}>
-            <span className={styles.eyebrow}>Инженерия и документация</span>
+            <span className={styles.eyebrow}>
+              {t("tech.eyebrow", "Инженерия и документация")}
+            </span>
             <h2 className={styles.title}>
-              {"< technical design >"}
-              <span className={styles.scaleBadge}>M 1:1</span>
+              {t("tech.title", "< technical design >")}
+              <span className={styles.scaleBadge}>{t("tech.badge", "M 1:1")}</span>
             </h2>
             <p className={styles.intro}>
-              Готовим техническую документацию для производства: чертежи
-              с допусками, принципиальные схемы и разводку печатных плат.
+              {t(
+                "tech.intro",
+                "Готовим техническую документацию для производства: чертежи с допусками, принципиальные схемы и разводку печатных плат."
+              )}
             </p>
           </div>
 
@@ -104,12 +113,16 @@ export default function TechnicalDesign() {
                     <span className={styles.tag}>{service.tag}</span>
 
                     <h3 className={styles.cardTitle}>
-                      {service.title.split("\n").map((line, li) => (
-                        <span key={li} style={{ display: "block" }}>{line}</span>
-                      ))}
+                      {pickLocalized(service, lang, "title", "titleEn")
+                        .split("\n")
+                        .map((line, li) => (
+                          <span key={li} style={{ display: "block" }}>{line}</span>
+                        ))}
                     </h3>
 
-                    <p className={styles.cardDesc}>{service.desc}</p>
+                    <p className={styles.cardDesc}>
+                      {pickLocalized(service, lang, "desc", "descEn")}
+                    </p>
 
                     <div className={styles.tagsRow}>
                       {service.tags.map((t) => (
@@ -118,7 +131,7 @@ export default function TechnicalDesign() {
                     </div>
 
                     <button className={styles.cta} onClick={openClientForm}>
-                      Обсудить проект
+                      {t("tech.cta", "Обсудить проект")}
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>

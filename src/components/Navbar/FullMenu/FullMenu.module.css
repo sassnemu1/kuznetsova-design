@@ -269,7 +269,10 @@
 .navLabel2 {
   color: #fff;
   font-family: var(--font-display, "Cormorant Garamond", serif);
-  font-size: clamp(52px, 7vw, 96px);
+  /* Размер зависит и от высоты экрана: раньше было только 7vw, и на
+     ноутбуке 1280×720 семь пунктов давали 1575px — последний пункт
+     («Контакт») уезжал за нижнюю границу. */
+  font-size: clamp(30px, min(7vw, 7vh), 96px);
   font-weight: 400;
   font-style: normal;
   letter-spacing: -0.01em;
@@ -414,4 +417,137 @@
   outline: 2px solid #fff;
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ─── Личный кабинет в левой колонке ──────────────────────────
+   Раньше был восьмым пунктом правого списка и не помещался по
+   высоте. Здесь он рядом с логотипом и не конкурирует с навигацией. */
+.leftBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.accountLink {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.accountLink:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.accountLink:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.accountIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.accountBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.accountTitle {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 13px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.accountSub {
+  font-family: var(--font-body, "DM Sans", sans-serif);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 900px) {
+  .accountLink {
+    padding: 10px 12px;
+  }
+  .accountSub { display: none; }
+}
+
+/* ─── Страховка от переполнения на низких экранах ──────────────
+   Даже с адаптивным кеглем на очень низком окне список может не
+   поместиться — тогда он прокручивается, а не обрезается. */
+.nav {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar { display: none; }
+
+.navNum {
+  flex-shrink: 0;
+}
+
+/* ─── Кабинет на телефоне ─────────────────────────────────────
+   На ширине ≤600px левая колонка скрывается целиком, вместе с ней
+   пропадала и ссылка на кабинет. Возвращаем её как отдельный блок
+   над контактами: сама колонка остаётся невидимой, показываем
+   только кабинет и кладём его поверх правой панели. */
+@media (max-width: 600px) {
+  .left {
+    display: block;
+    position: fixed;
+    inset: auto 0 190px 0;
+    width: auto;
+    background: transparent;
+    padding: 0;
+    transform: none;
+    transition: opacity 0.4s ease 0.35s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 6;
+  }
+
+  .overlay.open .left {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Из левой колонки на телефоне нужен только кабинет */
+  .left .logo,
+  .left .badge {
+    display: none;
+  }
+
+  .leftBottom {
+    padding: 0 32px;
+  }
+
+  /* Оставляем списку место снизу, чтобы последний пункт
+     не оказывался под кнопкой кабинета. */
+  .nav {
+    padding-bottom: 84px;
+  }
+
+  .accountLink {
+    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.12);
+  }
 }

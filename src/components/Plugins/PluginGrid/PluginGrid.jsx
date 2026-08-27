@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import { PLUGINS, PLUGIN_STATUS } from "@/data/PluginsData";
 import { getIndustry } from "@/data/IndustriesData";
 import { getIndustryCounts } from "@/data/ServicesData";
@@ -14,16 +16,6 @@ const INDUSTRY_COUNTS = getIndustryCounts();
 
 /* Вкладки собираются из PLUGIN_STATUS, чтобы подписи и цвета жили в данных. */
 const STATUS_ORDER = ["live", "beta", "soon"];
-
-const TABS = [
-  { id: "all", label: "Все", color: null, count: PLUGINS.length },
-  ...STATUS_ORDER.map((id) => ({
-    id,
-    label: PLUGIN_STATUS[id].ru,
-    color: PLUGIN_STATUS[id].color,
-    count: PLUGINS.filter((p) => p.status === id).length,
-  })),
-];
 
 const CheckIcon = () => (
   <svg
@@ -47,12 +39,28 @@ const CheckIcon = () => (
 export default function PluginGrid() {
   const [filter, setFilter] = useState("all");
 
+  const t = useT();
+  const { lang } = useLanguage();
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const gridRef = useRef(null);
   const tabRefs = useRef([]);
 
   const { gsap, ScrollTrigger } = useGSAP();
+
+  const TABS = useMemo(
+    () => [
+      { id: "all", label: t("plugins.tabAll", "Все"), color: null, count: PLUGINS.length },
+      ...STATUS_ORDER.map((id) => ({
+        id,
+        label: pickLocalized(PLUGIN_STATUS[id], lang, "ru", "en"),
+        color: PLUGIN_STATUS[id].color,
+        count: PLUGINS.filter((p) => p.status === id).length,
+      })),
+    ],
+    [t, lang]
+  );
 
   const visible = useMemo(
     () => (filter === "all" ? PLUGINS : PLUGINS.filter((p) => p.status === filter)),
@@ -130,20 +138,22 @@ export default function PluginGrid() {
     <section ref={sectionRef} className={styles.section} id="modules">
       <div className={styles.inner}>
         <div ref={headerRef} className={styles.header}>
-          <p className={styles.eyebrow}>Модули</p>
-          <h2 className={styles.title}>Дашборд под вашу отрасль</h2>
+          <p className={styles.eyebrow}>{t("plugins.modulesEyebrow", "Модули")}</p>
+          <h2 className={styles.title}>
+            {t("plugins.modulesTitle", "Дашборд под вашу отрасль")}
+          </h2>
           <p className={styles.intro}>
-            Каждый модуль — это готовый набор экранов и сценариев, который мы
-            ставим поверх сайта и допиливаем под ваши процессы. Ресторану нужен
-            стоп-лист, салону — график мастеров, застройщику — шахматка. Общая
-            основа одна, начинка разная.
+            {t(
+              "plugins.modulesIntro",
+              "Каждый модуль — это готовый набор экранов и сценариев, который мы ставим поверх сайта и допиливаем под ваши процессы. Ресторану нужен стоп-лист, салону — график мастеров, застройщику — шахматка. Общая основа одна, начинка разная."
+            )}
           </p>
         </div>
 
         <div
           className={styles.tabs}
           role="tablist"
-          aria-label="Фильтр модулей по статусу"
+          aria-label={t("plugins.filterLabel", "Фильтр модулей по статусу")}
         >
           {TABS.map((tab, i) => {
             const selected = tab.id === filter;
@@ -197,24 +207,30 @@ export default function PluginGrid() {
                   }}
                 >
                   <div className={styles.cardHead}>
-                    <h3 className={styles.cardTitle}>{plugin.ru}</h3>
+                    <h3 className={styles.cardTitle}>
+                      {pickLocalized(plugin, lang, "ru", "en")}
+                    </h3>
                     <span className={styles.pill}>
                       <span className={styles.pillDot} aria-hidden="true" />
-                      {status.ru}
+                      {pickLocalized(status, lang, "ru", "en")}
                     </span>
                   </div>
 
                   {industry ? (
-                    <p className={styles.cardIndustry}>{industry.ru}</p>
+                    <p className={styles.cardIndustry}>
+                      {pickLocalized(industry, lang, "ru", "en")}
+                    </p>
                   ) : null}
 
-                  <p className={styles.cardLead}>{plugin.lead}</p>
+                  <p className={styles.cardLead}>
+                    {pickLocalized(plugin, lang, "lead", "leadEn")}
+                  </p>
 
                   <ul className={styles.features}>
                     {plugin.features.map((feature) => (
                       <li key={feature.ru} className={styles.feature}>
                         <CheckIcon />
-                        <span>{feature.ru}</span>
+                        <span>{pickLocalized(feature, lang, "ru", "en")}</span>
                       </li>
                     ))}
                   </ul>
@@ -224,7 +240,7 @@ export default function PluginGrid() {
                       href={`/work#${plugin.industry}`}
                       className={styles.cardLink}
                     >
-                      Работы в этой сфере
+                      {t("plugins.worksInField", "Работы в этой сфере")}
                       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                         <path
                           d="M2.5 7h9M7.5 3l4 4-4 4"

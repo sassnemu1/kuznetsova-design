@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState, useMemo } from "react";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 import { SERVICES_DATA } from "@/data/ServicesData";
 import CategorySlider from "./CategorySlider";
 import styles from "./PortfolioShowcase.module.css";
 
 export default function PortfolioShowcase() {
+  const t = useT();
+
   const sections = useMemo(
     () => SERVICES_DATA.filter((s) => s.works.length > 0),
     []
@@ -68,10 +71,13 @@ export default function PortfolioShowcase() {
         <div className={styles.railInner}>
           <span className={styles.railLabel}>
             <span className={styles.railLabelDot} />
-            Категории
+            {t("portfolio.categories", "Категории")}
           </span>
 
-          <nav className={styles.railNav} aria-label="Категории портфолио">
+          <nav
+            className={styles.railNav}
+            aria-label={t("portfolio.categoriesNav", "Категории портфолио")}
+          >
             {sections.map((s, i) => (
               <button
                 key={s.id}
@@ -119,7 +125,9 @@ export default function PortfolioShowcase() {
                 }}
               />
             </div>
-            <span className={styles.railHint}>Листайте вниз</span>
+            <span className={styles.railHint}>
+              {t("portfolio.hint", "Листайте вниз")}
+            </span>
           </div>
         </div>
       </aside>

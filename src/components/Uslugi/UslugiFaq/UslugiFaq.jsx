@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT } from "@/context/LanguageContext";
 import styles from "./UslugiFaq.module.css";
 
 /**
@@ -12,26 +13,35 @@ import styles from "./UslugiFaq.module.css";
  * Первый вопрос раскрыт по умолчанию.
  *
  * faq — массив { q, a } из UslugiData.js.
+ *
+ * title не передан — берём заголовок из словаря на языке страницы.
  */
-export default function UslugiFaq({ faq = [], title = "Частые вопросы" }) {
+export default function UslugiFaq({ faq = [], title = "" }) {
   const baseId = useId().replace(/:/g, "");
   const [openIndex, setOpenIndex] = useState(0);
 
   const openClientForm = useBecomeClient();
+  const t = useT();
 
   if (!faq.length) return null;
+
+  const heading = title || t("faq.title", "Частые вопросы");
 
   return (
     <section className={styles.section} aria-labelledby={`${baseId}-title`}>
       <div className={styles.inner}>
         <div className={styles.head}>
-          <span className={styles.eyebrow}>Вопросы и ответы</span>
+          <span className={styles.eyebrow}>
+            {t("faq.eyebrow", "Вопросы и ответы")}
+          </span>
           <h2 id={`${baseId}-title`} className={styles.title}>
-            {title}
+            {heading}
           </h2>
           <p className={styles.intro}>
-            Если нужного вопроса здесь нет — напишите, ответим человеческим
-            текстом, а не выдержкой из договора.
+            {t(
+              "faq.intro",
+              "Если нужного вопроса здесь нет — напишите, ответим человеческим текстом, а не выдержкой из договора."
+            )}
           </p>
         </div>
 
@@ -85,11 +95,13 @@ export default function UslugiFaq({ faq = [], title = "Частые вопрос
 
         <div className={styles.footer}>
           <p className={styles.footerText}>
-            Остались вопросы по вашей задаче? Расскажите о ней в двух абзацах —
-            вернёмся со сметой, сроком и составом работ.
+            {t(
+              "faq.footerText",
+              "Остались вопросы по вашей задаче? Расскажите о ней в двух абзацах — вернёмся со сметой, сроком и составом работ."
+            )}
           </p>
           <button type="button" className={styles.footerCta} onClick={openClientForm}>
-            Написать нам
+            {t("faq.footerCta", "Написать нам")}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path
                 d="M2.5 7h9M7.5 3l4 4-4 4"

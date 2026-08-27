@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import RunningText from "@/components/UI/RunningText/RunningText";
+import { useT } from "@/context/LanguageContext";
 import { PRODUCT_GROUPS, CARE_PLANS } from "@/data/ProductsData";
 import styles from "./ServicesHero.module.css";
 
@@ -23,12 +24,6 @@ const groupsCount = PRODUCT_GROUPS.length;
 const itemsCount = PRODUCT_GROUPS.reduce((sum, g) => sum + g.items.length, 0);
 const plansCount = CARE_PLANS.length;
 
-const STATS = [
-  { num: `${groupsCount}`, label: plural(groupsCount, "направление", "направления", "направлений") },
-  { num: `${itemsCount}`, label: plural(itemsCount, "услуга", "услуги", "услуг") },
-  { num: `${plansCount}`, label: plural(plansCount, "тариф Care", "тарифа Care", "тарифов Care") },
-];
-
 export default function ServicesHero() {
   const sectionRef = useRef(null);
   const topBarRef = useRef(null);
@@ -37,7 +32,42 @@ export default function ServicesHero() {
   const dividerRef = useRef(null);
   const bottomRef = useRef(null);
 
+  const t = useT();
   const { gsap } = useGSAP();
+
+  /* Статистика считается из данных — никаких зашитых чисел */
+  const stats = useMemo(
+    () => [
+      {
+        num: `${groupsCount}`,
+        label: plural(
+          groupsCount,
+          t("services.unit.group.one", "направление"),
+          t("services.unit.group.few", "направления"),
+          t("services.unit.group.many", "направлений")
+        ),
+      },
+      {
+        num: `${itemsCount}`,
+        label: plural(
+          itemsCount,
+          t("services.unit.item.one", "услуга"),
+          t("services.unit.item.few", "услуги"),
+          t("services.unit.item.many", "услуг")
+        ),
+      },
+      {
+        num: `${plansCount}`,
+        label: plural(
+          plansCount,
+          t("services.unit.plan.one", "тариф Care"),
+          t("services.unit.plan.few", "тарифа Care"),
+          t("services.unit.plan.many", "тарифов Care")
+        ),
+      },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     if (!gsap) return;
@@ -82,7 +112,11 @@ export default function ServicesHero() {
       <div className={styles.glow3} />
 
       <div ref={topBarRef} className={styles.topBar}>
-        <Link href="/" className={styles.brand} aria-label="На главную">
+        <Link
+          href="/"
+          className={styles.brand}
+          aria-label={t("common.home", "На главную")}
+        >
           <span className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design" fill />
           </span>
@@ -90,19 +124,21 @@ export default function ServicesHero() {
         </Link>
 
         <div className={styles.issue}>
-          <span className={styles.issueLabel}>Каталог 2026</span>
+          <span className={styles.issueLabel}>
+            {t("services.hero.issue", "Каталог 2026")}
+          </span>
           <span className={styles.issueDot} />
         </div>
       </div>
 
       <div className={styles.titleWrap}>
         <span ref={kickerRef} className={styles.kicker}>
-          Что мы делаем
+          {t("services.hero.kicker", "Что мы делаем")}
         </span>
 
         <div className={styles.titleClip}>
           <h1 ref={titleRef} className={styles.title}>
-            Услуги
+            {t("services.hero.title", "Услуги")}
           </h1>
         </div>
       </div>
@@ -112,12 +148,14 @@ export default function ServicesHero() {
 
         <div ref={bottomRef} className={styles.bottomContent}>
           <p className={styles.desc}>
-            Полный каталог бюро — от знака и сайта до съёмки, 3D и автоматизации.
-            Здесь виден состав работ; сумму называем в коммерческом предложении после брифа.
+            {t(
+              "services.hero.desc",
+              "Полный каталог бюро — от знака и сайта до съёмки, 3D и автоматизации. Здесь виден состав работ; сумму называем в коммерческом предложении после брифа."
+            )}
           </p>
 
           <div className={styles.stats}>
-            {STATS.map((s) => (
+            {stats.map((s) => (
               <div key={s.label} className={styles.stat}>
                 <span className={styles.statNum}>{s.num}</span>
                 <span className={styles.statLabel}>{s.label}</span>

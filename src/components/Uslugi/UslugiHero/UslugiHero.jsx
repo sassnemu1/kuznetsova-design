@@ -5,6 +5,7 @@ import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import RunningText from "@/components/UI/RunningText/RunningText";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT } from "@/context/LanguageContext";
 import styles from "./UslugiHero.module.css";
 
 /**
@@ -23,6 +24,7 @@ export default function UslugiHero({ usluga, runningRows }) {
   const bottomRef = useRef(null);
 
   const openClientForm = useBecomeClient();
+  const t = useT();
   const { gsap } = useGSAP();
 
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function UslugiHero({ usluga, runningRows }) {
       <div className={styles.inner}>
         <p ref={eyebrowRef} className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          Услуга
+          {t("uslugi.eyebrow", "Услуга")}
         </p>
 
         <div className={styles.titleClip}>
@@ -99,7 +101,7 @@ export default function UslugiHero({ usluga, runningRows }) {
                 className={styles.ctaPrimary}
                 onClick={openClientForm}
               >
-                Обсудить задачу
+                {t("uslugi.discuss", "Обсудить задачу")}
                 <svg
                   width="14"
                   height="14"
@@ -118,7 +120,7 @@ export default function UslugiHero({ usluga, runningRows }) {
               </button>
 
               <Link href="/work" className={styles.ctaSecondary}>
-                Смотреть работы
+                {t("uslugi.viewWork", "Смотреть работы")}
               </Link>
             </div>
           </div>

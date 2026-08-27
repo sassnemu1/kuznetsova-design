@@ -21,9 +21,9 @@
   left: 50%;
   transform: translate(-50%, -50%) translateZ(0);
 
-  font-family: var(--font-bold);
+  font-family: var(--font-display), Georgia, serif;
   font-size: clamp(180px, 35vw, 820px);
-  font-weight: 900;
+  font-weight: 600;
   color: rgba(56, 100, 219, 0.087);
 
   white-space: nowrap;

@@ -9,6 +9,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
 import styles from "./ChatWidget.module.css";
 
 /* Ключи sessionStorage — переписка живёт только внутри вкладки и одной сессии */
@@ -18,17 +19,8 @@ const STORAGE_LOG = "kd-chat-log";
 /* Сколько сообщений держим в контексте (и отправляем на сервер) */
 const CONTEXT_LIMIT = 12;
 
-const GREETING = {
-  role: "assistant",
-  content:
-    "Здравствуйте! Я ассистент бюро Kuznetsova Design. Расскажу про услуги, сопровождение и наши работы — спрашивайте.",
-};
-
-const SUGGESTIONS = [
-  "Сколько стоит сайт?",
-  "С какими нишами вы работаете?",
-  "Что входит в сопровождение?",
-];
+/* Приветствие и подсказки зависят от языка, поэтому собираются
+   внутри компонента через t(), а не константой на уровне модуля. */
 
 const TELEGRAM_URL = "https://t.me/KUZNETSOVA_designn";
 const EMAIL = "kristina@kuznetsova.design";
@@ -85,6 +77,9 @@ function getRestoredOpen() {
 const noopSubscribe = () => () => {};
 
 export default function ChatWidget() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   const restoredLog = useSyncExternalStore(noopSubscribe, getRestoredLog, () => null);
   const restoredOpen = useSyncExternalStore(noopSubscribe, getRestoredOpen, () => false);
 
@@ -93,11 +88,25 @@ export default function ChatWidget() {
   const [log, setMessages] = useState(null);
 
   const isOpen = openOverride ?? restoredOpen;
-  // useMemo — иначе [GREETING] был бы новым массивом на каждый рендер
+
+  // Приветствие живёт в словаре: мемоизируем, чтобы объект не пересоздавался
+  // на каждый рендер и не тянул за собой [greeting] ниже.
+  const greeting = useMemo(
+    () => ({
+      role: "assistant",
+      content: t(
+        "chat.greeting",
+        "Здравствуйте! Я ассистент бюро Kuznetsova Design. Расскажу про услуги, сопровождение и наши работы — спрашивайте."
+      ),
+    }),
+    [t]
+  );
+
+  // useMemo — иначе [greeting] был бы новым массивом на каждый рендер
   // и тянул за собой все эффекты, зависящие от messages.
   const messages = useMemo(
-    () => log ?? restoredLog ?? [GREETING],
-    [log, restoredLog]
+    () => log ?? restoredLog ?? [greeting],
+    [log, restoredLog, greeting]
   );
   const [draft, setDraft] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -176,7 +185,7 @@ export default function ChatWidget() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: payload, lang: "ru" }),
+          body: JSON.stringify({ messages: payload, lang }),
         });
 
         const data = await res.json().catch(() => null);
@@ -188,7 +197,10 @@ export default function ChatWidget() {
               role: "assistant",
               content:
                 data?.error ||
-                "Слишком много сообщений подряд. Подождите пару минут.",
+                t(
+                  "chat.errorRate",
+                  "Слишком много сообщений подряд. Подождите пару минут."
+                ),
               degraded: true,
             },
           ]);
@@ -200,8 +212,10 @@ export default function ChatWidget() {
             ...prev,
             {
               role: "assistant",
-              content:
-                "Не получилось получить ответ. Напишите нам напрямую — ответим быстро.",
+              content: t(
+                "chat.errorReply",
+                "Не получилось получить ответ. Напишите нам напрямую — ответим быстро."
+              ),
               degraded: true,
             },
           ]);
@@ -221,8 +235,10 @@ export default function ChatWidget() {
           ...prev,
           {
             role: "assistant",
-            content:
-              "Связь прервалась. Напишите нам в Telegram или на почту — так точно дойдёт.",
+            content: t(
+              "chat.errorNetwork",
+              "Связь прервалась. Напишите нам в Telegram или на почту — так точно дойдёт."
+            ),
             degraded: true,
           },
         ]);
@@ -230,7 +246,7 @@ export default function ChatWidget() {
         setIsSending(false);
       }
     },
-    [isSending, messages]
+    [isSending, messages, lang, t]
   );
 
   const onSubmit = (e) => {
@@ -247,6 +263,15 @@ export default function ChatWidget() {
 
   const showSuggestions = messages.length <= 1 && !isSending;
 
+  const suggestions = useMemo(
+    () => [
+      t("chat.suggest1", "Сколько стоит сайт?"),
+      t("chat.suggest2", "С какими нишами вы работаете?"),
+      t("chat.suggest3", "Что входит в сопровождение?"),
+    ],
+    [t]
+  );
+
   return (
     <>
       <button
@@ -255,7 +280,11 @@ export default function ChatWidget() {
         className={styles.launcher}
         onClick={() => (isOpen ? close() : setIsOpen(true))}
         aria-expanded={isOpen}
-        aria-label={isOpen ? "Закрыть чат с ассистентом" : "Открыть чат с ассистентом"}
+        aria-label={
+          isOpen
+            ? t("chat.closeChatAria", "Закрыть чат с ассистентом")
+            : t("chat.openChatAria", "Открыть чат с ассистентом")
+        }
       >
         {isOpen ? (
           <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -285,18 +314,18 @@ export default function ChatWidget() {
         className={`${styles.panel} ${isOpen ? styles.panelOpen : ""}`}
         role="dialog"
         aria-modal="false"
-        aria-label="Чат с ассистентом Kuznetsova Design"
+        aria-label={t("chat.dialogLabel", "Чат с ассистентом Kuznetsova Design")}
       >
         <header className={styles.header}>
           <div className={styles.headerText}>
-            <span className={styles.eyebrow}>Ассистент</span>
+            <span className={styles.eyebrow}>{t("chat.assistant", "Ассистент")}</span>
             <h2 className={styles.title}>Kuznetsova Design</h2>
           </div>
           <button
             type="button"
             className={styles.closeBtn}
             onClick={close}
-            aria-label="Закрыть чат"
+            aria-label={t("chat.close", "Закрыть чат")}
           >
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path
@@ -351,7 +380,7 @@ export default function ChatWidget() {
                       openClientForm();
                     }}
                   >
-                    Оставить заявку
+                    {t("chat.leaveRequest", "Оставить заявку")}
                   </button>
                 </div>
               )}
@@ -364,7 +393,9 @@ export default function ChatWidget() {
                 <span className={styles.dot} />
                 <span className={styles.dot} />
                 <span className={styles.dot} />
-                <span className={styles.srOnly}>Ассистент печатает</span>
+                <span className={styles.srOnly}>
+                  {t("chat.typingSr", "Ассистент печатает")}
+                </span>
               </div>
             </div>
           )}
@@ -372,7 +403,7 @@ export default function ChatWidget() {
 
         {showSuggestions && (
           <div className={styles.chips}>
-            {SUGGESTIONS.map((question) => (
+            {suggestions.map((question) => (
               <button
                 key={question}
                 type="button"
@@ -387,7 +418,7 @@ export default function ChatWidget() {
 
         <form className={styles.composer} onSubmit={onSubmit}>
           <label className={styles.srOnly} htmlFor="kd-chat-input">
-            Сообщение ассистенту
+            {t("chat.inputLabel", "Сообщение ассистенту")}
           </label>
           <textarea
             id="kd-chat-input"
@@ -396,7 +427,7 @@ export default function ChatWidget() {
             rows={1}
             value={draft}
             maxLength={2000}
-            placeholder="Спросите об услугах или проекте…"
+            placeholder={t("chat.inputPlaceholder", "Спросите об услугах или проекте…")}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={onKeyDown}
           />
@@ -404,7 +435,7 @@ export default function ChatWidget() {
             type="submit"
             className={styles.sendBtn}
             disabled={isSending || !draft.trim()}
-            aria-label="Отправить сообщение"
+            aria-label={t("chat.sendAria", "Отправить сообщение")}
           >
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
@@ -419,7 +450,10 @@ export default function ChatWidget() {
         </form>
 
         <p className={styles.note}>
-          Ассистент может ошибаться. Цены называем после короткого брифа.
+          {t(
+            "chat.note",
+            "Ассистент может ошибаться. Цены называем после короткого брифа."
+          )}
         </p>
       </div>
     </>

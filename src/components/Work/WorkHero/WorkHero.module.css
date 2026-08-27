@@ -122,8 +122,12 @@
   overflow: hidden;
 }
 .titleClip h1 {
-  font-family: var(--font-bold);
-  font-size: clamp(72px, 9vw, 160px);
+  /* Cormorant Garamond: единый шрифт заголовков на всех страницах
+     и, в отличие от Bebas Neue, с полной поддержкой кириллицы. */
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 300;
+  font-size: clamp(64px, 9vw, 150px);
+  letter-spacing: -0.015em;
   color: #fff;
   margin: 0;
 }

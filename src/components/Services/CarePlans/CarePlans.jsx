@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { CARE_PLANS } from "@/data/ProductsData";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import styles from "./CarePlans.module.css";
 
 export default function CarePlans() {
@@ -14,6 +16,8 @@ export default function CarePlans() {
   const ctaRef = useRef(null);
 
   const openClientForm = useBecomeClient();
+  const t = useT();
+  const { lang } = useLanguage();
   const { gsap, ScrollTrigger } = useGSAP();
 
   useEffect(() => {
@@ -102,17 +106,22 @@ export default function CarePlans() {
     return () => ctx.revert();
   }, [gsap, ScrollTrigger]);
 
+  const planCtaLabel = t("care.planCta", "Обсудить подписку");
+
   return (
     <div ref={sectionRef}>
       <section className={styles.section} id="care">
         <div className={styles.inner}>
           <div ref={headerRef} className={styles.header}>
             <span className={styles.eyebrow}>Care</span>
-            <h2 className={styles.title}>Подписка на сопровождение</h2>
+            <h2 className={styles.title}>
+              {t("care.title", "Подписка на сопровождение")}
+            </h2>
             <p className={styles.lead}>
-              Сайт живёт дольше, если за ним следят. Care — это ежемесячная работа:
-              хостинг и домен, бэкапы и обновления, правки по запросу, визуалы для
-              соцсетей и отчёт о позициях в поиске.
+              {t(
+                "care.lead",
+                "Сайт живёт дольше, если за ним следят. Care — это ежемесячная работа: хостинг и домен, бэкапы и обновления, правки по запросу, визуалы для соцсетей и отчёт о позициях в поиске."
+              )}
             </p>
           </div>
 
@@ -126,13 +135,19 @@ export default function CarePlans() {
                 className={`${styles.card} ${plan.featured ? styles.cardFeatured : ""}`}
               >
                 {plan.featured ? (
-                  <span className={styles.badge}>Популярный</span>
+                  <span className={styles.badge}>
+                    {t("products.care.featured", "Популярный")}
+                  </span>
                 ) : null}
 
                 <div className={styles.cardTop}>
                   <span className={styles.planName}>{plan.name}</span>
-                  <h3 className={styles.planTitle}>{plan.ru}</h3>
-                  <p className={styles.planTagline}>{plan.tagline}</p>
+                  <h3 className={styles.planTitle}>
+                    {pickLocalized(plan, lang, "ru", "en")}
+                  </h3>
+                  <p className={styles.planTagline}>
+                    {pickLocalized(plan, lang, "tagline", "taglineEn")}
+                  </p>
                 </div>
 
                 <span className={styles.cardRule} aria-hidden="true" />
@@ -156,7 +171,7 @@ export default function CarePlans() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span>{inc.ru}</span>
+                      <span>{pickLocalized(inc, lang, "ru", "en")}</span>
                     </li>
                   ))}
                 </ul>
@@ -165,9 +180,9 @@ export default function CarePlans() {
                   type="button"
                   className={styles.planCta}
                   onClick={openClientForm}
-                  aria-label={`Обсудить подписку ${plan.name}`}
+                  aria-label={`${planCtaLabel} ${plan.name}`}
                 >
-                  Обсудить подписку
+                  {planCtaLabel}
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path
                       d="M2.5 7h9M7.5 3l4 4-4 4"
@@ -183,25 +198,33 @@ export default function CarePlans() {
           </div>
 
           <p ref={noteRef} className={styles.note}>
-            Минимальный срок подписки — 3 месяца. Стоимость называем после брифа:
-            она зависит от объёма сайта и того, сколько работы берём на себя.
+            {t(
+              "care.note",
+              "Минимальный срок подписки — 3 месяца. Стоимость называем после брифа: она зависит от объёма сайта и того, сколько работы берём на себя."
+            )}
           </p>
         </div>
       </section>
 
       <section ref={ctaRef} className={`${styles.ctaBand} nav-dark-zone`}>
         <div className={styles.ctaInner}>
-          <span className={styles.ctaEyebrow}>Дальше</span>
+          <span className={styles.ctaEyebrow}>
+            {t("care.ctaEyebrow", "Дальше")}
+          </span>
 
-          <h2 className={styles.ctaTitle}>Расскажите, что нужно сделать</h2>
+          <h2 className={styles.ctaTitle}>
+            {t("care.ctaTitle", "Расскажите, что нужно сделать")}
+          </h2>
 
           <p className={styles.ctaText}>
-            Короткий бриф — и мы вернёмся с составом работ, сроками и стоимостью.
-            Если задача не из каталога, тоже напишите: скорее всего, мы её уже решали.
+            {t(
+              "care.ctaText",
+              "Короткий бриф — и мы вернёмся с составом работ, сроками и стоимостью. Если задача не из каталога, тоже напишите: скорее всего, мы её уже решали."
+            )}
           </p>
 
           <button type="button" className={styles.ctaButton} onClick={openClientForm}>
-            Начать проект
+            {t("common.startProject", "Начать проект")}
             <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path
                 d="M2.5 7h9M7.5 3l4 4-4 4"

@@ -15,8 +15,7 @@ const NAV_ITEMS = [
   { num: "04", key: "nav.plugins",      ru: "Плагины",         href: "/plugins" },
   { num: "05", key: "nav.studio",       ru: "О студии",        href: "/#studio" },
   { num: "06", key: "nav.blog",         ru: "Наш блог",        href: "/blog" },
-  { num: "07", key: "nav.account",      ru: "Личный кабинет",  href: "/login" },
-  { num: "08", key: "nav.contact",      ru: "Контакт",         href: "/#contact" },
+  { num: "07", key: "nav.contact",      ru: "Контакт",         href: "/#contact" },
 ];
 
 export default function FullMenu({ isOpen, onClose }) {
@@ -65,6 +64,26 @@ export default function FullMenu({ isOpen, onClose }) {
         </Link>
 
         <div className={styles.leftBottom}>
+          {/* Личный кабинет живёт в левой колонке: в правом списке он
+              был восьмым пунктом и выходил за нижнюю границу экрана. */}
+          <Link href="/login" className={styles.accountLink} onClick={onClose}>
+            <span className={styles.accountIcon} aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="5.2" r="2.8" stroke="currentColor" strokeWidth="1.4" />
+                <path d="M2.8 13.6c0-2.6 2.3-4.2 5.2-4.2s5.2 1.6 5.2 4.2"
+                  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+            </span>
+            <span className={styles.accountBody}>
+              <span className={styles.accountTitle}>
+                {t("nav.account", "Личный кабинет")}
+              </span>
+              <span className={styles.accountSub}>
+                {t("menu.accountSub", "Дашборд и CRM")}
+              </span>
+            </span>
+          </Link>
+
           <div className={styles.badge}>
             <span className={styles.badgeDot} />
             <div>

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import useGSAP from "@/hooks/useGSAP";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import { PRODUCT_GROUPS } from "@/data/ProductsData";
 import styles from "./ProductCatalogue.module.css";
 
@@ -23,6 +25,8 @@ export default function ProductCatalogue() {
   const headerRef = useRef(null);
   const groupRefs = useRef([]);
 
+  const t = useT();
+  const { lang } = useLanguage();
   const { gsap, ScrollTrigger } = useGSAP();
 
   /* На узких экранах группы сворачиваются, на десктопе всегда раскрыты */
@@ -100,19 +104,37 @@ export default function ProductCatalogue() {
     );
   };
 
+  /* Порядок слов в подписи разный по языкам — подставляем уже собранные
+     счётчики в шаблон, а не склеиваем куски в JSX */
+  const groupsLabel = `${totalGroups} ${plural(
+    totalGroups,
+    t("services.unit.group.one", "направление"),
+    t("services.unit.group.few", "направления"),
+    t("services.unit.group.many", "направлений")
+  )}`;
+  const itemsLabel = `${totalItems} ${plural(
+    totalItems,
+    t("services.unit.position.one", "позиция"),
+    t("services.unit.position.few", "позиции"),
+    t("services.unit.position.many", "позиций")
+  )}`;
+
+  const lead = t(
+    "products.catalogue.lead",
+    "{groups} и {items}. Проекты собираются из этих блоков: можно взять одну услугу, можно закрыть весь цикл — от имени до ленты в соцсетях."
+  )
+    .replace("{groups}", groupsLabel)
+    .replace("{items}", itemsLabel);
+
   return (
     <section ref={sectionRef} className={styles.section} id="catalogue">
       <div className={styles.inner}>
         <div ref={headerRef} className={styles.header}>
-          <span className={styles.eyebrow}>Каталог</span>
-          <h2 className={styles.title}>Что можно заказать</h2>
-          <p className={styles.lead}>
-            {totalGroups}{" "}
-            {plural(totalGroups, "направление", "направления", "направлений")} и{" "}
-            {totalItems} {plural(totalItems, "позиция", "позиции", "позиций")}. Проекты
-            собираются из этих блоков: можно взять одну услугу, можно закрыть весь цикл —
-            от имени до ленты в соцсетях.
-          </p>
+          <span className={styles.eyebrow}>{t("products.label", "Каталог")}</span>
+          <h2 className={styles.title}>
+            {t("products.catalogue.title", "Что можно заказать")}
+          </h2>
+          <p className={styles.lead}>{lead}</p>
         </div>
 
         <div className={styles.groups}>
@@ -131,10 +153,14 @@ export default function ProductCatalogue() {
                 <span className={styles.groupHeadText}>
                   <span className={styles.groupTitleRow}>
                     <span className={styles.groupDot} aria-hidden="true" />
-                    <span className={styles.groupTitle}>{group.ru}</span>
+                    <span className={styles.groupTitle}>
+                      {pickLocalized(group, lang, "ru", "en")}
+                    </span>
                   </span>
                   <span className={styles.groupEn}>{group.en}</span>
-                  <span className={styles.groupLead}>{group.lead}</span>
+                  <span className={styles.groupLead}>
+                    {pickLocalized(group, lang, "lead", "leadEn")}
+                  </span>
                 </span>
 
                 <span className={styles.groupMeta}>
@@ -196,17 +222,23 @@ export default function ProductCatalogue() {
                   className={`${styles.panel} ${isOpen ? "" : styles.panelClosed}`}
                 >
                   <ul className={styles.items}>
-                    {group.items.map((item) => (
-                      <li key={item.en} className={styles.item}>
-                        <span className={styles.itemMark} aria-hidden="true" />
-                        <span className={styles.itemBody}>
-                          <span className={styles.itemName}>{item.ru}</span>
-                          {item.note ? (
-                            <span className={styles.itemNote}>{item.note}</span>
-                          ) : null}
-                        </span>
-                      </li>
-                    ))}
+                    {group.items.map((item) => {
+                      const note = pickLocalized(item, lang, "note", "noteEn");
+
+                      return (
+                        <li key={item.en} className={styles.item}>
+                          <span className={styles.itemMark} aria-hidden="true" />
+                          <span className={styles.itemBody}>
+                            <span className={styles.itemName}>
+                              {pickLocalized(item, lang, "ru", "en")}
+                            </span>
+                            {note ? (
+                              <span className={styles.itemNote}>{note}</span>
+                            ) : null}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </article>

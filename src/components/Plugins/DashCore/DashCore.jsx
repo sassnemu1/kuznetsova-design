@@ -4,10 +4,15 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import { DASH_CORE } from "@/data/PluginsData";
 import styles from "./DashCore.module.css";
 
 export default function DashCore() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const listRef = useRef(null);
@@ -83,12 +88,15 @@ export default function DashCore() {
         <div className={styles.inner}>
           <div className={styles.layout}>
             <div ref={headerRef} className={styles.header}>
-              <p className={styles.eyebrow}>Ядро</p>
-              <h2 className={styles.title}>Что входит в любой кабинет</h2>
+              <p className={styles.eyebrow}>{t("dash.eyebrow", "Ядро")}</p>
+              <h2 className={styles.title}>
+                {t("dash.title", "Что входит в любой кабинет")}
+              </h2>
               <p className={styles.intro}>
-                Отраслевая часть у всех разная, но основание одно. Эти вещи
-                собраны один раз и достаются каждому проекту — независимо от
-                того, ресторан у вас, клиника или фонд.
+                {t(
+                  "dash.intro",
+                  "Отраслевая часть у всех разная, но основание одно. Эти вещи собраны один раз и достаются каждому проекту — независимо от того, ресторан у вас, клиника или фонд."
+                )}
               </p>
             </div>
 
@@ -98,7 +106,9 @@ export default function DashCore() {
                   <span className={styles.itemNum} aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className={styles.itemText}>{item.ru}</span>
+                  <span className={styles.itemText}>
+                    {pickLocalized(item, lang, "ru", "en")}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -110,18 +120,22 @@ export default function DashCore() {
       <section className={`${styles.cta} nav-dark-zone`} id="plugins-cta">
         <div className={styles.inner}>
           <div ref={ctaRef} className={styles.ctaInner}>
-            <p className={styles.ctaEyebrow}>Доступ</p>
+            <p className={styles.ctaEyebrow}>{t("dash.ctaEyebrow", "Доступ")}</p>
 
-            <h2 className={styles.ctaTitle}>Кабинет собирается прямо сейчас</h2>
+            <h2 className={styles.ctaTitle}>
+              {t("dash.ctaTitle", "Кабинет собирается прямо сейчас")}
+            </h2>
 
             <p className={styles.ctaText}>
-              Расскажите про свою отрасль и процессы — мы покажем, как ляжет
-              модуль на ваш сайт, и поставим вас в очередь на подключение.
+              {t(
+                "dash.ctaText",
+                "Расскажите про свою отрасль и процессы — мы покажем, как ляжет модуль на ваш сайт, и поставим вас в очередь на подключение."
+              )}
             </p>
 
             <div className={styles.ctaActions}>
               <Link href="/login?mode=request" className={styles.btnPrimary}>
-                Запросить доступ
+                {t("dash.requestAccess", "Запросить доступ")}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path
                     d="M2.5 7h9M7.5 3l4 4-4 4"
@@ -134,13 +148,15 @@ export default function DashCore() {
               </Link>
 
               <button type="button" onClick={openClientForm} className={styles.btnSecondary}>
-                Обсудить проект
+                {t("common.discussProject", "Обсудить проект")}
               </button>
             </div>
 
             <p className={styles.ctaNote}>
-              Кабинет dash.kuznetsova.design сейчас в разработке — оставьте
-              заявку, и мы откроем доступ первым.
+              {t(
+                "dash.ctaNote",
+                "Кабинет dash.kuznetsova.design сейчас в разработке — оставьте заявку, и мы откроем доступ первым."
+              )}
             </p>
           </div>
         </div>

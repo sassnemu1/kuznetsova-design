@@ -4,10 +4,13 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 import styles from "./BlogHero.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
 
 export default function BlogHero() {
+  const t = useT();
+
   const sectionRef = useRef(null);
   const topBarRef = useRef(null);
   const lettersRef = useRef([]);
@@ -51,7 +54,11 @@ export default function BlogHero() {
 
       {/* Верхняя плашка */}
       <div ref={topBarRef} className={styles.topBar}>
-        <Link href="/" className={styles.brand} aria-label="На главную">
+        <Link
+          href="/"
+          className={styles.brand}
+          aria-label={t("common.home", "На главную")}
+        >
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design" fill />
           </div>
@@ -70,7 +77,7 @@ export default function BlogHero() {
       <div className={styles.titleWrap}>
         
         <div className={styles.titleClip}>
-            <h1 className={styles.title}>Blog &amp; News</h1>
+            <h1 className={styles.title}>{t("blog.title", "Blog & News")}</h1>
         </div>
       </div>
 
@@ -79,7 +86,7 @@ export default function BlogHero() {
         <div ref={dividerRef} className={styles.divider} />
         <div ref={bottomRef} className={styles.bottomContent}>
           <p className={styles.desc}>
-            Работы, события и заметки из жизни студии
+            {t("blog.desc", "Работы, события и заметки из жизни студии")}
           </p>
         </div>
       </div>

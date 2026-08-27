@@ -4,12 +4,17 @@ import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { MORE_SERVICES_DATA } from "@/data/MoreServicesData";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import ChatMock from "./ChatMock";
 import NetworkMock from "./NetworkMock";
 import styles from "./MoreServices.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
 
 export default function MoreServices() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const cardRefs = useRef([]);
@@ -73,14 +78,16 @@ export default function MoreServices() {
         <div className={styles.inner}>
 
           <div ref={headerRef} className={styles.header}>
-            <span className={styles.eyebrow}>Code</span>
+            <span className={styles.eyebrow}>{t("more.eyebrow", "Code")}</span>
             <h2 className={styles.title}>
-              {"{ More Development }"}
-              <span className={styles.scaleBadge}>{"<Code />"}</span>
+              {t("more.title", "{ More Development }")}
+              <span className={styles.scaleBadge}>{t("more.badge", "<Code />")}</span>
             </h2>
             <p className={styles.intro}>
-              Берём задачи на стыке дизайна и технологий: автоматизируем
-              процессы и встраиваем нейросети в рабочие сценарии бизнеса.
+              {t(
+                "more.intro",
+                "Берём задачи на стыке дизайна и технологий: автоматизируем процессы и встраиваем нейросети в рабочие сценарии бизнеса."
+              )}
             </p>
           </div>
 
@@ -104,12 +111,16 @@ export default function MoreServices() {
                   <span className={styles.tag}>{service.tag}</span>
 
                   <h3 className={styles.cardTitle}>
-                    {service.title.split("\n").map((line, li) => (
-                      <span key={li} style={{ display: "block" }}>{line}</span>
-                    ))}
+                    {pickLocalized(service, lang, "title", "titleEn")
+                      .split("\n")
+                      .map((line, li) => (
+                        <span key={li} style={{ display: "block" }}>{line}</span>
+                      ))}
                   </h3>
 
-                  <p className={styles.cardDesc}>{service.desc}</p>
+                  <p className={styles.cardDesc}>
+                    {pickLocalized(service, lang, "desc", "descEn")}
+                  </p>
 
                   <div className={styles.tagsRow}>
                     {service.tags.map((t) => (
@@ -118,7 +129,7 @@ export default function MoreServices() {
                   </div>
 
                   <button className={styles.cta} onClick={openClientForm}>
-                    Обсудить проект
+                    {t("more.cta", "Обсудить проект")}
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>

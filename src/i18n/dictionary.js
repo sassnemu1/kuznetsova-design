@@ -6,7 +6,8 @@
  * Ключи плоские, в точечной нотации, сгруппированы по секциям сайта:
  * common.* nav.* menu.* hero.* info.* about.* process.* services.*
  * more.* tech.* reviews.* work.* portfolio.* case.* blog.* form.*
- * footer.* chat.* products.* lang.*
+ * footer.* chat.* products.* care.* plugins.* dash.* uslugi.* faq.*
+ * auth.* lang.*
  *
  * Русский — оригинал. Остальные девять языков переведены с него
  * (английский служит перекрёстной проверкой) как самостоятельный
@@ -63,6 +64,10 @@ export const DICT = {
      РУССКИЙ
      ══════════════════════════════════════════════════════════════ */
   ru: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Плагины",
+    "nav.account": "Личный кабинет",
+    "menu.accountSub": "Дашборд и CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Отделы портфолио",
     "portfolio.title": "Кому мы делаем дизайн",
@@ -232,6 +237,25 @@ export const DICT = {
     "services.label": "Услуги",
     "services.all": "Все услуги",
 
+    /* ─── Страница услуг: шапка и счётчики ──────────────────── */
+    "services.hero.issue": "Каталог 2026",
+    "services.hero.kicker": "Что мы делаем",
+    "services.hero.title": "Услуги",
+    "services.hero.desc":
+      "Полный каталог бюро — от знака и сайта до съёмки, 3D и автоматизации. Здесь виден состав работ; сумму называем в коммерческом предложении после брифа.",
+    "services.unit.group.one": "направление",
+    "services.unit.group.few": "направления",
+    "services.unit.group.many": "направлений",
+    "services.unit.item.one": "услуга",
+    "services.unit.item.few": "услуги",
+    "services.unit.item.many": "услуг",
+    "services.unit.position.one": "позиция",
+    "services.unit.position.few": "позиции",
+    "services.unit.position.many": "позиций",
+    "services.unit.plan.one": "тариф Care",
+    "services.unit.plan.few": "тарифа Care",
+    "services.unit.plan.many": "тарифов Care",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -326,6 +350,79 @@ export const DICT = {
     "products.care.featured": "Популярный",
     "products.cta": "Обсудить задачу",
 
+    /* ─── Каталог услуг ─────────────────────────────────────── */
+    "products.catalogue.title": "Что можно заказать",
+    "products.catalogue.lead":
+      "{groups} и {items}. Проекты собираются из этих блоков: можно взять одну услугу, можно закрыть весь цикл — от имени до ленты в соцсетях.",
+
+    /* ─── Подписка Care ─────────────────────────────────────── */
+    "care.title": "Подписка на сопровождение",
+    "care.lead":
+      "Сайт живёт дольше, если за ним следят. Care — это ежемесячная работа: хостинг и домен, бэкапы и обновления, правки по запросу, визуалы для соцсетей и отчёт о позициях в поиске.",
+    "care.planCta": "Обсудить подписку",
+    "care.note":
+      "Минимальный срок подписки — 3 месяца. Стоимость называем после брифа: она зависит от объёма сайта и того, сколько работы берём на себя.",
+    "care.ctaEyebrow": "Дальше",
+    "care.ctaTitle": "Расскажите, что нужно сделать",
+    "care.ctaText":
+      "Короткий бриф — и мы вернёмся с составом работ, сроками и стоимостью. Если задача не из каталога, тоже напишите: скорее всего, мы её уже решали.",
+
+    /* ─── Плагины и дашборды ────────────────────────────────── */
+    "plugins.issue": "dash · в разработке",
+    "plugins.eyebrow": "Плагины и дашборды",
+    "plugins.title": "Плагины",
+    "plugins.desc":
+      "Сайт приводит клиента, но работа начинается дальше: заявки, записи, заказы, остатки и деньги. Плагин — это дашборд, собранный под вашу отрасль и живущий в вашем собственном кабинете, а не в чужой универсальной панели.",
+    "plugins.stat.modules": "модулей",
+    "plugins.stat.live": "уже работают",
+    "plugins.stat.industries": "отраслей",
+    "plugins.tabAll": "Все",
+    "plugins.filterLabel": "Фильтр модулей по статусу",
+    "plugins.modulesEyebrow": "Модули",
+    "plugins.modulesTitle": "Дашборд под вашу отрасль",
+    "plugins.modulesIntro":
+      "Каждый модуль — это готовый набор экранов и сценариев, который мы ставим поверх сайта и допиливаем под ваши процессы. Ресторану нужен стоп-лист, салону — график мастеров, застройщику — шахматка. Общая основа одна, начинка разная.",
+    "plugins.worksInField": "Работы в этой сфере",
+
+    /* ─── Ядро кабинета ─────────────────────────────────────── */
+    "dash.eyebrow": "Ядро",
+    "dash.title": "Что входит в любой кабинет",
+    "dash.intro":
+      "Отраслевая часть у всех разная, но основание одно. Эти вещи собраны один раз и достаются каждому проекту — независимо от того, ресторан у вас, клиника или фонд.",
+    "dash.ctaEyebrow": "Доступ",
+    "dash.ctaTitle": "Кабинет собирается прямо сейчас",
+    "dash.ctaText":
+      "Расскажите про свою отрасль и процессы — мы покажем, как ляжет модуль на ваш сайт, и поставим вас в очередь на подключение.",
+    "dash.requestAccess": "Запросить доступ",
+    "dash.ctaNote":
+      "Кабинет dash.kuznetsova.design сейчас в разработке — оставьте заявку, и мы откроем доступ первым.",
+
+    /* ─── Страница отдельной услуги ─────────────────────────── */
+    "uslugi.eyebrow": "Услуга",
+    "uslugi.discuss": "Обсудить задачу",
+    "uslugi.viewWork": "Смотреть работы",
+    "uslugi.aboutLabel": "Об услуге",
+    "uslugi.deliverEyebrow": "Что вы получаете",
+    "uslugi.deliverTitle": "Состав передачи",
+    "uslugi.deliverIntro":
+      "Всё, что физически оказывается у вас на руках после сдачи проекта — в исходниках и без привязки к подрядчику.",
+    "uslugi.stepsEyebrow": "Процесс",
+    "uslugi.stepsTitle": "Как идёт работа",
+    "uslugi.stepsIntro":
+      "Этапы с точками приёмки: на каждой видно, что сделано, и можно скорректировать направление, пока это ещё недорого.",
+    "uslugi.estimateText":
+      "Смету со сроками и составом работ присылаем после короткого брифа — так цифра относится к вашей задаче, а не к средней по рынку.",
+    "uslugi.estimateCta": "Отправить бриф",
+
+    /* ─── Вопросы и ответы ──────────────────────────────────── */
+    "faq.eyebrow": "Вопросы и ответы",
+    "faq.title": "Частые вопросы",
+    "faq.intro":
+      "Если нужного вопроса здесь нет — напишите, ответим человеческим текстом, а не выдержкой из договора.",
+    "faq.footerText":
+      "Остались вопросы по вашей задаче? Расскажите о ней в двух абзацах — вернёмся со сметой, сроком и составом работ.",
+    "faq.footerCta": "Написать нам",
+
     /* ─── Форма заявки ─────────────────────────────────────── */
     "form.dialogLabel": "Стать клиентом",
     "form.eyebrow": "Начните проект",
@@ -400,6 +497,56 @@ export const DICT = {
     "footer.rights": "Все права защищены.",
     "footer.privacy": "Политика конфиденциальности",
 
+    /* ─── Доступ к кабинету ─────────────────────────────────── */
+    "auth.panelLabel": "Доступ к личному кабинету",
+    "auth.tabsLabel": "Вход или запрос доступа",
+    "auth.tabSignin": "Вход",
+    "auth.tabRequest": "Запросить доступ",
+    "auth.notice":
+      "Кабинет {dash} сейчас в разработке. Формы входа пока нет — мы не станем делать вид, что она работает. Как только кабинет откроется, вход появится на этом же экране.",
+    "auth.noticeSecondary":
+      "Если студия уже завела вам аккаунт, вы получили письмо с адресом кабинета и приглашением. Открыть его можно по ссылке ниже.",
+    "auth.openDash": "Открыть {dash}",
+    "auth.hintSignin":
+      "Доступ открывается после того, как студия создаст аккаунт вашей компании. Самостоятельная регистрация не предусмотрена.",
+    "auth.noAccount": "Аккаунта ещё нет?",
+    "auth.orWrite": "или напишите на",
+    "auth.live.sent": "Запрос отправлен. Мы ответим в течение рабочего дня.",
+    "auth.live.sending": "Отправляем запрос…",
+    "auth.success.label": "Запрос отправлен",
+    "auth.success.title": "Мы получили заявку",
+    "auth.success.body":
+      "Свяжемся с вами в течение рабочего дня: уточним состав модулей, роли сотрудников и заведём кабинет на {dash}. Ответ придёт на указанный e-mail.",
+    "auth.success.again": "Отправить ещё один запрос",
+    "auth.formIntro":
+      "Расскажите о компании — подберём модули под вашу отрасль и заведём кабинет.",
+    "auth.field.name": "Имя",
+    "auth.field.company": "Компания",
+    "auth.field.email": "E-mail",
+    "auth.field.phone": "Телефон",
+    "auth.field.industry": "Сфера бизнеса",
+    "auth.field.comment": "Комментарий",
+    "auth.placeholder.name": "Александра",
+    "auth.placeholder.company": "Название бренда",
+    "auth.placeholder.email": "you@company.ru",
+    "auth.placeholder.comment":
+      "Сколько человек будет работать в кабинете, какие задачи важны в первую очередь",
+    "auth.industryNone": "Не выбрано",
+    "auth.consent": "Согласен на обработку персональных данных согласно",
+    "auth.consentLink": "политике конфиденциальности",
+    "auth.submit": "Отправить запрос",
+    "auth.submitting": "Отправляем…",
+    "auth.hintRequest":
+      "Мы не создаём аккаунты автоматически: сначала обсуждаем задачи, потом заводим кабинет и передаём доступ ответственному сотруднику.",
+    "auth.error.name": "Введите имя",
+    "auth.error.company": "Укажите название компании",
+    "auth.error.email": "Введите e-mail",
+    "auth.error.emailFormat": "Проверьте формат e-mail",
+    "auth.error.consent": "Без согласия мы не сможем обработать запрос",
+    "auth.error.send": "Ошибка отправки",
+    "auth.error.submit":
+      "Не удалось отправить запрос. Попробуйте ещё раз или напишите нам на почту.",
+
     /* ─── Чат-мок в блоке More Development ─────────────────── */
     "chat.bot": "бот",
     "chat.you": "вы",
@@ -407,6 +554,29 @@ export const DICT = {
     "chat.typing": "печатает…",
     "chat.placeholder": "Сообщение…",
     "chat.send": "Отправить",
+
+    /* ─── Чат с ассистентом ─────────────────────────────────── */
+    "chat.greeting":
+      "Здравствуйте! Я ассистент бюро Kuznetsova Design. Расскажу про услуги, сопровождение и наши работы — спрашивайте.",
+    "chat.suggest1": "Сколько стоит сайт?",
+    "chat.suggest2": "С какими нишами вы работаете?",
+    "chat.suggest3": "Что входит в сопровождение?",
+    "chat.assistant": "Ассистент",
+    "chat.dialogLabel": "Чат с ассистентом Kuznetsova Design",
+    "chat.openChatAria": "Открыть чат с ассистентом",
+    "chat.closeChatAria": "Закрыть чат с ассистентом",
+    "chat.close": "Закрыть чат",
+    "chat.typingSr": "Ассистент печатает",
+    "chat.inputLabel": "Сообщение ассистенту",
+    "chat.inputPlaceholder": "Спросите об услугах или проекте…",
+    "chat.sendAria": "Отправить сообщение",
+    "chat.leaveRequest": "Оставить заявку",
+    "chat.note": "Ассистент может ошибаться. Цены называем после короткого брифа.",
+    "chat.errorRate": "Слишком много сообщений подряд. Подождите пару минут.",
+    "chat.errorReply":
+      "Не получилось получить ответ. Напишите нам напрямую — ответим быстро.",
+    "chat.errorNetwork":
+      "Связь прервалась. Напишите нам в Telegram или на почту — так точно дойдёт.",
 
     /* ─── Переключатель языка ──────────────────────────────── */
     "lang.label": "Язык интерфейса",
@@ -428,6 +598,10 @@ export const DICT = {
      ENGLISH
      ══════════════════════════════════════════════════════════════ */
   en: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Plug-ins",
+    "nav.account": "Client account",
+    "menu.accountSub": "Dashboard and CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Portfolio sections",
     "portfolio.title": "Who we design for",
@@ -597,6 +771,25 @@ export const DICT = {
     "services.label": "Services",
     "services.all": "All services",
 
+    /* ─── Services page: hero and counters ──────────────────── */
+    "services.hero.issue": "Catalogue 2026",
+    "services.hero.kicker": "What we do",
+    "services.hero.title": "Services",
+    "services.hero.desc":
+      "The studio's full catalogue — from a mark and a website to photography, 3D and automation. Here you see what the work consists of; the figure comes in the proposal, after the brief.",
+    "services.unit.group.one": "area",
+    "services.unit.group.few": "areas",
+    "services.unit.group.many": "areas",
+    "services.unit.item.one": "service",
+    "services.unit.item.few": "services",
+    "services.unit.item.many": "services",
+    "services.unit.position.one": "item",
+    "services.unit.position.few": "items",
+    "services.unit.position.many": "items",
+    "services.unit.plan.one": "Care plan",
+    "services.unit.plan.few": "Care plans",
+    "services.unit.plan.many": "Care plans",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -692,6 +885,79 @@ export const DICT = {
     "products.care.featured": "Most chosen",
     "products.cta": "Discuss your task",
 
+    /* ─── Service catalogue ─────────────────────────────────── */
+    "products.catalogue.title": "What you can order",
+    "products.catalogue.lead":
+      "{groups} and {items}. Projects are assembled from these blocks: take a single service, or close the whole cycle — from the name to the social feed.",
+
+    /* ─── Care subscription ─────────────────────────────────── */
+    "care.title": "Support subscription",
+    "care.lead":
+      "A website lasts longer when someone looks after it. Care is monthly work: hosting and domain, backups and updates, edits on request, visuals for social media and a report on search positions.",
+    "care.planCta": "Discuss the subscription",
+    "care.note":
+      "The minimum subscription term is three months. We name the cost after the brief: it depends on the size of the site and how much of the work we take on.",
+    "care.ctaEyebrow": "Next",
+    "care.ctaTitle": "Tell us what needs doing",
+    "care.ctaText":
+      "A short brief, and we come back with the scope, the schedule and the cost. If the task is not in the catalogue, write anyway — chances are we have solved it before.",
+
+    /* ─── Plugins and dashboards ────────────────────────────── */
+    "plugins.issue": "dash · in development",
+    "plugins.eyebrow": "Plugins and dashboards",
+    "plugins.title": "Plugins",
+    "plugins.desc":
+      "A website brings the client in, but the work starts after that: enquiries, bookings, orders, stock and money. A plugin is a dashboard built for your industry and living in your own account, not in someone else's all-purpose panel.",
+    "plugins.stat.modules": "modules",
+    "plugins.stat.live": "already live",
+    "plugins.stat.industries": "industries",
+    "plugins.tabAll": "All",
+    "plugins.filterLabel": "Filter modules by status",
+    "plugins.modulesEyebrow": "Modules",
+    "plugins.modulesTitle": "A dashboard for your industry",
+    "plugins.modulesIntro":
+      "Each module is a ready set of screens and flows that we place on top of the site and tune to your processes. A restaurant needs a stop-list, a salon a stylists' schedule, a developer a unit availability grid. The foundation is shared, the contents differ.",
+    "plugins.worksInField": "Work in this field",
+
+    /* ─── Dashboard core ────────────────────────────────────── */
+    "dash.eyebrow": "Core",
+    "dash.title": "What every account includes",
+    "dash.intro":
+      "The industry layer differs for everyone, the foundation does not. These things were built once and come with every project — whether you run a restaurant, a clinic or a foundation.",
+    "dash.ctaEyebrow": "Access",
+    "dash.ctaTitle": "The account is being built right now",
+    "dash.ctaText":
+      "Tell us about your industry and your processes — we will show how the module fits your site and put you in the queue for connection.",
+    "dash.requestAccess": "Request access",
+    "dash.ctaNote":
+      "The dash.kuznetsova.design account is still in development — leave a request and you will be among the first to get access.",
+
+    /* ─── Single service page ───────────────────────────────── */
+    "uslugi.eyebrow": "Service",
+    "uslugi.discuss": "Discuss your task",
+    "uslugi.viewWork": "See the work",
+    "uslugi.aboutLabel": "About the service",
+    "uslugi.deliverEyebrow": "What you get",
+    "uslugi.deliverTitle": "Deliverables",
+    "uslugi.deliverIntro":
+      "Everything that physically ends up in your hands when the project is delivered — source files included, with no lock-in to the contractor.",
+    "uslugi.stepsEyebrow": "Process",
+    "uslugi.stepsTitle": "How the work goes",
+    "uslugi.stepsIntro":
+      "Stages with checkpoints: at each one you see what is done and can adjust the direction while it is still inexpensive.",
+    "uslugi.estimateText":
+      "We send the estimate with the schedule and the scope after a short brief — that way the figure belongs to your task, not to a market average.",
+    "uslugi.estimateCta": "Send a brief",
+
+    /* ─── Questions and answers ─────────────────────────────── */
+    "faq.eyebrow": "Questions and answers",
+    "faq.title": "Frequent questions",
+    "faq.intro":
+      "If your question is not here, write to us — the answer will be in plain words, not an extract from a contract.",
+    "faq.footerText":
+      "Still have questions about your task? Describe it in two paragraphs — we will come back with an estimate, a schedule and the scope.",
+    "faq.footerCta": "Write to us",
+
     /* ─── Enquiry form ─────────────────────────────────────── */
     "form.dialogLabel": "Become a client",
     "form.eyebrow": "Start a project",
@@ -766,6 +1032,56 @@ export const DICT = {
     "footer.rights": "All rights reserved.",
     "footer.privacy": "Privacy policy",
 
+    /* ─── Client area access ────────────────────────────────── */
+    "auth.panelLabel": "Access to the client area",
+    "auth.tabsLabel": "Sign in or request access",
+    "auth.tabSignin": "Sign in",
+    "auth.tabRequest": "Request access",
+    "auth.notice":
+      "The {dash} account is still in development. There is no sign-in form yet — we are not going to pretend one works. As soon as the account opens, sign-in will appear on this very screen.",
+    "auth.noticeSecondary":
+      "If the studio has already created an account for you, you have received an e-mail with the address of the area and an invitation. You can open it via the link below.",
+    "auth.openDash": "Open {dash}",
+    "auth.hintSignin":
+      "Access opens once the studio has created an account for your company. There is no self-registration.",
+    "auth.noAccount": "No account yet?",
+    "auth.orWrite": "or write to",
+    "auth.live.sent": "Request sent. We will reply within one working day.",
+    "auth.live.sending": "Sending the request…",
+    "auth.success.label": "Request sent",
+    "auth.success.title": "We have your request",
+    "auth.success.body":
+      "We will get in touch within one working day: we will confirm the set of modules and the staff roles, and set up the account on {dash}. The reply will come to the e-mail you gave.",
+    "auth.success.again": "Send another request",
+    "auth.formIntro":
+      "Tell us about the company — we will pick the modules for your industry and set up the account.",
+    "auth.field.name": "Name",
+    "auth.field.company": "Company",
+    "auth.field.email": "E-mail",
+    "auth.field.phone": "Phone",
+    "auth.field.industry": "Line of business",
+    "auth.field.comment": "Comment",
+    "auth.placeholder.name": "Alexandra",
+    "auth.placeholder.company": "Brand name",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment":
+      "How many people will work in the account, which tasks matter first",
+    "auth.industryNone": "Not selected",
+    "auth.consent": "I consent to the processing of personal data in accordance with the",
+    "auth.consentLink": "privacy policy",
+    "auth.submit": "Send the request",
+    "auth.submitting": "Sending…",
+    "auth.hintRequest":
+      "We do not create accounts automatically: first we discuss the tasks, then we set up the area and hand access to the person responsible.",
+    "auth.error.name": "Enter your name",
+    "auth.error.company": "Enter the company name",
+    "auth.error.email": "Enter your e-mail",
+    "auth.error.emailFormat": "Check the e-mail format",
+    "auth.error.consent": "Without consent we cannot process the request",
+    "auth.error.send": "Sending error",
+    "auth.error.submit":
+      "The request could not be sent. Try again or write to us by e-mail.",
+
     /* ─── Chat mock ────────────────────────────────────────── */
     "chat.bot": "bot",
     "chat.you": "you",
@@ -773,6 +1089,29 @@ export const DICT = {
     "chat.typing": "typing…",
     "chat.placeholder": "Message…",
     "chat.send": "Send",
+
+    /* ─── Assistant chat ────────────────────────────────────── */
+    "chat.greeting":
+      "Hello. I am the assistant of Kuznetsova Design. I can tell you about our services, ongoing care and our work — just ask.",
+    "chat.suggest1": "How much does a website cost?",
+    "chat.suggest2": "Which industries do you work with?",
+    "chat.suggest3": "What does ongoing care include?",
+    "chat.assistant": "Assistant",
+    "chat.dialogLabel": "Chat with the Kuznetsova Design assistant",
+    "chat.openChatAria": "Open the chat with the assistant",
+    "chat.closeChatAria": "Close the chat with the assistant",
+    "chat.close": "Close the chat",
+    "chat.typingSr": "The assistant is typing",
+    "chat.inputLabel": "Message to the assistant",
+    "chat.inputPlaceholder": "Ask about services or your project…",
+    "chat.sendAria": "Send the message",
+    "chat.leaveRequest": "Leave a request",
+    "chat.note": "The assistant can be wrong. We name prices after a short brief.",
+    "chat.errorRate": "Too many messages in a row. Please wait a couple of minutes.",
+    "chat.errorReply":
+      "The answer did not come through. Write to us directly — we reply quickly.",
+    "chat.errorNetwork":
+      "The connection dropped. Write to us on Telegram or by e-mail — that will get through.",
 
     /* ─── Language switch ──────────────────────────────────── */
     "lang.label": "Interface language",
@@ -794,6 +1133,10 @@ export const DICT = {
      中文 (ZH)
      ══════════════════════════════════════════════════════════════ */
   zh: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "插件",
+    "nav.account": "客户账户",
+    "menu.accountSub": "仪表板与 CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "作品分类",
     "portfolio.title": "我们为谁做设计",
@@ -958,6 +1301,24 @@ export const DICT = {
     "services.label": "服务",
     "services.all": "全部服务",
 
+    /* ─── 服务页：首屏与计数 ─────────────────────────────────────────── */
+    "services.hero.issue": "2026 目录",
+    "services.hero.kicker": "我们做什么",
+    "services.hero.title": "服务",
+    "services.hero.desc": "工作室的完整目录——从标志、网站到拍摄、3D 与自动化。这里可以看到工作的构成；具体金额在简报之后写进方案。",
+    "services.unit.group.one": "个方向",
+    "services.unit.group.few": "个方向",
+    "services.unit.group.many": "个方向",
+    "services.unit.item.one": "项服务",
+    "services.unit.item.few": "项服务",
+    "services.unit.item.many": "项服务",
+    "services.unit.position.one": "个项目",
+    "services.unit.position.few": "个项目",
+    "services.unit.position.many": "个项目",
+    "services.unit.plan.one": "个 Care 方案",
+    "services.unit.plan.few": "个 Care 方案",
+    "services.unit.plan.many": "个 Care 方案",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -1051,6 +1412,68 @@ export const DICT = {
     "products.care.featured": "热门选择",
     "products.cta": "洽谈需求",
 
+    /* ─── 服务目录 ──────────────────────────────────────────────── */
+    "products.catalogue.title": "可以委托的内容",
+    "products.catalogue.lead":
+      "{groups}、{items}。项目由这些模块搭建：可以只选一项服务，也可以走完整个流程——从命名到社交媒体的内容。",
+
+    /* ─── Care 订阅 ───────────────────────────────────────────── */
+    "care.title": "运维订阅",
+    "care.lead": "有人照看的网站活得更久。Care 是每月的工作：托管与域名、备份与更新、按需修改、社交媒体视觉，以及搜索排名报告。",
+    "care.planCta": "洽谈订阅",
+    "care.note": "订阅最短周期为三个月。费用在简报之后确定：取决于网站的体量，以及我们承担多少工作。",
+    "care.ctaEyebrow": "下一步",
+    "care.ctaTitle": "告诉我们需要做什么",
+    "care.ctaText": "填一份简短的简报，我们会带着工作构成、周期与费用回复您。如果需求不在目录里也请告诉我们，多半我们已经做过类似的事。",
+
+    /* ─── 插件与仪表盘 ────────────────────────────────────────────── */
+    "plugins.issue": "dash · 开发中",
+    "plugins.eyebrow": "插件与仪表盘",
+    "plugins.title": "插件",
+    "plugins.desc":
+      "网站把客户带来，真正的工作从这里开始：咨询、预约、订单、库存和资金。插件是一套按您的行业搭建的仪表盘，运行在您自己的后台里，而不是别人的通用面板中。",
+    "plugins.stat.modules": "个模块",
+    "plugins.stat.live": "已上线",
+    "plugins.stat.industries": "个行业",
+    "plugins.tabAll": "全部",
+    "plugins.filterLabel": "按状态筛选模块",
+    "plugins.modulesEyebrow": "模块",
+    "plugins.modulesTitle": "为您的行业定制的仪表盘",
+    "plugins.modulesIntro":
+      "每个模块都是一整套现成的界面与流程，我们把它装在网站之上，再按您的业务打磨。餐厅需要停售清单，美发沙龙需要技师排班，开发商需要房源表。底座相同，内容不同。",
+    "plugins.worksInField": "该领域的作品",
+
+    /* ─── 工作台核心 ─────────────────────────────────────────────── */
+    "dash.eyebrow": "核心",
+    "dash.title": "每个后台都包含什么",
+    "dash.intro": "行业部分各不相同，底座却是同一个。这些能力只做一次，之后每个项目都能拿到——无论您经营的是餐厅、诊所还是基金会。",
+    "dash.ctaEyebrow": "访问权限",
+    "dash.ctaTitle": "后台正在搭建中",
+    "dash.ctaText": "请介绍您的行业和业务流程，我们会展示模块如何落在您的网站上，并把您排入接入队列。",
+    "dash.requestAccess": "申请访问",
+    "dash.ctaNote": "dash.kuznetsova.design 后台仍在开发中——留下申请，我们会优先为您开放访问。",
+
+    /* ─── 单项服务页 ─────────────────────────────────────────────── */
+    "uslugi.eyebrow": "服务",
+    "uslugi.discuss": "洽谈需求",
+    "uslugi.viewWork": "查看作品",
+    "uslugi.aboutLabel": "关于这项服务",
+    "uslugi.deliverEyebrow": "您会得到什么",
+    "uslugi.deliverTitle": "交付清单",
+    "uslugi.deliverIntro": "项目交付后真正交到您手上的一切——包含源文件，且不与承包方绑定。",
+    "uslugi.stepsEyebrow": "流程",
+    "uslugi.stepsTitle": "工作如何推进",
+    "uslugi.stepsIntro": "分阶段推进，每个阶段都有验收点：您能看到已完成的部分，并在代价还小的时候调整方向。",
+    "uslugi.estimateText": "在一份简短的简报之后，我们会发来含周期与工作构成的报价——这样数字对应的是您的项目，而不是市场平均值。",
+    "uslugi.estimateCta": "发送简报",
+
+    /* ─── 问与答 ───────────────────────────────────────────────── */
+    "faq.eyebrow": "问与答",
+    "faq.title": "常见问题",
+    "faq.intro": "如果这里没有您要问的问题，请写信给我们：回复会是人话，而不是合同条款的摘录。",
+    "faq.footerText": "对自己的项目还有疑问？用两段文字说明，我们会带着报价、周期与工作构成回复您。",
+    "faq.footerCta": "写信给我们",
+
     /* ─── 咨询表单 ──────────────────────────────────────────── */
     "form.dialogLabel": "成为客户",
     "form.eyebrow": "启动项目",
@@ -1125,6 +1548,48 @@ export const DICT = {
     "footer.rights": "版权所有。",
     "footer.privacy": "隐私政策",
 
+    /* ─── 客户后台访问 ────────────────────────────────────────────── */
+    "auth.panelLabel": "客户后台访问",
+    "auth.tabsLabel": "登录或申请访问",
+    "auth.tabSignin": "登录",
+    "auth.tabRequest": "申请访问",
+    "auth.notice": "{dash} 后台仍在开发中。目前还没有登录表单——我们不会假装它能用。后台一旦开放，登录入口就会出现在这个页面上。",
+    "auth.noticeSecondary": "如果工作室已为您开通账户，您会收到一封含后台地址与邀请的邮件。可以通过下方链接打开。",
+    "auth.openDash": "打开 {dash}",
+    "auth.hintSignin": "在工作室为贵公司创建账户之后，访问权限才会开启。不提供自助注册。",
+    "auth.noAccount": "还没有账户？",
+    "auth.orWrite": "或写信至",
+    "auth.live.sent": "请求已发送。我们会在一个工作日内回复。",
+    "auth.live.sending": "正在发送请求…",
+    "auth.success.label": "请求已发送",
+    "auth.success.title": "我们已收到您的申请",
+    "auth.success.body": "我们会在一个工作日内与您联系：确认模块组合与员工角色，并在 {dash} 上开通后台。回复将发送到您填写的邮箱。",
+    "auth.success.again": "再发送一个请求",
+    "auth.formIntro": "请介绍贵公司，我们会为您的行业挑选模块并开通后台。",
+    "auth.field.name": "姓名",
+    "auth.field.company": "公司",
+    "auth.field.email": "电子邮箱",
+    "auth.field.phone": "电话",
+    "auth.field.industry": "业务领域",
+    "auth.field.comment": "备注",
+    "auth.placeholder.name": "李明",
+    "auth.placeholder.company": "品牌名称",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment": "会有多少人使用后台，哪些任务最优先",
+    "auth.industryNone": "未选择",
+    "auth.consent": "我同意依据以下政策处理个人数据：",
+    "auth.consentLink": "隐私政策",
+    "auth.submit": "发送请求",
+    "auth.submitting": "发送中…",
+    "auth.hintRequest": "我们不会自动创建账户：先讨论需求，再开通后台，并把访问权限交给负责人。",
+    "auth.error.name": "请输入姓名",
+    "auth.error.company": "请填写公司名称",
+    "auth.error.email": "请输入电子邮箱",
+    "auth.error.emailFormat": "请检查邮箱格式",
+    "auth.error.consent": "未获同意，我们无法处理该请求",
+    "auth.error.send": "发送失败",
+    "auth.error.submit": "请求发送失败。请重试，或给我们发邮件。",
+
     /* ─── 聊天演示 ──────────────────────────────────────────── */
     "chat.bot": "机器人",
     "chat.you": "您",
@@ -1132,6 +1597,26 @@ export const DICT = {
     "chat.typing": "正在输入…",
     "chat.placeholder": "输入消息…",
     "chat.send": "发送",
+
+    /* ─── 助理对话 ──────────────────────────────────────────────── */
+    "chat.greeting": "您好，我是 Kuznetsova Design 的助理。可以为您介绍服务、运维支持和我们的作品，请随时提问。",
+    "chat.suggest1": "做一个网站要多少钱？",
+    "chat.suggest2": "你们服务哪些行业？",
+    "chat.suggest3": "运维支持包含什么？",
+    "chat.assistant": "助理",
+    "chat.dialogLabel": "与 Kuznetsova Design 助理对话",
+    "chat.openChatAria": "打开与助理的对话",
+    "chat.closeChatAria": "关闭与助理的对话",
+    "chat.close": "关闭对话",
+    "chat.typingSr": "助理正在输入",
+    "chat.inputLabel": "发给助理的消息",
+    "chat.inputPlaceholder": "咨询服务或您的项目…",
+    "chat.sendAria": "发送消息",
+    "chat.leaveRequest": "提交需求",
+    "chat.note": "助理可能出错。价格会在简短的简报之后给出。",
+    "chat.errorRate": "连续发送的消息过多，请稍等几分钟。",
+    "chat.errorReply": "未能获取回复。可以直接联系我们，我们会尽快回应。",
+    "chat.errorNetwork": "连接中断。请通过 Telegram 或邮件联系我们，这样一定能收到。",
 
     /* ─── 语言切换 ──────────────────────────────────────────── */
     "lang.label": "界面语言",
@@ -1153,6 +1638,10 @@ export const DICT = {
      ESPAÑOL (ES)
      ══════════════════════════════════════════════════════════════ */
   es: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Plug-ins",
+    "nav.account": "Área de cliente",
+    "menu.accountSub": "Panel y CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Secciones del portafolio",
     "portfolio.title": "Para quién diseñamos",
@@ -1322,6 +1811,25 @@ export const DICT = {
     "services.label": "Servicios",
     "services.all": "Todos los servicios",
 
+    /* ─── Página de servicios: portada y contadores ─────────── */
+    "services.hero.issue": "Catálogo 2026",
+    "services.hero.kicker": "Lo que hacemos",
+    "services.hero.title": "Servicios",
+    "services.hero.desc":
+      "El catálogo completo del estudio: desde una marca y un sitio web hasta fotografía, 3D y automatización. Aquí se ve en qué consiste el trabajo; la cifra la damos en la propuesta, después del briefing.",
+    "services.unit.group.one": "área",
+    "services.unit.group.few": "áreas",
+    "services.unit.group.many": "áreas",
+    "services.unit.item.one": "servicio",
+    "services.unit.item.few": "servicios",
+    "services.unit.item.many": "servicios",
+    "services.unit.position.one": "ítem",
+    "services.unit.position.few": "ítems",
+    "services.unit.position.many": "ítems",
+    "services.unit.plan.one": "plan Care",
+    "services.unit.plan.few": "planes Care",
+    "services.unit.plan.many": "planes Care",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -1418,6 +1926,79 @@ export const DICT = {
     "products.care.featured": "El más elegido",
     "products.cta": "Hablemos de tu proyecto",
 
+    /* ─── Catálogo de servicios ─────────────────────────────── */
+    "products.catalogue.title": "Qué se puede encargar",
+    "products.catalogue.lead":
+      "{groups} y {items}. Los proyectos se arman con estos bloques: puedes tomar un solo servicio o cerrar el ciclo completo, desde el nombre hasta el feed en redes.",
+
+    /* ─── Suscripción Care ──────────────────────────────────── */
+    "care.title": "Suscripción de mantenimiento",
+    "care.lead":
+      "Un sitio dura más cuando alguien lo cuida. Care es trabajo mensual: hosting y dominio, copias de seguridad y actualizaciones, cambios a petición, visuales para redes e informe de posiciones en buscadores.",
+    "care.planCta": "Hablar de la suscripción",
+    "care.note":
+      "El plazo mínimo de suscripción es de tres meses. El coste lo indicamos después del briefing: depende del tamaño del sitio y de cuánto trabajo asumimos.",
+    "care.ctaEyebrow": "Siguiente",
+    "care.ctaTitle": "Cuéntanos qué hay que hacer",
+    "care.ctaText":
+      "Un briefing breve y volvemos con el alcance, los plazos y el coste. Si la tarea no está en el catálogo, escríbenos igual: es probable que ya la hayamos resuelto.",
+
+    /* ─── Plugins y paneles ─────────────────────────────────── */
+    "plugins.issue": "dash · en desarrollo",
+    "plugins.eyebrow": "Plugins y paneles",
+    "plugins.title": "Plugins",
+    "plugins.desc":
+      "El sitio trae al cliente, pero el trabajo empieza después: solicitudes, citas, pedidos, existencias y dinero. Un plugin es un panel construido para tu sector, que vive en tu propia cuenta y no en un panel genérico ajeno.",
+    "plugins.stat.modules": "módulos",
+    "plugins.stat.live": "ya en marcha",
+    "plugins.stat.industries": "sectores",
+    "plugins.tabAll": "Todos",
+    "plugins.filterLabel": "Filtrar módulos por estado",
+    "plugins.modulesEyebrow": "Módulos",
+    "plugins.modulesTitle": "Un panel para tu sector",
+    "plugins.modulesIntro":
+      "Cada módulo es un conjunto listo de pantallas y flujos que montamos sobre el sitio y ajustamos a tus procesos. Un restaurante necesita una lista de bajas, un salón el horario de sus profesionales, una promotora la tabla de disponibilidad. La base es común, el contenido cambia.",
+    "plugins.worksInField": "Trabajos de este sector",
+
+    /* ─── Núcleo del panel ──────────────────────────────────── */
+    "dash.eyebrow": "Núcleo",
+    "dash.title": "Qué incluye cualquier panel",
+    "dash.intro":
+      "La capa sectorial cambia en cada caso, la base no. Estas piezas se construyeron una vez y llegan con cada proyecto, tengas un restaurante, una clínica o una fundación.",
+    "dash.ctaEyebrow": "Acceso",
+    "dash.ctaTitle": "El panel se está construyendo ahora mismo",
+    "dash.ctaText":
+      "Cuéntanos tu sector y tus procesos: te mostraremos cómo encaja el módulo en tu sitio y te pondremos en la cola de conexión.",
+    "dash.requestAccess": "Solicitar acceso",
+    "dash.ctaNote":
+      "El panel dash.kuznetsova.design está en desarrollo: deja tu solicitud y abriremos el acceso a los primeros.",
+
+    /* ─── Página de un servicio ─────────────────────────────── */
+    "uslugi.eyebrow": "Servicio",
+    "uslugi.discuss": "Hablemos de tu proyecto",
+    "uslugi.viewWork": "Ver los trabajos",
+    "uslugi.aboutLabel": "Sobre el servicio",
+    "uslugi.deliverEyebrow": "Lo que recibes",
+    "uslugi.deliverTitle": "Entregables",
+    "uslugi.deliverIntro":
+      "Todo lo que queda físicamente en tus manos al entregar el proyecto: con los archivos fuente y sin dependencia del proveedor.",
+    "uslugi.stepsEyebrow": "Proceso",
+    "uslugi.stepsTitle": "Cómo avanza el trabajo",
+    "uslugi.stepsIntro":
+      "Etapas con puntos de aceptación: en cada uno se ve lo hecho y aún se puede corregir el rumbo mientras resulta barato.",
+    "uslugi.estimateText":
+      "Enviamos el presupuesto con plazos y alcance después de un briefing breve: así la cifra corresponde a tu proyecto y no a una media del mercado.",
+    "uslugi.estimateCta": "Enviar el briefing",
+
+    /* ─── Preguntas y respuestas ────────────────────────────── */
+    "faq.eyebrow": "Preguntas y respuestas",
+    "faq.title": "Preguntas frecuentes",
+    "faq.intro":
+      "Si tu pregunta no está aquí, escríbenos: responderemos en lenguaje humano, no con un extracto del contrato.",
+    "faq.footerText":
+      "¿Te quedan dudas sobre tu proyecto? Descríbelo en dos párrafos y volvemos con presupuesto, plazos y alcance.",
+    "faq.footerCta": "Escríbenos",
+
     /* ─── Formulario ────────────────────────────────────────── */
     "form.dialogLabel": "Ser cliente",
     "form.eyebrow": "Empieza tu proyecto",
@@ -1493,6 +2074,56 @@ export const DICT = {
     "footer.rights": "Todos los derechos reservados.",
     "footer.privacy": "Política de privacidad",
 
+    /* ─── Acceso al área de cliente ─────────────────────────── */
+    "auth.panelLabel": "Acceso al área de cliente",
+    "auth.tabsLabel": "Iniciar sesión o solicitar acceso",
+    "auth.tabSignin": "Entrar",
+    "auth.tabRequest": "Solicitar acceso",
+    "auth.notice":
+      "El panel {dash} está en desarrollo. Todavía no hay formulario de acceso y no vamos a fingir que funciona. En cuanto el panel abra, el acceso aparecerá en esta misma pantalla.",
+    "auth.noticeSecondary":
+      "Si el estudio ya te ha creado una cuenta, has recibido un correo con la dirección del panel y una invitación. Puedes abrirlo con el enlace de abajo.",
+    "auth.openDash": "Abrir {dash}",
+    "auth.hintSignin":
+      "El acceso se abre cuando el estudio crea la cuenta de tu empresa. No existe registro por cuenta propia.",
+    "auth.noAccount": "¿Aún no tienes cuenta?",
+    "auth.orWrite": "o escribe a",
+    "auth.live.sent": "Solicitud enviada. Responderemos en un día laborable.",
+    "auth.live.sending": "Enviando la solicitud…",
+    "auth.success.label": "Solicitud enviada",
+    "auth.success.title": "Hemos recibido tu solicitud",
+    "auth.success.body":
+      "Te contactaremos en un día laborable: precisaremos el conjunto de módulos, los roles del equipo y crearemos la cuenta en {dash}. La respuesta llegará al e-mail indicado.",
+    "auth.success.again": "Enviar otra solicitud",
+    "auth.formIntro":
+      "Cuéntanos sobre la empresa: elegiremos los módulos de tu sector y crearemos la cuenta.",
+    "auth.field.name": "Nombre",
+    "auth.field.company": "Empresa",
+    "auth.field.email": "E-mail",
+    "auth.field.phone": "Teléfono",
+    "auth.field.industry": "Sector de actividad",
+    "auth.field.comment": "Comentario",
+    "auth.placeholder.name": "Alejandra",
+    "auth.placeholder.company": "Nombre de la marca",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment":
+      "Cuántas personas usarán el panel y qué tareas importan primero",
+    "auth.industryNone": "Sin seleccionar",
+    "auth.consent": "Acepto el tratamiento de datos personales conforme a la",
+    "auth.consentLink": "política de privacidad",
+    "auth.submit": "Enviar solicitud",
+    "auth.submitting": "Enviando…",
+    "auth.hintRequest":
+      "No creamos cuentas automáticamente: primero hablamos de las tareas, después creamos el panel y entregamos el acceso a la persona responsable.",
+    "auth.error.name": "Escribe tu nombre",
+    "auth.error.company": "Indica el nombre de la empresa",
+    "auth.error.email": "Escribe tu e-mail",
+    "auth.error.emailFormat": "Revisa el formato del e-mail",
+    "auth.error.consent": "Sin tu consentimiento no podemos tramitar la solicitud",
+    "auth.error.send": "Error de envío",
+    "auth.error.submit":
+      "No se ha podido enviar la solicitud. Inténtalo de nuevo o escríbenos por e-mail.",
+
     /* ─── Chat de muestra ───────────────────────────────────── */
     "chat.bot": "bot",
     "chat.you": "tú",
@@ -1500,6 +2131,30 @@ export const DICT = {
     "chat.typing": "escribiendo…",
     "chat.placeholder": "Mensaje…",
     "chat.send": "Enviar",
+
+    /* ─── Chat con el asistente ─────────────────────────────── */
+    "chat.greeting":
+      "Hola. Soy el asistente de Kuznetsova Design. Puedo contarte sobre los servicios, el mantenimiento y nuestros trabajos: pregunta lo que quieras.",
+    "chat.suggest1": "¿Cuánto cuesta un sitio web?",
+    "chat.suggest2": "¿Con qué sectores trabajáis?",
+    "chat.suggest3": "¿Qué incluye el mantenimiento?",
+    "chat.assistant": "Asistente",
+    "chat.dialogLabel": "Chat con el asistente de Kuznetsova Design",
+    "chat.openChatAria": "Abrir el chat con el asistente",
+    "chat.closeChatAria": "Cerrar el chat con el asistente",
+    "chat.close": "Cerrar el chat",
+    "chat.typingSr": "El asistente está escribiendo",
+    "chat.inputLabel": "Mensaje para el asistente",
+    "chat.inputPlaceholder": "Pregunta por los servicios o tu proyecto…",
+    "chat.sendAria": "Enviar el mensaje",
+    "chat.leaveRequest": "Dejar una solicitud",
+    "chat.note":
+      "El asistente puede equivocarse. Los precios los damos tras un briefing breve.",
+    "chat.errorRate": "Demasiados mensajes seguidos. Espera un par de minutos.",
+    "chat.errorReply":
+      "No hemos podido obtener respuesta. Escríbenos directamente: contestamos rápido.",
+    "chat.errorNetwork":
+      "Se ha cortado la conexión. Escríbenos por Telegram o por e-mail: así seguro que llega.",
 
     /* ─── Cambio de idioma ──────────────────────────────────── */
     "lang.label": "Idioma de la interfaz",
@@ -1521,6 +2176,10 @@ export const DICT = {
      PORTUGUÊS (PT)
      ══════════════════════════════════════════════════════════════ */
   pt: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Plug-ins",
+    "nav.account": "Área de cliente",
+    "menu.accountSub": "Painel e CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Secções do portfólio",
     "portfolio.title": "Para quem desenhamos",
@@ -1690,6 +2349,25 @@ export const DICT = {
     "services.label": "Serviços",
     "services.all": "Todos os serviços",
 
+    /* ─── Página de serviços: abertura e contadores ─────────── */
+    "services.hero.issue": "Catálogo 2026",
+    "services.hero.kicker": "O que fazemos",
+    "services.hero.title": "Serviços",
+    "services.hero.desc":
+      "O catálogo completo do estúdio: da marca e do site à fotografia, ao 3D e à automação. Aqui vê a composição do trabalho; o valor indicamos na proposta, depois do briefing.",
+    "services.unit.group.one": "área",
+    "services.unit.group.few": "áreas",
+    "services.unit.group.many": "áreas",
+    "services.unit.item.one": "serviço",
+    "services.unit.item.few": "serviços",
+    "services.unit.item.many": "serviços",
+    "services.unit.position.one": "item",
+    "services.unit.position.few": "itens",
+    "services.unit.position.many": "itens",
+    "services.unit.plan.one": "plano Care",
+    "services.unit.plan.few": "planos Care",
+    "services.unit.plan.many": "planos Care",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -1786,6 +2464,79 @@ export const DICT = {
     "products.care.featured": "O mais escolhido",
     "products.cta": "Falar sobre a sua tarefa",
 
+    /* ─── Catálogo de serviços ──────────────────────────────── */
+    "products.catalogue.title": "O que pode encomendar",
+    "products.catalogue.lead":
+      "{groups} e {items}. Os projetos montam-se a partir destes blocos: pode escolher um único serviço ou fechar o ciclo completo, do nome ao feed nas redes.",
+
+    /* ─── Assinatura Care ───────────────────────────────────── */
+    "care.title": "Assinatura de acompanhamento",
+    "care.lead":
+      "Um site dura mais quando alguém cuida dele. Care é trabalho mensal: alojamento e domínio, cópias de segurança e atualizações, alterações a pedido, visuais para redes e relatório de posições na pesquisa.",
+    "care.planCta": "Falar sobre a assinatura",
+    "care.note":
+      "O prazo mínimo da assinatura é de três meses. O custo indicamos depois do briefing: depende do tamanho do site e de quanto trabalho assumimos.",
+    "care.ctaEyebrow": "A seguir",
+    "care.ctaTitle": "Conte-nos o que é preciso fazer",
+    "care.ctaText":
+      "Um briefing curto e voltamos com o âmbito, os prazos e o custo. Se a tarefa não estiver no catálogo, escreva na mesma: é provável que já a tenhamos resolvido.",
+
+    /* ─── Plugins e painéis ─────────────────────────────────── */
+    "plugins.issue": "dash · em desenvolvimento",
+    "plugins.eyebrow": "Plugins e painéis",
+    "plugins.title": "Plugins",
+    "plugins.desc":
+      "O site traz o cliente, mas o trabalho começa depois: pedidos, marcações, encomendas, stock e dinheiro. Um plugin é um painel construído para o seu setor, que vive na sua própria conta e não num painel genérico alheio.",
+    "plugins.stat.modules": "módulos",
+    "plugins.stat.live": "já em funcionamento",
+    "plugins.stat.industries": "setores",
+    "plugins.tabAll": "Todos",
+    "plugins.filterLabel": "Filtrar módulos por estado",
+    "plugins.modulesEyebrow": "Módulos",
+    "plugins.modulesTitle": "Um painel para o seu setor",
+    "plugins.modulesIntro":
+      "Cada módulo é um conjunto pronto de ecrãs e fluxos que colocamos sobre o site e afinamos aos seus processos. Um restaurante precisa de uma lista de indisponíveis, um salão do horário dos profissionais, uma construtora do mapa de unidades. A base é a mesma, o recheio muda.",
+    "plugins.worksInField": "Trabalhos deste setor",
+
+    /* ─── Núcleo do painel ──────────────────────────────────── */
+    "dash.eyebrow": "Núcleo",
+    "dash.title": "O que inclui qualquer painel",
+    "dash.intro":
+      "A camada setorial muda em cada caso, a base não. Estas peças foram construídas uma vez e chegam com cada projeto, tenha um restaurante, uma clínica ou uma fundação.",
+    "dash.ctaEyebrow": "Acesso",
+    "dash.ctaTitle": "O painel está a ser construído neste momento",
+    "dash.ctaText":
+      "Conte-nos o seu setor e os seus processos: mostramos como o módulo assenta no seu site e colocamo-lo na fila de ligação.",
+    "dash.requestAccess": "Solicitar acesso",
+    "dash.ctaNote":
+      "O painel dash.kuznetsova.design está em desenvolvimento: deixe o seu pedido e abriremos o acesso aos primeiros.",
+
+    /* ─── Página de um serviço ──────────────────────────────── */
+    "uslugi.eyebrow": "Serviço",
+    "uslugi.discuss": "Falar sobre a sua tarefa",
+    "uslugi.viewWork": "Ver os trabalhos",
+    "uslugi.aboutLabel": "Sobre o serviço",
+    "uslugi.deliverEyebrow": "O que recebe",
+    "uslugi.deliverTitle": "Entregáveis",
+    "uslugi.deliverIntro":
+      "Tudo o que fica efetivamente nas suas mãos na entrega do projeto: com os ficheiros de origem e sem dependência do fornecedor.",
+    "uslugi.stepsEyebrow": "Processo",
+    "uslugi.stepsTitle": "Como decorre o trabalho",
+    "uslugi.stepsIntro":
+      "Etapas com pontos de aceitação: em cada um vê o que está feito e ainda pode corrigir o rumo enquanto sai barato.",
+    "uslugi.estimateText":
+      "Enviamos o orçamento com prazos e âmbito depois de um briefing curto: assim o valor corresponde ao seu projeto e não a uma média de mercado.",
+    "uslugi.estimateCta": "Enviar o briefing",
+
+    /* ─── Perguntas e respostas ─────────────────────────────── */
+    "faq.eyebrow": "Perguntas e respostas",
+    "faq.title": "Perguntas frequentes",
+    "faq.intro":
+      "Se a sua pergunta não está aqui, escreva-nos: respondemos em linguagem humana, não com um extrato do contrato.",
+    "faq.footerText":
+      "Ainda tem dúvidas sobre o seu projeto? Descreva-o em dois parágrafos e voltamos com orçamento, prazos e âmbito.",
+    "faq.footerCta": "Escreva-nos",
+
     /* ─── Formulário ────────────────────────────────────────── */
     "form.dialogLabel": "Tornar-se cliente",
     "form.eyebrow": "Comece o seu projeto",
@@ -1861,6 +2612,56 @@ export const DICT = {
     "footer.rights": "Todos os direitos reservados.",
     "footer.privacy": "Política de privacidade",
 
+    /* ─── Acesso à área de cliente ──────────────────────────── */
+    "auth.panelLabel": "Acesso à área de cliente",
+    "auth.tabsLabel": "Entrar ou solicitar acesso",
+    "auth.tabSignin": "Entrar",
+    "auth.tabRequest": "Solicitar acesso",
+    "auth.notice":
+      "O painel {dash} está em desenvolvimento. Ainda não existe formulário de entrada e não vamos fingir que funciona. Assim que o painel abrir, a entrada aparecerá neste mesmo ecrã.",
+    "auth.noticeSecondary":
+      "Se o estúdio já criou a sua conta, recebeu um e-mail com o endereço do painel e um convite. Pode abri-lo pela ligação abaixo.",
+    "auth.openDash": "Abrir {dash}",
+    "auth.hintSignin":
+      "O acesso abre depois de o estúdio criar a conta da sua empresa. Não existe registo autónomo.",
+    "auth.noAccount": "Ainda não tem conta?",
+    "auth.orWrite": "ou escreva para",
+    "auth.live.sent": "Pedido enviado. Respondemos dentro de um dia útil.",
+    "auth.live.sending": "A enviar o pedido…",
+    "auth.success.label": "Pedido enviado",
+    "auth.success.title": "Recebemos o seu pedido",
+    "auth.success.body":
+      "Entraremos em contacto dentro de um dia útil: definimos o conjunto de módulos, os papéis da equipa e criamos a conta em {dash}. A resposta chegará ao e-mail indicado.",
+    "auth.success.again": "Enviar outro pedido",
+    "auth.formIntro":
+      "Conte-nos sobre a empresa: escolhemos os módulos do seu setor e criamos a conta.",
+    "auth.field.name": "Nome",
+    "auth.field.company": "Empresa",
+    "auth.field.email": "E-mail",
+    "auth.field.phone": "Telefone",
+    "auth.field.industry": "Setor de atividade",
+    "auth.field.comment": "Comentário",
+    "auth.placeholder.name": "Alexandra",
+    "auth.placeholder.company": "Nome da marca",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment":
+      "Quantas pessoas vão usar o painel e que tarefas são prioritárias",
+    "auth.industryNone": "Não selecionado",
+    "auth.consent": "Aceito o tratamento de dados pessoais nos termos da",
+    "auth.consentLink": "política de privacidade",
+    "auth.submit": "Enviar pedido",
+    "auth.submitting": "A enviar…",
+    "auth.hintRequest":
+      "Não criamos contas automaticamente: primeiro falamos das tarefas, depois criamos o painel e entregamos o acesso à pessoa responsável.",
+    "auth.error.name": "Indique o seu nome",
+    "auth.error.company": "Indique o nome da empresa",
+    "auth.error.email": "Indique o seu e-mail",
+    "auth.error.emailFormat": "Verifique o formato do e-mail",
+    "auth.error.consent": "Sem consentimento não podemos tratar o pedido",
+    "auth.error.send": "Erro de envio",
+    "auth.error.submit":
+      "Não foi possível enviar o pedido. Tente novamente ou escreva-nos por e-mail.",
+
     /* ─── Chat de demonstração ──────────────────────────────── */
     "chat.bot": "bot",
     "chat.you": "você",
@@ -1868,6 +2669,30 @@ export const DICT = {
     "chat.typing": "a escrever…",
     "chat.placeholder": "Mensagem…",
     "chat.send": "Enviar",
+
+    /* ─── Chat com o assistente ─────────────────────────────── */
+    "chat.greeting":
+      "Olá. Sou o assistente da Kuznetsova Design. Posso falar sobre os serviços, o acompanhamento e os nossos trabalhos: pergunte à vontade.",
+    "chat.suggest1": "Quanto custa um site?",
+    "chat.suggest2": "Com que setores trabalham?",
+    "chat.suggest3": "O que inclui o acompanhamento?",
+    "chat.assistant": "Assistente",
+    "chat.dialogLabel": "Chat com o assistente da Kuznetsova Design",
+    "chat.openChatAria": "Abrir o chat com o assistente",
+    "chat.closeChatAria": "Fechar o chat com o assistente",
+    "chat.close": "Fechar o chat",
+    "chat.typingSr": "O assistente está a escrever",
+    "chat.inputLabel": "Mensagem para o assistente",
+    "chat.inputPlaceholder": "Pergunte sobre os serviços ou o seu projeto…",
+    "chat.sendAria": "Enviar a mensagem",
+    "chat.leaveRequest": "Deixar um pedido",
+    "chat.note":
+      "O assistente pode enganar-se. Os valores indicamos depois de um briefing curto.",
+    "chat.errorRate": "Demasiadas mensagens seguidas. Aguarde alguns minutos.",
+    "chat.errorReply":
+      "Não foi possível obter resposta. Escreva-nos diretamente: respondemos depressa.",
+    "chat.errorNetwork":
+      "A ligação caiu. Escreva-nos pelo Telegram ou por e-mail: assim chega de certeza.",
 
     /* ─── Mudança de idioma ─────────────────────────────────── */
     "lang.label": "Idioma da interface",
@@ -1890,6 +2715,10 @@ export const DICT = {
      Espace insécable ( ) avant « : ; ! ? », comme le veut l'usage.
      ══════════════════════════════════════════════════════════════ */
   fr: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Plug-ins",
+    "nav.account": "Espace client",
+    "menu.accountSub": "Tableau de bord et CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Sections du portfolio",
     "portfolio.title": "Pour qui nous concevons",
@@ -2059,6 +2888,25 @@ export const DICT = {
     "services.label": "Services",
     "services.all": "Tous les services",
 
+    /* ─── Page Services : en-tête et compteurs ──────────────── */
+    "services.hero.issue": "Catalogue 2026",
+    "services.hero.kicker": "Ce que nous faisons",
+    "services.hero.title": "Services",
+    "services.hero.desc":
+      "Le catalogue complet du studio : du signe et du site jusqu'à la photographie, la 3D et l'automatisation. Vous voyez ici la composition du travail ; le montant figure dans la proposition, après le brief.",
+    "services.unit.group.one": "domaine",
+    "services.unit.group.few": "domaines",
+    "services.unit.group.many": "domaines",
+    "services.unit.item.one": "service",
+    "services.unit.item.few": "services",
+    "services.unit.item.many": "services",
+    "services.unit.position.one": "poste",
+    "services.unit.position.few": "postes",
+    "services.unit.position.many": "postes",
+    "services.unit.plan.one": "formule Care",
+    "services.unit.plan.few": "formules Care",
+    "services.unit.plan.many": "formules Care",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -2155,6 +3003,79 @@ export const DICT = {
     "products.care.featured": "Le plus choisi",
     "products.cta": "Parlons de votre projet",
 
+    /* ─── Catalogue des services ────────────────────────────── */
+    "products.catalogue.title": "Ce que vous pouvez commander",
+    "products.catalogue.lead":
+      "{groups} et {items}. Les projets s'assemblent à partir de ces blocs : une seule prestation, ou le cycle complet — du nom jusqu'au fil sur les réseaux.",
+
+    /* ─── Abonnement Care ───────────────────────────────────── */
+    "care.title": "Abonnement de suivi",
+    "care.lead":
+      "Un site dure plus longtemps quand quelqu'un s'en occupe. Care, c'est un travail mensuel : hébergement et domaine, sauvegardes et mises à jour, retouches à la demande, visuels pour les réseaux et rapport de positions dans la recherche.",
+    "care.planCta": "Parler de l'abonnement",
+    "care.note":
+      "La durée minimale de l'abonnement est de trois mois. Le coût est annoncé après le brief : il dépend du volume du site et de la part de travail que nous prenons en charge.",
+    "care.ctaEyebrow": "La suite",
+    "care.ctaTitle": "Dites-nous ce qu'il faut faire",
+    "care.ctaText":
+      "Un brief court, et nous revenons avec le périmètre, les délais et le coût. Si la mission ne figure pas au catalogue, écrivez quand même : nous l'avons sans doute déjà traitée.",
+
+    /* ─── Plugins et tableaux de bord ───────────────────────── */
+    "plugins.issue": "dash · en développement",
+    "plugins.eyebrow": "Plugins et tableaux de bord",
+    "plugins.title": "Plugins",
+    "plugins.desc":
+      "Le site amène le client, mais le travail commence après : demandes, rendez-vous, commandes, stocks et argent. Un plugin est un tableau de bord conçu pour votre secteur, qui vit dans votre propre espace et non dans un panneau universel appartenant à un tiers.",
+    "plugins.stat.modules": "modules",
+    "plugins.stat.live": "déjà en service",
+    "plugins.stat.industries": "secteurs",
+    "plugins.tabAll": "Tous",
+    "plugins.filterLabel": "Filtrer les modules par statut",
+    "plugins.modulesEyebrow": "Modules",
+    "plugins.modulesTitle": "Un tableau de bord pour votre secteur",
+    "plugins.modulesIntro":
+      "Chaque module est un ensemble prêt d'écrans et de scénarios que nous posons sur le site et ajustons à vos processus. Un restaurant a besoin d'une liste des plats indisponibles, un salon du planning des praticiens, un promoteur d'un tableau des lots. Le socle est commun, le contenu diffère.",
+    "plugins.worksInField": "Projets dans ce secteur",
+
+    /* ─── Cœur de l'espace client ───────────────────────────── */
+    "dash.eyebrow": "Le socle",
+    "dash.title": "Ce que contient chaque espace",
+    "dash.intro":
+      "La couche métier change d'un client à l'autre, le socle non. Ces éléments ont été construits une fois et accompagnent chaque projet : restaurant, clinique ou fondation.",
+    "dash.ctaEyebrow": "Accès",
+    "dash.ctaTitle": "L'espace client est en cours de construction",
+    "dash.ctaText":
+      "Parlez-nous de votre secteur et de vos processus : nous vous montrerons comment le module s'intègre à votre site et vous inscrirons sur la liste de raccordement.",
+    "dash.requestAccess": "Demander un accès",
+    "dash.ctaNote":
+      "L'espace dash.kuznetsova.design est encore en développement : laissez une demande et vous serez parmi les premiers à y accéder.",
+
+    /* ─── Page d'une prestation ─────────────────────────────── */
+    "uslugi.eyebrow": "Prestation",
+    "uslugi.discuss": "Parlons de votre projet",
+    "uslugi.viewWork": "Voir les projets",
+    "uslugi.aboutLabel": "À propos de la prestation",
+    "uslugi.deliverEyebrow": "Ce que vous recevez",
+    "uslugi.deliverTitle": "Livrables",
+    "uslugi.deliverIntro":
+      "Tout ce qui vous revient concrètement à la livraison du projet : fichiers sources compris, sans dépendance au prestataire.",
+    "uslugi.stepsEyebrow": "Processus",
+    "uslugi.stepsTitle": "Comment se déroule le travail",
+    "uslugi.stepsIntro":
+      "Des étapes avec des points de validation : à chacun, vous voyez ce qui est fait et pouvez corriger la direction tant que cela reste peu coûteux.",
+    "uslugi.estimateText":
+      "Nous envoyons le devis avec les délais et le périmètre après un brief court : le chiffre correspond ainsi à votre projet, et non à une moyenne du marché.",
+    "uslugi.estimateCta": "Envoyer un brief",
+
+    /* ─── Questions et réponses ─────────────────────────────── */
+    "faq.eyebrow": "Questions et réponses",
+    "faq.title": "Questions fréquentes",
+    "faq.intro":
+      "Si votre question ne figure pas ici, écrivez-nous : la réponse sera en langage humain, pas un extrait de contrat.",
+    "faq.footerText":
+      "Des questions subsistent sur votre projet ? Décrivez-le en deux paragraphes : nous reviendrons avec un devis, des délais et le périmètre.",
+    "faq.footerCta": "Nous écrire",
+
     /* ─── Formulaire ────────────────────────────────────────── */
     "form.dialogLabel": "Devenir client",
     "form.eyebrow": "Lancez votre projet",
@@ -2230,6 +3151,56 @@ export const DICT = {
     "footer.rights": "Tous droits réservés.",
     "footer.privacy": "Politique de confidentialité",
 
+    /* ─── Accès à l'espace client ───────────────────────────── */
+    "auth.panelLabel": "Accès à l'espace client",
+    "auth.tabsLabel": "Connexion ou demande d'accès",
+    "auth.tabSignin": "Connexion",
+    "auth.tabRequest": "Demander un accès",
+    "auth.notice":
+      "L'espace {dash} est en cours de développement. Il n'y a pas encore de formulaire de connexion et nous ne ferons pas semblant qu'il fonctionne. Dès l'ouverture de l'espace, la connexion apparaîtra sur cet écran.",
+    "auth.noticeSecondary":
+      "Si le studio vous a déjà créé un compte, vous avez reçu un e-mail avec l'adresse de l'espace et une invitation. Vous pouvez l'ouvrir par le lien ci-dessous.",
+    "auth.openDash": "Ouvrir {dash}",
+    "auth.hintSignin":
+      "L'accès s'ouvre une fois que le studio a créé le compte de votre entreprise. L'inscription autonome n'est pas prévue.",
+    "auth.noAccount": "Pas encore de compte ?",
+    "auth.orWrite": "ou écrivez à",
+    "auth.live.sent": "Demande envoyée. Nous répondrons sous un jour ouvré.",
+    "auth.live.sending": "Envoi de la demande…",
+    "auth.success.label": "Demande envoyée",
+    "auth.success.title": "Nous avons bien reçu votre demande",
+    "auth.success.body":
+      "Nous vous contacterons sous un jour ouvré : nous préciserons l'ensemble des modules, les rôles des collaborateurs et créerons l'espace sur {dash}. La réponse arrivera à l'e-mail indiqué.",
+    "auth.success.again": "Envoyer une autre demande",
+    "auth.formIntro":
+      "Parlez-nous de l'entreprise : nous choisirons les modules adaptés à votre secteur et créerons l'espace.",
+    "auth.field.name": "Nom",
+    "auth.field.company": "Entreprise",
+    "auth.field.email": "E-mail",
+    "auth.field.phone": "Téléphone",
+    "auth.field.industry": "Secteur d'activité",
+    "auth.field.comment": "Commentaire",
+    "auth.placeholder.name": "Alexandra",
+    "auth.placeholder.company": "Nom de la marque",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment":
+      "Combien de personnes utiliseront l'espace, quelles tâches comptent en premier",
+    "auth.industryNone": "Non sélectionné",
+    "auth.consent": "J'accepte le traitement des données personnelles conformément à la",
+    "auth.consentLink": "politique de confidentialité",
+    "auth.submit": "Envoyer la demande",
+    "auth.submitting": "Envoi…",
+    "auth.hintRequest":
+      "Nous ne créons pas de comptes automatiquement : nous discutons d'abord des besoins, puis nous créons l'espace et confions l'accès à la personne responsable.",
+    "auth.error.name": "Indiquez votre nom",
+    "auth.error.company": "Indiquez le nom de l'entreprise",
+    "auth.error.email": "Indiquez votre e-mail",
+    "auth.error.emailFormat": "Vérifiez le format de l'e-mail",
+    "auth.error.consent": "Sans consentement, nous ne pouvons pas traiter la demande",
+    "auth.error.send": "Erreur d'envoi",
+    "auth.error.submit":
+      "La demande n'a pas pu être envoyée. Réessayez ou écrivez-nous par e-mail.",
+
     /* ─── Chat de démonstration ─────────────────────────────── */
     "chat.bot": "bot",
     "chat.you": "vous",
@@ -2237,6 +3208,30 @@ export const DICT = {
     "chat.typing": "écrit…",
     "chat.placeholder": "Message…",
     "chat.send": "Envoyer",
+
+    /* ─── Chat avec l'assistant ─────────────────────────────── */
+    "chat.greeting":
+      "Bonjour. Je suis l'assistant de Kuznetsova Design. Je peux vous parler des services, du suivi et de nos projets : posez vos questions.",
+    "chat.suggest1": "Combien coûte un site ?",
+    "chat.suggest2": "Avec quels secteurs travaillez-vous ?",
+    "chat.suggest3": "Que comprend le suivi ?",
+    "chat.assistant": "Assistant",
+    "chat.dialogLabel": "Chat avec l'assistant de Kuznetsova Design",
+    "chat.openChatAria": "Ouvrir le chat avec l'assistant",
+    "chat.closeChatAria": "Fermer le chat avec l'assistant",
+    "chat.close": "Fermer le chat",
+    "chat.typingSr": "L'assistant écrit",
+    "chat.inputLabel": "Message à l'assistant",
+    "chat.inputPlaceholder": "Posez une question sur les services ou votre projet…",
+    "chat.sendAria": "Envoyer le message",
+    "chat.leaveRequest": "Laisser une demande",
+    "chat.note":
+      "L'assistant peut se tromper. Les prix sont annoncés après un brief court.",
+    "chat.errorRate": "Trop de messages d'affilée. Patientez quelques minutes.",
+    "chat.errorReply":
+      "La réponse n'est pas arrivée. Écrivez-nous directement, nous répondons vite.",
+    "chat.errorNetwork":
+      "La connexion a été interrompue. Écrivez-nous sur Telegram ou par e-mail : le message arrivera à coup sûr.",
 
     /* ─── Changement de langue ──────────────────────────────── */
     "lang.label": "Langue de l'interface",
@@ -2258,6 +3253,10 @@ export const DICT = {
      DEUTSCH (DE)
      ══════════════════════════════════════════════════════════════ */
   de: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Plug-ins",
+    "nav.account": "Kundenbereich",
+    "menu.accountSub": "Dashboard und CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Portfolio-Bereiche",
     "portfolio.title": "Für wen wir gestalten",
@@ -2428,6 +3427,25 @@ export const DICT = {
     "services.label": "Leistungen",
     "services.all": "Alle Leistungen",
 
+    /* ─── Leistungsseite: Kopfbereich und Zähler ────────────── */
+    "services.hero.issue": "Katalog 2026",
+    "services.hero.kicker": "Was wir machen",
+    "services.hero.title": "Leistungen",
+    "services.hero.desc":
+      "Der vollständige Katalog des Studios — von der Marke und der Website bis zu Fotografie, 3D und Automatisierung. Hier sehen Sie den Umfang der Arbeit; die Summe nennen wir im Angebot, nach dem Briefing.",
+    "services.unit.group.one": "Bereich",
+    "services.unit.group.few": "Bereiche",
+    "services.unit.group.many": "Bereiche",
+    "services.unit.item.one": "Leistung",
+    "services.unit.item.few": "Leistungen",
+    "services.unit.item.many": "Leistungen",
+    "services.unit.position.one": "Position",
+    "services.unit.position.few": "Positionen",
+    "services.unit.position.many": "Positionen",
+    "services.unit.plan.one": "Care-Paket",
+    "services.unit.plan.few": "Care-Pakete",
+    "services.unit.plan.many": "Care-Pakete",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -2524,6 +3542,79 @@ export const DICT = {
     "products.care.featured": "Beliebt",
     "products.cta": "Aufgabe besprechen",
 
+    /* ─── Leistungskatalog ──────────────────────────────────── */
+    "products.catalogue.title": "Was Sie beauftragen können",
+    "products.catalogue.lead":
+      "{groups} und {items}. Projekte entstehen aus diesen Bausteinen: eine einzelne Leistung oder der komplette Zyklus — vom Namen bis zum Feed in den sozialen Netzwerken.",
+
+    /* ─── Care-Abonnement ───────────────────────────────────── */
+    "care.title": "Abonnement für die Betreuung",
+    "care.lead":
+      "Eine Website hält länger, wenn sich jemand um sie kümmert. Care ist monatliche Arbeit: Hosting und Domain, Backups und Updates, Änderungen auf Anfrage, Visuals für die sozialen Netzwerke und ein Bericht zu den Suchpositionen.",
+    "care.planCta": "Abonnement besprechen",
+    "care.note":
+      "Die Mindestlaufzeit des Abonnements beträgt drei Monate. Die Kosten nennen wir nach dem Briefing: Sie hängen vom Umfang der Website ab und davon, wie viel Arbeit wir übernehmen.",
+    "care.ctaEyebrow": "Weiter",
+    "care.ctaTitle": "Erzählen Sie uns, was zu tun ist",
+    "care.ctaText":
+      "Ein kurzes Briefing, und wir melden uns mit Umfang, Terminen und Kosten. Steht die Aufgabe nicht im Katalog, schreiben Sie trotzdem — wahrscheinlich haben wir sie schon gelöst.",
+
+    /* ─── Plugins und Dashboards ────────────────────────────── */
+    "plugins.issue": "dash · in Entwicklung",
+    "plugins.eyebrow": "Plugins und Dashboards",
+    "plugins.title": "Plugins",
+    "plugins.desc":
+      "Die Website bringt den Kunden, doch die Arbeit beginnt danach: Anfragen, Termine, Bestellungen, Bestände und Geld. Ein Plugin ist ein Dashboard, das für Ihre Branche gebaut ist und in Ihrem eigenen Bereich lebt, nicht in einer fremden Universalkonsole.",
+    "plugins.stat.modules": "Module",
+    "plugins.stat.live": "bereits im Einsatz",
+    "plugins.stat.industries": "Branchen",
+    "plugins.tabAll": "Alle",
+    "plugins.filterLabel": "Module nach Status filtern",
+    "plugins.modulesEyebrow": "Module",
+    "plugins.modulesTitle": "Ein Dashboard für Ihre Branche",
+    "plugins.modulesIntro":
+      "Jedes Modul ist ein fertiger Satz von Screens und Abläufen, den wir auf die Website setzen und an Ihre Prozesse anpassen. Ein Restaurant braucht eine Streichliste, ein Salon den Dienstplan der Meister, ein Bauträger einen Wohnungsspiegel. Die Basis ist dieselbe, der Inhalt unterschiedlich.",
+    "plugins.worksInField": "Arbeiten aus dieser Branche",
+
+    /* ─── Kern des Kundenbereichs ───────────────────────────── */
+    "dash.eyebrow": "Kern",
+    "dash.title": "Was in jedem Bereich enthalten ist",
+    "dash.intro":
+      "Der Branchenteil ist bei jedem anders, das Fundament nicht. Diese Bausteine wurden einmal gebaut und stehen jedem Projekt zur Verfügung — ob Restaurant, Klinik oder Stiftung.",
+    "dash.ctaEyebrow": "Zugang",
+    "dash.ctaTitle": "Der Bereich entsteht gerade",
+    "dash.ctaText":
+      "Erzählen Sie uns von Ihrer Branche und Ihren Abläufen — wir zeigen, wie sich das Modul in Ihre Website einfügt, und setzen Sie auf die Warteliste für den Anschluss.",
+    "dash.requestAccess": "Zugang anfragen",
+    "dash.ctaNote":
+      "Der Bereich dash.kuznetsova.design ist noch in Entwicklung — hinterlassen Sie eine Anfrage, und Sie erhalten den Zugang als Erste.",
+
+    /* ─── Seite einer einzelnen Leistung ────────────────────── */
+    "uslugi.eyebrow": "Leistung",
+    "uslugi.discuss": "Aufgabe besprechen",
+    "uslugi.viewWork": "Arbeiten ansehen",
+    "uslugi.aboutLabel": "Über die Leistung",
+    "uslugi.deliverEyebrow": "Was Sie erhalten",
+    "uslugi.deliverTitle": "Übergabepaket",
+    "uslugi.deliverIntro":
+      "Alles, was nach der Projektübergabe tatsächlich bei Ihnen liegt — mit Quelldateien und ohne Bindung an den Dienstleister.",
+    "uslugi.stepsEyebrow": "Prozess",
+    "uslugi.stepsTitle": "Wie die Arbeit läuft",
+    "uslugi.stepsIntro":
+      "Etappen mit Abnahmepunkten: An jedem sehen Sie, was fertig ist, und können die Richtung noch ändern, solange es günstig ist.",
+    "uslugi.estimateText":
+      "Den Kostenvoranschlag mit Terminen und Umfang schicken wir nach einem kurzen Briefing — so gilt die Zahl für Ihre Aufgabe und nicht für einen Marktdurchschnitt.",
+    "uslugi.estimateCta": "Briefing senden",
+
+    /* ─── Fragen und Antworten ──────────────────────────────── */
+    "faq.eyebrow": "Fragen und Antworten",
+    "faq.title": "Häufige Fragen",
+    "faq.intro":
+      "Fehlt Ihre Frage, schreiben Sie uns — die Antwort kommt in verständlichen Worten und nicht als Auszug aus dem Vertrag.",
+    "faq.footerText":
+      "Noch Fragen zu Ihrer Aufgabe? Beschreiben Sie sie in zwei Absätzen — wir melden uns mit Kostenvoranschlag, Termin und Umfang.",
+    "faq.footerCta": "Schreiben Sie uns",
+
     /* ─── Anfrageformular ───────────────────────────────────── */
     "form.dialogLabel": "Kunde werden",
     "form.eyebrow": "Projekt starten",
@@ -2599,6 +3690,56 @@ export const DICT = {
     "footer.rights": "Alle Rechte vorbehalten.",
     "footer.privacy": "Datenschutzerklärung",
 
+    /* ─── Zugang zum Kundenbereich ──────────────────────────── */
+    "auth.panelLabel": "Zugang zum Kundenbereich",
+    "auth.tabsLabel": "Anmelden oder Zugang anfragen",
+    "auth.tabSignin": "Anmelden",
+    "auth.tabRequest": "Zugang anfragen",
+    "auth.notice":
+      "Der Bereich {dash} ist noch in Entwicklung. Ein Anmeldeformular gibt es bisher nicht — und wir tun nicht so, als würde eines funktionieren. Sobald der Bereich öffnet, erscheint die Anmeldung auf genau diesem Screen.",
+    "auth.noticeSecondary":
+      "Wenn das Studio bereits ein Konto für Sie angelegt hat, haben Sie eine E-Mail mit der Adresse des Bereichs und einer Einladung erhalten. Über den Link unten können Sie ihn öffnen.",
+    "auth.openDash": "{dash} öffnen",
+    "auth.hintSignin":
+      "Der Zugang wird freigeschaltet, sobald das Studio ein Konto für Ihr Unternehmen angelegt hat. Eine Selbstregistrierung ist nicht vorgesehen.",
+    "auth.noAccount": "Noch kein Konto?",
+    "auth.orWrite": "oder schreiben Sie an",
+    "auth.live.sent": "Anfrage gesendet. Wir antworten innerhalb eines Werktags.",
+    "auth.live.sending": "Anfrage wird gesendet…",
+    "auth.success.label": "Anfrage gesendet",
+    "auth.success.title": "Wir haben Ihre Anfrage erhalten",
+    "auth.success.body":
+      "Wir melden uns innerhalb eines Werktags: Wir klären den Umfang der Module und die Rollen der Mitarbeitenden und legen den Bereich auf {dash} an. Die Antwort geht an die angegebene E-Mail.",
+    "auth.success.again": "Weitere Anfrage senden",
+    "auth.formIntro":
+      "Erzählen Sie uns von Ihrem Unternehmen — wir wählen die Module für Ihre Branche und legen den Bereich an.",
+    "auth.field.name": "Name",
+    "auth.field.company": "Unternehmen",
+    "auth.field.email": "E-Mail",
+    "auth.field.phone": "Telefon",
+    "auth.field.industry": "Geschäftsbereich",
+    "auth.field.comment": "Kommentar",
+    "auth.placeholder.name": "Alexandra",
+    "auth.placeholder.company": "Markenname",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment":
+      "Wie viele Personen im Bereich arbeiten und welche Aufgaben zuerst zählen",
+    "auth.industryNone": "Nicht ausgewählt",
+    "auth.consent": "Ich willige in die Verarbeitung personenbezogener Daten ein gemäß der",
+    "auth.consentLink": "Datenschutzerklärung",
+    "auth.submit": "Anfrage senden",
+    "auth.submitting": "Wird gesendet…",
+    "auth.hintRequest":
+      "Wir legen Konten nicht automatisch an: Zuerst besprechen wir die Aufgaben, dann richten wir den Bereich ein und übergeben den Zugang an die verantwortliche Person.",
+    "auth.error.name": "Bitte Namen eingeben",
+    "auth.error.company": "Bitte Firmennamen angeben",
+    "auth.error.email": "Bitte E-Mail eingeben",
+    "auth.error.emailFormat": "Bitte E-Mail-Format prüfen",
+    "auth.error.consent": "Ohne Einwilligung können wir die Anfrage nicht bearbeiten",
+    "auth.error.send": "Fehler beim Senden",
+    "auth.error.submit":
+      "Die Anfrage konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie uns eine E-Mail.",
+
     /* ─── Chat-Demo ─────────────────────────────────────────── */
     "chat.bot": "Bot",
     "chat.you": "Sie",
@@ -2606,6 +3747,31 @@ export const DICT = {
     "chat.typing": "schreibt…",
     "chat.placeholder": "Nachricht…",
     "chat.send": "Senden",
+
+    /* ─── Chat mit dem Assistenten ──────────────────────────── */
+    "chat.greeting":
+      "Guten Tag. Ich bin der Assistent von Kuznetsova Design. Ich erzähle Ihnen von den Leistungen, der Betreuung und unseren Arbeiten — fragen Sie einfach.",
+    "chat.suggest1": "Was kostet eine Website?",
+    "chat.suggest2": "Mit welchen Branchen arbeiten Sie?",
+    "chat.suggest3": "Was umfasst die Betreuung?",
+    "chat.assistant": "Assistent",
+    "chat.dialogLabel": "Chat mit dem Assistenten von Kuznetsova Design",
+    "chat.openChatAria": "Chat mit dem Assistenten öffnen",
+    "chat.closeChatAria": "Chat mit dem Assistenten schließen",
+    "chat.close": "Chat schließen",
+    "chat.typingSr": "Der Assistent schreibt",
+    "chat.inputLabel": "Nachricht an den Assistenten",
+    "chat.inputPlaceholder": "Fragen Sie nach Leistungen oder Ihrem Projekt…",
+    "chat.sendAria": "Nachricht senden",
+    "chat.leaveRequest": "Anfrage hinterlassen",
+    "chat.note":
+      "Der Assistent kann sich irren. Preise nennen wir nach einem kurzen Briefing.",
+    "chat.errorRate":
+      "Zu viele Nachrichten hintereinander. Warten Sie bitte ein paar Minuten.",
+    "chat.errorReply":
+      "Es kam keine Antwort. Schreiben Sie uns direkt — wir antworten schnell.",
+    "chat.errorNetwork":
+      "Die Verbindung ist abgebrochen. Schreiben Sie uns über Telegram oder per E-Mail — so kommt es sicher an.",
 
     /* ─── Sprachumschalter ──────────────────────────────────── */
     "lang.label": "Sprache der Oberfläche",
@@ -2627,6 +3793,10 @@ export const DICT = {
      العربية (AR) — письмо справа налево, dir="rtl"
      ══════════════════════════════════════════════════════════════ */
   ar: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "الإضافات",
+    "nav.account": "حساب العميل",
+    "menu.accountSub": "لوحة التحكم و CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "أقسام الأعمال",
     "portfolio.title": "لمن نصمّم",
@@ -2794,6 +3964,25 @@ export const DICT = {
     "services.label": "الخدمات",
     "services.all": "كل الخدمات",
 
+    /* ─── صفحة الخدمات: الترويسة والعدادات ──────────────────── */
+    "services.hero.issue": "كتالوج 2026",
+    "services.hero.kicker": "ما الذي نقدمه",
+    "services.hero.title": "الخدمات",
+    "services.hero.desc":
+      "الكتالوج الكامل للاستوديو، من العلامة والموقع إلى التصوير والثلاثي الأبعاد والأتمتة، هنا يظهر تكوين العمل، أما المبلغ فنذكره في العرض بعد الموجز.",
+    "services.unit.group.one": "مجال",
+    "services.unit.group.few": "مجالات",
+    "services.unit.group.many": "مجالات",
+    "services.unit.item.one": "خدمة",
+    "services.unit.item.few": "خدمات",
+    "services.unit.item.many": "خدمات",
+    "services.unit.position.one": "بند",
+    "services.unit.position.few": "بنود",
+    "services.unit.position.many": "بنود",
+    "services.unit.plan.one": "خطة Care",
+    "services.unit.plan.few": "خطط Care",
+    "services.unit.plan.many": "خطط Care",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -2889,6 +4078,79 @@ export const DICT = {
     "products.care.featured": "الأكثر اختيارًا",
     "products.cta": "لنناقش مهمتك",
 
+    /* ─── كتالوج الخدمات ────────────────────────────────────── */
+    "products.catalogue.title": "ما الذي يمكن طلبه",
+    "products.catalogue.lead":
+      "{groups} و{items}. تُبنى المشاريع من هذه الوحدات، يمكن اختيار خدمة واحدة أو إغلاق الدورة كاملة، من الاسم حتى محتوى الشبكات الاجتماعية.",
+
+    /* ─── اشتراك Care ───────────────────────────────────────── */
+    "care.title": "اشتراك المتابعة",
+    "care.lead":
+      "الموقع يعيش أطول حين يجد من يعتني به. Care عمل شهري: الاستضافة والنطاق، النسخ الاحتياطية والتحديثات، التعديلات عند الطلب، وتصاميم الشبكات الاجتماعية وتقرير عن مواقع الظهور في البحث.",
+    "care.planCta": "مناقشة الاشتراك",
+    "care.note":
+      "الحد الأدنى لمدة الاشتراك ثلاثة أشهر، ونذكر التكلفة بعد الموجز لأنها تعتمد على حجم الموقع وعلى حجم العمل الذي نتولاه.",
+    "care.ctaEyebrow": "الخطوة التالية",
+    "care.ctaTitle": "أخبرنا بما تحتاج إنجازه",
+    "care.ctaText":
+      "موجز قصير ونعود إليك بتفاصيل العمل والمواعيد والتكلفة، وإن لم تكن المهمة ضمن الكتالوج فاكتب لنا أيضًا، فالأرجح أننا أنجزنا مثلها من قبل.",
+
+    /* ─── الإضافات ولوحات التحكم ────────────────────────────── */
+    "plugins.issue": "dash · قيد التطوير",
+    "plugins.eyebrow": "الإضافات ولوحات التحكم",
+    "plugins.title": "الإضافات",
+    "plugins.desc":
+      "الموقع يجلب العميل، لكن العمل يبدأ بعد ذلك: الطلبات والمواعيد والمخزون والمال. الإضافة لوحة تحكم مبنية لقطاعك وتعمل داخل حسابك أنت، لا داخل لوحة عامة تخص طرفًا آخر.",
+    "plugins.stat.modules": "وحدة",
+    "plugins.stat.live": "قيد التشغيل",
+    "plugins.stat.industries": "قطاعات",
+    "plugins.tabAll": "الكل",
+    "plugins.filterLabel": "تصفية الوحدات حسب الحالة",
+    "plugins.modulesEyebrow": "الوحدات",
+    "plugins.modulesTitle": "لوحة تحكم مصممة لقطاعك",
+    "plugins.modulesIntro":
+      "كل وحدة مجموعة جاهزة من الشاشات والسيناريوهات نضعها فوق الموقع ونضبطها على عملياتك. المطعم يحتاج قائمة الأصناف المتوقفة، والصالون جدول العاملين، والمطوّر العقاري جدول الوحدات. الأساس واحد والمحتوى مختلف.",
+    "plugins.worksInField": "أعمال في هذا المجال",
+
+    /* ─── نواة لوحة العميل ──────────────────────────────────── */
+    "dash.eyebrow": "النواة",
+    "dash.title": "ما تتضمنه كل لوحة",
+    "dash.intro":
+      "الجزء الخاص بالقطاع يختلف من عميل لآخر، أما الأساس فواحد. بُنيت هذه العناصر مرة واحدة وتصل مع كل مشروع، سواء كان مطعمًا أو عيادة أو مؤسسة.",
+    "dash.ctaEyebrow": "الوصول",
+    "dash.ctaTitle": "اللوحة قيد البناء الآن",
+    "dash.ctaText":
+      "أخبرنا عن قطاعك وعملياتك، وسنوضح كيف تستقر الوحدة على موقعك وندرجك في قائمة الانتظار للتوصيل.",
+    "dash.requestAccess": "طلب الوصول",
+    "dash.ctaNote":
+      "لوحة dash.kuznetsova.design ما زالت قيد التطوير، اترك طلبك وسنفتح لك الوصول أولًا.",
+
+    /* ─── صفحة الخدمة المفردة ───────────────────────────────── */
+    "uslugi.eyebrow": "خدمة",
+    "uslugi.discuss": "لنناقش مهمتك",
+    "uslugi.viewWork": "مشاهدة الأعمال",
+    "uslugi.aboutLabel": "عن الخدمة",
+    "uslugi.deliverEyebrow": "ما الذي تحصل عليه",
+    "uslugi.deliverTitle": "قائمة التسليم",
+    "uslugi.deliverIntro":
+      "كل ما يصل إلى يديك فعليًا بعد تسليم المشروع، بالملفات المصدرية ودون ارتباط بالمنفّذ.",
+    "uslugi.stepsEyebrow": "العملية",
+    "uslugi.stepsTitle": "كيف يسير العمل",
+    "uslugi.stepsIntro":
+      "مراحل بنقاط قبول، عند كل نقطة ترى ما أُنجز ويمكنك تصحيح الاتجاه ما دام ذلك غير مكلف.",
+    "uslugi.estimateText":
+      "نرسل عرض التكلفة مع المواعيد وتفاصيل العمل بعد موجز قصير، فيكون الرقم خاصًا بمهمتك لا بمتوسط السوق.",
+    "uslugi.estimateCta": "إرسال الموجز",
+
+    /* ─── أسئلة وأجوبة ──────────────────────────────────────── */
+    "faq.eyebrow": "أسئلة وأجوبة",
+    "faq.title": "الأسئلة الشائعة",
+    "faq.intro":
+      "إن لم تجد سؤالك هنا فاكتب لنا، وسيأتي الجواب بلغة إنسانية لا كمقتطف من عقد.",
+    "faq.footerText":
+      "ما زالت لديك أسئلة عن مهمتك؟ صفها في فقرتين وسنعود إليك بعرض التكلفة والمدة وتفاصيل العمل.",
+    "faq.footerCta": "راسلنا",
+
     /* ─── نموذج الطلب ───────────────────────────────────────── */
     "form.dialogLabel": "كن عميلًا",
     "form.eyebrow": "ابدأ مشروعك",
@@ -2963,6 +4225,53 @@ export const DICT = {
     "footer.rights": "جميع الحقوق محفوظة.",
     "footer.privacy": "سياسة الخصوصية",
 
+    /* ─── الوصول إلى لوحة العميل ────────────────────────────── */
+    "auth.panelLabel": "الوصول إلى لوحة العميل",
+    "auth.tabsLabel": "تسجيل الدخول أو طلب الوصول",
+    "auth.tabSignin": "تسجيل الدخول",
+    "auth.tabRequest": "طلب الوصول",
+    "auth.notice":
+      "لوحة {dash} قيد التطوير حاليًا، ولا يوجد نموذج دخول بعد، ولن ندّعي أنه يعمل. وحالما تُفتح اللوحة سيظهر الدخول على هذه الشاشة نفسها.",
+    "auth.noticeSecondary":
+      "إذا كان الاستوديو قد أنشأ لك حسابًا فقد وصلتك رسالة تتضمن عنوان اللوحة ودعوة للانضمام، ويمكنك فتحها عبر الرابط أدناه.",
+    "auth.openDash": "فتح {dash}",
+    "auth.hintSignin":
+      "يُفتح الوصول بعد أن ينشئ الاستوديو حسابًا لشركتك، ولا يوجد تسجيل ذاتي.",
+    "auth.noAccount": "ليس لديك حساب بعد؟",
+    "auth.orWrite": "أو راسلنا على",
+    "auth.live.sent": "أُرسل الطلب، وسنرد خلال يوم عمل واحد.",
+    "auth.live.sending": "جارٍ إرسال الطلب…",
+    "auth.success.label": "أُرسل الطلب",
+    "auth.success.title": "استلمنا طلبك",
+    "auth.success.body":
+      "سنتواصل معك خلال يوم عمل واحد لنحدد الوحدات وأدوار الموظفين وننشئ اللوحة على {dash}، وسيصلك الرد على البريد الذي ذكرته.",
+    "auth.success.again": "إرسال طلب آخر",
+    "auth.formIntro": "أخبرنا عن شركتك، وسنختار الوحدات المناسبة لقطاعك وننشئ اللوحة.",
+    "auth.field.name": "الاسم",
+    "auth.field.company": "الشركة",
+    "auth.field.email": "البريد الإلكتروني",
+    "auth.field.phone": "الهاتف",
+    "auth.field.industry": "مجال النشاط",
+    "auth.field.comment": "ملاحظة",
+    "auth.placeholder.name": "سارة",
+    "auth.placeholder.company": "اسم العلامة",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment": "كم شخصًا سيعمل داخل اللوحة، وما المهام الأهم أولًا",
+    "auth.industryNone": "لم يُحدد",
+    "auth.consent": "أوافق على معالجة البيانات الشخصية وفق",
+    "auth.consentLink": "سياسة الخصوصية",
+    "auth.submit": "إرسال الطلب",
+    "auth.submitting": "جارٍ الإرسال…",
+    "auth.hintRequest":
+      "لا ننشئ الحسابات تلقائيًا، بل نناقش المهام أولًا ثم نجهز اللوحة ونسلم الوصول إلى الموظف المسؤول.",
+    "auth.error.name": "أدخل الاسم",
+    "auth.error.company": "أدخل اسم الشركة",
+    "auth.error.email": "أدخل البريد الإلكتروني",
+    "auth.error.emailFormat": "تحقق من صيغة البريد الإلكتروني",
+    "auth.error.consent": "بدون الموافقة لا يمكننا معالجة الطلب",
+    "auth.error.send": "خطأ في الإرسال",
+    "auth.error.submit": "تعذر إرسال الطلب، حاول مرة أخرى أو راسلنا عبر البريد الإلكتروني.",
+
     /* ─── محادثة توضيحية ────────────────────────────────────── */
     "chat.bot": "بوت",
     "chat.you": "أنت",
@@ -2970,6 +4279,28 @@ export const DICT = {
     "chat.typing": "يكتب…",
     "chat.placeholder": "رسالة…",
     "chat.send": "إرسال",
+
+    /* ─── الدردشة مع المساعد ────────────────────────────────── */
+    "chat.greeting":
+      "مرحبًا، أنا مساعد استوديو Kuznetsova Design. يسعدني أن أحدثك عن الخدمات والمتابعة وأعمالنا، فاسأل ما تشاء.",
+    "chat.suggest1": "كم تكلفة الموقع؟",
+    "chat.suggest2": "مع أي قطاعات تعملون؟",
+    "chat.suggest3": "ماذا تشمل المتابعة؟",
+    "chat.assistant": "المساعد",
+    "chat.dialogLabel": "دردشة مع مساعد Kuznetsova Design",
+    "chat.openChatAria": "فتح الدردشة مع المساعد",
+    "chat.closeChatAria": "إغلاق الدردشة مع المساعد",
+    "chat.close": "إغلاق الدردشة",
+    "chat.typingSr": "المساعد يكتب",
+    "chat.inputLabel": "رسالة إلى المساعد",
+    "chat.inputPlaceholder": "اسأل عن الخدمات أو مشروعك…",
+    "chat.sendAria": "إرسال الرسالة",
+    "chat.leaveRequest": "ترك طلب",
+    "chat.note": "قد يخطئ المساعد، ونذكر الأسعار بعد موجز قصير.",
+    "chat.errorRate": "رسائل كثيرة متتالية، انتظر بضع دقائق من فضلك.",
+    "chat.errorReply": "تعذر الحصول على رد، راسلنا مباشرة وسنجيب سريعًا.",
+    "chat.errorNetwork":
+      "انقطع الاتصال، راسلنا على Telegram أو عبر البريد الإلكتروني ليصلنا بالتأكيد.",
 
     /* ─── تبديل اللغة ───────────────────────────────────────── */
     "lang.label": "لغة الواجهة",
@@ -2991,6 +4322,10 @@ export const DICT = {
      日本語 (JA)
      ══════════════════════════════════════════════════════════════ */
   ja: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "プラグイン",
+    "nav.account": "クライアント専用ページ",
+    "menu.accountSub": "ダッシュボードと CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "ポートフォリオの分類",
     "portfolio.title": "私たちがデザインする相手",
@@ -3159,6 +4494,25 @@ export const DICT = {
     "services.label": "サービス",
     "services.all": "すべてのサービス",
 
+    /* ─── サービスページ：ヘッダーと件数 ───────────────────────────────────── */
+    "services.hero.issue": "カタログ 2026",
+    "services.hero.kicker": "私たちの仕事",
+    "services.hero.title": "サービス",
+    "services.hero.desc":
+      "スタジオの全カタログ。ロゴやウェブサイトから撮影、3D、自動化まで。ここでは仕事の構成が見えます。金額はブリーフのあと、提案書でお伝えします。",
+    "services.unit.group.one": "分野",
+    "services.unit.group.few": "分野",
+    "services.unit.group.many": "分野",
+    "services.unit.item.one": "件のサービス",
+    "services.unit.item.few": "件のサービス",
+    "services.unit.item.many": "件のサービス",
+    "services.unit.position.one": "項目",
+    "services.unit.position.few": "項目",
+    "services.unit.position.many": "項目",
+    "services.unit.plan.one": "件の Care プラン",
+    "services.unit.plan.few": "件の Care プラン",
+    "services.unit.plan.many": "件の Care プラン",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -3255,6 +4609,71 @@ export const DICT = {
     "products.care.featured": "人気",
     "products.cta": "課題を相談する",
 
+    /* ─── サービスカタログ ──────────────────────────────────────────── */
+    "products.catalogue.title": "ご依頼いただけること",
+    "products.catalogue.lead":
+      "{groups}、{items}。プロジェクトはこれらのブロックから組み立てます。単体のサービスだけでも、名前からSNSの投稿まで一連の流れをまとめてでも承ります。",
+
+    /* ─── Care サブスクリプション ────────────────────────────────────── */
+    "care.title": "運用サポートのサブスクリプション",
+    "care.lead":
+      "手をかけ続けたサイトは長く生きます。Care は毎月の作業です。ホスティングとドメイン、バックアップと更新、依頼に応じた修正、SNS用のビジュアル、検索順位のレポート。",
+    "care.planCta": "サブスクリプションを相談する",
+    "care.note": "サブスクリプションの最短期間は3か月です。費用はブリーフのあとにお伝えします。サイトの規模と、私たちが引き受ける作業量によって変わります。",
+    "care.ctaEyebrow": "次に",
+    "care.ctaTitle": "何が必要かをお聞かせください",
+    "care.ctaText":
+      "短いブリーフをいただければ、作業の構成、期間、費用をまとめてお返しします。カタログにない依頼でもご連絡ください。すでに手がけている可能性が高いはずです。",
+
+    /* ─── プラグインとダッシュボード ─────────────────────────────────────── */
+    "plugins.issue": "dash · 開発中",
+    "plugins.eyebrow": "プラグインとダッシュボード",
+    "plugins.title": "プラグイン",
+    "plugins.desc":
+      "サイトは顧客を連れてきますが、仕事はその先から始まります。問い合わせ、予約、注文、在庫、そしてお金。プラグインは、業種に合わせて組み上げたダッシュボードで、他社の汎用パネルではなく、自社の管理画面の中で動きます。",
+    "plugins.stat.modules": "モジュール",
+    "plugins.stat.live": "稼働中",
+    "plugins.stat.industries": "業種",
+    "plugins.tabAll": "すべて",
+    "plugins.filterLabel": "ステータスでモジュールを絞り込む",
+    "plugins.modulesEyebrow": "モジュール",
+    "plugins.modulesTitle": "業種に合わせたダッシュボード",
+    "plugins.modulesIntro":
+      "各モジュールは、サイトの上に載せて業務に合わせて調整する、画面とシナリオの完成セットです。レストランには品切れリスト、サロンにはスタッフのシフト、デベロッパーには住戸一覧。土台は共通で、中身が異なります。",
+    "plugins.worksInField": "この分野の実績",
+
+    /* ─── 管理画面のコア ───────────────────────────────────────────── */
+    "dash.eyebrow": "コア",
+    "dash.title": "どの管理画面にも入るもの",
+    "dash.intro": "業種ごとの部分は違っても、土台は同じです。これらは一度つくられ、レストランでもクリニックでも財団でも、すべてのプロジェクトに付いてきます。",
+    "dash.ctaEyebrow": "アクセス",
+    "dash.ctaTitle": "管理画面はいま構築中です",
+    "dash.ctaText": "業種と業務の流れをお聞かせください。モジュールがサイトにどう収まるかをお見せし、接続の順番待ちリストにお入れします。",
+    "dash.requestAccess": "アクセスを申請する",
+    "dash.ctaNote": "dash.kuznetsova.design の管理画面は現在開発中です。ご依頼をいただければ、最初にアクセスを開放します。",
+
+    /* ─── 個別サービスページ ─────────────────────────────────────────── */
+    "uslugi.eyebrow": "サービス",
+    "uslugi.discuss": "課題を相談する",
+    "uslugi.viewWork": "実績を見る",
+    "uslugi.aboutLabel": "このサービスについて",
+    "uslugi.deliverEyebrow": "お渡しするもの",
+    "uslugi.deliverTitle": "納品物",
+    "uslugi.deliverIntro": "プロジェクトの納品後、実際にお手元に残るものすべて。ソースファイル込みで、制作会社に縛られません。",
+    "uslugi.stepsEyebrow": "プロセス",
+    "uslugi.stepsTitle": "作業の進め方",
+    "uslugi.stepsIntro": "受け入れポイントを置いた段階制です。各段階で完成した部分を確認でき、まだ費用がかからないうちに方向を修正できます。",
+    "uslugi.estimateText":
+      "短いブリーフのあとに、期間と作業構成を含む見積もりをお送りします。そうすれば数字は市場平均ではなく、あなたの案件のものになります。",
+    "uslugi.estimateCta": "ブリーフを送る",
+
+    /* ─── 質問と回答 ─────────────────────────────────────────────── */
+    "faq.eyebrow": "質問と回答",
+    "faq.title": "よくある質問",
+    "faq.intro": "お探しの質問がここになければ、ご連絡ください。契約書の抜粋ではなく、人の言葉でお答えします。",
+    "faq.footerText": "案件について、まだ気になることがありますか。二段落ほどでお聞かせいただければ、見積もり、期間、作業構成をまとめてお返しします。",
+    "faq.footerCta": "問い合わせる",
+
     /* ─── お問い合わせフォーム ──────────────────────────────── */
     "form.dialogLabel": "クライアントになる",
     "form.eyebrow": "プロジェクトを始める",
@@ -3329,6 +4748,51 @@ export const DICT = {
     "footer.rights": "無断転載を禁じます。",
     "footer.privacy": "プライバシーポリシー",
 
+    /* ─── クライアント画面へのアクセス ────────────────────────────────────── */
+    "auth.panelLabel": "クライアント画面へのアクセス",
+    "auth.tabsLabel": "ログインまたはアクセス申請",
+    "auth.tabSignin": "ログイン",
+    "auth.tabRequest": "アクセスを申請する",
+    "auth.notice":
+      "{dash} の管理画面は現在開発中です。ログインフォームはまだなく、動くふりをするつもりもありません。管理画面が開き次第、この画面にログインが現れます。",
+    "auth.noticeSecondary":
+      "スタジオがすでにアカウントを発行している場合、管理画面のアドレスと招待を記したメールが届いています。下のリンクから開けます。",
+    "auth.openDash": "{dash} を開く",
+    "auth.hintSignin": "アクセスは、スタジオが貴社のアカウントを作成したあとに開きます。ご自身での登録はできません。",
+    "auth.noAccount": "アカウントはまだですか。",
+    "auth.orWrite": "または、こちらまで",
+    "auth.live.sent": "リクエストを送信しました。1営業日以内にご返信します。",
+    "auth.live.sending": "リクエストを送信しています…",
+    "auth.success.label": "リクエストを送信しました",
+    "auth.success.title": "お申し込みを受け取りました",
+    "auth.success.body":
+      "1営業日以内にご連絡し、モジュールの構成と担当者の役割を確認したうえで、{dash} に管理画面を用意します。ご返信はご記入のメールアドレス宛に届きます。",
+    "auth.success.again": "もう一件送信する",
+    "auth.formIntro": "会社について教えてください。業種に合ったモジュールを選び、管理画面をご用意します。",
+    "auth.field.name": "お名前",
+    "auth.field.company": "会社名",
+    "auth.field.email": "メールアドレス",
+    "auth.field.phone": "電話番号",
+    "auth.field.industry": "事業分野",
+    "auth.field.comment": "コメント",
+    "auth.placeholder.name": "山田太郎",
+    "auth.placeholder.company": "ブランド名",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment": "管理画面を使う人数と、まず優先したい業務",
+    "auth.industryNone": "未選択",
+    "auth.consent": "個人データの取り扱いについて、次の方針に同意します：",
+    "auth.consentLink": "プライバシーポリシー",
+    "auth.submit": "リクエストを送信",
+    "auth.submitting": "送信中…",
+    "auth.hintRequest": "アカウントを自動で発行することはありません。まず課題を話し合い、その後に管理画面を用意して、担当者にアクセス権をお渡しします。",
+    "auth.error.name": "お名前を入力してください",
+    "auth.error.company": "会社名を入力してください",
+    "auth.error.email": "メールアドレスを入力してください",
+    "auth.error.emailFormat": "メールアドレスの形式をご確認ください",
+    "auth.error.consent": "同意がない場合、リクエストを処理できません",
+    "auth.error.send": "送信エラー",
+    "auth.error.submit": "リクエストを送信できませんでした。もう一度お試しいただくか、メールでご連絡ください。",
+
     /* ─── チャットのデモ ────────────────────────────────────── */
     "chat.bot": "ボット",
     "chat.you": "あなた",
@@ -3336,6 +4800,27 @@ export const DICT = {
     "chat.typing": "入力中…",
     "chat.placeholder": "メッセージ…",
     "chat.send": "送信",
+
+    /* ─── アシスタントチャット ────────────────────────────────────────── */
+    "chat.greeting":
+      "こんにちは。Kuznetsova Design のアシスタントです。サービス、運用サポート、これまでの制作事例についてご案内します。お気軽にご質問ください。",
+    "chat.suggest1": "サイトの費用はどれくらいですか",
+    "chat.suggest2": "どのような業種に対応していますか",
+    "chat.suggest3": "運用サポートには何が含まれますか",
+    "chat.assistant": "アシスタント",
+    "chat.dialogLabel": "Kuznetsova Design のアシスタントとのチャット",
+    "chat.openChatAria": "アシスタントとのチャットを開く",
+    "chat.closeChatAria": "アシスタントとのチャットを閉じる",
+    "chat.close": "チャットを閉じる",
+    "chat.typingSr": "アシスタントが入力しています",
+    "chat.inputLabel": "アシスタントへのメッセージ",
+    "chat.inputPlaceholder": "サービスやプロジェクトについてご質問ください…",
+    "chat.sendAria": "メッセージを送信",
+    "chat.leaveRequest": "問い合わせを送る",
+    "chat.note": "アシスタントは間違えることがあります。価格は短いブリーフのあとにお伝えします。",
+    "chat.errorRate": "続けてのメッセージが多すぎます。数分ほどお待ちください。",
+    "chat.errorReply": "回答を取得できませんでした。直接ご連絡ください。すぐにお返事します。",
+    "chat.errorNetwork": "接続が途切れました。Telegram かメールでご連絡ください。確実に届きます。",
 
     /* ─── 言語切り替え ──────────────────────────────────────── */
     "lang.label": "表示言語",
@@ -3357,6 +4842,10 @@ export const DICT = {
      TÜRKÇE (TR)
      ══════════════════════════════════════════════════════════════ */
   tr: {
+    /* ─── Меню: плагины и кабинет ────────────────────────── */
+    "nav.plugins": "Eklentiler",
+    "nav.account": "Müşteri hesabı",
+    "menu.accountSub": "Panel ve CRM",
     /* ─── Объединённое меню портфолио ───────────────────── */
     "portfolio.eyebrow": "Portföy bölümleri",
     "portfolio.title": "Kimler için tasarlıyoruz",
@@ -3525,6 +5014,25 @@ export const DICT = {
     "services.label": "Hizmetler",
     "services.all": "Tüm hizmetler",
 
+    /* ─── Hizmetler sayfası: başlık ve sayaçlar ─────────────── */
+    "services.hero.issue": "Katalog 2026",
+    "services.hero.kicker": "Ne yapıyoruz",
+    "services.hero.title": "Hizmetler",
+    "services.hero.desc":
+      "Stüdyonun tam kataloğu: işaretten ve siteden çekime, 3D'ye ve otomasyona kadar. Burada işin içeriği görünür; tutarı brifingten sonra teklifte belirtiriz.",
+    "services.unit.group.one": "alan",
+    "services.unit.group.few": "alan",
+    "services.unit.group.many": "alan",
+    "services.unit.item.one": "hizmet",
+    "services.unit.item.few": "hizmet",
+    "services.unit.item.many": "hizmet",
+    "services.unit.position.one": "kalem",
+    "services.unit.position.few": "kalem",
+    "services.unit.position.many": "kalem",
+    "services.unit.plan.one": "Care planı",
+    "services.unit.plan.few": "Care planı",
+    "services.unit.plan.many": "Care planı",
+
     /* ─── More Development ─────────────────────────────────── */
     "more.eyebrow": "Code",
     "more.title": "{ More Development }",
@@ -3620,6 +5128,79 @@ export const DICT = {
     "products.care.featured": "En çok tercih edilen",
     "products.cta": "İhtiyacınızı konuşalım",
 
+    /* ─── Hizmet kataloğu ───────────────────────────────────── */
+    "products.catalogue.title": "Neler sipariş edebilirsiniz",
+    "products.catalogue.lead":
+      "{groups} ve {items}. Projeler bu bloklardan kurulur: tek bir hizmeti alabilir ya da isimden sosyal medya akışına kadar tüm döngüyü kapatabilirsiniz.",
+
+    /* ─── Care aboneliği ────────────────────────────────────── */
+    "care.title": "Bakım aboneliği",
+    "care.lead":
+      "Bakılan bir site daha uzun yaşar. Care aylık bir çalışmadır: barındırma ve alan adı, yedekler ve güncellemeler, talep üzerine düzenlemeler, sosyal medya görselleri ve arama sıralaması raporu.",
+    "care.planCta": "Aboneliği konuşalım",
+    "care.note":
+      "En kısa abonelik süresi üç aydır. Tutarı brifingten sonra belirtiriz: sitenin hacmine ve işin ne kadarını üstlendiğimize bağlıdır.",
+    "care.ctaEyebrow": "Sonraki adım",
+    "care.ctaTitle": "Ne yapılması gerektiğini anlatın",
+    "care.ctaText":
+      "Kısa bir brifing yeter; işin kapsamı, süresi ve tutarıyla size döneriz. İş katalogda yoksa da yazın: büyük olasılıkla daha önce çözmüşüzdür.",
+
+    /* ─── Eklentiler ve panolar ─────────────────────────────── */
+    "plugins.issue": "dash · geliştiriliyor",
+    "plugins.eyebrow": "Eklentiler ve panolar",
+    "plugins.title": "Eklentiler",
+    "plugins.desc":
+      "Site müşteriyi getirir, asıl iş sonrasında başlar: talepler, randevular, siparişler, stok ve para. Eklenti, sektörünüze göre kurulmuş ve başkasının genel panelinde değil, kendi hesabınızda çalışan bir panodur.",
+    "plugins.stat.modules": "modül",
+    "plugins.stat.live": "hâlihazırda çalışıyor",
+    "plugins.stat.industries": "sektör",
+    "plugins.tabAll": "Tümü",
+    "plugins.filterLabel": "Modülleri duruma göre filtrele",
+    "plugins.modulesEyebrow": "Modüller",
+    "plugins.modulesTitle": "Sektörünüze göre bir pano",
+    "plugins.modulesIntro":
+      "Her modül, sitenin üzerine yerleştirdiğimiz ve süreçlerinize göre incelttiğimiz hazır bir ekran ve senaryo setidir. Restoranın stop listesine, kuaförün usta çizelgesine, müteahhidin daire şemasına ihtiyacı var. Zemin ortak, içerik farklı.",
+    "plugins.worksInField": "Bu alandaki işler",
+
+    /* ─── Panonun çekirdeği ─────────────────────────────────── */
+    "dash.eyebrow": "Çekirdek",
+    "dash.title": "Her panoda ne var",
+    "dash.intro":
+      "Sektöre özel katman herkeste farklı, temel ise aynı. Bunlar bir kez kuruldu ve restoran da işletseniz klinik ya da vakıf da, her projeye birlikte gelir.",
+    "dash.ctaEyebrow": "Erişim",
+    "dash.ctaTitle": "Pano şu anda kuruluyor",
+    "dash.ctaText":
+      "Sektörünüzü ve süreçlerinizi anlatın; modülün sitenize nasıl oturacağını gösterelim ve sizi bağlantı sırasına alalım.",
+    "dash.requestAccess": "Erişim talep et",
+    "dash.ctaNote":
+      "dash.kuznetsova.design panosu hâlâ geliştiriliyor; talebinizi bırakın, erişimi ilk size açalım.",
+
+    /* ─── Tekil hizmet sayfası ──────────────────────────────── */
+    "uslugi.eyebrow": "Hizmet",
+    "uslugi.discuss": "İhtiyacınızı konuşalım",
+    "uslugi.viewWork": "İşleri gör",
+    "uslugi.aboutLabel": "Hizmet hakkında",
+    "uslugi.deliverEyebrow": "Ne teslim alırsınız",
+    "uslugi.deliverTitle": "Teslim edilenler",
+    "uslugi.deliverIntro":
+      "Proje teslim edildiğinde fiilen elinize geçen her şey: kaynak dosyalarıyla birlikte ve tedarikçiye bağlı kalmadan.",
+    "uslugi.stepsEyebrow": "Süreç",
+    "uslugi.stepsTitle": "İş nasıl ilerler",
+    "uslugi.stepsIntro":
+      "Kabul noktaları olan aşamalar: her noktada yapılanı görür ve henüz maliyeti düşükken yönü değiştirebilirsiniz.",
+    "uslugi.estimateText":
+      "Süreleri ve iş kapsamını içeren teklifi kısa bir brifingten sonra göndeririz; böylece rakam piyasa ortalamasına değil, sizin işinize ait olur.",
+    "uslugi.estimateCta": "Brifing gönder",
+
+    /* ─── Sorular ve yanıtlar ───────────────────────────────── */
+    "faq.eyebrow": "Sorular ve yanıtlar",
+    "faq.title": "Sık sorulan sorular",
+    "faq.intro":
+      "Aradığınız soru burada yoksa yazın; yanıtı sözleşme maddesiyle değil, insan diliyle veririz.",
+    "faq.footerText":
+      "İşinizle ilgili sorular mı kaldı? İki paragrafta anlatın; teklif, süre ve iş kapsamıyla size dönelim.",
+    "faq.footerCta": "Bize yazın",
+
     /* ─── Başvuru formu ─────────────────────────────────────── */
     "form.dialogLabel": "Müşterimiz olun",
     "form.eyebrow": "Projenize başlayın",
@@ -3694,6 +5275,54 @@ export const DICT = {
     "footer.rights": "Tüm hakları saklıdır.",
     "footer.privacy": "Gizlilik politikası",
 
+    /* ─── Müşteri paneline erişim ───────────────────────────── */
+    "auth.panelLabel": "Müşteri paneline erişim",
+    "auth.tabsLabel": "Giriş veya erişim talebi",
+    "auth.tabSignin": "Giriş",
+    "auth.tabRequest": "Erişim talep et",
+    "auth.notice":
+      "{dash} panosu şu anda geliştiriliyor. Henüz bir giriş formu yok ve çalışıyormuş gibi davranmayacağız. Pano açılır açılmaz giriş bu ekranda belirecek.",
+    "auth.noticeSecondary":
+      "Stüdyo sizin için bir hesap açtıysa, pano adresini ve daveti içeren bir e-posta almışsınızdır. Aşağıdaki bağlantıdan açabilirsiniz.",
+    "auth.openDash": "{dash} adresini aç",
+    "auth.hintSignin":
+      "Erişim, stüdyo şirketinizin hesabını oluşturduktan sonra açılır. Kendi kendine kayıt bulunmuyor.",
+    "auth.noAccount": "Henüz hesabınız yok mu?",
+    "auth.orWrite": "ya da şu adrese yazın:",
+    "auth.live.sent": "Talep gönderildi. Bir iş günü içinde yanıtlayacağız.",
+    "auth.live.sending": "Talep gönderiliyor…",
+    "auth.success.label": "Talep gönderildi",
+    "auth.success.title": "Talebinizi aldık",
+    "auth.success.body":
+      "Bir iş günü içinde size ulaşacağız: modüllerin kapsamını ve ekip rollerini netleştirip {dash} üzerinde panoyu açacağız. Yanıt belirttiğiniz e-posta adresine gelecek.",
+    "auth.success.again": "Başka bir talep gönder",
+    "auth.formIntro":
+      "Şirketinizi anlatın; sektörünüze uygun modülleri seçip panoyu açalım.",
+    "auth.field.name": "Ad",
+    "auth.field.company": "Şirket",
+    "auth.field.email": "E-posta",
+    "auth.field.phone": "Telefon",
+    "auth.field.industry": "Faaliyet alanı",
+    "auth.field.comment": "Not",
+    "auth.placeholder.name": "Ayşe",
+    "auth.placeholder.company": "Marka adı",
+    "auth.placeholder.email": "you@company.com",
+    "auth.placeholder.comment": "Panoda kaç kişi çalışacak, önce hangi işler önemli",
+    "auth.industryNone": "Seçilmedi",
+    "auth.consent": "Kişisel verilerin işlenmesini şu belgeye göre kabul ediyorum:",
+    "auth.consentLink": "gizlilik politikası",
+    "auth.submit": "Talebi gönder",
+    "auth.submitting": "Gönderiliyor…",
+    "auth.hintRequest":
+      "Hesapları otomatik açmıyoruz: önce işleri konuşuyor, sonra panoyu kurup erişimi sorumlu kişiye devrediyoruz.",
+    "auth.error.name": "Adınızı girin",
+    "auth.error.company": "Şirket adını girin",
+    "auth.error.email": "E-posta adresinizi girin",
+    "auth.error.emailFormat": "E-posta biçimini kontrol edin",
+    "auth.error.consent": "Onay olmadan talebi işleyemeyiz",
+    "auth.error.send": "Gönderim hatası",
+    "auth.error.submit": "Talep gönderilemedi. Tekrar deneyin ya da bize e-posta yazın.",
+
     /* ─── Örnek sohbet ──────────────────────────────────────── */
     "chat.bot": "bot",
     "chat.you": "siz",
@@ -3701,6 +5330,28 @@ export const DICT = {
     "chat.typing": "yazıyor…",
     "chat.placeholder": "Mesaj…",
     "chat.send": "Gönder",
+
+    /* ─── Asistan sohbeti ───────────────────────────────────── */
+    "chat.greeting":
+      "Merhaba. Kuznetsova Design asistanıyım. Hizmetler, bakım desteği ve işlerimiz hakkında bilgi verebilirim; sormanız yeterli.",
+    "chat.suggest1": "Bir site ne kadar?",
+    "chat.suggest2": "Hangi sektörlerle çalışıyorsunuz?",
+    "chat.suggest3": "Bakım desteği neleri kapsıyor?",
+    "chat.assistant": "Asistan",
+    "chat.dialogLabel": "Kuznetsova Design asistanıyla sohbet",
+    "chat.openChatAria": "Asistan sohbetini aç",
+    "chat.closeChatAria": "Asistan sohbetini kapat",
+    "chat.close": "Sohbeti kapat",
+    "chat.typingSr": "Asistan yazıyor",
+    "chat.inputLabel": "Asistana mesaj",
+    "chat.inputPlaceholder": "Hizmetleri veya projenizi sorun…",
+    "chat.sendAria": "Mesajı gönder",
+    "chat.leaveRequest": "Talep bırak",
+    "chat.note": "Asistan yanılabilir. Fiyatları kısa bir brifingten sonra veriyoruz.",
+    "chat.errorRate": "Arka arkaya çok fazla mesaj geldi. Birkaç dakika bekleyin.",
+    "chat.errorReply": "Yanıt alınamadı. Doğrudan bize yazın, hızlıca dönüyoruz.",
+    "chat.errorNetwork":
+      "Bağlantı koptu. Bize Telegram'dan ya da e-postayla yazın; böylece kesinlikle ulaşır.",
 
     /* ─── Dil değiştirme ────────────────────────────────────── */
     "lang.label": "Arayüz dili",

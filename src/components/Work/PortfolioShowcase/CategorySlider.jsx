@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 import styles from "./CategorySlider.module.css";
 
 const AUTOPLAY_SEC = 6;
@@ -22,6 +23,8 @@ const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function CategorySlider({ service, index, isActive }) {
+  const t = useT();
+
   const sectionRef = useRef(null);
   const heroRef    = useRef(null);
   const parallaxRef = useRef(null); // обёртка слоёв — двигается при скролле
@@ -347,7 +350,7 @@ export default function CategorySlider({ service, index, isActive }) {
         <button
           className={`${styles.sideBtn} ${styles.sideBtnLeft}`}
           onClick={goPrev}
-          aria-label="Предыдущий"
+          aria-label={t("common.prev", "Предыдущий")}
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="1.6"
@@ -393,7 +396,9 @@ export default function CategorySlider({ service, index, isActive }) {
 
             <div className={styles.heroBottom}>
               <div className={styles.heroMeta}>
-                <span className={styles.heroMetaLabel}>Клиент</span>
+                <span className={styles.heroMetaLabel}>
+                  {t("common.client", "Клиент")}
+                </span>
                 <span className={styles.heroMetaVal}>{cur.sub}</span>
               </div>
 
@@ -409,7 +414,7 @@ export default function CategorySlider({ service, index, isActive }) {
                     rel="noopener noreferrer"
                     className={styles.siteBtn}
                   >
-                    Открыть сайт
+                    {t("common.openSite", "Открыть сайт")}
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <path d="M3 9L9 3M4.5 3H9v4.5" stroke="currentColor"
                         strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -417,7 +422,7 @@ export default function CategorySlider({ service, index, isActive }) {
                   </a>
                 )}
                 <Link href={`/work/${cur.slug}`} className={styles.heroCta}>
-                  Смотреть кейс
+                  {t("common.viewCase", "Смотреть кейс")}
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor"
                       strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -451,7 +456,7 @@ export default function CategorySlider({ service, index, isActive }) {
         <button
           className={`${styles.sideBtn} ${styles.sideBtnRight}`}
           onClick={goNext}
-          aria-label="Следующий"
+          aria-label={t("common.next", "Следующий")}
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M7 4l5 5-5 5" stroke="currentColor" strokeWidth="1.6"
@@ -468,7 +473,7 @@ export default function CategorySlider({ service, index, isActive }) {
             className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
             style={{ background: i === active ? service.color : undefined }}
             onClick={() => goTo(i)}
-            aria-label={`Слайд ${i + 1}`}
+            aria-label={`${t("portfolio.slide", "Слайд")} ${i + 1}`}
           />
         ))}
       </div>

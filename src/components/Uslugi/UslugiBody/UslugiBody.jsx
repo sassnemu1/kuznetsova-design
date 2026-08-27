@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT } from "@/context/LanguageContext";
 import styles from "./UslugiBody.module.css";
 
 /**
@@ -14,6 +15,7 @@ import styles from "./UslugiBody.module.css";
  */
 export default function UslugiBody({ usluga }) {
   const rootRef = useRef(null);
+  const t = useT();
   const { gsap, ScrollTrigger } = useGSAP();
 
   useEffect(() => {
@@ -54,7 +56,10 @@ export default function UslugiBody({ usluga }) {
   return (
     <div ref={rootRef} className={styles.root}>
       {/* ─── ТЕКСТОВЫЕ РАЗДЕЛЫ ─────────────────────────────── */}
-      <section className={styles.editorial} aria-label="Об услуге">
+      <section
+        className={styles.editorial}
+        aria-label={t("uslugi.aboutLabel", "Об услуге")}
+      >
         <div className={styles.inner}>
           {usluga.sections.map((section, i) => (
             <article key={section.h2} data-reveal className={styles.block}>
@@ -80,13 +85,17 @@ export default function UslugiBody({ usluga }) {
         <section className={styles.deliverables} aria-labelledby="deliverables-title">
           <div className={styles.inner}>
             <div data-reveal className={styles.sectionHead}>
-              <span className={styles.eyebrow}>Что вы получаете</span>
+              <span className={styles.eyebrow}>
+                {t("uslugi.deliverEyebrow", "Что вы получаете")}
+              </span>
               <h2 id="deliverables-title" className={styles.sectionTitle}>
-                Состав передачи
+                {t("uslugi.deliverTitle", "Состав передачи")}
               </h2>
               <p className={styles.sectionIntro}>
-                Всё, что физически оказывается у вас на руках после сдачи
-                проекта — в исходниках и без привязки к подрядчику.
+                {t(
+                  "uslugi.deliverIntro",
+                  "Всё, что физически оказывается у вас на руках после сдачи проекта — в исходниках и без привязки к подрядчику."
+                )}
               </p>
             </div>
 
@@ -110,13 +119,17 @@ export default function UslugiBody({ usluga }) {
         <section className={styles.steps} aria-labelledby="steps-title">
           <div className={styles.inner}>
             <div data-reveal className={styles.sectionHead}>
-              <span className={styles.eyebrow}>Процесс</span>
+              <span className={styles.eyebrow}>
+                {t("uslugi.stepsEyebrow", "Процесс")}
+              </span>
               <h2 id="steps-title" className={styles.sectionTitle}>
-                Как идёт работа
+                {t("uslugi.stepsTitle", "Как идёт работа")}
               </h2>
               <p className={styles.sectionIntro}>
-                Этапы с точками приёмки: на каждой видно, что сделано, и можно
-                скорректировать направление, пока это ещё недорого.
+                {t(
+                  "uslugi.stepsIntro",
+                  "Этапы с точками приёмки: на каждой видно, что сделано, и можно скорректировать направление, пока это ещё недорого."
+                )}
               </p>
             </div>
 
@@ -136,16 +149,17 @@ export default function UslugiBody({ usluga }) {
 
             <div data-reveal className={styles.estimate}>
               <p className={styles.estimateText}>
-                Смету со сроками и составом работ присылаем после короткого
-                брифа — так цифра относится к вашей задаче, а не к средней
-                по рынку.
+                {t(
+                  "uslugi.estimateText",
+                  "Смету со сроками и составом работ присылаем после короткого брифа — так цифра относится к вашей задаче, а не к средней по рынку."
+                )}
               </p>
               <button
                 type="button"
                 className={styles.estimateCta}
                 onClick={openClientForm}
               >
-                Отправить бриф
+                {t("uslugi.estimateCta", "Отправить бриф")}
                 <svg
                   width="14"
                   height="14"

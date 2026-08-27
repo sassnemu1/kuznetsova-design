@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useGSAP from "@/hooks/useGSAP";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import { DASH_URL } from "@/data/PluginsData";
 import { INDUSTRIES } from "@/data/IndustriesData";
 import styles from "./AuthPanel.module.css";
@@ -15,11 +17,6 @@ import styles from "./AuthPanel.module.css";
  */
 const DASH_BASE = process.env.NEXT_PUBLIC_DASH_URL || DASH_URL;
 const DASH_LABEL = DASH_BASE.replace(/^https?:\/\//, "").replace(/\/+$/, "");
-
-const TABS = [
-  { id: "signin", label: "Вход" },
-  { id: "request", label: "Запросить доступ" },
-];
 
 const INITIAL_FORM = {
   name: "",
@@ -35,6 +32,17 @@ const INITIAL_FORM = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function AuthPanel() {
+  const t = useT();
+  const { lang } = useLanguage();
+
+  const TABS = useMemo(
+    () => [
+      { id: "signin", label: t("auth.tabSignin", "Вход") },
+      { id: "request", label: t("auth.tabRequest", "Запросить доступ") },
+    ],
+    [t]
+  );
+
   const searchParams = useSearchParams();
   // Вкладка из адреса — производное значение, считаем его во время рендера.
   // Как только человек переключил вкладку сам, его выбор побеждает.
@@ -104,11 +112,14 @@ export default function AuthPanel() {
   const validateForm = () => {
     const next = {};
 
-    if (!formData.name.trim()) next.name = "Введите имя";
-    if (!formData.company.trim()) next.company = "Укажите название компании";
-    if (!formData.email.trim()) next.email = "Введите e-mail";
-    else if (!EMAIL_RE.test(formData.email.trim())) next.email = "Проверьте формат e-mail";
-    if (!formData.consent) next.consent = "Без согласия мы не сможем обработать запрос";
+    if (!formData.name.trim()) next.name = t("auth.error.name", "Введите имя");
+    if (!formData.company.trim())
+      next.company = t("auth.error.company", "Укажите название компании");
+    if (!formData.email.trim()) next.email = t("auth.error.email", "Введите e-mail");
+    else if (!EMAIL_RE.test(formData.email.trim()))
+      next.email = t("auth.error.emailFormat", "Проверьте формат e-mail");
+    if (!formData.consent)
+      next.consent = t("auth.error.consent", "Без согласия мы не сможем обработать запрос");
 
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -129,11 +140,16 @@ export default function AuthPanel() {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Ошибка отправки");
+      if (!res.ok) throw new Error(data.error || t("auth.error.send", "Ошибка отправки"));
 
       setSent(true);
     } catch (err) {
-      setSubmitError("Не удалось отправить запрос. Попробуйте ещё раз или напишите нам на почту.");
+      setSubmitError(
+        t(
+          "auth.error.submit",
+          "Не удалось отправить запрос. Попробуйте ещё раз или напишите нам на почту."
+        )
+      );
       console.error("Request access form:", err?.message || err);
     } finally {
       setIsSending(false);
@@ -149,9 +165,24 @@ export default function AuthPanel() {
 
   const describedBy = (field) => (errors[field] ? `auth-${field}-error` : undefined);
 
+  /* Ключ auth.notice содержит {dash}: адрес кабинета выводится в моноширинном
+     span, поэтому строку разбираем вокруг подстановки, а не рендерим как есть. */
+  const noticeParts = t(
+    "auth.notice",
+    "Кабинет {dash} сейчас в разработке. Формы входа пока нет — мы не станем делать вид, что она работает. Как только кабинет откроется, вход появится на этом же экране."
+  ).split("{dash}");
+
   return (
-    <section ref={panelRef} className={styles.panel} aria-label="Доступ к личному кабинету">
-      <div className={styles.tabs} role="tablist" aria-label="Вход или запрос доступа">
+    <section
+      ref={panelRef}
+      className={styles.panel}
+      aria-label={t("auth.panelLabel", "Доступ к личному кабинету")}
+    >
+      <div
+        className={styles.tabs}
+        role="tablist"
+        aria-label={t("auth.tabsLabel", "Вход или запрос доступа")}
+      >
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -193,14 +224,20 @@ export default function AuthPanel() {
         className={styles.tabPanel}
       >
         <p className={styles.notice}>
-          Кабинет <span className={styles.mono}>{DASH_LABEL}</span> сейчас в разработке.
-          Формы входа пока нет — мы не станем делать вид, что она работает.
-          Как только кабинет откроется, вход появится на этом же экране.
+          {noticeParts[0]}
+          {noticeParts.length > 1 ? (
+            <>
+              <span className={styles.mono}>{DASH_LABEL}</span>
+              {noticeParts.slice(1).join(DASH_LABEL)}
+            </>
+          ) : null}
         </p>
 
         <p className={styles.noticeSecondary}>
-          Если студия уже завела вам аккаунт, вы получили письмо с адресом кабинета
-          и приглашением. Открыть его можно по ссылке ниже.
+          {t(
+            "auth.noticeSecondary",
+            "Если студия уже завела вам аккаунт, вы получили письмо с адресом кабинета и приглашением. Открыть его можно по ссылке ниже."
+          )}
         </p>
 
         <a
@@ -209,7 +246,7 @@ export default function AuthPanel() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Открыть {DASH_LABEL}
+          {t("auth.openDash", "Открыть {dash}").replace("{dash}", DASH_LABEL)}
           <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path
               d="M3 9L9 3M4.5 3H9v4.5"
@@ -222,18 +259,20 @@ export default function AuthPanel() {
         </a>
 
         <p className={styles.hint}>
-          Доступ открывается после того, как студия создаст аккаунт вашей компании.
-          Самостоятельная регистрация не предусмотрена.
+          {t(
+            "auth.hintSignin",
+            "Доступ открывается после того, как студия создаст аккаунт вашей компании. Самостоятельная регистрация не предусмотрена."
+          )}
         </p>
 
         <div className={styles.divider} />
 
         <p className={styles.switchRow}>
-          Аккаунта ещё нет?{" "}
+          {t("auth.noAccount", "Аккаунта ещё нет?")}{" "}
           <button type="button" className={styles.switchLink} onClick={() => selectTab("request")}>
-            Запросить доступ
+            {t("auth.tabRequest", "Запросить доступ")}
           </button>{" "}
-          или напишите на{" "}
+          {t("auth.orWrite", "или напишите на")}{" "}
           <a className={styles.inlineLink} href="mailto:kristina@kuznetsova.design">
             kristina@kuznetsova.design
           </a>
@@ -253,31 +292,39 @@ export default function AuthPanel() {
         {/* Статус отправки — озвучивается скринридером */}
         <div className={styles.liveRegion} role="status" aria-live="polite">
           {sent
-            ? "Запрос отправлен. Мы ответим в течение рабочего дня."
+            ? t("auth.live.sent", "Запрос отправлен. Мы ответим в течение рабочего дня.")
             : submitError
             ? submitError
             : isSending
-            ? "Отправляем запрос…"
+            ? t("auth.live.sending", "Отправляем запрос…")
             : ""}
         </div>
 
         {sent ? (
           <div className={styles.success}>
-            <p className={styles.successLabel}>Запрос отправлен</p>
-            <h2 className={styles.successTitle}>Мы получили заявку</h2>
+            <p className={styles.successLabel}>
+              {t("auth.success.label", "Запрос отправлен")}
+            </p>
+            <h2 className={styles.successTitle}>
+              {t("auth.success.title", "Мы получили заявку")}
+            </h2>
             <p className={styles.successBody}>
-              Свяжемся с вами в течение рабочего дня: уточним состав модулей,
-              роли сотрудников и заведём кабинет на {DASH_LABEL}. Ответ придёт
-              на указанный e-mail.
+              {t(
+                "auth.success.body",
+                "Свяжемся с вами в течение рабочего дня: уточним состав модулей, роли сотрудников и заведём кабинет на {dash}. Ответ придёт на указанный e-mail."
+              ).replace("{dash}", DASH_LABEL)}
             </p>
             <button type="button" className={styles.ghostBtn} onClick={resetForm}>
-              Отправить ещё один запрос
+              {t("auth.success.again", "Отправить ещё один запрос")}
             </button>
           </div>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <p className={styles.formIntro}>
-              Расскажите о компании — подберём модули под вашу отрасль и заведём кабинет.
+              {t(
+                "auth.formIntro",
+                "Расскажите о компании — подберём модули под вашу отрасль и заведём кабинет."
+              )}
             </p>
 
             {/* Honeypot — скрыто от людей, ловит ботов */}
@@ -294,7 +341,7 @@ export default function AuthPanel() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="auth-name">
-                Имя <span aria-hidden="true">*</span>
+                {t("auth.field.name", "Имя")} <span aria-hidden="true">*</span>
               </label>
               <input
                 id="auth-name"
@@ -303,7 +350,7 @@ export default function AuthPanel() {
                 autoComplete="name"
                 value={formData.name}
                 onChange={(e) => updateField("name", e.target.value)}
-                placeholder="Александра"
+                placeholder={t("auth.placeholder.name", "Александра")}
                 aria-invalid={errors.name ? "true" : undefined}
                 aria-describedby={describedBy("name")}
                 required
@@ -317,7 +364,7 @@ export default function AuthPanel() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="auth-company">
-                Компания <span aria-hidden="true">*</span>
+                {t("auth.field.company", "Компания")} <span aria-hidden="true">*</span>
               </label>
               <input
                 id="auth-company"
@@ -326,7 +373,7 @@ export default function AuthPanel() {
                 autoComplete="organization"
                 value={formData.company}
                 onChange={(e) => updateField("company", e.target.value)}
-                placeholder="Название бренда"
+                placeholder={t("auth.placeholder.company", "Название бренда")}
                 aria-invalid={errors.company ? "true" : undefined}
                 aria-describedby={describedBy("company")}
                 required
@@ -341,7 +388,7 @@ export default function AuthPanel() {
             <div className={styles.row}>
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="auth-email">
-                  E-mail <span aria-hidden="true">*</span>
+                  {t("auth.field.email", "E-mail")} <span aria-hidden="true">*</span>
                 </label>
                 <input
                   id="auth-email"
@@ -350,7 +397,7 @@ export default function AuthPanel() {
                   autoComplete="email"
                   value={formData.email}
                   onChange={(e) => updateField("email", e.target.value)}
-                  placeholder="you@company.ru"
+                  placeholder={t("auth.placeholder.email", "you@company.ru")}
                   aria-invalid={errors.email ? "true" : undefined}
                   aria-describedby={describedBy("email")}
                   required
@@ -364,7 +411,7 @@ export default function AuthPanel() {
 
               <div className={styles.field}>
                 <label className={styles.label} htmlFor="auth-phone">
-                  Телефон
+                  {t("auth.field.phone", "Телефон")}
                 </label>
                 <input
                   id="auth-phone"
@@ -380,7 +427,7 @@ export default function AuthPanel() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="auth-industry">
-                Сфера бизнеса
+                {t("auth.field.industry", "Сфера бизнеса")}
               </label>
               <select
                 id="auth-industry"
@@ -388,10 +435,10 @@ export default function AuthPanel() {
                 value={formData.industry}
                 onChange={(e) => updateField("industry", e.target.value)}
               >
-                <option value="">Не выбрано</option>
+                <option value="">{t("auth.industryNone", "Не выбрано")}</option>
                 {INDUSTRIES.map((industry) => (
                   <option key={industry.id} value={industry.id}>
-                    {industry.ru}
+                    {pickLocalized(industry, lang, "ru", "en")}
                   </option>
                 ))}
               </select>
@@ -399,7 +446,7 @@ export default function AuthPanel() {
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="auth-comment">
-                Комментарий
+                {t("auth.field.comment", "Комментарий")}
               </label>
               <textarea
                 id="auth-comment"
@@ -407,7 +454,10 @@ export default function AuthPanel() {
                 rows={4}
                 value={formData.comment}
                 onChange={(e) => updateField("comment", e.target.value)}
-                placeholder="Сколько человек будет работать в кабинете, какие задачи важны в первую очередь"
+                placeholder={t(
+                  "auth.placeholder.comment",
+                  "Сколько человек будет работать в кабинете, какие задачи важны в первую очередь"
+                )}
               />
             </div>
 
@@ -424,9 +474,9 @@ export default function AuthPanel() {
                   required
                 />
                 <span>
-                  Согласен на обработку персональных данных согласно{" "}
+                  {t("auth.consent", "Согласен на обработку персональных данных согласно")}{" "}
                   <Link className={styles.inlineLink} href="/privacy">
-                    политике конфиденциальности
+                    {t("auth.consentLink", "политике конфиденциальности")}
                   </Link>
                 </span>
               </label>
@@ -438,14 +488,18 @@ export default function AuthPanel() {
             </div>
 
             <button type="submit" className={styles.submitBtn} disabled={isSending}>
-              {isSending ? "Отправляем…" : "Отправить запрос"}
+              {isSending
+                ? t("auth.submitting", "Отправляем…")
+                : t("auth.submit", "Отправить запрос")}
             </button>
 
             {submitError && <p className={styles.errorText}>{submitError}</p>}
 
             <p className={styles.hint}>
-              Мы не создаём аккаунты автоматически: сначала обсуждаем задачи,
-              потом заводим кабинет и передаём доступ ответственному сотруднику.
+              {t(
+                "auth.hintRequest",
+                "Мы не создаём аккаунты автоматически: сначала обсуждаем задачи, потом заводим кабинет и передаём доступ ответственному сотруднику."
+              )}
             </p>
           </form>
         )}
