@@ -2,7 +2,11 @@
 
 import { forwardRef } from "react";
 
+import { useT } from "@/context/LanguageContext";
+
 const ServiceCard = forwardRef(function ServiceCard({ item, isActive, onClick }, ref) {
+  const t = useT();
+
   return (
     <div
       className={`serviceCard${isActive ? " serviceCard--active" : ""}`}
@@ -26,11 +30,15 @@ const ServiceCard = forwardRef(function ServiceCard({ item, isActive, onClick },
             <span key={li} style={{ display: "block" }}>{line}</span>
           ))}
         </h3>
-        <p className="serviceCard__desc">{item.desc}</p>
+        {/* tag и title намеренно остаются английскими — это витринная
+            латинская типографика чёрной секции. Переводим описание. */}
+        <p className="serviceCard__desc">
+          {t(`services.desc.${item.id}`, item.desc)}
+        </p>
       </div>
 
       <div className="serviceCard__cta">
-        <span>View work</span>
+        <span>{t("common.viewWork", "View work")}</span>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>

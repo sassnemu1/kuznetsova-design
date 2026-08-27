@@ -64,6 +64,15 @@ export const DICT = {
      РУССКИЙ
      ══════════════════════════════════════════════════════════════ */
   ru: {
+    "common.viewWork": "Смотреть работы",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "отраслей",
+    "services.intro": "Будучи сплочённой командой экспертов, мы создаём запоминающиеся и вызывающие эмоции веб-сайты, цифровые решения и нативные приложения.",
+    "services.desc.01": "Логотипы, визуальные системы, типографика, бренд-стратегия и рыночное позиционирование.",
+    "services.desc.02": "Премиальные сайты с авторской анимацией, сложными взаимодействиями и высокой производительностью.",
+    "services.desc.03": "Контент-стратегия, визуальный стиль, шаблоны и съёмка для социальных сетей.",
+    "services.desc.04": "3D-графика, сложные анимации, переходы и продвинутое 3D-моделирование.",
+    "services.desc.05": "Креативное руководство, визуальный язык и концептуальная разработка проектов.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Плагины",
     "nav.account": "Личный кабинет",
@@ -598,6 +607,15 @@ export const DICT = {
      ENGLISH
      ══════════════════════════════════════════════════════════════ */
   en: {
+    "common.viewWork": "View work",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "industries",
+    "services.intro": "A close-knit team of specialists building memorable, emotionally charged websites, digital products and native apps.",
+    "services.desc.01": "Logos, visual systems, typography, brand strategy and market positioning.",
+    "services.desc.02": "Premium websites with bespoke animation, intricate interactions and serious performance.",
+    "services.desc.03": "Content strategy, visual language, templates and photography for social media.",
+    "services.desc.04": "3D graphics, complex animation, transitions and advanced 3D modelling.",
+    "services.desc.05": "Creative direction, visual language and conceptual development for projects.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Plug-ins",
     "nav.account": "Client account",
@@ -1133,6 +1151,15 @@ export const DICT = {
      中文 (ZH)
      ══════════════════════════════════════════════════════════════ */
   zh: {
+    "common.viewWork": "查看作品",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "个行业",
+    "services.intro": "我们是一支紧密协作的专业团队，打造令人难忘、富有感染力的网站、数字产品与原生应用。",
+    "services.desc.01": "标志、视觉系统、字体排印、品牌战略与市场定位。",
+    "services.desc.02": "高端网站，配以原创动效、复杂交互与出色的性能表现。",
+    "services.desc.03": "内容策略、视觉风格、模板与社交媒体拍摄。",
+    "services.desc.04": "3D 图形、复杂动画、转场与进阶 3D 建模。",
+    "services.desc.05": "创意指导、视觉语言与项目的概念开发。",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "插件",
     "nav.account": "客户账户",
@@ -1638,6 +1665,15 @@ export const DICT = {
      ESPAÑOL (ES)
      ══════════════════════════════════════════════════════════════ */
   es: {
+    "common.viewWork": "Ver trabajos",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "sectores",
+    "services.intro": "Somos un equipo unido de especialistas que crea sitios web memorables y emocionantes, soluciones digitales y aplicaciones nativas.",
+    "services.desc.01": "Logotipos, sistemas visuales, tipografía, estrategia de marca y posicionamiento.",
+    "services.desc.02": "Sitios premium con animación de autor, interacciones complejas y alto rendimiento.",
+    "services.desc.03": "Estrategia de contenido, estilo visual, plantillas y producción para redes sociales.",
+    "services.desc.04": "Gráficos 3D, animaciones complejas, transiciones y modelado 3D avanzado.",
+    "services.desc.05": "Dirección creativa, lenguaje visual y desarrollo conceptual de proyectos.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Plug-ins",
     "nav.account": "Área de cliente",
@@ -2176,6 +2212,15 @@ export const DICT = {
      PORTUGUÊS (PT)
      ══════════════════════════════════════════════════════════════ */
   pt: {
+    "common.viewWork": "Ver trabalhos",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "sectores",
+    "services.intro": "Somos uma equipa unida de especialistas que cria sites memoráveis e emocionantes, soluções digitais e aplicações nativas.",
+    "services.desc.01": "Logótipos, sistemas visuais, tipografia, estratégia de marca e posicionamento.",
+    "services.desc.02": "Sites premium com animação de autor, interacções complexas e alto desempenho.",
+    "services.desc.03": "Estratégia de conteúdo, estilo visual, modelos e produção para redes sociais.",
+    "services.desc.04": "Gráficos 3D, animações complexas, transições e modelação 3D avançada.",
+    "services.desc.05": "Direcção criativa, linguagem visual e desenvolvimento conceptual de projectos.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Plug-ins",
     "nav.account": "Área de cliente",
@@ -2715,6 +2760,15 @@ export const DICT = {
      Espace insécable ( ) avant « : ; ! ? », comme le veut l'usage.
      ══════════════════════════════════════════════════════════════ */
   fr: {
+    "common.viewWork": "Voir les projets",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "secteurs",
+    "services.intro": "Équipe soudée de spécialistes, nous concevons des sites mémorables et chargés d'émotion, des solutions numériques et des applications natives.",
+    "services.desc.01": "Logos, systèmes visuels, typographie, stratégie de marque et positionnement.",
+    "services.desc.02": "Sites premium avec animation sur mesure, interactions complexes et hautes performances.",
+    "services.desc.03": "Stratégie de contenu, style visuel, gabarits et prises de vue pour les réseaux sociaux.",
+    "services.desc.04": "Graphisme 3D, animations complexes, transitions et modélisation 3D avancée.",
+    "services.desc.05": "Direction créative, langage visuel et développement conceptuel des projets.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Plug-ins",
     "nav.account": "Espace client",
@@ -3253,6 +3307,15 @@ export const DICT = {
      DEUTSCH (DE)
      ══════════════════════════════════════════════════════════════ */
   de: {
+    "common.viewWork": "Arbeiten ansehen",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "Branchen",
+    "services.intro": "Als eingespieltes Expertenteam gestalten wir einprägsame, emotional wirksame Websites, digitale Lösungen und native Apps.",
+    "services.desc.01": "Logos, visuelle Systeme, Typografie, Markenstrategie und Positionierung.",
+    "services.desc.02": "Premium-Websites mit eigener Animation, komplexen Interaktionen und hoher Performance.",
+    "services.desc.03": "Content-Strategie, visueller Stil, Vorlagen und Aufnahmen für soziale Netzwerke.",
+    "services.desc.04": "3D-Grafik, komplexe Animationen, Übergänge und fortgeschrittene 3D-Modellierung.",
+    "services.desc.05": "Kreativdirektion, visuelle Sprache und konzeptionelle Entwicklung von Projekten.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Plug-ins",
     "nav.account": "Kundenbereich",
@@ -3793,6 +3856,15 @@ export const DICT = {
      العربية (AR) — письмо справа налево, dir="rtl"
      ══════════════════════════════════════════════════════════════ */
   ar: {
+    "common.viewWork": "عرض الأعمال",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "قطاعاً",
+    "services.intro": "فريق متماسك من المختصّين يصنع مواقع لا تُنسى وذات أثر عاطفي، وحلولاً رقمية وتطبيقات أصلية.",
+    "services.desc.01": "الشعارات والأنظمة البصرية والخطوط واستراتيجية العلامة وتموضعها في السوق.",
+    "services.desc.02": "مواقع راقية بحركة مصمّمة خصيصاً وتفاعلات معقّدة وأداء عالٍ.",
+    "services.desc.03": "استراتيجية المحتوى والأسلوب البصري والقوالب والتصوير لشبكات التواصل.",
+    "services.desc.04": "رسوم ثلاثية الأبعاد وحركة معقّدة وانتقالات ونمذجة ثلاثية متقدّمة.",
+    "services.desc.05": "الإدارة الإبداعية واللغة البصرية والتطوير المفاهيمي للمشاريع.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "الإضافات",
     "nav.account": "حساب العميل",
@@ -4322,6 +4394,15 @@ export const DICT = {
      日本語 (JA)
      ══════════════════════════════════════════════════════════════ */
   ja: {
+    "common.viewWork": "実績を見る",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "業種",
+    "services.intro": "結束した専門家チームとして、記憶に残り感情を動かすウェブサイト、デジタルソリューション、ネイティブアプリを制作します。",
+    "services.desc.01": "ロゴ、ビジュアルシステム、タイポグラフィ、ブランド戦略と市場でのポジショニング。",
+    "services.desc.02": "オリジナルのアニメーション、緻密なインタラクション、高い性能を備えたプレミアムサイト。",
+    "services.desc.03": "コンテンツ戦略、ビジュアルスタイル、テンプレート、SNS向けの撮影。",
+    "services.desc.04": "3Dグラフィックス、複雑なアニメーション、トランジション、高度な3Dモデリング。",
+    "services.desc.05": "クリエイティブディレクション、ビジュアル言語、プロジェクトのコンセプト開発。",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "プラグイン",
     "nav.account": "クライアント専用ページ",
@@ -4842,6 +4923,15 @@ export const DICT = {
      TÜRKÇE (TR)
      ══════════════════════════════════════════════════════════════ */
   tr: {
+    "common.viewWork": "Çalışmaları gör",
+    /* ─── Чёрная секция услуг + статистика ───────────────── */
+    "about.stat.industries": "sektör",
+    "services.intro": "Sıkı bir uzman ekibi olarak akılda kalan, duygu uyandıran web siteleri, dijital çözümler ve yerel uygulamalar üretiyoruz.",
+    "services.desc.01": "Logolar, görsel sistemler, tipografi, marka stratejisi ve pazar konumlandırması.",
+    "services.desc.02": "Özgün animasyon, karmaşık etkileşimler ve yüksek performanslı premium siteler.",
+    "services.desc.03": "İçerik stratejisi, görsel dil, şablonlar ve sosyal medya için çekim.",
+    "services.desc.04": "3D grafik, karmaşık animasyonlar, geçişler ve ileri düzey 3D modelleme.",
+    "services.desc.05": "Kreatif yönetim, görsel dil ve projelerin kavramsal geliştirmesi.",
     /* ─── Меню: плагины и кабинет ────────────────────────── */
     "nav.plugins": "Eklentiler",
     "nav.account": "Müşteri hesabı",
