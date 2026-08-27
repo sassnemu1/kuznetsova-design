@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useT } from "@/context/LanguageContext";
 import styles from "./IndustryTabs.module.css";
 
 const prefersReducedMotion = () =>
@@ -18,6 +19,7 @@ const prefersReducedMotion = () =>
 export default function IndustryTabs({ tabs, activeId, onSelect }) {
   const listRef = useRef(null);
   const btnRefs = useRef([]);
+  const t = useT();
 
   const activeIndex = tabs.findIndex((t) => t.id === activeId);
 
@@ -62,7 +64,7 @@ export default function IndustryTabs({ tabs, activeId, onSelect }) {
         ref={listRef}
         className={styles.list}
         role="tablist"
-        aria-label="Отрасли портфолио"
+        aria-label={t("portfolio.industriesNav", "Отрасли портфолио")}
         aria-orientation="horizontal"
         onKeyDown={handleKeyDown}
       >

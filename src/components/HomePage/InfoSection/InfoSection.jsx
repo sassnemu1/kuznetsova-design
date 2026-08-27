@@ -1,14 +1,17 @@
 "use client";
 
 import styles from "./InfoSection.module.css";
+import { useT } from "@/context/LanguageContext";
 
 export default function InfoSection() {
+  const t = useT();
+
   return (
     <section className={styles.section}>
-      
+
       <div className={styles.inner}>
         <span className={styles.label}>
-          Что мы создаём
+          {t("info.label", "Что мы создаём")}
         </span>
 
         <h2 className={styles.title}>
@@ -25,8 +28,10 @@ export default function InfoSection() {
         </h2>
 
         <p className={styles.subtext}>
-          От стратегии и визуальной идентичности до веб-разработки, 
-          автоматизация и интеллектуальные цифровые системы.
+          {t(
+            "info.subtext",
+            "От стратегии и визуальной идентичности до веб-разработки, автоматизация и интеллектуальные цифровые системы."
+          )}
         </p>
       </div>
     </section>

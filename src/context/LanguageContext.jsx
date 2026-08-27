@@ -10,7 +10,12 @@ import {
   useSyncExternalStore,
 } from "react";
 
-import { DEFAULT_LANGUAGE, LANGUAGES, translate } from "@/i18n/dictionary";
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGES,
+  isRTL,
+  translate,
+} from "@/i18n/dictionary";
 
 const STORAGE_KEY = "kd-lang";
 
@@ -107,10 +112,13 @@ export function LanguageProvider({ children }) {
   // Явный выбор пользователя важнее того, что лежит в хранилище.
   const effectiveLang = override ?? detected;
 
-  // <html lang> должен соответствовать тому, что реально читает человек.
+  // <html lang> должен соответствовать тому, что реально читает человек,
+  // а <html dir> — направлению письма: арабский раскладывается справа налево.
   useEffect(() => {
     if (typeof document === "undefined") return;
     document.documentElement.lang = effectiveLang;
+    const rtl = typeof isRTL === "function" ? isRTL(effectiveLang) : false;
+    document.documentElement.dir = rtl ? "rtl" : "ltr";
   }, [effectiveLang]);
 
   const setLang = useCallback((next) => {

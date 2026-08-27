@@ -21,28 +21,40 @@ import {
   getIndustryCounts,
 } from "@/data/ServicesData";
 import { plural } from "@/lib/plural";
+import { useT, useLanguage } from "@/context/LanguageContext";
 
-const services = [
+// Тексты карточек живут в словаре; здесь — только ключи, оформление
+// и русский оригинал как запасной вариант.
+const SERVICE_CARDS = [
   {
     num: "01",
-    title: "БРЕНДИНГ И ГРАФИКА",
-    desc: "Логотипы, брендбуки, упаковка, мерч и полная айдентика, которую запоминают.",
+    titleKey: "about.service.branding.title",
+    titleRu: "БРЕНДИНГ И ГРАФИКА",
+    descKey: "about.service.branding.desc",
+    descRu:
+      "Логотипы, брендбуки, упаковка, мерч и полная айдентика, которую запоминают.",
     tags: ["Figma", "Illustrator", "After Effects", "Branding"],
     bgColor: "#f8f5f0",
     image: "/design-solutions.webp",
   },
   {
     num: "02",
-    title: "WEB & DIGITAL",
-    desc: "Современные сайты и цифровые продукты на чистом коде. Без шаблонов и компромиссов.",
+    titleKey: "about.service.web.title",
+    titleRu: "WEB & DIGITAL",
+    descKey: "about.service.web.desc",
+    descRu:
+      "Современные сайты и цифровые продукты на чистом коде. Без шаблонов и компромиссов.",
     tags: ["React", "Next.js", "TypeScript", "Framer Motion"],
     bgColor: "#f0f4ff",
     image: "/web-dev.webp",
   },
   {
     num: "03",
-    title: "3D-DESIGN",
-    desc: "Визуализация, 3D-моделинг, моушн и AR/VR решения. Объём, который продаёт.",
+    titleKey: "about.service.3d.title",
+    titleRu: "3D-DESIGN",
+    descKey: "about.service.3d.desc",
+    descRu:
+      "Визуализация, 3D-моделинг, моушн и AR/VR решения. Объём, который продаёт.",
     tags: ["Blender", "Cinema 4D", "Spline", "Three.js"],
     bgColor: "#f5f0f8",
     image: "/mob-dev.webp",
@@ -55,23 +67,60 @@ const totalWorks = getAllWorks().length;
 const totalDisciplines = SERVICES_DATA.length;
 const totalIndustries = Object.keys(getIndustryCounts()).length;
 
-const stats = [
-  { num: "5+", label: "лет в дизайне" },
-  { num: `${totalWorks}`, label: plural(totalWorks, "проект", "проекта", "проектов") },
-  { num: `${totalDisciplines}`, label: plural(totalDisciplines, "направление", "направления", "направлений") },
-  { num: `${totalIndustries}`, label: plural(totalIndustries, "отрасль", "отрасли", "отраслей") },
-];
+/**
+ * Подписи к цифрам.
+ *
+ * Числа остаются вычисленными из данных. Русское склонение зависит от
+ * самого числа, поэтому plural() работает только для «ru»; в остальных
+ * девяти языках форма слова от числа не зависит и берётся из словаря.
+ */
+function buildStats(t, lang) {
+  const isRu = lang === "ru";
 
-const story = [
+  return [
+    {
+      num: "5+",
+      label: t("about.stat.years", "лет в дизайне"),
+    },
+    {
+      num: `${totalWorks}`,
+      label: isRu
+        ? plural(totalWorks, "проект", "проекта", "проектов")
+        : t("about.stat.projects", "проектов"),
+    },
+    {
+      num: `${totalDisciplines}`,
+      label: isRu
+        ? plural(totalDisciplines, "направление", "направления", "направлений")
+        : t("about.stat.disciplines", "направлений"),
+    },
+    {
+      num: `${totalIndustries}`,
+      label: isRu
+        ? plural(totalIndustries, "отрасль", "отрасли", "отраслей")
+        : t("about.stat.industries", "отраслей"),
+    },
+  ];
+}
+
+const STORY_PEOPLE = [
   {
-    name: "Кристина Кузнецова",
-    role: "Основатель · Арт-директор",
-    text: "Дизайнер, который не признаёт границ между дисциплинами. Графический дизайн, веб-разработка, 3D-визуализация — для неё это не разные профессии, а один инструментарий. Бюро создано, чтобы доказывать это проектами.",
+    nameKey: "about.story.kristina.name",
+    nameRu: "Кристина Кузнецова",
+    roleKey: "about.story.kristina.role",
+    roleRu: "Основатель · Арт-директор",
+    textKey: "about.story.kristina.text",
+    textRu:
+      "Дизайнер, который не признаёт границ между дисциплинами. Графический дизайн, веб-разработка, 3D-визуализация — для неё это не разные профессии, а один инструментарий. Бюро создано, чтобы доказывать это проектами.",
   },
   {
-    name: "Ярослав Киселев",
-    role: "CEO · Финансовый директор",
-    text: "Он отвечает за то, чтобы каждый проект имел чёткий план, бюджет и дедлайн. Чтобы клиент получал результат, а не оправдания.",
+    nameKey: "about.story.yaroslav.name",
+    nameRu: "Ярослав Киселев",
+    roleKey: "about.story.yaroslav.role",
+    roleRu: "CEO · Финансовый директор",
+    textKey: "about.story.yaroslav.text",
+    textRu:
+      "Он отвечает за то, чтобы каждый проект имел чёткий план, бюджет и дедлайн. Чтобы клиент получал результат, а не оправдания.",
   },
 ];
 
@@ -95,6 +144,13 @@ export default function AboutSection() {
   const storyStatsRef = useRef(null);
 
   const openClientForm = useBecomeClient();
+
+  const t = useT();
+  const { lang } = useLanguage();
+
+  const services = SERVICE_CARDS;
+  const stats = buildStats(t, lang);
+  const story = STORY_PEOPLE;
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -248,19 +304,23 @@ export default function AboutSection() {
 
             {/* ── Левая колонка — sticky ── */}
             <div className={styles.heroLeft}>
-              <span ref={heroEyebrowRef} className={styles.heroEyebrow}>О нас</span>
+              <span ref={heroEyebrowRef} className={styles.heroEyebrow}>
+                {t("about.eyebrow", "О нас")}
+              </span>
 
               <h1 className={styles.heroTitle}>
                 <div className={styles.heroClip}>
                   <span ref={heroLine1Ref} className={styles.heroTitleLine}>
-                    Мы стремимся к инновациям.
+                    {t("about.title", "Мы стремимся к инновациям.")}
                   </span>
                 </div>
               </h1>
 
               <p ref={heroSubRef} className={styles.heroSub}>
-                Создаём визуальные системы, которые работают во всех измерениях —
-                от брендинга и кода до объёмного 3D.
+                {t(
+                  "about.sub",
+                  "Создаём визуальные системы, которые работают во всех измерениях — от брендинга и кода до объёмного 3D."
+                )}
               </p>
 
               <button
@@ -268,8 +328,8 @@ export default function AboutSection() {
                 className={styles.heroBtn}
                 onClick={openClientForm}
               >
-                Начать проект
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                {t("about.cta", "Начать проект")}
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
@@ -292,9 +352,14 @@ export default function AboutSection() {
             <div className={styles.heroRight}>
               <div className={styles.servicesBlock}>
                 <div className={styles.servTop}>
-                  <div className={styles.sectionLabel}>Что мы делаем</div>
+                  <div className={styles.sectionLabel}>
+                    {t("about.servicesLabel", "Что мы делаем")}
+                  </div>
                   <p ref={servIntroRef} className={styles.servIntro}>
-                    Три направления, в которых мы создаём выдающийся результат
+                    {t(
+                      "about.servicesIntro",
+                      "Три направления, в которых мы создаём выдающийся результат"
+                    )}
                   </p>
                 </div>
 
@@ -312,8 +377,12 @@ export default function AboutSection() {
                       />
                       <div className={styles.servCardContent}>
                         <span className={styles.servCardNum}>{service.num}</span>
-                        <h3 className={styles.servCardTitle}>{service.title}</h3>
-                        <p className={styles.servCardDesc}>{service.desc}</p>
+                        <h3 className={styles.servCardTitle}>
+                          {t(service.titleKey, service.titleRu)}
+                        </h3>
+                        <p className={styles.servCardDesc}>
+                          {t(service.descKey, service.descRu)}
+                        </p>
                         <div className={styles.servCardDivider} />
                         <div className={styles.servCardTags}>
                           {service.tags.map((tag, idx) => (
@@ -337,11 +406,13 @@ export default function AboutSection() {
             {/* Левая колонка — заголовок + биографии */}
             <div className={styles.storyLeft}>
               <div>
-                <span className={styles.storyEyebrow}>История бренда</span>
+                <span className={styles.storyEyebrow}>
+                  {t("about.story.eyebrow", "История бренда")}
+                </span>
                 <h2 ref={storyHeadlineRef} className={styles.storyHeadline}>
-                  Одно имя.
+                  {t("about.story.headlineLine1", "Одно имя.")}
                   <br />
-                  Все виды дизайна.
+                  {t("about.story.headlineLine2", "Все виды дизайна.")}
                 </h2>
               </div>
 
@@ -353,17 +424,25 @@ export default function AboutSection() {
                     className={styles.storyItem}
                   >
                     <div className={styles.storyMeta}>
-                      <span className={styles.storyName}>{item.name}</span>
-                      <span className={styles.storyRole}>{item.role}</span>
+                      <span className={styles.storyName}>
+                        {t(item.nameKey, item.nameRu)}
+                      </span>
+                      <span className={styles.storyRole}>
+                        {t(item.roleKey, item.roleRu)}
+                      </span>
                     </div>
-                    <p className={styles.storyText}>{item.text}</p>
+                    <p className={styles.storyText}>
+                      {t(item.textKey, item.textRu)}
+                    </p>
                   </div>
                 ))}
               </div>
 
               <p ref={storyClosingRef} className={styles.storyClosing}>
-                Вместе мы строим студию, где дизайн уважают как бизнес&#8209;инструмент,
-                а не как украшение.
+                {t(
+                  "about.story.closing",
+                  "Вместе мы строим студию, где дизайн уважают как бизнес‑инструмент, а не как украшение."
+                )}
               </p>
             </div>
 
@@ -373,23 +452,31 @@ export default function AboutSection() {
                 <div className={styles.storyQuoteOverlay} />
 
                 <p className={styles.storyQuoteText}>
-                  Дизайн — это не то, как вещь выглядит. Это то, как она работает.
+                  {t(
+                    "about.quote.text",
+                    "Дизайн — это не то, как вещь выглядит. Это то, как она работает."
+                  )}
                 </p>
 
                 <span className={styles.storyQuoteAuthor}>
-                  Стив Джобс — принцип, которому следует бюро
+                  {t(
+                    "about.quote.author",
+                    "Стив Джобс — принцип, которому следует бюро"
+                  )}
                 </span>
 
                 <div className={styles.storyContacts}>
                     <span className={styles.storyContactsTitle}>
-                      Наши контакты
+                      {t("about.contacts.title", "Наши контакты")}
                     </span>
 
                     <a
                       href="mailto:kristina@kuznetsova.design"
                       className={styles.storyContactItem}
                     >
-                      <span className={styles.storyContactLabel}>Email Кристины Кузнецовой</span>
+                      <span className={styles.storyContactLabel}>
+                        {t("about.contacts.kristina", "Email Кристины Кузнецовой")}
+                      </span>
                       <span className={styles.storyContactValue}>
                         kristina@kuznetsova.design
                       </span>
@@ -398,7 +485,9 @@ export default function AboutSection() {
                       href="mailto:kiselev@kuznetsova.design"
                       className={styles.storyContactItem}
                     >
-                      <span className={styles.storyContactLabel}>Email Ярослава Киселева</span>
+                      <span className={styles.storyContactLabel}>
+                        {t("about.contacts.yaroslav", "Email Ярослава Киселева")}
+                      </span>
                       <span className={styles.storyContactValue}>
                         kiselev@kuznetsova.design
                       </span>
@@ -410,18 +499,20 @@ export default function AboutSection() {
                       rel="noopener noreferrer"
                       className={styles.storyContactItem}
                     >
-                      <span className={styles.storyContactLabel}>НОМЕР ТЕЛЕФОНА</span>
+                      <span className={styles.storyContactLabel}>
+                        {t("about.contacts.phone", "НОМЕР ТЕЛЕФОНА")}
+                      </span>
                       <span className={styles.storyContactValue}>
                         +7 (968) 500 26-66
                       </span>
                     </a>
 
                     <div className={styles.storySocials}>
-                        <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-                        <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
-                        <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer"><FaPinterest /></a>
-                        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал бюро"><FaTelegramPlane /></a>
-                        <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer"><FaVk /></a>
+                        <a href="https://www.instagram.com/kuznetsovade.sign?igsh=enVnMGd0emM2YjBx&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram aria-hidden="true" /></a>
+                        <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance aria-hidden="true" /></a>
+                        <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest aria-hidden="true" /></a>
+                        <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label={t("about.social.telegram", "Telegram-канал бюро")}><FaTelegramPlane aria-hidden="true" /></a>
+                        <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer" aria-label="VK"><FaVk aria-hidden="true" /></a>
                     </div>
                 </div>
               </div>

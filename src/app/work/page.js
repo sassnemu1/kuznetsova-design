@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer.jsx";
 import WorkHero from "@/components/Work/WorkHero/WorkHero";
-import PortfolioShowcase from "@/components/Work/PortfolioShowcase/PortfolioShowcase";
-import PortfolioIndustries from "@/components/Work/PortfolioIndustries/PortfolioIndustries";
+import PortfolioBrowser from "@/components/Work/PortfolioIndustries/PortfolioBrowser";
 import { SERVICES_DATA, getAllWorkSlugs } from "@/data/ServicesData";
 
 import styles from "./page.module.css";
@@ -58,10 +57,8 @@ export default function PortfolioPage() {
       <WorkHero />
 
       <div id="main">
-        <PortfolioIndustries />
+        <PortfolioBrowser />
       </div>
-
-      <PortfolioShowcase />
 
       <Footer />
     </main>

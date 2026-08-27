@@ -3,22 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useT } from "@/context/LanguageContext";
 import styles from "./BecomeClient.module.css";
 
+/**
+ * Услуги и бюджеты.
+ *
+ * value — то, что уходит на /api/contact. Оно всегда русское и не зависит
+ * от языка интерфейса: письмо студии читают в Москве. Переводится только
+ * подпись на чипе — через ключ key с русским запасным вариантом.
+ */
 const SERVICES = [
-  "Брендинг",
-  "Веб-дизайн",
-  "Айдентика",
-  "UX/UI",
-  "Моушн",
-  "Другое",
+  { value: "Брендинг", key: "form.service.branding" },
+  { value: "Веб-дизайн", key: "form.service.web" },
+  { value: "Айдентика", key: "form.service.identity" },
+  { value: "UX/UI", key: "form.service.uxui" },
+  { value: "Моушн", key: "form.service.motion" },
+  { value: "Другое", key: "form.service.other" },
 ];
 
 const BUDGETS = [
-  "До 150 000 ₽",
-  "150 000 – 500 000 ₽",
-  "500 000 – 1 000 000 ₽",
-  "Больше 1 000 000 ₽",
+  { value: "До 150 000 ₽", key: "form.budget.upTo150" },
+  { value: "150 000 – 500 000 ₽", key: "form.budget.150to500" },
+  { value: "500 000 – 1 000 000 ₽", key: "form.budget.500to1000" },
+  { value: "Больше 1 000 000 ₽", key: "form.budget.over1000" },
 ];
 
 const INITIAL_FORM_DATA = {
@@ -39,6 +47,7 @@ export default function BecomeClient({ isOpen, onClose }) {
   const [sent, setSent] = useState(false);
   const firstFieldRef = useRef(null);
 
+  const t = useT();
 
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -79,12 +88,18 @@ export default function BecomeClient({ isOpen, onClose }) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = "Введите имя";
-    if (!formData.email.trim()) newErrors.email = "Введите email";
-    if (!formData.phone.trim()) newErrors.phone = "Введите номер телефона";
-    if (!formData.message.trim()) newErrors.message = "Расскажите о проекте";
-    if (formData.services.length === 0) newErrors.services = "Выберите хотя бы одну услугу";
-    if (!formData.budget) newErrors.budget = "Выберите бюджет";
+    if (!formData.name.trim())
+      newErrors.name = t("form.error.name", "Введите имя");
+    if (!formData.email.trim())
+      newErrors.email = t("form.error.email", "Введите email");
+    if (!formData.phone.trim())
+      newErrors.phone = t("form.error.phone", "Введите номер телефона");
+    if (!formData.message.trim())
+      newErrors.message = t("form.error.message", "Расскажите о проекте");
+    if (formData.services.length === 0)
+      newErrors.services = t("form.error.services", "Выберите хотя бы одну услугу");
+    if (!formData.budget)
+      newErrors.budget = t("form.error.budget", "Выберите бюджет");
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -107,11 +122,14 @@ export default function BecomeClient({ isOpen, onClose }) {
 
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.error || "Ошибка отправки");
+        if (!res.ok)
+          throw new Error(data.error || t("form.error.generic", "Ошибка отправки"));
 
         setSent(true);
     } catch (err) {
-        setSubmitError("Не удалось отправить заявку. Попробуйте ещё раз.");
+        setSubmitError(
+          t("form.error.submit", "Не удалось отправить заявку. Попробуйте ещё раз.")
+        );
         console.error(err);
     } finally {
         setIsLoading(false);
@@ -123,7 +141,7 @@ export default function BecomeClient({ isOpen, onClose }) {
       className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
       role="dialog"
       aria-modal="true"
-      aria-label="Стать клиентом"
+      aria-label={t("form.dialogLabel", "Стать клиентом")}
     >
       <div className={styles.backdrop} onClick={handleClose} />
 
@@ -131,7 +149,11 @@ export default function BecomeClient({ isOpen, onClose }) {
         {/* ── LEFT ── */}
         <aside className={styles.left}>
           <div className={styles.leftInner}>
-            <Link href="/" className={styles.brand} aria-label="На главную">
+            <Link
+              href="/"
+              className={styles.brand}
+              aria-label={t("common.home", "На главную")}
+            >
               <div className={styles.logoMark}>
                 <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
               </div>
@@ -139,30 +161,34 @@ export default function BecomeClient({ isOpen, onClose }) {
             </Link>
 
             <div className={styles.pitch}>
-              <p className={styles.pitchEyebrow}>Начните проект</p>
+              <p className={styles.pitchEyebrow}>
+                {t("form.eyebrow", "Начните проект")}
+              </p>
               <h2 className={styles.pitchHeadline}>
-                Давайте создадим&nbsp;нечто
+                {t("form.headlineLine1", "Давайте создадим нечто")}
                 <br />
-                <em>выдающееся</em>
+                <em>{t("form.headlineAccent", "выдающееся")}</em>
               </h2>
               <p className={styles.pitchBody}>
-                Заполните форму — мы ответим в течение 24&nbsp;часов
-                и предложим концепцию уже на первом звонке.
+                {t(
+                  "form.pitch",
+                  "Заполните форму — мы ответим в течение 24 часов и предложим концепцию уже на первом звонке."
+                )}
               </p>
             </div>
 
             <ul className={styles.promises}>
               <li>
                 <span className={styles.promiseIcon}>01</span>
-                Персональный арт-директор на проекте
+                {t("form.promise1", "Персональный арт-директор на проекте")}
               </li>
               <li>
                 <span className={styles.promiseIcon}>02</span>
-                Прозрачный процесс и еженедельные синки
+                {t("form.promise2", "Прозрачный процесс и еженедельные синки")}
               </li>
               <li>
                 <span className={styles.promiseIcon}>03</span>
-                Сроки и объём работ зафиксированы в договоре
+                {t("form.promise3", "Сроки и объём работ зафиксированы в договоре")}
               </li>
             </ul>
 
@@ -178,9 +204,15 @@ export default function BecomeClient({ isOpen, onClose }) {
         <div className={styles.right}>
           <div className={styles.rightInner}>
             <div className={styles.header}>
-              <span className={styles.headerLabel}>Заявка</span>
-              <button className={styles.closeBtn} onClick={handleClose} aria-label="Закрыть">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <span className={styles.headerLabel}>
+                {t("form.headerLabel", "Заявка")}
+              </span>
+              <button
+                className={styles.closeBtn}
+                onClick={handleClose}
+                aria-label={t("form.close", "Закрыть")}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                 </svg>
               </button>
@@ -189,12 +221,14 @@ export default function BecomeClient({ isOpen, onClose }) {
             {sent ? (
               <div className={styles.success}>
                 <div className={styles.successIcon}>✓</div>
-                <h3 className={styles.successTitle}>Заявка отправлена</h3>
+                <h3 className={styles.successTitle}>
+                  {t("form.success.title", "Заявка отправлена")}
+                </h3>
                 <p className={styles.successBody}>
-                  Мы свяжемся с вами в течение 24 часов.
+                  {t("form.success.body", "Мы свяжемся с вами в течение 24 часов.")}
                 </p>
                 <button className={styles.successBtn} onClick={handleClose}>
-                  Закрыть
+                  {t("form.success.close", "Закрыть")}
                 </button>
               </div>
             ) : (
@@ -214,7 +248,9 @@ export default function BecomeClient({ isOpen, onClose }) {
                 {/* Row 1 */}
                 <div className={styles.row}>
                   <div className={styles.field}>
-                    <label className={styles.label} htmlFor="bc-name">Имя <span>*</span></label>
+                    <label className={styles.label} htmlFor="bc-name">
+                      {t("form.name.label", "Имя")} <span>*</span>
+                    </label>
                     <input
                       ref={firstFieldRef}
                       id="bc-name"
@@ -222,21 +258,23 @@ export default function BecomeClient({ isOpen, onClose }) {
                       type="text"
                       value={formData.name}
                       onChange={(e) => updateField("name", e.target.value)}
-                      placeholder="Александр"
+                      placeholder={t("form.name.placeholder", "Александр")}
                       required
                     />
                     {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                   </div>
 
                   <div className={styles.field}>
-                    <label className={styles.label} htmlFor="bc-company">Компания</label>
+                    <label className={styles.label} htmlFor="bc-company">
+                      {t("form.company.label", "Компания")}
+                    </label>
                     <input
                       id="bc-company"
                       className={styles.input}
                       type="text"
                       value={formData.company}
                       onChange={(e) => updateField("company", e.target.value)}
-                      placeholder="Ваш бренд"
+                      placeholder={t("form.company.placeholder", "Ваш бренд")}
                     />
                   </div>
                 </div>
@@ -244,28 +282,32 @@ export default function BecomeClient({ isOpen, onClose }) {
                 {/* Row 2 */}
                 <div className={styles.row}>
                   <div className={styles.field}>
-                    <label className={styles.label} htmlFor="bc-email">Email <span>*</span></label>
+                    <label className={styles.label} htmlFor="bc-email">
+                      {t("form.email.label", "Email")} <span>*</span>
+                    </label>
                     <input
                       id="bc-email"
                       className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
                       type="email"
                       value={formData.email}
                       onChange={(e) => updateField("email", e.target.value)}
-                      placeholder="you@company.ru"
+                      placeholder={t("form.email.placeholder", "you@company.ru")}
                       required
                     />
                     {errors.email && <span className={styles.errorText}>{errors.email}</span>}
                   </div>
 
                   <div className={styles.field}>
-                    <label className={styles.label} htmlFor="bc-phone">Телефон <span>*</span></label>
+                    <label className={styles.label} htmlFor="bc-phone">
+                      {t("form.phone.label", "Телефон")} <span>*</span>
+                    </label>
                     <input
                       id="bc-phone"
                       className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => updateField("phone", e.target.value)}
-                      placeholder="+7 (___) ___-__-__"
+                      placeholder={t("form.phone.placeholder", "+7 (___) ___-__-__")}
                       required
                     />
                     {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
@@ -274,29 +316,34 @@ export default function BecomeClient({ isOpen, onClose }) {
 
                 {/* Telegram */}
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="bc-tg">Telegram</label>
+                  <label className={styles.label} htmlFor="bc-tg">
+                    {t("form.telegram.label", "Telegram")}
+                  </label>
                   <input
                     id="bc-tg"
                     className={styles.input}
                     type="text"
                     value={formData.telegram}
                     onChange={(e) => updateField("telegram", e.target.value)}
-                    placeholder="@username"
+                    placeholder={t("form.telegram.placeholder", "@username")}
                   />
                 </div>
 
                 {/* Services */}
                 <div className={styles.field}>
-                  <label className={styles.label}>Нужные услуги <span>*</span></label>
+                  <label className={styles.label}>
+                    {t("form.services.label", "Нужные услуги")} <span>*</span>
+                  </label>
                   <div className={styles.chips}>
                     {SERVICES.map((s) => (
                       <button
-                        key={s}
+                        key={s.value}
                         type="button"
-                        className={`${styles.chip} ${formData.services.includes(s) ? styles.chipActive : ""}`}
-                        onClick={() => toggleService(s)}
+                        className={`${styles.chip} ${formData.services.includes(s.value) ? styles.chipActive : ""}`}
+                        onClick={() => toggleService(s.value)}
+                        aria-pressed={formData.services.includes(s.value)}
                       >
-                        {s}
+                        {t(s.key, s.value)}
                       </button>
                     ))}
                   </div>
@@ -305,16 +352,19 @@ export default function BecomeClient({ isOpen, onClose }) {
 
                 {/* Budget */}
                 <div className={styles.field}>
-                  <label className={styles.label}>Бюджет <span>*</span></label>
+                  <label className={styles.label}>
+                    {t("form.budget.label", "Бюджет")} <span>*</span>
+                  </label>
                   <div className={styles.chips}>
                     {BUDGETS.map((b) => (
                       <button
-                        key={b}
+                        key={b.value}
                         type="button"
-                        className={`${styles.chip} ${formData.budget === b ? styles.chipActive : ""}`}
-                        onClick={() => updateField("budget", b)}
+                        className={`${styles.chip} ${formData.budget === b.value ? styles.chipActive : ""}`}
+                        onClick={() => updateField("budget", b.value)}
+                        aria-pressed={formData.budget === b.value}
                       >
-                        {b}
+                        {t(b.key, b.value)}
                       </button>
                     ))}
                   </div>
@@ -323,14 +373,19 @@ export default function BecomeClient({ isOpen, onClose }) {
 
                 {/* Message */}
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="bc-msg">О проекте <span>*</span></label>
+                  <label className={styles.label} htmlFor="bc-msg">
+                    {t("form.message.label", "О проекте")} <span>*</span>
+                  </label>
                   <textarea
                     id="bc-msg"
                     className={`${styles.textarea} ${errors.message ? styles.inputError : ""}`}
                     rows={5}
                     value={formData.message}
                     onChange={(e) => updateField("message", e.target.value)}
-                    placeholder="Расскажите подробнее о задаче..."
+                    placeholder={t(
+                      "form.message.placeholder",
+                      "Расскажите подробнее о задаче..."
+                    )}
                     required
                   />
                   {errors.message && <span className={styles.errorText}>{errors.message}</span>}
@@ -338,9 +393,11 @@ export default function BecomeClient({ isOpen, onClose }) {
 
                 <div className={styles.formFooter}>
                   <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-                    {isLoading ? "Отправка..." : "Отправить заявку"}
+                    {isLoading
+                      ? t("form.submitting", "Отправка...")
+                      : t("form.submit", "Отправить заявку")}
                     {!isLoading && (
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                     )}
@@ -350,8 +407,10 @@ export default function BecomeClient({ isOpen, onClose }) {
                         <p className={styles.errorText} style={{ marginTop: 8 }}>{submitError}</p>
                     )}
                   <p className={styles.privacy}>
-                    Нажимая кнопку, вы принимаете{" "}
-                    <Link href="/privacy" target="_blank">политику конфиденциальности</Link>
+                    {t("form.privacyPrefix", "Нажимая кнопку, вы принимаете")}{" "}
+                    <Link href="/privacy" target="_blank">
+                      {t("form.privacyLink", "политику конфиденциальности")}
+                    </Link>
                   </p>
                 </div>
               </form>

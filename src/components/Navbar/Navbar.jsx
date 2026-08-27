@@ -10,8 +10,10 @@ import styles from "./Navbar.module.css";
 import FullMenu from "./FullMenu/FullMenu";
 import LanguageToggle from "@/components/UI/LanguageToggle/LanguageToggle";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useT } from "@/context/LanguageContext";
 
 export default function Navbar() {
+  const t = useT();
   const openClientForm = useBecomeClient();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesVisible, setIsServicesVisible] = useState(false);
@@ -59,14 +61,14 @@ export default function Navbar() {
               className={styles.clientBtn}
               onClick={openClientForm}
             >
-              <span>Начните проект</span>
+              <span>{t("nav.startProject", "Начните проект")}</span>
               <IoIosArrowForward size={16} />
             </button>
 
             <button
               className={styles.menuBtn}
               onClick={() => setIsMenuOpen(true)}
-              aria-label="Открыть меню"
+              aria-label={t("nav.openMenu", "Открыть меню")}
             >
               <HiOutlineMenu size={21} />
             </button>

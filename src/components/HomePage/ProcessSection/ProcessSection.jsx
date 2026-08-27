@@ -3,32 +3,49 @@
 import { useEffect, useRef } from "react";
 import styles from "./ProcessSection.module.css";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 
-const steps = [
+// Порядковые номера и ключи словаря — текст подставляется при рендере.
+const STEP_KEYS = [
   {
     num: "01",
-    title: "Брифинг",
-    desc: "Знакомимся, фиксируем задачу письменно, согласовываем объём, бюджет и сроки. Без брифа не начинаем.",
+    titleKey: "process.step1.title",
+    titleRu: "Брифинг",
+    descKey: "process.step1.desc",
+    descRu:
+      "Знакомимся, фиксируем задачу письменно, согласовываем объём, бюджет и сроки. Без брифа не начинаем.",
   },
   {
     num: "02",
-    title: "Концепция",
-    desc: "Кристина разрабатывает визуальное решение. Внутренняя проверка перед показом клиенту.",
+    titleKey: "process.step2.title",
+    titleRu: "Концепция",
+    descKey: "process.step2.desc",
+    descRu:
+      "Кристина разрабатывает визуальное решение. Внутренняя проверка перед показом клиенту.",
   },
   {
     num: "03",
-    title: "Презентация и правки",
-    desc: "Показываем, обсуждаем, дорабатываем. До двух раундов правок включено в договор.",
+    titleKey: "process.step3.title",
+    titleRu: "Презентация и правки",
+    descKey: "process.step3.desc",
+    descRu:
+      "Показываем, обсуждаем, дорабатываем. До двух раундов правок включено в договор.",
   },
   {
     num: "04",
-    title: "Производство",
-    desc: "Финальные файлы, вёрстка, рендеры, передача исходников. Всё, что нужно для запуска.",
+    titleKey: "process.step4.title",
+    titleRu: "Производство",
+    descKey: "process.step4.desc",
+    descRu:
+      "Финальные файлы, вёрстка, рендеры, передача исходников. Всё, что нужно для запуска.",
   },
   {
     num: "05",
-    title: "Сдача",
-    desc: "Подписание акта, передача материалов, запрос обратной связи. Проект закрыт — кейс готов.",
+    titleKey: "process.step5.title",
+    titleRu: "Сдача",
+    descKey: "process.step5.desc",
+    descRu:
+      "Подписание акта, передача материалов, запрос обратной связи. Проект закрыт — кейс готов.",
   },
 ];
 
@@ -37,6 +54,9 @@ export default function ProcessSection() {
   const headerRef = useRef(null);
   const titleRef = useRef(null);
   const stepsRef = useRef([]);
+
+  const t = useT();
+  const steps = STEP_KEYS;
 
   const { gsap, ScrollTrigger } = useGSAP();
 
@@ -110,26 +130,30 @@ export default function ProcessSection() {
       <div className={styles.inner}>
         <div ref={headerRef} className={styles.hero}>
           {/* Большой декоративный номер */}
-          <div className={styles.heroBgIndex}>HOW TO WORK</div>
+          <div className={styles.heroBgIndex}>
+            {t("process.bgLabel", "HOW TO WORK")}
+          </div>
 
           <div className={styles.heroLayout}>
             {/* ЛЕВАЯ КОЛОНКА */}
             <div className={styles.heroRight}>
               <span className={styles.heroEyebrow}>
-                — Как мы работаем
+                {t("process.eyebrow", "— Как мы работаем")}
               </span>
 
               <h2 ref={titleRef} className={styles.heroTitle}>
-                <span className="heroTitleLine">Процесс</span>{" "}
+                <span className="heroTitleLine">
+                  {t("process.titleLine1", "Процесс")}
+                </span>{" "}
                 <span className="heroTitleLine heroTitleLineAccent">
-                  работы
+                  {t("process.titleLine2", "работы")}
                 </span>
               </h2>
 
               <p className={styles.heroSub}>
-                От первого сообщения до передачи файлов.
+                {t("process.subLine1", "От первого сообщения до передачи файлов.")}
                 <br />
-                Каждый этап прозрачен и контролируется.
+                {t("process.subLine2", "Каждый этап прозрачен и контролируется.")}
               </p>
             </div>
 
@@ -155,11 +179,11 @@ export default function ProcessSection() {
 
                   <div className={styles.stepBody}>
                     <h3 className={styles.stepTitle}>
-                      {step.title}
+                      {t(step.titleKey, step.titleRu)}
                     </h3>
 
                     <p className={styles.stepDesc}>
-                      {step.desc}
+                      {t(step.descKey, step.descRu)}
                     </p>
                   </div>
                 </div>

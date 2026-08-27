@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 import styles from "./WorkGrid.module.css";
 
 const bgFor = (w) => (w.image ? `url(${w.image}), ${w.thumbBg}` : w.thumbBg);
@@ -23,6 +24,7 @@ const prefersReducedMotion = () =>
 export default function WorkGrid({ works, color }) {
   const gridRef = useRef(null);
   const { gsap } = useGSAP();
+  const t = useT();
 
   /* ── Мягкое появление карточек при смене вкладки ───────────── */
   useEffect(() => {
@@ -69,7 +71,9 @@ export default function WorkGrid({ works, color }) {
 
             <span className={styles.top}>
               {work.concept && (
-                <span className={styles.concept}>Концепт</span>
+                <span className={styles.concept}>
+                  {t("common.concept", "Концепт")}
+                </span>
               )}
               <span className={styles.year}>{work.year}</span>
             </span>
@@ -100,9 +104,11 @@ export default function WorkGrid({ works, color }) {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.external}
-              aria-label={`Открыть сайт проекта «${work.title}» в новой вкладке`}
+              aria-label={`${t("portfolio.openSiteAria", "Открыть сайт проекта")} «${work.title}»`}
             >
-              <span className={styles.externalText}>Сайт</span>
+              <span className={styles.externalText}>
+                {t("case.site", "Сайт")}
+              </span>
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path
                   d="M3 9L9 3M4.5 3H9v4.5"

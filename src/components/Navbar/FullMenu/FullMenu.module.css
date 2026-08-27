@@ -395,3 +395,23 @@
     transition-delay: 0ms !important;
   }
 }
+/* ─── Размер зоны нажатия на мобильном ────────────────────────
+   Текстовые ссылки в меню имели высоту строки 17px — меньше
+   минимума 24×24 из WCAG 2.5.8. Добавляем вертикальный отступ,
+   не трогая визуальный размер шрифта. */
+.clientLink,
+.contactLink,
+.legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding-block: 4px;
+}
+
+.clientLink:focus-visible,
+.contactLink:focus-visible,
+.legal a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}

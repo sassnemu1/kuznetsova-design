@@ -10,6 +10,8 @@ import {
 } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { useBecomeClient } from "@/context/BecomeClientContext";
+import { useLanguage, useT } from "@/context/LanguageContext";
+import { pickLocalized } from "@/i18n/dictionary";
 import { INDUSTRIES } from "@/data/IndustriesData";
 import { getAllWorks, getIndustryCounts } from "@/data/ServicesData";
 import IndustryTabs from "./IndustryTabs";
@@ -83,6 +85,9 @@ export default function PortfolioIndustries() {
   const openClientForm = useBecomeClient();
   const { gsap, ScrollTrigger } = useGSAP();
 
+  const t = useT();
+  const { lang } = useLanguage();
+
   /* ── Данные ────────────────────────────────────────────────── */
   const allWorks = useMemo(() => getAllWorks(), []);
   const counts = useMemo(() => getIndustryCounts(), []);
@@ -91,23 +96,23 @@ export default function PortfolioIndustries() {
     () => [
       {
         id: ALL_ID,
-        label: ALL_TAB.ru,
+        label: t("portfolio.all", ALL_TAB.ru),
         count: allWorks.length,
         color: ALL_TAB.color,
         empty: false,
       },
       ...INDUSTRIES.map((ind) => ({
         id: ind.id,
-        label: ind.ru,
+        label: pickLocalized(ind, lang, "ru", "en"),
         count: counts[ind.id] || 0,
         color: ind.color,
         empty: !counts[ind.id],
       })),
     ],
-    [allWorks.length, counts]
+    [allWorks.length, counts, lang, t]
   );
 
-  const validIds = useMemo(() => new Set(tabs.map((t) => t.id)), [tabs]);
+  const validIds = useMemo(() => new Set(tabs.map((t2) => t2.id)), [tabs]);
 
   // Вкладка, выбранная руками, важнее той, что пришла из адреса.
   const activeId = picked ?? (validIds.has(hashId) ? hashId : ALL_ID);
@@ -129,6 +134,20 @@ export default function PortfolioIndustries() {
   );
 
   const activeColor = current.color || ALL_TAB.color;
+
+  /* ── Описание выбранной вкладки ────────────────────────────────
+     У «Всех работ» текст интерфейсный и живёт в словаре, у отрасли —
+     в данных, где есть только ru и en. */
+  const leadText =
+    current === ALL_TAB
+      ? t("portfolio.allDesc", ALL_TAB.desc)
+      : pickLocalized(current, lang, "desc", "descEn");
+
+  /* ── Единица счёта: по-русски склоняем, иначе берём из словаря ── */
+  const worksUnit =
+    lang === "ru"
+      ? pluralWorks(works.length)
+      : t("portfolio.worksCount", pluralWorks(works.length));
 
   /* ── Смена вкладки: пишем хэш без прокрутки страницы ────────
      router.push из next/navigation здесь не годится — он утащит
@@ -171,13 +190,17 @@ export default function PortfolioIndustries() {
       <div className={styles.inner}>
         {/* ── Заголовок ────────────────────────────────────── */}
         <div ref={headerRef} className={styles.header}>
-          <span className={styles.eyebrow}>Отделы портфолио</span>
-          <h2 className={styles.title}>Кому мы делаем дизайн</h2>
+          <span className={styles.eyebrow}>
+            {t("portfolio.industriesEyebrow", "Отделы портфолио")}
+          </span>
+          <h2 className={styles.title}>
+            {t("portfolio.industriesTitle", "Кому мы делаем дизайн")}
+          </h2>
           <p className={styles.intro}>
-            Наши работы с ресторанами и кафе, брендами одежды, клиниками,
-            застройщиками и продуктовыми командами. Один проект часто живёт сразу
-            в нескольких отраслях — выберите вкладку, чтобы увидеть только
-            профильные кейсы.
+            {t(
+              "portfolio.industriesIntro",
+              "Наши работы с ресторанами и кафе, брендами одежды, клиниками, застройщиками и продуктовыми командами. Один проект часто живёт сразу в нескольких отраслях — выберите вкладку, чтобы увидеть только профильные кейсы."
+            )}
           </p>
         </div>
 
@@ -195,27 +218,30 @@ export default function PortfolioIndustries() {
           style={{ "--ind-color": activeColor }}
         >
           <div className={styles.lead}>
-            <p className={styles.leadText}>{current.desc}</p>
+            <p className={styles.leadText}>{leadText}</p>
             <span className={styles.leadCount}>
               <span className={styles.leadNum}>{works.length}</span>
-              <span className={styles.leadUnit}>{pluralWorks(works.length)}</span>
+              <span className={styles.leadUnit}>{worksUnit}</span>
             </span>
           </div>
 
           {isEmpty ? (
             <div className={styles.empty}>
-              <span className={styles.emptyLabel}>Раздел готовится</span>
+              <span className={styles.emptyLabel}>
+                {t("portfolio.emptyLabel", "Раздел готовится")}
+              </span>
               <p className={styles.emptyText}>
-                В этом направлении мы сейчас готовим кейсы к публикации.
-                Расскажите о своей задаче — покажем близкие по смыслу работы из
-                других отраслей и обсудим, как это будет выглядеть у вас.
+                {t(
+                  "portfolio.emptyText",
+                  "В этом направлении мы сейчас готовим кейсы к публикации. Расскажите о своей задаче — покажем близкие по смыслу работы из других отраслей и обсудим, как это будет выглядеть у вас."
+                )}
               </p>
               <button
                 type="button"
                 className={styles.emptyBtn}
                 onClick={openClientForm}
               >
-                Обсудить проект
+                {t("common.discussProject", "Обсудить проект")}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path
                     d="M2.5 7h9M7.5 3l4 4-4 4"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 import useGSAP from "@/hooks/useGSAP";
+import { useT } from "@/context/LanguageContext";
 import {
   FaInstagram,
   FaBehance,
@@ -15,6 +16,7 @@ import {
 import { MdOutlineMail } from "react-icons/md";
 
 export default function Footer() {
+  const t = useT();
   const footerRef = useRef(null);
   const titleLettersRef = useRef([]);
   const designRef = useRef(null);
@@ -82,7 +84,11 @@ export default function Footer() {
           <div className={styles.titlePerspective}>
 
             <div className={styles.FooterLogoSection}>
-              <Link href="/" className={styles.FooterLogoMark} aria-label="На главную">
+              <Link
+                href="/"
+                className={styles.FooterLogoMark}
+                aria-label={t("common.home", "На главную")}
+              >
                 <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
               </Link>
               <div>
@@ -112,25 +118,27 @@ export default function Footer() {
 
           <div className={styles.footerLinks} ref={linksRef}>
             <div>
-              <h4>Navigation</h4>
-              <Link href="/work">Work</Link>
-              <Link href="/#studio">Studio</Link>
-              <Link href="/#services">Services</Link>
-              <Link href="/#contact">Contact</Link>
+              <h4>{t("footer.navigation", "Navigation")}</h4>
+              <Link href="/work">{t("footer.work", "Work")}</Link>
+              <Link href="/#studio">{t("footer.studioLink", "Studio")}</Link>
+              <Link href="/#services">{t("footer.services", "Services")}</Link>
+              <Link href="/#contact">{t("footer.contactLink", "Contact")}</Link>
             </div>
 
             <div>
-              <h4>Studio</h4>
-              <Link href="/#studio">About</Link>
-              <Link href="/blog">Journal</Link>
-              <Link href="/#howtowork">Process</Link>
-              <Link href="/#engineering">Engineering</Link>
+              <h4>{t("footer.studio", "Studio")}</h4>
+              <Link href="/#studio">{t("footer.about", "About")}</Link>
+              <Link href="/blog">{t("footer.journal", "Journal")}</Link>
+              <Link href="/#howtowork">{t("footer.process", "Process")}</Link>
+              <Link href="/#engineering">
+                {t("footer.engineering", "Engineering")}
+              </Link>
             </div>
 
             <div>
-              <h4>Contact</h4>
+              <h4>{t("footer.contact", "Contact")}</h4>
               <a href="mailto:kristina@kuznetsova.design">kristina@kuznetsova.design</a>
-              <span>Москва, Россия</span>
+              <span>{t("footer.location", "Москва, Россия")}</span>
             </div>
           </div>
 
@@ -140,7 +148,7 @@ export default function Footer() {
               <a href="https://www.instagram.com/kuznetsovade.sign" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
               <a href="https://www.behance.net/kristinkuznets17" target="_blank" rel="noopener noreferrer" aria-label="Behance"><FaBehance /></a>
               <a href="https://pin.it/sMiIQLlD7" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><FaPinterest /></a>
-              <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label="Telegram-канал бюро"><FaTelegramPlane /></a>
+              <a href="https://t.me/kuznetsova_design1" target="_blank" rel="noopener noreferrer" aria-label={t("footer.telegramChannel", "Telegram-канал бюро")}><FaTelegramPlane /></a>
               <a href="https://vk.ru/club239423173" target="_blank" rel="noopener noreferrer" aria-label="VK"><FaVk /></a>
               {/* <a href="mailto:kristina@kuznetsova.design" aria-label="Email"><MdOutlineMail /></a> */}
             </div>
@@ -150,9 +158,14 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className={styles.copyright} ref={copyrightRef}>
-          <p>© {new Date().getFullYear()} Kuznetsova Design. Все права защищены.</p>
+          <p>
+            © {new Date().getFullYear()} Kuznetsova Design.{" "}
+            {t("footer.rights", "Все права защищены.")}
+          </p>
           <p className={styles.legal}>
-            <Link href="/privacy">Политика конфиденциальности</Link>
+            <Link href="/privacy">
+              {t("footer.privacy", "Политика конфиденциальности")}
+            </Link>
           </p>
         </div>
       </div>

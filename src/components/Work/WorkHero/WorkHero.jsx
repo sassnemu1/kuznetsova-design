@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
@@ -8,16 +8,11 @@ import styles from "./WorkHero.module.css";
 import RunningText from "@/components/UI/RunningText/RunningText";
 import { SERVICES_DATA } from "@/data/ServicesData";
 import { plural } from "@/lib/plural";
+import { useLanguage, useT } from "@/context/LanguageContext";
 
 // Статистика считается из данных — не разъезжается с реальным портфолио
 const totalWorks = SERVICES_DATA.reduce((sum, s) => sum + s.works.length, 0);
 const totalCategories = SERVICES_DATA.filter((s) => s.works.length > 0).length;
-
-const STATS = [
-  { num: `${totalWorks}`, label: plural(totalWorks, "проект", "проекта", "проектов") },
-  { num: `${totalCategories}`, label: plural(totalCategories, "направление", "направления", "направлений") },
-  { num: "5+", label: "лет в дизайне" },
-];
 
 export default function WorkHero() {
   const sectionRef = useRef(null);
@@ -27,6 +22,32 @@ export default function WorkHero() {
   const bottomRef = useRef(null);
 
   const { gsap } = useGSAP();
+  const t = useT();
+  const { lang } = useLanguage();
+
+  /* ── Подписи статистики ────────────────────────────────────────
+     По-русски слово склоняется по числу; на остальных языках берём
+     одну форму из словаря. */
+  const stats = useMemo(() => {
+    const worksLabel =
+      lang === "ru"
+        ? plural(totalWorks, "проект", "проекта", "проектов")
+        : t("work.stat.projects", plural(totalWorks, "проект", "проекта", "проектов"));
+
+    const categoriesLabel =
+      lang === "ru"
+        ? plural(totalCategories, "направление", "направления", "направлений")
+        : t(
+            "work.stat.categories",
+            plural(totalCategories, "направление", "направления", "направлений")
+          );
+
+    return [
+      { key: "projects", num: `${totalWorks}`, label: worksLabel },
+      { key: "categories", num: `${totalCategories}`, label: categoriesLabel },
+      { key: "years", num: "5+", label: t("work.stat.years", "лет в дизайне") },
+    ];
+  }, [lang, t]);
 
   useEffect(() => {
     if (!gsap) return;
@@ -57,7 +78,11 @@ export default function WorkHero() {
       <div className={styles.glow3} />
 
       <div ref={topBarRef} className={styles.topBar}>
-        <Link href="/" className={styles.brand} aria-label="На главную">
+        <Link
+          href="/"
+          className={styles.brand}
+          aria-label={t("common.home", "На главную")}
+        >
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design" fill />
           </div>
@@ -71,7 +96,7 @@ export default function WorkHero() {
 
       <div className={styles.titleWrap}>
         <div className={styles.titleClip}>
-          <h1 ref={titleRef}>Portfolio</h1>
+          <h1 ref={titleRef}>{t("work.title", "Portfolio")}</h1>
         </div>
       </div>
 
@@ -79,12 +104,15 @@ export default function WorkHero() {
         <div ref={dividerRef} className={styles.divider} />
         <div ref={bottomRef} className={styles.bottomContent}>
           <p className={styles.desc}>
-            Избранные проекты в брендинге, вебе, 3D и арт-дирекшне
+            {t(
+              "work.desc",
+              "Избранные проекты в брендинге, вебе, 3D и арт-дирекшне"
+            )}
           </p>
 
           <div className={styles.stats}>
-            {STATS.map((s) => (
-              <div key={s.label} className={styles.stat}>
+            {stats.map((s) => (
+              <div key={s.key} className={styles.stat}>
                 <span className={styles.statNum}>{s.num}</span>
                 <span className={styles.statLabel}>{s.label}</span>
               </div>

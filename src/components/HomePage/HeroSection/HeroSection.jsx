@@ -6,6 +6,7 @@ import Link from "next/link";
 import styles from "./HeroSection.module.css";
 
 import useGSAP from "@/hooks/useGSAP.js";
+import { useT } from "@/context/LanguageContext";
 
 import {
   FaInstagram,
@@ -25,6 +26,8 @@ export default function HeroSection() {
   const lettersRef = useRef([]);
   const designRef = useRef(null);
   const taglineRef = useRef(null);
+
+  const t = useT();
 
   const { gsap, ScrollTrigger } = useGSAP();
   const scrollTriggerRef = useRef(null);
@@ -136,7 +139,8 @@ export default function HeroSection() {
     };
   }, [gsap, ScrollTrigger]);
 
-  const kuznetsova = "Kuznetsova".split("");
+  // Имя бюро не переводится — в словаре оно одинаково во всех языках.
+  const kuznetsova = t("hero.brandTop", "Kuznetsova").split("");
 
   return (
     <section ref={heroRef} className={styles.hero}>
@@ -145,24 +149,30 @@ export default function HeroSection() {
       </div>
 
       <div className={styles.bgText} ref={bgTextRef}>
-        MOSCOW
+        {t("hero.city", "MOSCOW")}
       </div>
 
       {/* NAV */}
       <nav className={styles.nav} ref={navRef}>
-        <Link href="/" className={styles.navLogo} aria-label="На главную">
+        <Link
+          href="/"
+          className={styles.navLogo}
+          aria-label={t("common.home", "На главную")}
+        >
           <div className={styles.logoMark}>
             <Image src="/logo-w.svg" alt="Kuznetsova Design logo" fill />
           </div>
-          <span className={styles.logoText}>Kuznetsova Design</span>
+          <span className={styles.logoText}>
+            {t("common.brand", "Kuznetsova Design")}
+          </span>
         </Link>
 
         <ul className={styles.navLinks}>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#studio">Studio</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><Link href="/work">Portfolio</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
+          <li><a href="#services">{t("nav.services", "Services")}</a></li>
+          <li><a href="#studio">{t("nav.studio", "Studio")}</a></li>
+          <li><a href="#contact">{t("nav.contact", "Contact")}</a></li>
+          <li><Link href="/work">{t("nav.work", "Portfolio")}</Link></li>
+          <li><Link href="/blog">{t("nav.blogShort", "Blog")}</Link></li>
         </ul>
       </nav>
 
@@ -195,11 +205,16 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.titleBottom} ref={designRef}>
-          <span className={styles.designText}>DESIGN.</span>
+          <span className={styles.designText}>
+            {t("hero.brandBottom", "DESIGN.")}
+          </span>
         </div>
 
         <p className={styles.tagline} ref={taglineRef}>
-          Visual systems · Brand identity · Digital experiences · Web Development
+          {t(
+            "hero.tagline",
+            "Visual systems · Brand identity · Digital experiences · Web Development"
+          )}
         </p>
       </div>
     </section>
