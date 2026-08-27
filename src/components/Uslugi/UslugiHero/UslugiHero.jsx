@@ -5,7 +5,8 @@ import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
 import RunningText from "@/components/UI/RunningText/RunningText";
 import { useBecomeClient } from "@/context/BecomeClientContext";
-import { useT } from "@/context/LanguageContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { localizeUsluga } from "@/i18n/uslugi";
 import styles from "./UslugiHero.module.css";
 
 /**
@@ -16,7 +17,11 @@ import styles from "./UslugiHero.module.css";
  *
  * Секция помечена классом nav-dark-zone — навбар инвертируется над тёмным фоном.
  */
-export default function UslugiHero({ usluga, runningRows }) {
+export default function UslugiHero({ usluga: source, runningRows }) {
+  const { lang } = useLanguage();
+  // Страница серверная и языка не знает — локализуем здесь, на клиенте.
+  const usluga = localizeUsluga(source, lang);
+
   const sectionRef = useRef(null);
   const eyebrowRef = useRef(null);
   const titleRef = useRef(null);

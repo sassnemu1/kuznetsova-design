@@ -22,12 +22,6 @@ const SERVICES = [
   { value: "Другое", key: "form.service.other" },
 ];
 
-const BUDGETS = [
-  { value: "До 150 000 ₽", key: "form.budget.upTo150" },
-  { value: "150 000 – 500 000 ₽", key: "form.budget.150to500" },
-  { value: "500 000 – 1 000 000 ₽", key: "form.budget.500to1000" },
-  { value: "Больше 1 000 000 ₽", key: "form.budget.over1000" },
-];
 
 const INITIAL_FORM_DATA = {
   name: "",
@@ -36,7 +30,6 @@ const INITIAL_FORM_DATA = {
   phone: "",
   telegram: "",
   services: [],
-  budget: "",
   message: "",
   website: "",
 };
@@ -98,8 +91,6 @@ export default function BecomeClient({ isOpen, onClose }) {
       newErrors.message = t("form.error.message", "Расскажите о проекте");
     if (formData.services.length === 0)
       newErrors.services = t("form.error.services", "Выберите хотя бы одну услугу");
-    if (!formData.budget)
-      newErrors.budget = t("form.error.budget", "Выберите бюджет");
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -348,27 +339,6 @@ export default function BecomeClient({ isOpen, onClose }) {
                     ))}
                   </div>
                   {errors.services && <span className={styles.errorText}>{errors.services}</span>}
-                </div>
-
-                {/* Budget */}
-                <div className={styles.field}>
-                  <label className={styles.label}>
-                    {t("form.budget.label", "Бюджет")} <span>*</span>
-                  </label>
-                  <div className={styles.chips}>
-                    {BUDGETS.map((b) => (
-                      <button
-                        key={b.value}
-                        type="button"
-                        className={`${styles.chip} ${formData.budget === b.value ? styles.chipActive : ""}`}
-                        onClick={() => updateField("budget", b.value)}
-                        aria-pressed={formData.budget === b.value}
-                      >
-                        {t(b.key, b.value)}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.budget && <span className={styles.errorText}>{errors.budget}</span>}
                 </div>
 
                 {/* Message */}

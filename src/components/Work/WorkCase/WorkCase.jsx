@@ -5,7 +5,7 @@ import Link from "next/link";
 import BackLink from "@/components/Work/BackLink/BackLink";
 import { getIndustry } from "@/data/IndustriesData";
 import { useLanguage, useT } from "@/context/LanguageContext";
-import { pickLocalized } from "@/i18n/dictionary";
+import { pickLocalized, pickLocalizedList } from "@/i18n/dictionary";
 import styles from "./WorkCase.module.css";
 
 export default function WorkCase({ work, prev, next }) {
@@ -44,7 +44,7 @@ export default function WorkCase({ work, prev, next }) {
             {work.serviceTag}
           </span>
           <h1 className={styles.heroTitle}>{work.title}</h1>
-          <p className={styles.heroSub}>{work.sub} · {work.year}</p>
+          <p className={styles.heroSub}>{pickLocalized(work, lang, "sub", "subEn")} · {work.year}</p>
           {work.concept && (
             <span className={styles.conceptBadge}>
               {t("common.concept", "Концепт")} —{" "}
@@ -64,7 +64,7 @@ export default function WorkCase({ work, prev, next }) {
               <span className={styles.sidebarLabel}>
                 {t("case.client", "Клиент")}
               </span>
-              <span className={styles.sidebarValue}>{work.client}</span>
+              <span className={styles.sidebarValue}>{pickLocalized(work, lang, "client", "clientEn")}</span>
             </div>
             <div className={styles.sidebarSection}>
               <span className={styles.sidebarLabel}>
@@ -106,7 +106,7 @@ export default function WorkCase({ work, prev, next }) {
                 {t("case.tools", "Инструменты")}
               </span>
               <div className={styles.tags}>
-                {(work.tags ?? []).map((t2) => (
+                {pickLocalizedList(work, lang, "tags").map((t2) => (
                   <span key={t2} className={styles.tag}>{t2}</span>
                 ))}
               </div>
@@ -138,7 +138,7 @@ export default function WorkCase({ work, prev, next }) {
               <span className={styles.introEyebrow}>
                 {t("case.about", "О проекте")}
               </span>
-              <p className={styles.introText}>{work.description}</p>
+              <p className={styles.introText}>{pickLocalized(work, lang, "description", "descriptionEn")}</p>
             </div>
 
             {/* Галерея */}
@@ -214,7 +214,7 @@ export default function WorkCase({ work, prev, next }) {
             {t("case.prev", "Предыдущий")}
           </span>
           <span className={styles.workNavTitle}>{prev.title}</span>
-          <span className={styles.workNavSub}>{prev.sub}</span>
+          <span className={styles.workNavSub}>{pickLocalized(prev, lang, "sub", "subEn")}</span>
         </Link>
 
         <div className={styles.workNavDivider} />
@@ -227,7 +227,7 @@ export default function WorkCase({ work, prev, next }) {
             </svg>
           </span>
           <span className={styles.workNavTitle}>{next.title}</span>
-          <span className={styles.workNavSub}>{next.sub}</span>
+          <span className={styles.workNavSub}>{pickLocalized(next, lang, "sub", "subEn")}</span>
         </Link>
       </nav>
 

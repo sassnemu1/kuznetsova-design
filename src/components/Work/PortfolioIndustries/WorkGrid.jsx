@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
-import { useT } from "@/context/LanguageContext";
+import { useLanguage, useT } from "@/context/LanguageContext";
+import { pickLocalized, pickLocalizedList } from "@/i18n/dictionary";
 import styles from "./WorkGrid.module.css";
 
 const bgFor = (w) => (w.image ? `url(${w.image}), ${w.thumbBg}` : w.thumbBg);
@@ -25,6 +26,7 @@ export default function WorkGrid({ works, color }) {
   const gridRef = useRef(null);
   const { gsap } = useGSAP();
   const t = useT();
+  const { lang } = useLanguage();
 
   /* ── Мягкое появление карточек при смене вкладки ───────────── */
   useEffect(() => {
@@ -80,15 +82,21 @@ export default function WorkGrid({ works, color }) {
 
             <span className={styles.body}>
               <span className={styles.title}>{work.title}</span>
-              {work.sub && <span className={styles.sub}>{work.sub}</span>}
+              {work.sub && (
+                <span className={styles.sub}>
+                  {pickLocalized(work, lang, "sub", "subEn")}
+                </span>
+              )}
 
               {work.description && (
-                <span className={styles.desc}>{work.description}</span>
+                <span className={styles.desc}>
+                  {pickLocalized(work, lang, "description", "descriptionEn")}
+                </span>
               )}
 
               {work.tags?.length > 0 && (
                 <span className={styles.tags}>
-                  {work.tags.slice(0, 3).map((tag) => (
+                  {pickLocalizedList(work, lang, "tags").slice(0, 3).map((tag) => (
                     <span key={tag} className={styles.tag}>
                       {tag}
                     </span>

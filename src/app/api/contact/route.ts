@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
       phone,
       telegram,
       services,
-      budget,
       message,
       website, // honeypot — настоящие пользователи это поле не видят и не заполняют
     } = body;
@@ -42,7 +41,6 @@ export async function POST(req: NextRequest) {
       email: escapeHtml(email),
       phone: escapeHtml(phone),
       telegram: escapeHtml(telegram),
-      budget: escapeHtml(budget),
       message: escapeHtml(message),
       services: Array.isArray(services) ? services.map(escapeHtml).join(", ") : "",
     };
@@ -89,10 +87,7 @@ export async function POST(req: NextRequest) {
               <td style="padding: 8px 0; color: #666; vertical-align: top;">Услуги</td>
               <td style="padding: 8px 0;">${safe.services}</td>
             </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #666;">Бюджет</td>
-              <td style="padding: 8px 0; font-weight: 600;">${safe.budget}</td>
-            </tr>
+
           </table>
 
           <div style="margin-top: 24px; padding: 20px; background: #f5f5f5; border-radius: 8px;">

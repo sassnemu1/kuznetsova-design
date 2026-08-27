@@ -1,13 +1,18 @@
+"use client";
+
+import { useT } from "@/context/LanguageContext";
 import PostCard from "../PostCard/PostCard";
 import styles from "./PostGrid.module.css";
 
 export default function PostGrid({ posts }) {
+  const t = useT();
+
   if (!posts.length) return null;
 
   return (
     <>
       <div className={styles.header}>
-        <span className={styles.label}>Все материалы</span>
+        <span className={styles.label}>{t("blog.all", "Все материалы")}</span>
         <div className={styles.line} />
       </div>
       <div className={styles.grid}>

@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import useGSAP from "@/hooks/useGSAP";
-import { useT } from "@/context/LanguageContext";
+import { useLanguage, useT } from "@/context/LanguageContext";
+import { pickLocalized, pickLocalizedList } from "@/i18n/dictionary";
 import styles from "./CategorySlider.module.css";
 
 const AUTOPLAY_SEC = 6;
@@ -24,6 +25,7 @@ const prefersReducedMotion = () =>
 
 export default function CategorySlider({ service, index, isActive }) {
   const t = useT();
+  const { lang } = useLanguage();
 
   const sectionRef = useRef(null);
   const heroRef    = useRef(null);
@@ -336,7 +338,9 @@ export default function CategorySlider({ service, index, isActive }) {
             <h2 className={styles.title}>{service.title.replace("\n", " ")}</h2>
           </div>
         </div>
-        <p className={styles.desc}>{service.desc}</p>
+        <p className={styles.desc}>
+          {t(`services.desc.${service.id}`, service.desc)}
+        </p>
       </div>
 
       {/* ── Hero + боковые кнопки ───────────────────────────── */}
@@ -391,7 +395,9 @@ export default function CategorySlider({ service, index, isActive }) {
             <h3 className={styles.heroTitle}>{cur.title}</h3>
 
             {cur.description && (
-              <p className={styles.heroDesc}>{cur.description}</p>
+              <p className={styles.heroDesc}>
+                {pickLocalized(cur, lang, "description", "descriptionEn")}
+              </p>
             )}
 
             <div className={styles.heroBottom}>
@@ -399,10 +405,12 @@ export default function CategorySlider({ service, index, isActive }) {
                 <span className={styles.heroMetaLabel}>
                   {t("common.client", "Клиент")}
                 </span>
-                <span className={styles.heroMetaVal}>{cur.sub}</span>
+                <span className={styles.heroMetaVal}>
+                  {pickLocalized(cur, lang, "sub", "subEn")}
+                </span>
               </div>
 
-              {cur.tags?.slice(0, 3).map((t) => (
+              {pickLocalizedList(cur, lang, "tags").slice(0, 3).map((t) => (
                 <span key={t} className={styles.heroChip}>{t}</span>
               ))}
 

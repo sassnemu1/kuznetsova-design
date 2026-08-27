@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 import useGSAP from "@/hooks/useGSAP";
 import { useBecomeClient } from "@/context/BecomeClientContext";
-import { useT } from "@/context/LanguageContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { localizeUsluga } from "@/i18n/uslugi";
 import styles from "./UslugiBody.module.css";
 
 /**
@@ -13,7 +14,10 @@ import styles from "./UslugiBody.module.css";
  *
  * usluga — запись из UslugiData.js.
  */
-export default function UslugiBody({ usluga }) {
+export default function UslugiBody({ usluga: source }) {
+  const { lang } = useLanguage();
+  const usluga = localizeUsluga(source, lang);
+
   const rootRef = useRef(null);
   const t = useT();
   const { gsap, ScrollTrigger } = useGSAP();

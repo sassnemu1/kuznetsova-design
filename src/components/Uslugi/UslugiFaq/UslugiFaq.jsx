@@ -2,7 +2,8 @@
 
 import { useId, useState } from "react";
 import { useBecomeClient } from "@/context/BecomeClientContext";
-import { useT } from "@/context/LanguageContext";
+import { useT, useLanguage } from "@/context/LanguageContext";
+import { localizeUsluga } from "@/i18n/uslugi";
 import styles from "./UslugiFaq.module.css";
 
 /**
@@ -16,7 +17,10 @@ import styles from "./UslugiFaq.module.css";
  *
  * title не передан — берём заголовок из словаря на языке страницы.
  */
-export default function UslugiFaq({ faq = [], title = "" }) {
+export default function UslugiFaq({ usluga, faq: faqProp = [], title = "" }) {
+  const { lang } = useLanguage();
+  const faq = usluga ? localizeUsluga(usluga, lang).faq : faqProp;
+
   const baseId = useId().replace(/:/g, "");
   const [openIndex, setOpenIndex] = useState(0);
 

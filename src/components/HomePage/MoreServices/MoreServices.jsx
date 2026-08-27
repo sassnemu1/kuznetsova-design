@@ -5,7 +5,7 @@ import useGSAP from "@/hooks/useGSAP";
 import { MORE_SERVICES_DATA } from "@/data/MoreServicesData";
 import { useBecomeClient } from "@/context/BecomeClientContext";
 import { useT, useLanguage } from "@/context/LanguageContext";
-import { pickLocalized } from "@/i18n/dictionary";
+import { pickLocalized, pickLocalizedList } from "@/i18n/dictionary";
 import ChatMock from "./ChatMock";
 import NetworkMock from "./NetworkMock";
 import styles from "./MoreServices.module.css";
@@ -102,9 +102,15 @@ export default function MoreServices() {
                 <span className={styles.cardNum}>{service.id}</span>
 
                 {service.visual === "chat" ? (
-                  <ChatMock messages={service.chat} color={service.color} />
+                  <ChatMock
+                    messages={pickLocalizedList(service, lang, "chat")}
+                    color={service.color}
+                  />
                 ) : (
-                  <NetworkMock nodes={service.nodes} color={service.color} />
+                  <NetworkMock
+                    nodes={pickLocalizedList(service, lang, "nodes")}
+                    color={service.color}
+                  />
                 )}
 
                 <div className={styles.content}>
@@ -123,8 +129,8 @@ export default function MoreServices() {
                   </p>
 
                   <div className={styles.tagsRow}>
-                    {service.tags.map((t) => (
-                      <span key={t} className={styles.chip}>{t}</span>
+                    {pickLocalizedList(service, lang, "tags").map((chip) => (
+                      <span key={chip} className={styles.chip}>{chip}</span>
                     ))}
                   </div>
 

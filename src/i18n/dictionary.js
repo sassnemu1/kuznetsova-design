@@ -64,6 +64,32 @@ export const DICT = {
      РУССКИЙ
      ══════════════════════════════════════════════════════════════ */
   ru: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Telegram-канал бюро",
+    "footer.telegramChannel": "Telegram-канал бюро",
+    "case.conceptNote": "инициативная работа бюро",
+    "case.industry": "Отрасль",
+    "case.galleryImage": "изображение",
+    "common.tagTurnkey": "#СайтПодКлюч",
+    "more.chatLabel": "telegram · бот",
+    "portfolio.openSiteAria": "Открыть сайт проекта",
+    "notFound.eyebrow": "Ошибка 404",
+    "notFound.title": "Такой страницы",
+    "notFound.titleAccent": "не существует",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "Возможно, адрес набран с опечаткой, страница переехала или проект, который вы искали, мы убрали из открытого портфолио. Ниже — короткие пути туда, где точно есть что посмотреть.",
+    "notFound.navLabel": "Основные разделы сайта",
+    "notFound.homeLabel": "Главная",
+    "notFound.homeTitle": "На главную",
+    "notFound.homeDesc": "Студия, услуги и то, как мы работаем — с самого начала.",
+    "notFound.workLabel": "Портфолио",
+    "notFound.workTitle": "В портфолио",
+    "notFound.workDesc": "Проекты бюро: брендинг, сайты, 3D и работа с соцсетями.",
+    "notFound.blogLabel": "Блог",
+    "notFound.blogTitle": "В блог",
+    "notFound.blogDesc": "Заметки, события и разборы проектов из жизни студии.",
+    "notFound.contactText": "Искали конкретный проект и не нашли? Напишите — подскажем, где он.",
+    "notFound.contactCta": "Написать в Telegram",
     "common.viewWork": "Смотреть работы",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "отраслей",
@@ -607,6 +633,32 @@ export const DICT = {
      ENGLISH
      ══════════════════════════════════════════════════════════════ */
   en: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Studio Telegram channel",
+    "footer.telegramChannel": "Studio Telegram channel",
+    "case.conceptNote": "studio's own initiative",
+    "case.industry": "Industry",
+    "case.galleryImage": "image",
+    "common.tagTurnkey": "#TurnkeyWebsite",
+    "more.chatLabel": "telegram · bot",
+    "portfolio.openSiteAria": "Open the project website",
+    "notFound.eyebrow": "Error 404",
+    "notFound.title": "This page",
+    "notFound.titleAccent": "does not exist",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "The address may have a typo, the page may have moved, or the project you were looking for is no longer in the public portfolio. Below are short routes to places that definitely have something to see.",
+    "notFound.navLabel": "Main sections of the site",
+    "notFound.homeLabel": "Home",
+    "notFound.homeTitle": "Go to homepage",
+    "notFound.homeDesc": "The studio, the services and how we work — from the beginning.",
+    "notFound.workLabel": "Portfolio",
+    "notFound.workTitle": "Go to portfolio",
+    "notFound.workDesc": "Studio projects: branding, websites, 3D and social media.",
+    "notFound.blogLabel": "Blog",
+    "notFound.blogTitle": "Go to blog",
+    "notFound.blogDesc": "Notes, events and project breakdowns from studio life.",
+    "notFound.contactText": "Looking for a specific project and could not find it? Write to us — we will point you to it.",
+    "notFound.contactCta": "Write on Telegram",
     "common.viewWork": "View work",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "industries",
@@ -1151,6 +1203,32 @@ export const DICT = {
      中文 (ZH)
      ══════════════════════════════════════════════════════════════ */
   zh: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "工作室 Telegram 频道",
+    "footer.telegramChannel": "工作室 Telegram 频道",
+    "case.conceptNote": "工作室自主发起的项目",
+    "case.industry": "行业",
+    "case.galleryImage": "图片",
+    "common.tagTurnkey": "#一站式网站",
+    "more.chatLabel": "telegram · 机器人",
+    "portfolio.openSiteAria": "打开项目网站",
+    "notFound.eyebrow": "错误 404",
+    "notFound.title": "该页面",
+    "notFound.titleAccent": "不存在",
+    "notFound.titleEnd": "。",
+    "notFound.lead": "可能是地址输入有误、页面已迁移，或您要找的项目已从公开作品集中移除。以下是几条通往值得一看之处的捷径。",
+    "notFound.navLabel": "网站主要板块",
+    "notFound.homeLabel": "首页",
+    "notFound.homeTitle": "返回首页",
+    "notFound.homeDesc": "工作室、服务，以及我们的工作方式——从头讲起。",
+    "notFound.workLabel": "作品集",
+    "notFound.workTitle": "查看作品集",
+    "notFound.workDesc": "工作室项目：品牌、网站、3D 与社交媒体。",
+    "notFound.blogLabel": "博客",
+    "notFound.blogTitle": "前往博客",
+    "notFound.blogDesc": "来自工作室日常的随笔、活动与项目解析。",
+    "notFound.contactText": "想找某个具体项目却没找到？写信给我们，我们会告诉您它在哪里。",
+    "notFound.contactCta": "在 Telegram 联系",
     "common.viewWork": "查看作品",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "个行业",
@@ -1665,6 +1743,32 @@ export const DICT = {
      ESPAÑOL (ES)
      ══════════════════════════════════════════════════════════════ */
   es: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Canal de Telegram del estudio",
+    "footer.telegramChannel": "Canal de Telegram del estudio",
+    "case.conceptNote": "iniciativa propia del estudio",
+    "case.industry": "Sector",
+    "case.galleryImage": "imagen",
+    "common.tagTurnkey": "#SitioLlaveEnMano",
+    "more.chatLabel": "telegram · bot",
+    "portfolio.openSiteAria": "Abrir el sitio del proyecto",
+    "notFound.eyebrow": "Error 404",
+    "notFound.title": "Esta página",
+    "notFound.titleAccent": "no existe",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "Puede que la dirección tenga una errata, que la página se haya movido o que el proyecto que buscaba ya no esté en el portafolio público. Abajo tiene rutas cortas a sitios donde sí hay algo que ver.",
+    "notFound.navLabel": "Secciones principales del sitio",
+    "notFound.homeLabel": "Inicio",
+    "notFound.homeTitle": "Ir al inicio",
+    "notFound.homeDesc": "El estudio, los servicios y cómo trabajamos — desde el principio.",
+    "notFound.workLabel": "Portafolio",
+    "notFound.workTitle": "Ir al portafolio",
+    "notFound.workDesc": "Proyectos del estudio: identidad, sitios web, 3D y redes sociales.",
+    "notFound.blogLabel": "Blog",
+    "notFound.blogTitle": "Ir al blog",
+    "notFound.blogDesc": "Notas, eventos y análisis de proyectos de la vida del estudio.",
+    "notFound.contactText": "¿Buscaba un proyecto concreto y no lo encontró? Escríbanos y le indicamos dónde está.",
+    "notFound.contactCta": "Escribir por Telegram",
     "common.viewWork": "Ver trabajos",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "sectores",
@@ -2212,6 +2316,32 @@ export const DICT = {
      PORTUGUÊS (PT)
      ══════════════════════════════════════════════════════════════ */
   pt: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Canal de Telegram do estúdio",
+    "footer.telegramChannel": "Canal de Telegram do estúdio",
+    "case.conceptNote": "iniciativa própria do estúdio",
+    "case.industry": "Sector",
+    "case.galleryImage": "imagem",
+    "common.tagTurnkey": "#SiteChaveNaMão",
+    "more.chatLabel": "telegram · bot",
+    "portfolio.openSiteAria": "Abrir o site do projecto",
+    "notFound.eyebrow": "Erro 404",
+    "notFound.title": "Esta página",
+    "notFound.titleAccent": "não existe",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "É possível que o endereço tenha uma gralha, que a página tenha mudado, ou que o projecto que procurava já não esteja no portfólio público. Abaixo ficam atalhos para onde há mesmo algo para ver.",
+    "notFound.navLabel": "Secções principais do site",
+    "notFound.homeLabel": "Início",
+    "notFound.homeTitle": "Ir para o início",
+    "notFound.homeDesc": "O estúdio, os serviços e a forma como trabalhamos — desde o princípio.",
+    "notFound.workLabel": "Portfólio",
+    "notFound.workTitle": "Ir para o portfólio",
+    "notFound.workDesc": "Projectos do estúdio: identidade, sites, 3D e redes sociais.",
+    "notFound.blogLabel": "Blogue",
+    "notFound.blogTitle": "Ir para o blogue",
+    "notFound.blogDesc": "Notas, eventos e análises de projectos da vida do estúdio.",
+    "notFound.contactText": "Procurava um projecto específico e não o encontrou? Escreva-nos e dizemos-lhe onde está.",
+    "notFound.contactCta": "Escrever no Telegram",
     "common.viewWork": "Ver trabalhos",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "sectores",
@@ -2760,6 +2890,32 @@ export const DICT = {
      Espace insécable ( ) avant « : ; ! ? », comme le veut l'usage.
      ══════════════════════════════════════════════════════════════ */
   fr: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Chaîne Telegram du studio",
+    "footer.telegramChannel": "Chaîne Telegram du studio",
+    "case.conceptNote": "initiative propre du studio",
+    "case.industry": "Secteur",
+    "case.galleryImage": "image",
+    "common.tagTurnkey": "#SiteClésEnMain",
+    "more.chatLabel": "telegram · bot",
+    "portfolio.openSiteAria": "Ouvrir le site du projet",
+    "notFound.eyebrow": "Erreur 404",
+    "notFound.title": "Cette page",
+    "notFound.titleAccent": "n'existe pas",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "L'adresse comporte peut-être une faute de frappe, la page a pu être déplacée, ou le projet recherché ne figure plus dans le portfolio public. Voici des chemins courts vers ce qui vaut le détour.",
+    "notFound.navLabel": "Sections principales du site",
+    "notFound.homeLabel": "Accueil",
+    "notFound.homeTitle": "Aller à l'accueil",
+    "notFound.homeDesc": "Le studio, les services et notre façon de travailler — depuis le début.",
+    "notFound.workLabel": "Portfolio",
+    "notFound.workTitle": "Voir le portfolio",
+    "notFound.workDesc": "Projets du studio : identité, sites web, 3D et réseaux sociaux.",
+    "notFound.blogLabel": "Blog",
+    "notFound.blogTitle": "Aller au blog",
+    "notFound.blogDesc": "Notes, événements et analyses de projets tirés de la vie du studio.",
+    "notFound.contactText": "Vous cherchiez un projet précis sans le trouver ? Écrivez-nous, nous vous indiquerons où il est.",
+    "notFound.contactCta": "Écrire sur Telegram",
     "common.viewWork": "Voir les projets",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "secteurs",
@@ -3307,6 +3463,32 @@ export const DICT = {
      DEUTSCH (DE)
      ══════════════════════════════════════════════════════════════ */
   de: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Telegram-Kanal des Studios",
+    "footer.telegramChannel": "Telegram-Kanal des Studios",
+    "case.conceptNote": "Eigeninitiative des Studios",
+    "case.industry": "Branche",
+    "case.galleryImage": "Bild",
+    "common.tagTurnkey": "#WebsiteSchlüsselfertig",
+    "more.chatLabel": "telegram · Bot",
+    "portfolio.openSiteAria": "Projektwebsite öffnen",
+    "notFound.eyebrow": "Fehler 404",
+    "notFound.title": "Diese Seite",
+    "notFound.titleAccent": "existiert nicht",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "Möglicherweise enthält die Adresse einen Tippfehler, die Seite wurde verschoben, oder das gesuchte Projekt ist nicht mehr im öffentlichen Portfolio. Unten finden Sie kurze Wege dorthin, wo es etwas zu sehen gibt.",
+    "notFound.navLabel": "Hauptbereiche der Website",
+    "notFound.homeLabel": "Startseite",
+    "notFound.homeTitle": "Zur Startseite",
+    "notFound.homeDesc": "Das Studio, die Leistungen und unsere Arbeitsweise — von Anfang an.",
+    "notFound.workLabel": "Portfolio",
+    "notFound.workTitle": "Zum Portfolio",
+    "notFound.workDesc": "Projekte des Studios: Branding, Websites, 3D und Social Media.",
+    "notFound.blogLabel": "Blog",
+    "notFound.blogTitle": "Zum Blog",
+    "notFound.blogDesc": "Notizen, Ereignisse und Projektanalysen aus dem Studioalltag.",
+    "notFound.contactText": "Sie haben ein bestimmtes Projekt gesucht und nicht gefunden? Schreiben Sie uns — wir sagen Ihnen, wo es ist.",
+    "notFound.contactCta": "Auf Telegram schreiben",
     "common.viewWork": "Arbeiten ansehen",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "Branchen",
@@ -3856,6 +4038,32 @@ export const DICT = {
      العربية (AR) — письмо справа налево, dir="rtl"
      ══════════════════════════════════════════════════════════════ */
   ar: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "قناة الاستوديو على Telegram",
+    "footer.telegramChannel": "قناة الاستوديو على Telegram",
+    "case.conceptNote": "مبادرة من الاستوديو نفسه",
+    "case.industry": "القطاع",
+    "case.galleryImage": "صورة",
+    "common.tagTurnkey": "#موقع_جاهز_بالكامل",
+    "more.chatLabel": "telegram · بوت",
+    "portfolio.openSiteAria": "فتح موقع المشروع",
+    "notFound.eyebrow": "خطأ 404",
+    "notFound.title": "هذه الصفحة",
+    "notFound.titleAccent": "غير موجودة",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "ربما يوجد خطأ مطبعي في العنوان، أو نُقلت الصفحة، أو أن المشروع الذي تبحث عنه لم يعد ضمن الأعمال المنشورة. في الأسفل طرق مختصرة إلى ما يستحق الاطّلاع.",
+    "notFound.navLabel": "الأقسام الرئيسية في الموقع",
+    "notFound.homeLabel": "الرئيسية",
+    "notFound.homeTitle": "إلى الصفحة الرئيسية",
+    "notFound.homeDesc": "الاستوديو والخدمات وطريقة عملنا — من البداية.",
+    "notFound.workLabel": "الأعمال",
+    "notFound.workTitle": "إلى الأعمال",
+    "notFound.workDesc": "مشاريع الاستوديو: الهوية والمواقع والتصميم ثلاثي الأبعاد ووسائل التواصل.",
+    "notFound.blogLabel": "المدوّنة",
+    "notFound.blogTitle": "إلى المدوّنة",
+    "notFound.blogDesc": "ملاحظات وفعاليات وتحليلات مشاريع من يوميات الاستوديو.",
+    "notFound.contactText": "بحثت عن مشروع بعينه ولم تجده؟ راسلنا وسنرشدك إليه.",
+    "notFound.contactCta": "راسلنا على Telegram",
     "common.viewWork": "عرض الأعمال",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "قطاعاً",
@@ -4394,6 +4602,32 @@ export const DICT = {
      日本語 (JA)
      ══════════════════════════════════════════════════════════════ */
   ja: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "スタジオの Telegram チャンネル",
+    "footer.telegramChannel": "スタジオの Telegram チャンネル",
+    "case.conceptNote": "スタジオの自主制作",
+    "case.industry": "業界",
+    "case.galleryImage": "画像",
+    "common.tagTurnkey": "#サイト一式",
+    "more.chatLabel": "telegram · ボット",
+    "portfolio.openSiteAria": "プロジェクトのサイトを開く",
+    "notFound.eyebrow": "エラー 404",
+    "notFound.title": "このページは",
+    "notFound.titleAccent": "存在しません",
+    "notFound.titleEnd": "。",
+    "notFound.lead": "アドレスの入力に誤りがあるか、ページが移動したか、お探しのプロジェクトを公開ポートフォリオから外した可能性があります。以下に、見どころのある場所への近道をご用意しました。",
+    "notFound.navLabel": "サイトの主なセクション",
+    "notFound.homeLabel": "ホーム",
+    "notFound.homeTitle": "ホームへ",
+    "notFound.homeDesc": "スタジオ、サービス、そして私たちの仕事の進め方——最初から。",
+    "notFound.workLabel": "実績",
+    "notFound.workTitle": "実績を見る",
+    "notFound.workDesc": "スタジオの案件：ブランディング、ウェブサイト、3D、SNS。",
+    "notFound.blogLabel": "ブログ",
+    "notFound.blogTitle": "ブログへ",
+    "notFound.blogDesc": "スタジオの日々から生まれた記録、出来事、案件の解説。",
+    "notFound.contactText": "特定の案件をお探しで見つからないときは、ご連絡ください。場所をお伝えします。",
+    "notFound.contactCta": "Telegram で連絡する",
     "common.viewWork": "実績を見る",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "業種",
@@ -4923,6 +5157,32 @@ export const DICT = {
      TÜRKÇE (TR)
      ══════════════════════════════════════════════════════════════ */
   tr: {
+    /* ─── 404, кейсы и мелкие подписи ─────────────────────── */
+    "about.social.telegram": "Stüdyonun Telegram kanalı",
+    "footer.telegramChannel": "Stüdyonun Telegram kanalı",
+    "case.conceptNote": "stüdyonun kendi girişimi",
+    "case.industry": "Sektör",
+    "case.galleryImage": "görsel",
+    "common.tagTurnkey": "#AnahtarTeslimSite",
+    "more.chatLabel": "telegram · bot",
+    "portfolio.openSiteAria": "Proje sitesini aç",
+    "notFound.eyebrow": "Hata 404",
+    "notFound.title": "Bu sayfa",
+    "notFound.titleAccent": "mevcut değil",
+    "notFound.titleEnd": ".",
+    "notFound.lead": "Adreste bir yazım hatası olabilir, sayfa taşınmış olabilir ya da aradığınız projeyi açık portföyden çıkarmış olabiliriz. Aşağıda görülmeye değer yerlere giden kısa yollar var.",
+    "notFound.navLabel": "Sitenin ana bölümleri",
+    "notFound.homeLabel": "Ana sayfa",
+    "notFound.homeTitle": "Ana sayfaya git",
+    "notFound.homeDesc": "Stüdyo, hizmetler ve nasıl çalıştığımız — en baştan.",
+    "notFound.workLabel": "Portföy",
+    "notFound.workTitle": "Portföye git",
+    "notFound.workDesc": "Stüdyo projeleri: marka kimliği, web siteleri, 3D ve sosyal medya.",
+    "notFound.blogLabel": "Blog",
+    "notFound.blogTitle": "Bloga git",
+    "notFound.blogDesc": "Stüdyo hayatından notlar, etkinlikler ve proje incelemeleri.",
+    "notFound.contactText": "Belirli bir proje arayıp bulamadınız mı? Bize yazın, nerede olduğunu söyleyelim.",
+    "notFound.contactCta": "Telegram'dan yazın",
     "common.viewWork": "Çalışmaları gör",
     /* ─── Чёрная секция услуг + статистика ───────────────── */
     "about.stat.industries": "sektör",
@@ -5518,9 +5778,9 @@ export function translate(lang, key, fallback) {
  * подсказки, ошибки формы) переведён на все десять языков.
  *
  * Поэтому правило простое и обратно совместимое:
- *   lang === "ru"  → русское поле,
- *   любой другой   → английское поле (для zh, es, pt, fr, de, ar, ja, tr
- *                    английский служит общим мостом).
+ *   lang === "ru"       → русское поле,
+ *   есть obj.i18n[lang] → перевод оттуда,
+ *   иначе               → английское поле (общий мост для остальных языков).
  *
  * Если нужного поля нет, возвращается второе — пустых мест не будет.
  */
@@ -5530,13 +5790,33 @@ export function pickLocalized(obj, lang, ruKey = "ru", enKey = "en") {
   const ruValue = obj[ruKey];
   const enValue = obj[enKey];
 
+  // Полные переводы данных лежат в obj.i18n[lang][ruKey].
+  // Поля ru/en остаются как есть — старые объекты продолжают работать.
+  if (lang !== "ru" && obj.i18n && obj.i18n[lang]) {
+    const translated = obj.i18n[lang][ruKey];
+    if (typeof translated === "string" && translated.length) return translated;
+  }
+
   if (lang === "ru") {
     if (typeof ruValue === "string" && ruValue.length) return ruValue;
     return typeof enValue === "string" ? enValue : "";
   }
 
+  // Английский — общий мост, если для языка перевода данных ещё нет.
   if (typeof enValue === "string" && enValue.length) return enValue;
   return typeof ruValue === "string" ? ruValue : "";
+}
+
+/**
+ * Локализованный массив строк из объекта данных.
+ * Используется там, где поле — список (features, includes и т.п.).
+ */
+export function pickLocalizedList(obj, lang, key) {
+  if (!obj) return [];
+  if (lang !== "ru" && obj.i18n && Array.isArray(obj.i18n[lang]?.[key])) {
+    return obj.i18n[lang][key];
+  }
+  return Array.isArray(obj[key]) ? obj[key] : [];
 }
 
 /**

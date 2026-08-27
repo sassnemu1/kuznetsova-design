@@ -5,7 +5,7 @@ import useGSAP from "@/hooks/useGSAP";
 import { TECHNICAL_DESIGN_DATA } from "@/data/TechnicalDesignData";
 import { useBecomeClient } from "@/context/BecomeClientContext";
 import { useT, useLanguage } from "@/context/LanguageContext";
-import { pickLocalized } from "@/i18n/dictionary";
+import { pickLocalized, pickLocalizedList } from "@/i18n/dictionary";
 import BlueprintMock from "./BlueprintMock";
 import SchematicMock from "./SchematicMock";
 import PcbMock from "./PcbMock";
@@ -125,8 +125,8 @@ export default function TechnicalDesign() {
                     </p>
 
                     <div className={styles.tagsRow}>
-                      {service.tags.map((t) => (
-                        <span key={t} className={styles.chip}>{t}</span>
+                      {pickLocalizedList(service, lang, "tags").map((chip) => (
+                        <span key={chip} className={styles.chip}>{chip}</span>
                       ))}
                     </div>
 

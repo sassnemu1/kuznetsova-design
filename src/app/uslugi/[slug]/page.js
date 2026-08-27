@@ -177,7 +177,7 @@ export default async function UslugaPage({ params }) {
 
         <UslugiCases caseSlugs={usluga.caseSlugs} />
 
-        <UslugiFaq faq={usluga.faq} />
+        <UslugiFaq usluga={usluga} />
 
         <section className={`${styles.cta} nav-dark-zone`} aria-labelledby="usluga-cta-title">
           <div className={styles.ctaInner}>
