@@ -3,6 +3,14 @@ services:
     build: .
     container_name: kuznetsova
     restart: always
-    env_file: .env.production
-    ports:
-      - "3000:3000"
+
+    env_file:
+      - .env.production
+
+    networks:
+      - web
+
+networks:
+  web:
+    name: onlinebazar_app-network
+    external: true
